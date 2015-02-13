@@ -2,9 +2,9 @@ package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.*;
-import net.thenamedev.legendarena.commands.extras.history.*;
+import net.thenamedev.legendarena.extras.history.*;
 import net.thenamedev.legendarena.listeners.*;
-import net.thenamedev.legendarena.commands.extras.staffchat.*;
+import net.thenamedev.legendarena.extras.staffchat.*;
 import org.bukkit.*;
 
 import java.util.*;

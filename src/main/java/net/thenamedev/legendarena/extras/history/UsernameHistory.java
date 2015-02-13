@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.extras.history;
+package net.thenamedev.legendarena.extras.history;
 
 //Code stolen from here: https://github.com/ParkerKemp/UsernameHistory
 //

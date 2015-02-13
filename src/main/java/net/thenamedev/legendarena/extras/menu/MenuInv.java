@@ -1,6 +1,6 @@
-package net.thenamedev.legendarena.commands.extras.menu;
+package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendarena.commands.extras.menu.staffmenu.*;
+import net.thenamedev.legendarena.extras.menu.staffmenu.*;
 import org.bukkit.*;
 import org.bukkit.event.*;
 import org.bukkit.plugin.*;

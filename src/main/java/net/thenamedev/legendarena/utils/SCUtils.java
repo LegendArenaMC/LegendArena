@@ -1,15 +1,15 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendarena.core.*;
-import net.thenamedev.legendarena.commands.extras.menu.*;
-import net.thenamedev.legendarena.commands.extras.staffchat.*;
+import net.thenamedev.legendarena.extras.menu.*;
+import net.thenamedev.legendarena.extras.staffchat.*;
 import org.bukkit.*;
 import org.bukkit.enchantments.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import static net.thenamedev.legendarena.commands.extras.menu.MenuCore.createItem;
+import static net.thenamedev.legendarena.extras.menu.MenuCore.createItem;
 
 /**
  * @author TheNameMan

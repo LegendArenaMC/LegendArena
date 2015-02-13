@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.extras.menu;
+package net.thenamedev.legendarena.extras.menu;
 
 import org.bukkit.*;
 import org.bukkit.entity.*;

@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.extras.history;
+package net.thenamedev.legendarena.extras.history;
 
 //This is a modified version of a class created by evilmidget38:
 //

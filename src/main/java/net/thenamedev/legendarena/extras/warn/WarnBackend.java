@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.extras.warn;
+package net.thenamedev.legendarena.extras.warn;
 
 import net.thenamedev.legendarena.core.*;
 import net.thenamedev.legendarena.utils.*;
