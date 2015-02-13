@@ -1,5 +1,6 @@
 package me.thenameman.legendarena.utils;
 
+import me.thenameman.legendarena.core.*;
 import me.thenameman.legendarena.menu.*;
 import me.thenameman.legendarena.staffchat.*;
 import org.bukkit.*;
@@ -7,6 +8,8 @@ import org.bukkit.enchantments.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static me.thenameman.legendarena.menu.MenuCore.createItem;
 
 /**
  * @author TheNameMan
@@ -34,6 +37,42 @@ public class SCUtils {
             inv.setItem(6, i);
         } else {
             inv.setItem(22, i);
+        }
+    }
+
+    public static void setRankPermissions(Player p, Inventory inv) {
+        Rank r = Rank.getRank(p);
+        if(r == Rank.Dev)
+            return;
+
+        ItemStack admin = createItem(Material.BEDROCK, ChatColor.RED + "ADMIN", ChatColor.BLUE + "Admin channel.");
+        ItemStack mod = createItem(Material.GOLD_NUGGET, ChatColor.RED + "MOD", ChatColor.BLUE + "Mod channel.");
+        ItemStack staff = createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
+        ItemStack alert = createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+        ItemStack notify = createItem(Material.BED, ChatColor.RED + "NOTIFY", ChatColor.BLUE + "Staff notifications channel.");
+        ItemStack helper = createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
+
+        if(r == Rank.Admin) {
+            //Cannot access: NOTIFY
+            inv.setItem(1, notify);
+        } else if(r == Rank.Mod) {
+            //Cannot access: ADMIN, NOTIFY
+            inv.setItem(0, admin);
+            inv.setItem(1, notify);
+        } else if(r == Rank.Helper) {
+            //Cannnot access: ADMIN, NOTIFY, MOD, ALERT
+            inv.setItem(0, admin);
+            inv.setItem(1, notify);
+            inv.setItem(2, mod);
+            inv.setItem(4, alert);
+        } else if(r == Rank.VIP) {
+            //Cannot access: ADMIN, NOTIFY, MOD, STAFF, ALERT, HELPER
+            inv.setItem(0, admin);
+            inv.setItem(1, notify);
+            inv.setItem(2, mod);
+            inv.setItem(3, staff);
+            inv.setItem(4, alert);
+            inv.setItem(6, helper);
         }
     }
 

@@ -40,8 +40,6 @@ public class InitUtils {
         Bukkit.getPluginCommand("namehistory").setExecutor(new UsernameHistory()); //Username history command [/namehistory]
         Bukkit.getPluginCommand("say").setExecutor(new Say()); //Say command [/say]
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/fw]
-        Bukkit.getPluginCommand("ladebug").setExecutor(new Debug()); //Debug command [/ladebug]
-        Bukkit.getPluginCommand("tutorial").setExecutor(new Tutorial()); //Tutorial command [/tutorial]
         Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/cc]
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
         Bukkit.getPluginCommand("globalmute").setExecutor(new GlobalMute()); //Globalmute command [/gmute]
