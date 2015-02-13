@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.menu;
+package net.thenamedev.legendarena.commands.extras.menu;
 
 import org.bukkit.*;
 import org.bukkit.inventory.*;

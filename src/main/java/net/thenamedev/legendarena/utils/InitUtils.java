@@ -2,9 +2,9 @@ package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.*;
-import net.thenamedev.legendarena.history.*;
+import net.thenamedev.legendarena.commands.extras.history.*;
 import net.thenamedev.legendarena.listeners.*;
-import net.thenamedev.legendarena.staffchat.*;
+import net.thenamedev.legendarena.commands.extras.staffchat.*;
 import org.bukkit.*;
 
 import java.util.*;
@@ -45,7 +45,9 @@ public class InitUtils {
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
         Bukkit.getPluginCommand("globalmute").setExecutor(new GlobalMute()); //Globalmute command [/gmute]
         Bukkit.getPluginCommand("userinfo").setExecutor(new Info()); //Userinfo command [/userinfo]
+        Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
