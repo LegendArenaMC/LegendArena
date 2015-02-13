@@ -67,7 +67,7 @@ public class MainMenu implements Listener {
 				p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " HUB...");
 				p.teleport(Bukkit.getWorld("hub").getSpawnLocation(), TeleportCause.PLUGIN);
 				e.getWhoClicked().closeInventory();
-			} else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival")) { // oh. I'm an idiot. /facepalm
+			} else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival")) {
 				e.setCancelled(true);
 				Player p = (Player) e.getWhoClicked();
 				p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SURVIVAL...");

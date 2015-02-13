@@ -78,7 +78,6 @@ public class MinigameMenu implements Listener {
                 e.setCancelled(true);
                 Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.RED + "That's coming soon[tm]!");
-                e.getWhoClicked().closeInventory();
             }
 
             else { //failsafe

@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendarena.commands.*;
+import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.history.*;
 import net.thenamedev.legendarena.listeners.*;
 import net.thenamedev.legendarena.staffchat.*;

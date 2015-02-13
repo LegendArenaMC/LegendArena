@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands;
+package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendarena.core.*;
 import net.thenamedev.legendarena.utils.*;
