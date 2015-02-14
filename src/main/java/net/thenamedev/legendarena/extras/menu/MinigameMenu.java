@@ -7,13 +7,14 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerTeleportEvent.*;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class MinigameMenu implements Listener {
 
-    private Inventory inv;
+    private final Inventory inv;
 
     public MinigameMenu(Plugin plugin) {
         inv = Bukkit.getServer().createInventory(null, 36, ChatColor.BLUE + "Minigames");
@@ -42,41 +43,41 @@ public class MinigameMenu implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public void show(Player p) {
+    public void show(@NotNull Player p) {
         p.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    public void onInventoryClick(@NotNull InventoryClickEvent e) {
         if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         if(e.getCurrentItem().getItemMeta() == null) return;
         try {
             if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival Games")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SURVIVAL GAMES...");
                 p.teleport(new Location(Bukkit.getWorld("hub"), -87.50, 4.0, -200.50), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Spleef")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SPLEEF...");
                 p.teleport(Bukkit.getWorld("spleef").getSpawnLocation(), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 e.getWhoClicked().closeInventory();
                 MenuInv.menu.show(p);
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Splegg")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SPLEGG...");
                 p.teleport(Bukkit.getWorld("splegg").getSpawnLocation(), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Prison")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.RED + "That's coming soon[tm]!");
             }
 

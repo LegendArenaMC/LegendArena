@@ -5,14 +5,15 @@ import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+import org.jetbrains.annotations.*;
 
 /**
- * Safer-kind of /op.
+ * Safer-kind of /op. (yes, I know, it isn't fool proof, but it works as well as I want it to)
  * @author TheNameMan
  */
 public class Op implements CommandExecutor {
 
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, @NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Dev)) {
             Rank.noPermissions(sender, Rank.Owner); //max rank is DEV, so that devs can test without op temporarily and be able to reop themselves when they're done testing without needing console/someone else to reop them
             //also, just fake that deop and op is for the owner only

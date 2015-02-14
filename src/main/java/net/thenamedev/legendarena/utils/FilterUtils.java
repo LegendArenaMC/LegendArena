@@ -1,5 +1,7 @@
 package net.thenamedev.legendarena.utils;
 
+import org.jetbrains.annotations.*;
+
 /**
  * I really did not want to add this, but for whatever reason people make me do this. /sigh
  * @author TheNameMan
@@ -25,15 +27,15 @@ public class FilterUtils {
             "biotch"
     };
 
-    public static boolean containsSwear(String m) {
+    public static boolean containsSwear(@NotNull String m) {
         boolean swear = false;
-        String msg = m.toLowerCase();
-        for(String sw : swears) {
+        @NotNull String msg = m.toLowerCase();
+        for(@NotNull String sw : swears) {
             if(msg.contains(sw)) {
                 swear = true;
             }
         }
-        for(String sw : dupeSwears) {
+        for(@NotNull String sw : dupeSwears) {
             if(msg.contains(sw)) {
                 swear = true;
             }

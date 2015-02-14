@@ -8,14 +8,15 @@ import org.bukkit.enchantments.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class SCUtils {
 
-    public static void setItem(Player p, Inventory inv) {
-        ItemStack i = getEnchantedItem(p);
+    public static void setItem(@NotNull Player p, @NotNull Inventory inv) {
+        @Nullable ItemStack i = getEnchantedItem(p);
         if(i == null) //sanity check
             return;
         ItemMeta im = i.getItemMeta();
@@ -38,8 +39,8 @@ public class SCUtils {
         }
     }
 
-    public static void setRankPermissions(Player p, Inventory inv) {
-        Rank r = Rank.getRank(p);
+    public static void setRankPermissions(@NotNull Player p, @NotNull Inventory inv) {
+        @NotNull Rank r = Rank.getRank(p);
         if(r == Rank.Dev)
             return;
 
@@ -84,7 +85,7 @@ public class SCUtils {
         }
     }
 
-    private static ItemStack getEnchantedItem(Player p) {
+    private static ItemStack getEnchantedItem(@NotNull Player p) {
         SCType channel = SCType.getType(p.getUniqueId());
         ItemStack init;
         if(channel == null) {

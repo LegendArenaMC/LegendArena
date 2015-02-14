@@ -1,1 +1,1 @@
-package net.thenamedev.legendarena.utils;/** * @author TheNameMan */@Deprecatedpublic class CommandUtils {    @Deprecated    public static String formattedCmd(String name, boolean header) {        return ChatUtils.formattedCmd(name, header);    }}
+package net.thenamedev.legendarena.utils;import org.jetbrains.annotations.*;/** * @author TheNameMan */@Deprecatedpublic class CommandUtils {    @NotNull    @Deprecated    public static String formattedCmd(String name, boolean header) {        return ChatUtils.formattedCmd(name, header);    }}

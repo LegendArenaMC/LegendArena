@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerTeleportEvent.*;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
@@ -52,48 +53,48 @@ public class MainMenu implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public void show(Player p) {
+    public void show(@NotNull Player p) {
         p.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    public void onInventoryClick(@NotNull InventoryClickEvent e) {
         if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         if(e.getCurrentItem().getItemMeta() == null) return;
         try {
 			if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
 				e.setCancelled(true);
-				Player p = (Player) e.getWhoClicked();
+				@NotNull Player p = (Player) e.getWhoClicked();
 				p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " HUB...");
 				p.teleport(Bukkit.getWorld("hub").getSpawnLocation(), TeleportCause.PLUGIN);
 				e.getWhoClicked().closeInventory();
 			} else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival")) {
 				e.setCancelled(true);
-				Player p = (Player) e.getWhoClicked();
+				@NotNull Player p = (Player) e.getWhoClicked();
 				p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SURVIVAL...");
 				p.teleport(new Location(Bukkit.getWorld("world"), 479.5, 67.0, 328.50), TeleportCause.PLUGIN);
 				e.getWhoClicked().closeInventory();
 			} else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Plots")) {
 				e.setCancelled(true);
-				Player p = (Player) e.getWhoClicked();
+				@NotNull Player p = (Player) e.getWhoClicked();
 				p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " PLOTS...");
 				p.teleport(Bukkit.getWorld("plotworld").getSpawnLocation(), TeleportCause.PLUGIN);
 				e.getWhoClicked().closeInventory();
 			} else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Shop")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SHOP...");
                 p.teleport(new Location(Bukkit.getWorld("hub"), 29.50, 4.0, -28.50), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Freebuild")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " FREEBUILD...");
                 p.teleport(Bukkit.getWorld("freebuild").getSpawnLocation(), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Minigames")) {
                 e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+                @NotNull Player p = (Player) e.getWhoClicked();
                 e.getWhoClicked().closeInventory();
                 MenuInv.minimenu.show(p);
             } else { //failsafe

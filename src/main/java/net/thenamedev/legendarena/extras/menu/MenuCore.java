@@ -3,6 +3,7 @@ package net.thenamedev.legendarena.extras.menu;
 import org.bukkit.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -11,8 +12,9 @@ import java.util.*;
  */
 public class MenuCore {
 
-    public static ItemStack createItem(Material m, String n) {
-        ItemStack i = new ItemStack(m);
+    @NotNull
+    public static ItemStack createItem(@NotNull Material m, String n) {
+        @NotNull ItemStack i = new ItemStack(m);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(n);
         im.setLore(Collections.singletonList(ChatColor.BLUE + "Warp to " + n));
@@ -20,8 +22,9 @@ public class MenuCore {
         return i;
     }
 
-    public static ItemStack createItem(Material m, String n, String l) {
-        ItemStack i = new ItemStack(m);
+    @NotNull
+    public static ItemStack createItem(@NotNull Material m, String n, String l) {
+        @NotNull ItemStack i = new ItemStack(m);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(n);
         im.setLore(Collections.singletonList(l));
@@ -29,7 +32,8 @@ public class MenuCore {
         return i;
     }
 
-    public static ItemStack createItem(ItemStack i, String n, String l) {
+    @NotNull
+    public static ItemStack createItem(@NotNull ItemStack i, String n, String l) {
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(n);
         im.setLore(Collections.singletonList(l));
@@ -37,8 +41,9 @@ public class MenuCore {
         return i;
     }
 
-    public static ItemStack createItem(Material m, String n, String... l) {
-        ItemStack i = new ItemStack(m);
+    @NotNull
+    public static ItemStack createItem(@NotNull Material m, String n, String... l) {
+        @NotNull ItemStack i = new ItemStack(m);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(n);
         im.setLore(Arrays.asList(l));

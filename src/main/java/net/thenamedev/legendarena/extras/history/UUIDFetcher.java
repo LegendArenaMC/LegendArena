@@ -11,6 +11,7 @@ package net.thenamedev.legendarena.extras.history;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,7 +36,7 @@ public class UUIDFetcher {
 	public UUID fetch() throws IOException {
 		Gson gson = new GsonBuilder().create();
 		UUID uuid;
-		HttpURLConnection connection = createConnection();
+		@NotNull HttpURLConnection connection = createConnection();
 		String body = gson.toJson(name);
 		writeBody(connection, body);
 		FetchedUuid[] id = gson.fromJson(
@@ -45,7 +46,7 @@ public class UUIDFetcher {
 		return uuid;
 	}
 
-	private static void writeBody(HttpURLConnection connection, String body)
+	private static void writeBody(@NotNull HttpURLConnection connection, @NotNull String body)
 			throws IOException {
 		OutputStream stream = connection.getOutputStream();
 		stream.write(body.getBytes());
@@ -53,9 +54,10 @@ public class UUIDFetcher {
 		stream.close();
 	}
 
-	private static HttpURLConnection createConnection() throws IOException {
-		URL url = new URL(PROFILE_URL);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	@NotNull
+    private static HttpURLConnection createConnection() throws IOException {
+		@NotNull URL url = new URL(PROFILE_URL);
+		@NotNull HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("POST");
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setUseCaches(false);
@@ -64,25 +66,26 @@ public class UUIDFetcher {
 		return connection;
 	}
 
-	private static UUID getUUID(String id) {
+	private static UUID getUUID(@NotNull String id) {
 		return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12)
 				+ "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-"
 				+ id.substring(20, 32));
 	}
 
-	public static byte[] toBytes(UUID uuid) {
-		ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
+	public static byte[] toBytes(@NotNull UUID uuid) {
+		@NotNull ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
 		byteBuffer.putLong(uuid.getMostSignificantBits());
 		byteBuffer.putLong(uuid.getLeastSignificantBits());
 		return byteBuffer.array();
 	}
 
-	public static UUID fromBytes(byte[] array) {
+	@NotNull
+    public static UUID fromBytes(@NotNull byte[] array) {
 		if(array.length != 16) {
 			throw new IllegalArgumentException("Illegal byte array length: "
 					+ array.length);
 		}
-		ByteBuffer byteBuffer = ByteBuffer.wrap(array);
+		@NotNull ByteBuffer byteBuffer = ByteBuffer.wrap(array);
 		long mostSignificant = byteBuffer.getLong();
 		long leastSignificant = byteBuffer.getLong();
 		return new UUID(mostSignificant, leastSignificant);

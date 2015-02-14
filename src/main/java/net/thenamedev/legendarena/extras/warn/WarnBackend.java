@@ -4,15 +4,19 @@ import net.thenamedev.legendarena.core.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class WarnBackend {
 
-    Player warnPlayer;
-    Player staff;
-    String reason;
+    @Nullable
+    private Player warnPlayer;
+    @Nullable
+    private Player staff;
+    @Nullable
+    private String reason;
 
     public void run() {
         ChatUtils.broadcast(
@@ -42,7 +46,7 @@ public class WarnBackend {
         warnPlayer.sendMessage("");
     }
 
-    public void setup(Player warned, Player staffMember, String reason) {
+    public void setup(@Nullable Player warned, @Nullable Player staffMember, @Nullable String reason) {
         if(warned == null || staffMember == null || reason == null) throw new NullPointerException();
         this.reason = reason;
         warnPlayer = warned;

@@ -6,13 +6,14 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.potion.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class Freeze implements CommandExecutor {
 
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, @NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
             return true;

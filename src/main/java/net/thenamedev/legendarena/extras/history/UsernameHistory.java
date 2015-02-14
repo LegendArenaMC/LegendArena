@@ -10,27 +10,29 @@ import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+import org.jetbrains.annotations.*;
 
 import java.io.*;
 import java.net.*;
 import java.text.*;
 import java.util.*;
 
+@SuppressWarnings("NullableProblems")
 class OldUsername implements Comparable<OldUsername> {
 	String name;
 	long changedToAt;
 
-	public int compareTo(OldUsername other) {
+	public int compareTo(@NotNull OldUsername other) {
 		return Long.compare(this.changedToAt, other.changedToAt);
 	}
 }
 
 public class UsernameHistory implements CommandExecutor {
 	ConsoleCommandSender console = Bukkit.getConsoleSender();
-	private HashMap<String, OldUsername[]> cache = new HashMap<>();
+    private HashMap<String, OldUsername[]> cache = new HashMap<>();
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-		String[] args) {
+	public boolean onCommand(@NotNull CommandSender sender, Command cmd, String label,
+		@NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
             return true;
@@ -47,7 +49,7 @@ public class UsernameHistory implements CommandExecutor {
 		return true;
 	}
 
-	private void getHistory(CommandSender sender, String username, boolean ovCa) {
+	private void getHistory(@NotNull CommandSender sender, @NotNull String username, boolean ovCa) {
         if(ovCa) { //they want to override cache, so let them (if they're an admin)
             if(Rank.getRank(sender, Rank.Admin)) {
                 sender.sendMessage("");
@@ -74,8 +76,8 @@ public class UsernameHistory implements CommandExecutor {
         }
 	}
 
-	private void getHistoryFromWeb(final CommandSender sender,
-			final String username) {
+	private void getHistoryFromWeb(@NotNull final CommandSender sender,
+			@NotNull final String username) {
 
 		new Thread() {
 			public void run() {
@@ -100,14 +102,14 @@ public class UsernameHistory implements CommandExecutor {
 						return;
 					}
 				}
-				OldUsername[] names = usernames(uuidString, username);
+				@Nullable OldUsername[] names = usernames(uuidString, username);
 				cache.put(username.toLowerCase(), names);
 				reportHistory(sender, names);
 			}
 		}.start();
 	}
 
-	private void reportHistory(CommandSender sender, OldUsername[] names) {
+	private void reportHistory(@NotNull CommandSender sender, @NotNull OldUsername[] names) {
 		sender.sendMessage("");
 		if(names.length == 1)
 			sender.sendMessage(ChatColor.GREEN + names[0].name + ChatColor.GOLD
@@ -118,9 +120,9 @@ public class UsernameHistory implements CommandExecutor {
 			sender.sendMessage("");
 
 			for(int i = 1; i < names.length; i++) {
-				DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-				Date date = new Date(names[i].changedToAt);
-				String formattedDate = df.format(date);
+				@NotNull DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+				@NotNull Date date = new Date(names[i].changedToAt);
+				@NotNull String formattedDate = df.format(date);
 				sender.sendMessage(ChatColor.BLUE + formattedDate
 						+ ChatColor.GOLD + " - changed to " + ChatColor.GREEN
 						+ names[i].name);
@@ -130,14 +132,14 @@ public class UsernameHistory implements CommandExecutor {
         }
 	}
 
-	private OldUsername[] usernames(String uuid, String current) {
+	private OldUsername[] usernames(@NotNull String uuid, String current) {
 		Gson gson = new GsonBuilder().create();
 		String compactUuid = uuid.replace("-", "");
 		try {
-			URL url = new URL("https://api.mojang.com/user/profiles/"
+			@NotNull URL url = new URL("https://api.mojang.com/user/profiles/"
 					+ compactUuid + "/names");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
+			@NotNull HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			@NotNull BufferedReader reader = new BufferedReader(new InputStreamReader(
 					conn.getInputStream()));
 
 			OldUsername[] oldNames = gson.fromJson(reader, OldUsername[].class);
