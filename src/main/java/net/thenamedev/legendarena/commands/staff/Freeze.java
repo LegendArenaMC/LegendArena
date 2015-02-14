@@ -27,7 +27,7 @@ public class Freeze implements CommandExecutor {
                     return true;
                 }
             } catch(Exception ex) {
-                sender.sendMessage(ChatColor.RED + "Encountered an error checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
+                sender.sendMessage(ChatColor.RED + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
                 ex.printStackTrace();
                 return true;
             }
@@ -45,9 +45,9 @@ public class Freeze implements CommandExecutor {
                 sender.sendMessage(ChatColor.GREEN + "Froze player " + p.getName() + " successfully.");
                 PluginUtils.frozenPlayers.add(p.getUniqueId());
             } else {
-                Player p = Bukkit.getPlayer(args[1]);
+                Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
-                p.setSleepingIgnored(false);
+                if(!Rank.getRank(p, Rank.Admin)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {}
                 try { p.removePotionEffect(PotionEffectType.JUMP); } catch(Exception ignore) {}
                 p.setMaximumNoDamageTicks(0);
