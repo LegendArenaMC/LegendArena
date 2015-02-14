@@ -26,6 +26,8 @@ public class InitUtils {
 
     public static void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Bukkit.getPluginManager().registerEvents(new MobSpawnListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
 
