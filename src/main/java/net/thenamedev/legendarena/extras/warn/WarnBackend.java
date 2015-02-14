@@ -8,7 +8,7 @@ import org.bukkit.entity.*;
 /**
  * @author TheNameMan
  */
-public class WarnBackend implements Runnable {
+public class WarnBackend {
 
     Player warnPlayer;
     Player staff;
@@ -19,7 +19,7 @@ public class WarnBackend implements Runnable {
                 ChatColor.RED + "Legend Arena " + ChatColor.GRAY
                         + PluginUtils.chars[1] + ChatColor.BLUE
                         + " Staff member " + ChatColor.RED
-                        + staff.getName() + ChatColor.BLUE
+                        + Rank.getFormattedName(staff) + ChatColor.BLUE
                         + " warned player " + ChatColor.YELLOW
                         + warnPlayer.getName() + ChatColor.BLUE
                         + " for reason: " + ChatColor.LIGHT_PURPLE
@@ -43,7 +43,7 @@ public class WarnBackend implements Runnable {
     }
 
     public void setup(Player warned, Player staffMember, String reason) {
-        if(warned == null || staffMember == null || reason == null) return;
+        if(warned == null || staffMember == null || reason == null) throw new NullPointerException();
         this.reason = reason;
         warnPlayer = warned;
         staff = staffMember;
