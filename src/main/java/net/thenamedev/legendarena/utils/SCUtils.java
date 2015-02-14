@@ -9,14 +9,12 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import static net.thenamedev.legendarena.extras.menu.MenuCore.createItem;
-
 /**
  * @author TheNameMan
  */
 public class SCUtils {
 
-    public static void setItem(Inventory inv, Player p) {
+    public static void setItem(Player p, Inventory inv) {
         ItemStack i = getEnchantedItem(p);
         if(i == null) //sanity check
             return;
@@ -50,37 +48,50 @@ public class SCUtils {
         ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
         ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
         ItemStack notify = MenuCore.createItem(Material.BED, ChatColor.RED + "NOTIFY", ChatColor.BLUE + "Staff notifications channel.");
-        ItemStack helper = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
+        ItemStack vip = MenuCore.createItem(Material.EMERALD, ChatColor.RED + "VIP", ChatColor.BLUE + "VIP channel.");
+        ItemStack helper = MenuCore.createItem(Material.SADDLE, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
 
         if(r == Rank.Admin) {
             //Cannot access: NOTIFY
-            inv.setItem(1, notify);
+            inv.setItem(0, notify);
         } else if(r == Rank.Mod) {
             //Cannot access: ADMIN, NOTIFY
-            inv.setItem(0, admin);
-            inv.setItem(1, notify);
+            inv.setItem(1, admin);
+            inv.setItem(0, notify);
         } else if(r == Rank.Helper) {
             //Cannnot access: ADMIN, NOTIFY, MOD, ALERT
-            inv.setItem(0, admin);
-            inv.setItem(1, notify);
+            inv.setItem(1, admin);
+            inv.setItem(0, notify);
             inv.setItem(2, mod);
             inv.setItem(4, alert);
         } else if(r == Rank.VIP) {
             //Cannot access: ADMIN, NOTIFY, MOD, STAFF, ALERT, HELPER
-            inv.setItem(0, admin);
-            inv.setItem(1, notify);
+            inv.setItem(1, admin);
+            inv.setItem(0, notify);
             inv.setItem(2, mod);
             inv.setItem(3, staff);
             inv.setItem(4, alert);
+            inv.setItem(6, helper);
+        } else if(r == Rank.Member) {
+            //Cannot access: ADMIN, NOTIFY, MOD, STAFF, ALERT, VIP, HELPER
+            inv.setItem(1, admin);
+            inv.setItem(0, notify);
+            inv.setItem(2, mod);
+            inv.setItem(3, staff);
+            inv.setItem(4, alert);
+            inv.setItem(5, vip);
             inv.setItem(6, helper);
         }
     }
 
     private static ItemStack getEnchantedItem(Player p) {
         SCType channel = SCType.getType(p.getUniqueId());
-        if(channel == null)
-            return null;
         ItemStack init;
+        if(channel == null) {
+            init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "GLOBAL", ChatColor.BLUE + "Global chat. That's really all that needs to be said.");
+            init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+            return init;
+        }
         switch(channel) {
             case ADMIN:
                 init = MenuCore.createItem(Material.BEDROCK, ChatColor.BLUE + "ADMIN", ChatColor.BLUE + "Admin channel.");
@@ -103,17 +114,19 @@ public class SCUtils {
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case VIP:
-                init = MenuCore.createItem(Material.EMERALD, ChatColor.BLUE + "VIP", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+                init = MenuCore.createItem(Material.EMERALD, ChatColor.BLUE + "VIP", ChatColor.BLUE + "VIP channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case HELPER:
-                init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "HELPER", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+                init = MenuCore.createItem(Material.SADDLE, ChatColor.BLUE + "HELPER", ChatColor.BLUE + "Helper channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
-
-            default:
-                return null;
+            case PUBLIC:
+                init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "OFF", ChatColor.BLUE + "Exit staff chat and go back to global chat.");
+                init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+                return init;
         }
+        return null; //fallback
     }
 
 }

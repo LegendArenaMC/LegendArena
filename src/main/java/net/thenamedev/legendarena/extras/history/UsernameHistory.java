@@ -6,6 +6,7 @@ package net.thenamedev.legendarena.extras.history;
 
 import com.google.gson.*;
 import net.thenamedev.legendarena.core.*;
+import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -45,10 +46,16 @@ public class UsernameHistory implements CommandExecutor {
 	private void getHistory(CommandSender sender, String username) {
 		OldUsername[] oldNames = cache.get(username.toLowerCase());
 		if(oldNames != null) {
+            sender.sendMessage("");
+            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
+            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Found player's name history in cache.");
 			reportHistory(sender, oldNames);
-		} else {
+        } else {
+            sender.sendMessage("");
+            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
+            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Name history not in cache; checking via Mojang API...");
 			getHistoryFromWeb(sender, username);
-		}
+        }
 	}
 
 	private void getHistoryFromWeb(final CommandSender sender,
@@ -102,7 +109,9 @@ public class UsernameHistory implements CommandExecutor {
 						+ ChatColor.GOLD + " - changed to " + ChatColor.GREEN
 						+ names[i].name);
 			}
-		}
+            sender.sendMessage("");
+            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Done.");
+        }
 	}
 
 	private OldUsername[] usernames(String uuid, String current) {
