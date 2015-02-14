@@ -27,7 +27,7 @@ class OldUsername implements Comparable<OldUsername> {
 
 public class UsernameHistory implements CommandExecutor {
 	ConsoleCommandSender console = Bukkit.getConsoleSender();
-	private HashMap<String, OldUsername[]> cache = new HashMap<String, OldUsername[]>();
+	private HashMap<String, OldUsername[]> cache = new HashMap<>();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 		String[] args) {
@@ -36,14 +36,30 @@ public class UsernameHistory implements CommandExecutor {
             return true;
         }
         if(args.length == 0) {
-            sender.sendMessage(ChatColor.BLUE + "Usage: /namehistory <player>");
+            sender.sendMessage(ChatColor.BLUE + "Usage: /namehistory <player> [--nocache]");
             return true;
         }
-		getHistory(sender, args[0]);
+		if(args.length == 1) {
+            getHistory(sender, args[0], false);
+        } else {
+            getHistory(sender, args[0], args[1].equalsIgnoreCase("--nocache"));
+        }
 		return true;
 	}
 
-	private void getHistory(CommandSender sender, String username) {
+	private void getHistory(CommandSender sender, String username, boolean ovCa) {
+        if(ovCa) { //they want to override cache, so let them (if they're an admin)
+            if(Rank.getRank(sender, Rank.Admin)) {
+                sender.sendMessage("");
+                sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
+                sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Overriding cache; checking via Mojang API...");
+                getHistoryFromWeb(sender, username);
+                return;
+            } else {
+                //they are not an admin, don't let them override cache
+                sender.sendMessage(ChatColor.RED + "You may NOT override cache! (You require the ADMIN rank to override cache)");
+            }
+        }
 		OldUsername[] oldNames = cache.get(username.toLowerCase());
 		if(oldNames != null) {
             sender.sendMessage("");
@@ -129,8 +145,6 @@ public class UsernameHistory implements CommandExecutor {
 			reader.close();
 			conn.disconnect();
 			return oldNames;
-		} catch(MalformedURLException e) {
-			e.printStackTrace();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

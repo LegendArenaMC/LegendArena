@@ -47,6 +47,8 @@ public class InitUtils {
         Bukkit.getPluginCommand("userinfo").setExecutor(new Info()); //Userinfo command [/userinfo]
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        Bukkit.getPluginCommand("op").setExecutor(new Op()); //Op command [/op]
+        Bukkit.getPluginCommand("deop").setExecutor(new Deop()); //Deop command [/deop]
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias

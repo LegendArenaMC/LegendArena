@@ -26,7 +26,7 @@ public class Freeze implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                     return true;
                 }
-            } catch(Exception ex) {
+            } catch(Exception ex) { //safeguard to make sure if Spigot kills the Bukkit.getPlayer() method (for whatever reason) the command doesn't say internal error/etc
                 sender.sendMessage(ChatColor.RED + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
                 ex.printStackTrace();
                 return true;
@@ -42,6 +42,7 @@ public class Freeze implements CommandExecutor {
                 p.setWalkSpeed((float) 0.0);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100000, 100, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 130, true));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100000, 20, true));
                 sender.sendMessage(ChatColor.GREEN + "Froze player " + p.getName() + " successfully.");
                 PluginUtils.frozenPlayers.add(p.getUniqueId());
             } else {
@@ -50,9 +51,10 @@ public class Freeze implements CommandExecutor {
                 if(!Rank.getRank(p, Rank.Admin)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {}
                 try { p.removePotionEffect(PotionEffectType.JUMP); } catch(Exception ignore) {}
+                try { p.removePotionEffect(PotionEffectType.WEAKNESS); } catch(Exception ignore) {}
                 p.setMaximumNoDamageTicks(0);
                 if(Rank.getRank(p, Rank.Mod) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
-                p.setAllowFlight(true);
+                    p.setAllowFlight(true);
                 p.setWalkSpeed((float) 0.2);
                 PluginUtils.frozenPlayers.remove(p.getUniqueId());
                 sender.sendMessage(ChatColor.GREEN + "Unfroze player " + p.getName() + " successfully.");

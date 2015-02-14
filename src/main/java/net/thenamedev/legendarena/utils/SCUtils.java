@@ -20,9 +20,9 @@ public class SCUtils {
             return;
         ItemMeta im = i.getItemMeta();
         if(im.getDisplayName().contains("ADMIN")) {
-            inv.setItem(0, i);
-        } else if(im.getDisplayName().contains("NOTIFY")) {
             inv.setItem(1, i);
+        } else if(im.getDisplayName().contains("NOTIFY")) {
+            inv.setItem(0, i);
         } else if(im.getDisplayName().contains("MOD")) {
             inv.setItem(2, i);
         } else if(im.getDisplayName().contains("STAFF")) {
@@ -122,7 +122,7 @@ public class SCUtils {
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case PUBLIC:
-                init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "OFF", ChatColor.BLUE + "Exit staff chat and go back to global chat.");
+                init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "OFF", ChatColor.BLUE + "Exit all channels and go back to global chat.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
         }
