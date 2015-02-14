@@ -37,4 +37,13 @@ public class MenuCore {
         return i;
     }
 
+    public static ItemStack createItem(Material m, String n, String... l) {
+        ItemStack i = new ItemStack(m);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(n);
+        im.setLore(Arrays.asList(l));
+        i.setItemMeta(im);
+        return i;
+    }
+
 }
