@@ -31,7 +31,7 @@ public class Freeze implements CommandExecutor {
                 ex.printStackTrace();
                 return true;
             }
-            if(!PluginUtils.frozenPlayers.contains(Bukkit.getPlayer(args[1]).getUniqueId())) {
+            if(!PluginUtils.frozenPlayers.contains(Bukkit.getPlayer(args[0]).getUniqueId())) {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(false);
                 p.setSleepingIgnored(true);
