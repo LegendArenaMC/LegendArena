@@ -44,13 +44,13 @@ public class SCUtils {
         if(r == Rank.Dev)
             return;
 
-        ItemStack admin = MenuCore.createItem(Material.BEDROCK, ChatColor.RED + "ADMIN", ChatColor.BLUE + "Admin channel.");
-        ItemStack mod = MenuCore.createItem(Material.GOLD_NUGGET, ChatColor.RED + "MOD", ChatColor.BLUE + "Mod channel.");
-        ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
-        ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
-        ItemStack notify = MenuCore.createItem(Material.BED, ChatColor.RED + "NOTIFY", ChatColor.BLUE + "Staff notifications channel.");
-        ItemStack vip = MenuCore.createItem(Material.EMERALD, ChatColor.RED + "VIP", ChatColor.BLUE + "VIP channel.");
-        ItemStack helper = MenuCore.createItem(Material.SADDLE, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
+        @NotNull ItemStack admin = MenuCore.createItem(Material.BEDROCK, ChatColor.RED + "ADMIN", ChatColor.BLUE + "Admin channel.");
+        @NotNull ItemStack mod = MenuCore.createItem(Material.GOLD_NUGGET, ChatColor.RED + "MOD", ChatColor.BLUE + "Mod channel.");
+        @NotNull ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
+        @NotNull ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+        @NotNull ItemStack notify = MenuCore.createItem(Material.BED, ChatColor.RED + "NOTIFY", ChatColor.BLUE + "Staff notifications channel.");
+        @NotNull ItemStack vip = MenuCore.createItem(Material.EMERALD, ChatColor.RED + "VIP", ChatColor.BLUE + "VIP channel.");
+        @NotNull ItemStack helper = MenuCore.createItem(Material.SADDLE, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
 
         if(r == Rank.Admin) {
             //Cannot access: NOTIFY
@@ -60,11 +60,10 @@ public class SCUtils {
             inv.setItem(1, admin);
             inv.setItem(0, notify);
         } else if(r == Rank.Helper) {
-            //Cannnot access: ADMIN, NOTIFY, MOD, ALERT
+            //Cannnot access: ADMIN, NOTIFY, MOD
             inv.setItem(1, admin);
             inv.setItem(0, notify);
             inv.setItem(2, mod);
-            inv.setItem(4, alert);
         } else if(r == Rank.VIP) {
             //Cannot access: ADMIN, NOTIFY, MOD, STAFF, ALERT, HELPER
             inv.setItem(1, admin);
@@ -86,13 +85,8 @@ public class SCUtils {
     }
 
     private static ItemStack getEnchantedItem(@NotNull Player p) {
-        SCType channel = SCType.getType(p.getUniqueId());
+        @NotNull SCType channel = SCType.getType(p.getUniqueId());
         ItemStack init;
-        if(channel == null) {
-            init = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.BLUE + "GLOBAL", ChatColor.BLUE + "Global chat. That's really all that needs to be said.");
-            init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-            return init;
-        }
         switch(channel) {
             case ADMIN:
                 init = MenuCore.createItem(Material.BEDROCK, ChatColor.BLUE + "ADMIN", ChatColor.BLUE + "Admin channel.");

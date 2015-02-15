@@ -34,7 +34,7 @@ public class UUIDFetcher {
 	}
 
 	public UUID fetch() throws IOException {
-		Gson gson = new GsonBuilder().create();
+		@NotNull Gson gson = new GsonBuilder().create();
 		UUID uuid;
 		@NotNull HttpURLConnection connection = createConnection();
 		String body = gson.toJson(name);

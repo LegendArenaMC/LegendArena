@@ -50,8 +50,8 @@ public class MinigameMenu implements Listener {
     @EventHandler
     public void onInventoryClick(@NotNull InventoryClickEvent e) {
         if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
-        if(e.getCurrentItem().getItemMeta() == null) return;
         try {
+            if(e.getCurrentItem().getItemMeta() == null) return;
             if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival Games")) {
                 e.setCancelled(true);
                 @NotNull Player p = (Player) e.getWhoClicked();

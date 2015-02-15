@@ -22,14 +22,14 @@ public class MainMenu implements Listener {
         inv = Bukkit.getServer().createInventory(null, 36, ChatColor.BLUE + "Warper");
 
         // Set the items
-        ItemStack plots = MenuCore.createItem(Material.BRICK, ChatColor.GREEN + "Plots");
-        ItemStack freebuild = MenuCore.createItem(Material.GOLDEN_CARROT, ChatColor.GREEN + "Freebuild");
-        ItemStack survival = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival");
-        ItemStack hub = MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "The Hub");
-        ItemStack shop = MenuCore.createItem(Material.BAKED_POTATO, ChatColor.GREEN + "Shop");
-        ItemStack minigames = MenuCore.createItem(Material.WORKBENCH, ChatColor.GREEN + "Minigames", ChatColor.BLUE + "Minigame list >>");
+        @NotNull ItemStack plots = MenuCore.createItem(Material.BRICK, ChatColor.GREEN + "Plots");
+        @NotNull ItemStack freebuild = MenuCore.createItem(Material.GOLDEN_CARROT, ChatColor.GREEN + "Freebuild");
+        @NotNull ItemStack survival = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival");
+        @NotNull ItemStack hub = MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "The Hub");
+        @NotNull ItemStack shop = MenuCore.createItem(Material.BAKED_POTATO, ChatColor.GREEN + "Shop");
+        @NotNull ItemStack minigames = MenuCore.createItem(Material.WORKBENCH, ChatColor.GREEN + "Minigames", ChatColor.BLUE + "Minigame list >>");
 
-        ItemStack comingsoon = MenuCore.createItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14), ChatColor.RED + "Coming Soon[tm]", ChatColor.RED + "Check back later on this one!");
+        @NotNull ItemStack comingsoon = MenuCore.createItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14), ChatColor.RED + "Coming Soon[tm]", ChatColor.RED + "Check back later on this one!");
 
         // Item clones
         ItemStack comingsoon1 = comingsoon.clone();
@@ -60,8 +60,8 @@ public class MainMenu implements Listener {
     @EventHandler
     public void onInventoryClick(@NotNull InventoryClickEvent e) {
         if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
-        if(e.getCurrentItem().getItemMeta() == null) return;
         try {
+            if(e.getCurrentItem().getItemMeta() == null) return;
 			if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
 				e.setCancelled(true);
 				@NotNull Player p = (Player) e.getWhoClicked();

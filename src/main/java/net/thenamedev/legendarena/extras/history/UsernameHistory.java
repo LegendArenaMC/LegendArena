@@ -29,6 +29,7 @@ class OldUsername implements Comparable<OldUsername> {
 
 public class UsernameHistory implements CommandExecutor {
 	ConsoleCommandSender console = Bukkit.getConsoleSender();
+    @NotNull
     private HashMap<String, OldUsername[]> cache = new HashMap<>();
 
 	public boolean onCommand(@NotNull CommandSender sender, Command cmd, String label,
@@ -133,7 +134,7 @@ public class UsernameHistory implements CommandExecutor {
 	}
 
 	private OldUsername[] usernames(@NotNull String uuid, String current) {
-		Gson gson = new GsonBuilder().create();
+		@NotNull Gson gson = new GsonBuilder().create();
 		String compactUuid = uuid.replace("-", "");
 		try {
 			@NotNull URL url = new URL("https://api.mojang.com/user/profiles/"

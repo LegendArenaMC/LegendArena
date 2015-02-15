@@ -38,6 +38,7 @@ public class InitUtils {
     private final static List<String> firework = new ArrayList<>();
     private final static List<String> clearchat = new ArrayList<>();
     private final static List<String> chat = new ArrayList<>();
+    private final static List<String> particles = new ArrayList<>();
 
     private static void registerCommands() {
         registerAliases();
@@ -52,12 +53,11 @@ public class InitUtils {
         Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles]
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
-        Bukkit.getPluginCommand("op").setExecutor(new Op()); //Op command [/op]
-        Bukkit.getPluginCommand("deop").setExecutor(new Deop()); //Deop command [/deop]
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
+        Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
         Bukkit.getPluginCommand("firework").setAliases(firework); //Firework alias
     }
 
@@ -66,6 +66,8 @@ public class InitUtils {
         clearchat.add("cc");
         chat.add("sc");
         chat.add("c");
+        particles.add("particle");
+        particles.add("ps");
     }
 
 }
