@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendarena.commands.*;
+import net.thenamedev.legendarena.commands.dev.*;
 import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.history.*;
 import net.thenamedev.legendarena.extras.particles.*;
@@ -35,7 +36,7 @@ public class InitUtils {
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-
+        Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
     }
 
     private final static List<String> firework = new ArrayList<>();
@@ -48,16 +49,18 @@ public class InitUtils {
         registerAliases();
         // Commands
         Bukkit.getPluginCommand("namehistory").setExecutor(new UsernameHistory()); //Username history command [/namehistory]
-        Bukkit.getPluginCommand("say").setExecutor(new Say()); //Say command [/say]
-        Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/fw]
-        Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/cc]
+        Bukkit.getPluginCommand("say").setExecutor(new Say()); //Say command [/say, /alert]
+        Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
+        Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/clearchat, /cc]
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
+        Bukkit.getPluginCommand("updatescoreboard").setExecutor(new UpdateScoreboard()); //Update scoreboard command [/updatescoreboard]
         Bukkit.getPluginCommand("globalmute").setExecutor(new GlobalMute()); //Globalmute command [/gmute]
         Bukkit.getPluginCommand("userinfo").setExecutor(new Info()); //Userinfo command [/userinfo]
-        Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles]
+        Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles, /particle, /ps]
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]
+        Bukkit.getPluginCommand("banhammer").setExecutor(new BanHammer()); //Ban hammer command [/banhammer]
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases

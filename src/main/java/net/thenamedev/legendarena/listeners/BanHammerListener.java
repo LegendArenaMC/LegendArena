@@ -28,7 +28,7 @@ public class BanHammerListener implements Listener {
             staff.sendMessage(ChatColor.RED + "You cannot ban other staff!");
             return;
         }
-        //
+        staff.performCommand("ban " + target.getName().toLowerCase() + " The (literal) ban hammer has spoken!");
     }
 
 }

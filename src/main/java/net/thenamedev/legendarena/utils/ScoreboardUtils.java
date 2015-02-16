@@ -40,20 +40,20 @@ public class ScoreboardUtils {
         ownOp = sb.registerNewTeam("OwnOp");
 
         //Set prefixes
-        mod.setPrefix("§5[Mod] §6");
-        helper.setPrefix("§1[Helper] §a");
-        vip.setPrefix("§6[VIP] §b");
-        member.setPrefix("§9[Member] §e");
+        mod.setPrefix("§5Mod §8| §6");
+        helper.setPrefix("§1Helper §8| §a");
+        vip.setPrefix("§6VIP §8| §b");
+        member.setPrefix("§9Member §8| §e");
 
-        admin.setPrefix("§a[Admin] §c");
-        admin.setSuffix("§5 [GM]");
+        admin.setPrefix("§aAdmin §8| §c");
+        admin.setSuffix("§8 |§5 GM");
 
         //Special ranks prefix/suffixes
-        opDev.setPrefix("§4[Dev] §c");
-        opDev.setSuffix("§5 [GM]");
+        opDev.setPrefix("§4Dev §8| §c");
+        opDev.setSuffix("§8 |§5 GM");
 
-        ownOp.setPrefix("§a[Owner] §4");
-        ownOp.setSuffix("§5 [GM]");
+        ownOp.setPrefix("§aOwner §8| §4");
+        ownOp.setSuffix("§8 |§5 GM");
     }
 
     public static void addPlayerToTeam(Team t, Player p) {
@@ -67,8 +67,8 @@ public class ScoreboardUtils {
 
     /**
      * Small hacky in-line class to make sure everyone is on the same scoreboard
-     *
-     * don't ask why I thought this was a great idea, I was probably drunk at the time of making this
+     * <br><br>
+     * don't ask why I thought this was a great idea, I was most likely drunk at the time of making this
      */
     public static class MakeSureNothingBreaks implements Runnable {
         public void run() {
