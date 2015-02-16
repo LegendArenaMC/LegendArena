@@ -21,10 +21,12 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.*;
 
+@Deprecated
 class FetchedUuid {
 	String id;
 }
 
+@Deprecated
 public class UUIDFetcher {
 	private static final String PROFILE_URL = "https://api.mojang.com/profiles/minecraft";
 	private final String name;

@@ -19,7 +19,7 @@ public class ParticleMenu implements Menu, Listener {
     private Inventory inv;
 
     public ParticleMenu(Plugin p) {
-        inv = Bukkit.getServer().createInventory(null, 18, ChatColor.BLUE + "Particle Selector");
+        inv = Bukkit.createInventory(null, 18, ChatColor.BLUE + "Particle Selector");
 
         @NotNull ItemStack hearts = MenuCore.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!");
         @NotNull ItemStack slime = MenuCore.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!");
@@ -43,7 +43,7 @@ public class ParticleMenu implements Menu, Listener {
 
         inv.setItem(17, off);
 
-        Bukkit.getServer().getPluginManager().registerEvents(this, p);
+        Bukkit.getPluginManager().registerEvents(this, p);
     }
 
     public void show(@NotNull Player p) {

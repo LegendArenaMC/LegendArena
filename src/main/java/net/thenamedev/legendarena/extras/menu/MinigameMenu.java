@@ -17,7 +17,7 @@ public class MinigameMenu implements Listener {
     private final Inventory inv;
 
     public MinigameMenu(Plugin plugin) {
-        inv = Bukkit.getServer().createInventory(null, 36, ChatColor.BLUE + "Minigames");
+        inv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Minigames");
 
         ItemStack spl;
         ItemStack ba;
@@ -30,17 +30,17 @@ public class MinigameMenu implements Listener {
 		more = MenuCore.createItem(Material.PAPER, ChatColor.RED + "Note", ChatColor.YELLOW + "More minigames are coming soon (as in when we finish them)!");
         spl = MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Splegg");
         pr = MenuCore.createItem(Material.IRON_FENCE, ChatColor.GREEN + "Prison", ChatColor.RED + "Coming soon[tm]...");
-        ba = MenuCore.createItem(Material.ARROW, ChatColor.GREEN + "Back", ChatColor.BLUE + "Go back <<");
+        //ba = MenuCore.createItem(Material.ARROW, ChatColor.GREEN + "Back", ChatColor.BLUE + "Go back <<");
         sg = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games");
 
         inv.setItem(1, sp);
         inv.setItem(7, spl);
 		inv.setItem(13, more);
         inv.setItem(19, pr);
-        inv.setItem(31, ba);
+        //inv.setItem(31, ba);
         inv.setItem(25, sg);
 
-        Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     public void show(@NotNull Player p) {

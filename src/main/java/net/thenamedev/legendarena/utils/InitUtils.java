@@ -6,6 +6,7 @@ import net.thenamedev.legendarena.extras.history.*;
 import net.thenamedev.legendarena.extras.particles.*;
 import net.thenamedev.legendarena.listeners.*;
 import net.thenamedev.legendarena.extras.staffchat.*;
+import net.thenamedev.legendarena.utils.ScoreboardUtils.MakeSureNothingBreaks;
 import org.bukkit.*;
 
 import java.util.*;
@@ -22,7 +23,9 @@ public class InitUtils {
             throw new NullPointerException();
         registerListeners();
         registerCommands();
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 20l, 20l);
+        ScoreboardUtils.registerTeams();
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new MakeSureNothingBreaks(), 40l, 40l);
         init = true;
     }
 
@@ -36,6 +39,7 @@ public class InitUtils {
     }
 
     private final static List<String> firework = new ArrayList<>();
+    private final static List<String> say = new ArrayList<>();
     private final static List<String> clearchat = new ArrayList<>();
     private final static List<String> chat = new ArrayList<>();
     private final static List<String> particles = new ArrayList<>();
@@ -57,6 +61,7 @@ public class InitUtils {
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
+        Bukkit.getPluginCommand("say").setAliases(say); //Say alias
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
         Bukkit.getPluginCommand("firework").setAliases(firework); //Firework alias
     }
@@ -65,6 +70,7 @@ public class InitUtils {
         firework.add("fw");
         clearchat.add("cc");
         chat.add("sc");
+        say.add("alert");
         chat.add("c");
         particles.add("particle");
         particles.add("ps");
