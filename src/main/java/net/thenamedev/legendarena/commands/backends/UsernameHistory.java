@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.history;
+package net.thenamedev.legendarena.commands.backends;
 
 //Code stolen from here: https://github.com/ParkerKemp/UsernameHistory
 //
@@ -27,30 +27,27 @@ class OldUsername implements Comparable<OldUsername> {
 	}
 }
 
-public class UsernameHistory implements CommandExecutor {
+public class UsernameHistory {
 	ConsoleCommandSender console = Bukkit.getConsoleSender();
-    @NotNull
-    private HashMap<String, OldUsername[]> cache = new HashMap<>();
+    @NotNull private static HashMap<String, OldUsername[]> cache = new HashMap<>();
 
-	public boolean onCommand(@NotNull CommandSender sender, Command cmd, String label,
-		@NotNull String[] args) {
+	public static void run(@NotNull CommandSender sender, @NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
-            return true;
+            return;
         }
-        if(args.length == 0) {
-            sender.sendMessage(ChatColor.BLUE + "Usage: /namehistory <player> [--nocache]");
-            return true;
+        if(args.length == 0 || args.length == 1) {
+            sender.sendMessage(ChatColor.BLUE + "Usage: /lookup history <player> [--nocache]");
+            return;
         }
-		if(args.length == 1) {
-            getHistory(sender, args[0], false);
+		if(args.length == 2) {
+            getHistory(sender, args[1], false);
         } else {
-            getHistory(sender, args[0], args[1].equalsIgnoreCase("--nocache"));
+            getHistory(sender, args[1], args[2].equalsIgnoreCase("--nocache"));
         }
-		return true;
 	}
 
-	private void getHistory(@NotNull CommandSender sender, @NotNull String username, boolean ovCa) {
+	private static void getHistory(@NotNull CommandSender sender, @NotNull String username, boolean ovCa) {
         if(ovCa) { //they want to override cache, so let them (if they're an admin)
             if(Rank.getRank(sender, Rank.Admin)) {
                 sender.sendMessage("");
@@ -66,19 +63,18 @@ public class UsernameHistory implements CommandExecutor {
 		OldUsername[] oldNames = cache.get(username.toLowerCase());
 		if(oldNames != null) {
             sender.sendMessage("");
-            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
-            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Found player's name history in cache.");
+            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.BLUE + username + ChatColor.BLUE + " ]. -----");
+            sender.sendMessage(PluginUtils.msgNormal + "Found player's name history in cache.");
 			reportHistory(sender, oldNames);
         } else {
             sender.sendMessage("");
-            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
-            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Name history not in cache; checking via Mojang API...");
+            sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.BLUE + username + ChatColor.BLUE + " ]. -----");
+            sender.sendMessage(PluginUtils.msgNormal + "Name history not in cache; checking via Mojang API...");
 			getHistoryFromWeb(sender, username);
         }
 	}
 
-	private void getHistoryFromWeb(@NotNull final CommandSender sender,
-			@NotNull final String username) {
+	private static void getHistoryFromWeb(@NotNull final CommandSender sender, @NotNull final String username) {
 
 		new Thread() {
 			public void run() {
@@ -110,13 +106,13 @@ public class UsernameHistory implements CommandExecutor {
 		}.start();
 	}
 
-	private void reportHistory(@NotNull CommandSender sender, @NotNull OldUsername[] names) {
+	private static void reportHistory(@NotNull CommandSender sender, @NotNull OldUsername[] names) {
 		sender.sendMessage("");
 		if(names.length == 1)
-			sender.sendMessage(ChatColor.GREEN + names[0].name + ChatColor.GOLD
+			sender.sendMessage(ChatColor.BLUE + names[0].name + ChatColor.GREEN
 					+ " has never changed their name.");
 		else {
-			sender.sendMessage(ChatColor.GOLD + "Originally " + ChatColor.GREEN
+			sender.sendMessage(ChatColor.GREEN + "Originally " + ChatColor.BLUE
 					+ names[0].name);
 			sender.sendMessage("");
 
@@ -124,16 +120,16 @@ public class UsernameHistory implements CommandExecutor {
 				@NotNull DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 				@NotNull Date date = new Date(names[i].changedToAt);
 				@NotNull String formattedDate = df.format(date);
-				sender.sendMessage(ChatColor.BLUE + formattedDate
-						+ ChatColor.GOLD + " - changed to " + ChatColor.GREEN
+				sender.sendMessage(ChatColor.YELLOW + formattedDate
+						+ ChatColor.GREEN + " - changed to " + ChatColor.BLUE
 						+ names[i].name);
 			}
             sender.sendMessage("");
-            sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Done.");
+            sender.sendMessage(PluginUtils.msgNormal + "Done.");
         }
 	}
 
-	private OldUsername[] usernames(@NotNull String uuid, String current) {
+	private static OldUsername[] usernames(@NotNull String uuid, String current) {
 		@NotNull Gson gson = new GsonBuilder().create();
 		String compactUuid = uuid.replace("-", "");
 		try {

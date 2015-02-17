@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.history;
+package net.thenamedev.legendarena.utils;
 
 //This is a modified version of a class created by evilmidget38:
 //
@@ -21,12 +21,10 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.*;
 
-@Deprecated
 class FetchedUuid {
 	String id;
 }
 
-@Deprecated
 public class UUIDFetcher {
 	private static final String PROFILE_URL = "https://api.mojang.com/profiles/minecraft";
 	private final String name;
