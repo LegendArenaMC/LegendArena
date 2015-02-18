@@ -34,6 +34,7 @@ public class LookupUser implements CommandExecutor {
             Bans.run(sender, args);
         } else {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /lalookup <history|info|bans> <player>");
+            return true;
         }
         return true;
     }

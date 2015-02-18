@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendarena.extras.menu.core.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;

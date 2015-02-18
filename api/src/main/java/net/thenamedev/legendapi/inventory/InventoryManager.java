@@ -33,6 +33,8 @@ public class InventoryManager implements Listener {
             throw new NullPointerException("Run setInvItems() first, doofus!");
         if(invName == null || invName.equals(""))
             throw new NullPointerException("Run setInvName() first, doofus!");
+        if(slots == 0)
+            throw new NullPointerException("Run setSlots() first, doofus!");
 
         inv = Bukkit.createInventory(null, slots, invName);
 

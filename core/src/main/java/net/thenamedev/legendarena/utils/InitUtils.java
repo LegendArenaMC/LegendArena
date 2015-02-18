@@ -6,7 +6,6 @@ import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.particles.*;
 import net.thenamedev.legendarena.extras.staffchat.*;
 import net.thenamedev.legendarena.listeners.*;
-import net.thenamedev.legendarena.utils.ScoreboardUtils.*;
 import org.bukkit.*;
 
 import java.util.*;
@@ -25,7 +24,6 @@ public class InitUtils {
         registerCommands();
         ScoreboardUtils.registerTeams();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new MakeSureNothingBreaks(), 40l, 40l);
         init = true;
     }
 
@@ -35,6 +33,7 @@ public class InitUtils {
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
     }
 
@@ -50,6 +49,7 @@ public class InitUtils {
         registerAliases();
         // Commands
         Bukkit.getPluginCommand("say").setExecutor(new Say()); //Say command [/say, /alert]
+        Bukkit.getPluginCommand("motdlist").setExecutor(new MOTDList()); //MOTD list command [/motdlist]
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
         Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/clearchat, /cc]
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]

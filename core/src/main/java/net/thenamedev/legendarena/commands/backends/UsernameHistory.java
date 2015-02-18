@@ -31,9 +31,16 @@ public class UsernameHistory {
 	ConsoleCommandSender console = Bukkit.getConsoleSender();
     @NotNull private static HashMap<String, OldUsername[]> cache = new HashMap<>();
 
+    @NotNull
+    private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
+
 	public static void run(@NotNull CommandSender sender, @NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
+            return;
+        }
+        if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {
+            sender.sendMessage(cooldown.get(((Player) sender).getUniqueId()).getTimeRemaining());
             return;
         }
         if(args.length == 0 || args.length == 1) {
@@ -45,6 +52,8 @@ public class UsernameHistory {
         } else {
             getHistory(sender, args[1], args[2].equalsIgnoreCase("--nocache"));
         }
+        //5 second cooldown
+        cooldown.put(((Player) sender).getUniqueId(), new Cooldown(5));
 	}
 
 	private static void getHistory(@NotNull CommandSender sender, @NotNull String username, boolean ovCa) {

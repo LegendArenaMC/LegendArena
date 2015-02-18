@@ -5,6 +5,7 @@ import net.ae97.fishbans.api.exceptions.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.entity.*;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -16,11 +17,20 @@ import java.util.logging.*;
  */
 public class Bans {
 
+    @NotNull
+    private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
+
     public static void run(@NotNull CommandSender sender, @NotNull String[] args) {
         if(args.length == 0 || args.length == 1) {
             sender.sendMessage(ChatColor.BLUE + "Usage: /lalookup bans <player> -[-detailed|d]");
             return;
         }
+        if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {
+            sender.sendMessage(cooldown.get(((Player) sender).getUniqueId()).getTimeRemaining());
+            return;
+        }
+        //5 second cooldown
+        cooldown.put(((Player) sender).getUniqueId(), new Cooldown(5));
         if(args.length == 2) {
             basicInfo(sender, args[1]);
         } else {

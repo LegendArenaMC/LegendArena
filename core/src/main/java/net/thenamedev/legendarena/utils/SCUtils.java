@@ -20,7 +20,7 @@ public class SCUtils {
         if(i == null) //sanity check
             return;
         ItemMeta im = i.getItemMeta();
-        if(im.getDisplayName().contains("ADMIN")) {
+        if(im.getDisplayName().contains("GM")) {
             inv.setItem(1, i);
         } else if(im.getDisplayName().contains("NOTIFY")) {
             inv.setItem(0, i);
@@ -44,7 +44,7 @@ public class SCUtils {
         if(r == Rank.Dev)
             return;
 
-        @NotNull ItemStack admin = MenuCore.createItem(Material.BEDROCK, ChatColor.RED + "ADMIN", ChatColor.BLUE + "Admin channel.");
+        @NotNull ItemStack admin = MenuCore.createItem(Material.DIAMOND_CHESTPLATE, ChatColor.RED + "GM", ChatColor.BLUE + "GM channel.");
         @NotNull ItemStack mod = MenuCore.createItem(Material.GOLD_NUGGET, ChatColor.RED + "MOD", ChatColor.BLUE + "Mod channel.");
         @NotNull ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
         @NotNull ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
@@ -89,7 +89,7 @@ public class SCUtils {
         ItemStack init;
         switch(channel) {
             case ADMIN:
-                init = MenuCore.createItem(Material.BEDROCK, ChatColor.BLUE + "ADMIN", ChatColor.BLUE + "Admin channel.");
+                init = MenuCore.createItem(Material.DIAMOND_CHESTPLATE, ChatColor.RED + "GM", ChatColor.BLUE + "GM channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case NOTIFICATION:

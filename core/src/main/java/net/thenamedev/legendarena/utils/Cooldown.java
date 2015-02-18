@@ -5,16 +5,16 @@ import org.jetbrains.annotations.*;
 
 /**
  * Code stolen from: http://hastebin.com/noqemohuda.java
- * @author TheNameMan
  */
 public class Cooldown {
 
     private int seconds;
-
+    private int total;
     private long start;
 
     public Cooldown(int seconds) {
         this.seconds = seconds;
+        this.total = seconds;
 
         this.start = System.currentTimeMillis();
     }
@@ -31,7 +31,7 @@ public class Cooldown {
 
     @NotNull
     public String getTimeRemaining() {
-        return ChatColor.RED + "You must wait another " + ChatColor.BLUE + remainingSeconds() + " seconds" + ChatColor.RED + " to use this again.";
+        return PluginUtils.msgNormal + "Cooldown: " + ChatColor.YELLOW + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.YELLOW + total + "s";
     }
 
 }

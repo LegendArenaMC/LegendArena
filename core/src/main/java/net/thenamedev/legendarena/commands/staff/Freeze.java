@@ -28,7 +28,7 @@ public class Freeze implements CommandExecutor {
                     return true;
                 }
             } catch(Exception ex) { //safeguard to make sure if Spigot kills the Bukkit.getPlayer() method (for whatever reason) the command doesn't say internal error/etc
-                sender.sendMessage(ChatColor.RED + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
+                sender.sendMessage(PluginUtils.msgError + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
                 ex.printStackTrace();
                 return true;
             }
@@ -44,15 +44,24 @@ public class Freeze implements CommandExecutor {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100000, 100, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 130, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100000, 20, true));
-                sender.sendMessage(ChatColor.GREEN + "Froze player " + p.getName() + " successfully.");
+                sender.sendMessage(PluginUtils.msgNormal + "Froze player " + p.getName() + " successfully.");
                 PluginUtils.frozenPlayers.add(p.getUniqueId());
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
                 if(!Rank.getRank(p, Rank.Admin)) p.setSleepingIgnored(false);
-                try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {}
-                try { p.removePotionEffect(PotionEffectType.JUMP); } catch(Exception ignore) {}
-                try { p.removePotionEffect(PotionEffectType.WEAKNESS); } catch(Exception ignore) {}
+                try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {
+                    if(LegendArena.debugSwitch)
+                        sender.sendMessage(PluginUtils.msgDebug + "Could not remove MINING FATIGUE.");
+                }
+                try { p.removePotionEffect(PotionEffectType.JUMP); } catch(Exception ignore) {
+                    if(LegendArena.debugSwitch)
+                        sender.sendMessage(PluginUtils.msgDebug + "Could not remove JUMP BOOST.");
+                }
+                try { p.removePotionEffect(PotionEffectType.WEAKNESS); } catch(Exception ignore) {
+                    if(LegendArena.debugSwitch)
+                        sender.sendMessage(PluginUtils.msgDebug + "Could not remove WEAKNESS.");
+                }
                 p.setMaximumNoDamageTicks(0);
                 if(Rank.getRank(p, Rank.Mod) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
                     p.setAllowFlight(true);

@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.utils;
 
+import net.thenamedev.legendarena.core.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scoreboard.*;
@@ -8,7 +9,7 @@ import org.jetbrains.annotations.*;
 /**
  * Tutorial used is <a href="http://bukkit.org/threads/tutorial-scoreboards-teams-with-the-bukkit-api.139655/">here</a>
  * <br><br>
- * I'm not sure if I need to give official credit, but I might as well say this much
+ * I'm not sure if I need to give official credit, but I might as well say this much..
  * @author TheNameMan
  */
 public class ScoreboardUtils {
@@ -19,7 +20,7 @@ public class ScoreboardUtils {
     //I trust you to not override these. Don't be evil.
 
     @Nullable
-    public static Team admin = null;
+    public static Team gm = null;
     @Nullable
     public static Team mod = null;
     @Nullable
@@ -37,7 +38,7 @@ public class ScoreboardUtils {
 
     public static void registerTeams() {
         //Init the teams
-        admin = sb.registerNewTeam("Admins");
+        gm = sb.registerNewTeam("GMs");
         mod = sb.registerNewTeam("Mods");
         helper = sb.registerNewTeam("Helpers");
         member = sb.registerNewTeam("Members");
@@ -53,8 +54,7 @@ public class ScoreboardUtils {
         vip.setPrefix("§6VIP §8| §b");
         member.setPrefix("§9Member §8| §e");
 
-        admin.setPrefix("§aAdmin §8| §c");
-        admin.setSuffix("§8 |§5 GM");
+        gm.setPrefix("§GM §8| §c");
 
         //Special ranks prefix/suffixes
         opDev.setPrefix("§4Dev §8| §c");
@@ -62,26 +62,34 @@ public class ScoreboardUtils {
 
         ownOp.setPrefix("§aOwner §8| §4");
         ownOp.setSuffix("§8 |§5 GM");
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new FixThings(), 40l, 40l);
     }
 
     public static void addPlayerToTeam(@Nullable Team t, @NotNull Player p) {
         p.setScoreboard(sb);
         if(t == null) {
             member.addPlayer(p);
-            return; //Add the player to the member team and return out - we don't want NPE's spamming console
+            return; //Add the player to the member team and exit the call - we don't want NPE's spamming console
         }
         t.addPlayer(p);
     }
 
-    /**
-     * Small hacky in-line class to make sure everyone is on the same scoreboard
-     * <br><br>
-     * don't ask why I thought this was a great idea, I was most likely drunk at the time of making this
-     */
-    public static class MakeSureNothingBreaks implements Runnable {
+    public static void removePlayer(Player p) {
+        ownOp.removePlayer(p);
+        opDev.removePlayer(p);
+        gm.removePlayer(p);
+        member.removePlayer(p);
+        vip.removePlayer(p);
+        mod.removePlayer(p);
+        helper.removePlayer(p);
+    }
+
+    public static class FixThings implements Runnable {
         public void run() {
-            for(@NotNull Player p : Bukkit.getOnlinePlayers()) {
-                p.setScoreboard(sb);
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                removePlayer(p);
+                addPlayerToTeam(Rank.getScoreboardTeam(p), p);
             }
         }
     }
