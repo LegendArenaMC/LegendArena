@@ -31,11 +31,7 @@
     <build>
         <resources>
             <resource>
-                <directory>core/src/main/java</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>api/src/main/java</directory>
+                <directory>src/main/java</directory>
                 <filtering>true</filtering>
             </resource>
             <resource>
