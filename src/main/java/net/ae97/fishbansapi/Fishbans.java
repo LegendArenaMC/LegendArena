@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api;
+package net.ae97.fishbansapi;
 
 import com.google.gson.*;
-import net.ae97.fishbans.api.exceptions.*;
+import net.ae97.fishbansapi.exceptions.*;
 
 import java.io.*;
 import java.net.*;

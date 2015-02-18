@@ -30,11 +30,11 @@ public class ScoreboardUtils {
     @Nullable
     public static Team member = null;
 
-    //Special ranks [only given to super-magical-special people]
+    //Special ranks
     @Nullable
-    public static Team opDev = null;
+    public static Team dev = null;
     @Nullable
-    public static Team ownOp = null;
+    public static Team owner = null;
 
     public static void registerTeams() {
         //Init the teams
@@ -45,8 +45,8 @@ public class ScoreboardUtils {
         vip = sb.registerNewTeam("VIPs");
 
         //Special teams
-        opDev = sb.registerNewTeam("OpDev");
-        ownOp = sb.registerNewTeam("OwnOp");
+        dev = sb.registerNewTeam("Dev");
+        owner = sb.registerNewTeam("Owner");
 
         //Set prefixes
         mod.setPrefix("§5Mod §8| §6");
@@ -57,11 +57,8 @@ public class ScoreboardUtils {
         gm.setPrefix("§GM §8| §c");
 
         //Special ranks prefix/suffixes
-        opDev.setPrefix("§4Dev §8| §c");
-        opDev.setSuffix("§8 |§5 GM");
-
-        ownOp.setPrefix("§aOwner §8| §4");
-        ownOp.setSuffix("§8 |§5 GM");
+        owner.setPrefix("§aOwner §8| §4");
+        dev.setPrefix("§4Dev §8| §c");
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new FixThings(), 40l, 40l);
     }
@@ -76,8 +73,8 @@ public class ScoreboardUtils {
     }
 
     public static void removePlayer(Player p) {
-        ownOp.removePlayer(p);
-        opDev.removePlayer(p);
+        dev.removePlayer(p);
+        owner.removePlayer(p);
         gm.removePlayer(p);
         member.removePlayer(p);
         vip.removePlayer(p);
@@ -87,7 +84,7 @@ public class ScoreboardUtils {
 
     public static class FixThings implements Runnable {
         public void run() {
-            for(Player p : Bukkit.getOnlinePlayers()) {
+            for(@NotNull Player p : Bukkit.getOnlinePlayers()) {
                 removePlayer(p);
                 addPlayerToTeam(Rank.getScoreboardTeam(p), p);
             }

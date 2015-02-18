@@ -12,12 +12,14 @@ import org.jetbrains.annotations.*;
 public class BanHammer implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, Command command, String s, String[] args) {
+        if(!(sender instanceof Player)) {
+            sender.sendMessage("Sorry - you can only do this as a player :(");
+            return true; //Do nothing if it's not a player
+        }
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
             return true;
         }
-        if(!(sender instanceof Player))
-            return true;
         ((Player) sender).getInventory().addItem(BanHammerManager.getBanHammerItem(sender.getName()));
         return true;
     }

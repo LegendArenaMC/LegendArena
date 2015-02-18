@@ -18,27 +18,25 @@ public class MinigameMenu implements Listener {
     private final Inventory inv;
 
     public MinigameMenu(Plugin plugin) {
-        inv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Minigames");
+        inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Minigames");
 
         ItemStack spl;
         ItemStack ba;
         ItemStack sp;
-        ItemStack pr;
+        //ItemStack pr;
 		ItemStack more;
         ItemStack sg;
 
         sp = MenuCore.createItem(Material.GOLD_SPADE, ChatColor.GREEN + "Spleef");
-		more = MenuCore.createItem(Material.PAPER, ChatColor.RED + "Note", ChatColor.YELLOW + "More minigames are coming soon (as in when we finish them)!");
+		more = MenuCore.createItem(Material.PAPER, ChatColor.RED + "Note!", ChatColor.YELLOW + "More minigames are coming soon (as in when we finish them)!");
         spl = MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Splegg");
-        pr = MenuCore.createItem(Material.IRON_FENCE, ChatColor.GREEN + "Prison", ChatColor.RED + "Coming soon[tm]...");
-        //ba = MenuCore.createItem(Material.ARROW, ChatColor.GREEN + "Back", ChatColor.BLUE + "Go back <<");
+        //pr = MenuCore.createItem(Material.IRON_FENCE, ChatColor.GREEN + "Prison", ChatColor.RED + "Coming soon[tm]...");
         sg = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games");
 
         inv.setItem(1, sp);
         inv.setItem(7, spl);
-		inv.setItem(13, more);
-        inv.setItem(19, pr);
-        //inv.setItem(31, ba);
+		inv.setItem(19, more);
+        //inv.setItem(19, pr);
         inv.setItem(25, sg);
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -76,10 +74,6 @@ public class MinigameMenu implements Listener {
                 p.sendMessage(ChatColor.GREEN + "Warping you to" + ChatColor.RED + " SPLEGG...");
                 p.teleport(Bukkit.getWorld("splegg").getSpawnLocation(), TeleportCause.PLUGIN);
                 e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Prison")) {
-                e.setCancelled(true);
-                @NotNull Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.RED + "That's coming soon[tm]!");
             }
 
             else { //failsafe

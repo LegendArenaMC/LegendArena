@@ -14,6 +14,10 @@ import org.jetbrains.annotations.*;
 public class Warn implements CommandExecutor {
 
     public boolean onCommand(@NotNull CommandSender sender, Command label, String labelString, @NotNull String[] args) {
+        if(!(sender instanceof Player)) {
+            sender.sendMessage("Sorry - you can only do this as a player :(");
+            return true; //Do nothing if it's not a player
+        }
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
             return true;

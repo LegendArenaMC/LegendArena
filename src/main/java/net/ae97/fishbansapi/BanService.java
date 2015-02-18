@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api;
+package net.ae97.fishbansapi;
 
 /**
  * The list of ban service provides which http://fishbans.com retrieves bans

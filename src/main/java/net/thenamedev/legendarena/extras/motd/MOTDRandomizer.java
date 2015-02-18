@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.extras.motd;
 
 import org.bukkit.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -37,26 +38,33 @@ public class MOTDRandomizer {
             "OBJECTION!", //reference to Pheonix Wright
             "What is a man? A miserable little pile of secrets.", //fine I'll admit it I just stole this quote from a top ten list of game quotes
             "All your base are belong to us.", //You know what this is a reference to.
-            "What are 'ya buyin', stranger?", //reference to Resident Evil 4
+            "What are 'ya buyin, stranger?", //reference to Resident Evil 4
             "Hey! Listen!", //hint: ZELDA. That's all you need.
-            "Legend Arena seems slow.. to.. start...", //reference to a Firefox message that says "Firefox seems slow.. to.. start..." [yes, I'm a Firefox user, come at me]
+            //"Legend Arena seems slow.. to.. start...", //reference to a Firefox message that says "Firefox seems slow.. to.. start..." [yes, I'm a Firefox user, come at me]
             "HEADSHOT!", //no.
             "Snake? SNAAAKE!", //reference to a Metal Gear quote when Snake dies
-            "FINISH HIM!", //you know what this is from.
+            //"FINISH HIM!", //you know what this is from.
             "Do a barrel roll!", //if you have no idea what this is from, you're a failure
             ChatColor.ITALIC + "askew" + ChatColor.GREEN, //try this in google. you'll get what this is then.
             "It's a me, Mario!", //if you don't know what this is from you're a failure
             "I used to be an adventurer like you, then I took an arrow to the knee.", //if you have no idea what this is, you're an ultra failure.
             "War. War never changes.", //I have no idea what this is from, I just stole it from a comments section on YouTube
-            "SPAAAAAACEEE" //portal reference... again
+            "SPAAAAAACEEE", //portal reference... again
+            //"Why don't you love me?", //Graser10 reference
+            //"This is intentionally blank.", //..I have no idea why I added this
+            "//Made in Java", //reference to Minecraft being made in Java
+            "Caused by: java.lang.NullPointerException", //reference to NullPointerException (oh how I have been burned so many times by this one error...)
+            "git commit -m \"YOLO M8\" && git push --force", //reference to a "fuck it, yolo"-type git commit
+            //"Uses \"git commit -m \"I like code\" && git push\"" //..I have no idea how to explain this
     };
 
     public static String randomize() {
-        Random r = new Random();
+        @NotNull Random r = new Random();
         int msgInt = r.nextInt(motdList.length);
         return motdList[msgInt];
     }
 
+    @NotNull
     public static String[] getList() {
         return motdList;
     }

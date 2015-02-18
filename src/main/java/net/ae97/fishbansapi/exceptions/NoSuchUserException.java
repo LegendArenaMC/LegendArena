@@ -16,23 +16,22 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api.exceptions;
+package net.ae97.fishbansapi.exceptions;
 
 /**
- * Thrown when no such {@link net.ae97.fishbans.api.BanService} exists with a
- * given name
+ * Throw when no such user exists on the Fishbans API
  *
  * @since 1.0
  * @author Lord_Ralex
  */
-public class NoSuchBanServiceException extends Exception {
+public class NoSuchUserException extends Exception {
 
-    public NoSuchBanServiceException(Exception parent) {
+    public NoSuchUserException(Exception parent) {
         super(parent);
     }
 
-    public NoSuchBanServiceException(String provider) {
-        super("Provider (" + provider + ") is not known by Fishbans");
+    public NoSuchUserException(String name) {
+        super("Name (" + name + ") is not known by Fishbans");
     }
 
 }

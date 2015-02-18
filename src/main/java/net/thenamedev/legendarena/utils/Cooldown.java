@@ -20,7 +20,7 @@ public class Cooldown {
     }
 
     public boolean done() {
-        return (System.currentTimeMillis() - start) > seconds * 1000;
+        return ((System.currentTimeMillis() - start) > seconds * 1000);
     }
 
     private String remainingSeconds() {

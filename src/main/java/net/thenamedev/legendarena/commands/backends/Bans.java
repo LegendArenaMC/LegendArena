@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.commands.backends;
 
-import net.ae97.fishbans.api.*;
-import net.ae97.fishbans.api.exceptions.*;
+import net.ae97.fishbansapi.*;
+import net.ae97.fishbansapi.exceptions.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;

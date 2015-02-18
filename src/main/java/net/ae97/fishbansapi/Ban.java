@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api;
+package net.ae97.fishbansapi;
 
 /**
  * A Ban record for a particular username or {@link java.util.UUID}.

@@ -3,8 +3,10 @@ package net.thenamedev.legendarena.utils;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.dev.*;
 import net.thenamedev.legendarena.commands.staff.*;
+import net.thenamedev.legendarena.extras.hideplayer.*;
 import net.thenamedev.legendarena.extras.particles.*;
 import net.thenamedev.legendarena.extras.staffchat.*;
+import net.thenamedev.legendarena.extras.warp.*;
 import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.*;
 
@@ -24,16 +26,20 @@ public class InitUtils {
         registerCommands();
         ScoreboardUtils.registerTeams();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HidePlayers(), 20l, 20l);
         init = true;
     }
 
     private static void registerListeners() {
+        Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new MobSpawnListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
     }
 
@@ -51,6 +57,8 @@ public class InitUtils {
         Bukkit.getPluginCommand("say").setExecutor(new Say()); //Say command [/say, /alert]
         Bukkit.getPluginCommand("motdlist").setExecutor(new MOTDList()); //MOTD list command [/motdlist]
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
+        Bukkit.getPluginCommand("fly").setExecutor(new Fly()); //Toggle flight command [/fly]
+        Bukkit.getPluginCommand("gadgets").setExecutor(new Gadgets()); //Hub gadgets toggle command [/gadgets]
         Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/clearchat, /cc]
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
         Bukkit.getPluginCommand("updatescoreboard").setExecutor(new UpdateScoreboard()); //Update scoreboard command [/updatescoreboard]

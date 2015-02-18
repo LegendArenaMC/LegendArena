@@ -52,7 +52,7 @@ public class SCUtils {
         @NotNull ItemStack vip = MenuCore.createItem(Material.EMERALD, ChatColor.RED + "VIP", ChatColor.BLUE + "VIP channel.");
         @NotNull ItemStack helper = MenuCore.createItem(Material.SADDLE, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
 
-        if(r == Rank.Admin) {
+        if(r == Rank.GM) {
             //Cannot access: NOTIFY
             inv.setItem(0, notify);
         } else if(r == Rank.Mod) {
@@ -88,7 +88,7 @@ public class SCUtils {
         @NotNull SCType channel = SCType.getType(p.getUniqueId());
         ItemStack init;
         switch(channel) {
-            case ADMIN:
+            case GM:
                 init = MenuCore.createItem(Material.DIAMOND_CHESTPLATE, ChatColor.RED + "GM", ChatColor.BLUE + "GM channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;

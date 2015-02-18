@@ -58,7 +58,7 @@ public class UsernameHistory {
 
 	private static void getHistory(@NotNull CommandSender sender, @NotNull String username, boolean ovCa) {
         if(ovCa) { //they want to override cache, so let them (if they're an admin)
-            if(Rank.getRank(sender, Rank.Admin)) {
+            if(Rank.getRank(sender, Rank.GM)) {
                 sender.sendMessage("");
                 sender.sendMessage(ChatColor.BLUE + "----- .[ " + ChatColor.GOLD + "Name History for " + ChatColor.GREEN + username + ChatColor.BLUE + " ]. -----");
                 sender.sendMessage(PluginUtils.msgNormal + ChatColor.GOLD + "Overriding cache; checking via Mojang API...");

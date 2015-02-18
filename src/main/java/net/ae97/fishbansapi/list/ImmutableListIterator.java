@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api.list;
+package net.ae97.fishbansapi.list;
 
 import java.util.List;
 import java.util.ListIterator;

@@ -16,14 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api.list;
+package net.ae97.fishbansapi.list;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.*;
+
+import java.util.*;
 
 /**
  * A {@link List} implentation which does not permit adding or removing items

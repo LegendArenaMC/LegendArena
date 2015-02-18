@@ -49,7 +49,7 @@ public class Freeze implements CommandExecutor {
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
-                if(!Rank.getRank(p, Rank.Admin)) p.setSleepingIgnored(false);
+                if(!Rank.getRank(p, Rank.GM)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {
                     if(LegendArena.debugSwitch)
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove MINING FATIGUE.");

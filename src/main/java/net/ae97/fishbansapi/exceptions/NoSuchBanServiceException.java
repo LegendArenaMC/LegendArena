@@ -16,24 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with FishbansAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.ae97.fishbans.api.exceptions;
+package net.ae97.fishbansapi.exceptions;
 
-import java.util.UUID;
+import net.ae97.fishbansapi.*;
 
 /**
- * Thrown when no such UUID exists on the Fishbans API
+ * Thrown when no such {@link BanService} exists with a
+ * given name
  *
  * @since 1.0
  * @author Lord_Ralex
  */
-public class NoSuchUUIDException extends Exception {
+public class NoSuchBanServiceException extends Exception {
 
-    public NoSuchUUIDException(Exception parent) {
+    public NoSuchBanServiceException(Exception parent) {
         super(parent);
     }
 
-    public NoSuchUUIDException(UUID uuid) {
-        super("UUID (" + uuid.toString() + ") is not known by Fishbans");
+    public NoSuchBanServiceException(String provider) {
+        super("Provider (" + provider + ") is not known by Fishbans");
     }
 
 }

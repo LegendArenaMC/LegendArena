@@ -4,6 +4,7 @@ import net.thenamedev.legendarena.extras.motd.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.event.*;
 import org.bukkit.event.server.*;
+import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
@@ -11,9 +12,10 @@ import org.bukkit.event.server.*;
 public class ServerPingListener implements Listener {
 
     @EventHandler
-    public void onPingEvent(ServerListPingEvent ev) {
+    public void onPingEvent(@NotNull ServerListPingEvent ev) {
         String msg = MOTDRandomizer.randomize();
         ev.setMotd(PluginUtils.msgNormal + msg);
+        //
     }
 
 }
