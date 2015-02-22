@@ -21,7 +21,7 @@ public class InventoryManager implements Listener {
     Inventory inv;
 
     ItemStack[] invItems;
-    int slots;
+    int slots = 0;
     String invName;
     List<Action> actionList;
 
@@ -30,11 +30,11 @@ public class InventoryManager implements Listener {
      */
     public void init() {
         if(invItems == null)
-            throw new NullPointerException("Run setInvItems() first, doofus!");
+            throw new NullPointerException("Run setInvItems() first, you derp!");
         if(invName == null || invName.equals(""))
-            throw new NullPointerException("Run setInvName() first, doofus!");
+            throw new NullPointerException("Run setInvName() first, you derp!");
         if(slots == 0)
-            throw new NullPointerException("Run setSlots() first, doofus!");
+            throw new NullPointerException("Run setSlots() first, you derp!");
 
         inv = Bukkit.createInventory(null, slots, invName);
 
@@ -45,12 +45,21 @@ public class InventoryManager implements Listener {
         invName = name;
     }
 
+    @Deprecated
     public void setInvItems(ItemStack[] items) {
         invItems = items;
     }
 
+    public void setInvItems(HashMap<Integer, ItemStack> items) {
+        for(Integer slot : items.keySet()) {
+            inv.setItem(slot, items.get(slot));
+        }
+    }
+
     public void show(Player p) {
-        //
+        if(inv != null) {
+            p.openInventory(inv);
+        }
     }
 
     public void setActions(List<Action> list) {

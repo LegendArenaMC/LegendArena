@@ -1,8 +1,8 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendarena.extras.menu.core.*;
-import net.thenamedev.legendarena.extras.particles.*;
-import net.thenamedev.legendarena.extras.particles.ParticleCore.*;
+import net.thenamedev.legendarena.extras.hub.particles.*;
+import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;

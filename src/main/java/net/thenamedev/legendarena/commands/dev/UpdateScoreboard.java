@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.commands.dev;
 
-import net.thenamedev.legendarena.core.*;
+import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -19,7 +19,7 @@ public class UpdateScoreboard implements CommandExecutor {
         }
         sender.sendMessage(PluginUtils.msgNormal + "Updating scoreboard...");
         for(@NotNull Player p : Bukkit.getOnlinePlayers()) {
-            ScoreboardUtils.addPlayerToTeam(Rank.getScoreboardTeam(p), p);
+            ScoreboardUtils.addPlayerToTeam(ScoreboardUtils.getScoreboardTeam(p), p);
         }
         sender.sendMessage(PluginUtils.msgNormal + "Scoreboard updated.");
         return true;

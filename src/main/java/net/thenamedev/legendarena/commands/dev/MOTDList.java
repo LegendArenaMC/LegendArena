@@ -1,8 +1,7 @@
 package net.thenamedev.legendarena.commands.dev;
 
-import net.thenamedev.legendarena.core.*;
-import net.thenamedev.legendarena.extras.motd.*;
-import net.thenamedev.legendarena.utils.*;
+import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendarena.extras.hub.motd.*;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.*;
 

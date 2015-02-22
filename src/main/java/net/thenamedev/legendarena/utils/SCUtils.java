@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.utils;
 
-import net.thenamedev.legendarena.core.*;
-import net.thenamedev.legendarena.extras.menu.*;
+import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendarena.extras.menu.core.*;
 import net.thenamedev.legendarena.extras.staffchat.*;
 import org.bukkit.*;
 import org.bukkit.enchantments.*;

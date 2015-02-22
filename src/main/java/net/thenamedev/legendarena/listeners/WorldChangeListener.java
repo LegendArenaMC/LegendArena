@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.listeners;
 
-import net.thenamedev.legendarena.core.*;
+import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.warp.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;

@@ -1,17 +1,21 @@
 package net.thenamedev.legendarena.commands.staff;
 
-import net.thenamedev.legendarena.core.*;
-import net.thenamedev.legendarena.utils.*;
+import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendarena.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.potion.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 /**
  * @author TheNameMan
  */
 public class Freeze implements CommandExecutor {
+
+    public static final ArrayList<UUID> frozenPlayers = new ArrayList<>();
 
     public boolean onCommand(@NotNull CommandSender sender, Command command, String s, @NotNull String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
@@ -32,7 +36,7 @@ public class Freeze implements CommandExecutor {
                 ex.printStackTrace();
                 return true;
             }
-            if(!PluginUtils.frozenPlayers.contains(Bukkit.getPlayer(args[0]).getUniqueId())) {
+            if(!frozenPlayers.contains(Bukkit.getPlayer(args[0]).getUniqueId())) {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(false);
                 p.setSleepingIgnored(true);
@@ -45,7 +49,7 @@ public class Freeze implements CommandExecutor {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 130, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100000, 20, true));
                 sender.sendMessage(PluginUtils.msgNormal + "Froze player " + p.getName() + " successfully.");
-                PluginUtils.frozenPlayers.add(p.getUniqueId());
+                frozenPlayers.add(p.getUniqueId());
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
@@ -66,7 +70,7 @@ public class Freeze implements CommandExecutor {
                 if(Rank.getRank(p, Rank.Mod) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
                     p.setAllowFlight(true);
                 p.setWalkSpeed((float) 0.2);
-                PluginUtils.frozenPlayers.remove(p.getUniqueId());
+                frozenPlayers.remove(p.getUniqueId());
                 sender.sendMessage(ChatColor.GREEN + "Unfroze player " + p.getName() + " successfully.");
             }
         }

@@ -5,7 +5,7 @@ package net.thenamedev.legendarena.commands.backends;
 //Not sure if credit is required, but I'd feel bad if I didn't say at the very least this much.
 
 import com.google.gson.*;
-import net.thenamedev.legendarena.core.*;
+import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;

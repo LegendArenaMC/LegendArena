@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.listeners;
 
-import net.thenamedev.legendarena.core.*;
+import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.banhammer.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -28,7 +28,7 @@ public class BanHammerListener implements Listener {
             staff.sendMessage(ChatColor.RED + "You cannot ban other staff!");
             return;
         }
-        staff.performCommand("ban " + target.getName().toLowerCase() + " The (literal) ban hammer has spoken!");
+        staff.performCommand("ban " + target.getName().toLowerCase() + " The ban hammer has spoken!");
     }
 
 }

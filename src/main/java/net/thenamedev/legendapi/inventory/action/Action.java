@@ -7,6 +7,8 @@ public interface Action {
 
     String itemName();
 
+    boolean useContains();
+
     void whenClicked();
 
 }

@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.extras.warn;
 
-import net.thenamedev.legendarena.core.*;
-import net.thenamedev.legendarena.utils.*;
+import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.jetbrains.annotations.*;
@@ -44,6 +43,7 @@ public class WarnBackend {
         );
         warnPlayer.sendMessage("");
         warnPlayer.sendMessage("");
+        warnPlayer.playSound(warnPlayer.getLocation(), Sound.BLAZE_DEATH, 2, 1);
     }
 
     public void setup(@Nullable Player warned, @Nullable Player staffMember, @Nullable String reason) {
