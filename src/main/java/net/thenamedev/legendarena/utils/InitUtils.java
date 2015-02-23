@@ -39,7 +39,7 @@ public class InitUtils {
         ScoreboardUtils.registerTeams();
         if(LegendArena.debugSwitch)
             ChatUtils.broadcast("Loading SCHEDULERS");
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 5l, 5l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HidePlayers(), 5l, 5l);
         if(LegendArena.debugSwitch)
@@ -123,6 +123,9 @@ public class InitUtils {
         if(LegendArena.debugSwitch)
             ChatUtils.broadcast("Loading /lalookup...");
         Bukkit.getPluginCommand("lalookup").setExecutor(new LookupUser()); //User lookup command [/lalookup]
+        if(LegendArena.debugSwitch)
+            ChatUtils.broadcast("Loading /tokens...");
+        Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
         if(LegendArena.debugSwitch)
             ChatUtils.broadcast("Done loading commands; adding aliases...");
         // Aliases

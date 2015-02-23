@@ -46,8 +46,8 @@ public class SCUtils {
 
         @NotNull ItemStack admin = MenuCore.createItem(Material.DIAMOND_CHESTPLATE, ChatColor.RED + "GM", ChatColor.BLUE + "GM channel.");
         @NotNull ItemStack mod = MenuCore.createItem(Material.GOLD_NUGGET, ChatColor.RED + "MOD", ChatColor.BLUE + "Mod channel.");
-        @NotNull ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "Staff channel.");
-        @NotNull ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+        @NotNull ItemStack staff = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.RED + "STAFF", ChatColor.BLUE + "General staff channel.");
+        @NotNull ItemStack alert = MenuCore.createItem(Material.DISPENSER, ChatColor.RED + "ALERT", ChatColor.BLUE + "Alert channel.");
         @NotNull ItemStack notify = MenuCore.createItem(Material.BED, ChatColor.RED + "NOTIFY", ChatColor.BLUE + "Staff notifications channel.");
         @NotNull ItemStack vip = MenuCore.createItem(Material.EMERALD, ChatColor.RED + "VIP", ChatColor.BLUE + "VIP channel.");
         @NotNull ItemStack helper = MenuCore.createItem(Material.SADDLE, ChatColor.RED + "HELPER", ChatColor.BLUE + "Helper channel.");
@@ -101,11 +101,11 @@ public class SCUtils {
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case STAFF:
-                init = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.BLUE + "STAFF", ChatColor.BLUE + "Staff channel.");
+                init = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.BLUE + "STAFF", ChatColor.BLUE + "General staff channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case ALERT:
-                init = MenuCore.createItem(Material.DISPENSER, ChatColor.BLUE + "ALERT", ChatColor.BLUE + "Alert channel. [basically a bulk /say]");
+                init = MenuCore.createItem(Material.DISPENSER, ChatColor.BLUE + "ALERT", ChatColor.BLUE + "Alert channel.");
                 init.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
                 return init;
             case VIP:

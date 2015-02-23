@@ -1,16 +1,13 @@
 package net.thenamedev.legendapi.inventory.action;
 
 import org.bukkit.entity.*;
+import org.bukkit.inventory.*;
 
 /**
  * @author TheNameMan
  */
-public interface Action {
+public interface InvOpenAction {
 
-    String itemName();
-
-    boolean useContains();
-
-    void whenClicked(Player p);
+    void act(Player p, Inventory inv);
 
 }

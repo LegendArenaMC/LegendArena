@@ -46,15 +46,15 @@ public class Bans {
         try {
             FishbansPlayer player = Fishbans.getFishbanPlayer(user);
             if(player.getBanCount() == 0) {
-                sender.sendMessage(PluginUtils.msgNormal + "No bans found for " + player.getName());
+                sender.sendMessage(PluginUtils.msgNormal + "No bans found for " + player.getName() + ".");
             } else {
                 sender.sendMessage(PluginUtils.msgNormal + player.getName() + " has " + ChatColor.BLUE + player.getBanCount() + ChatColor.GREEN + " ban" + (player.getBanCount() == 1 ? "" : "s"));
             }
         } catch(IOException e) {
-            Bukkit.getLogger().log(Level.SEVERE, "Error occured while checking bans for " + user, e);
-            sender.sendMessage(PluginUtils.msgError + "An error occured while checking bans: " + e.getMessage());
+            Bukkit.getLogger().log(Level.SEVERE, "Error occured while checking bans for " + user + ".", e);
+            sender.sendMessage(PluginUtils.msgError + "An error occured while checking bans: \"" + e.getMessage() + "\".");
         } catch(NoSuchUserException e) {
-            sender.sendMessage(PluginUtils.msgWarning + "No user with that name exists");
+            sender.sendMessage(PluginUtils.msgWarning + "No user with that name exists.");
         }
     }
 

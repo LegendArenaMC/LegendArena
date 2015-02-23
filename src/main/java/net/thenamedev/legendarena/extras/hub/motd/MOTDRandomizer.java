@@ -54,7 +54,8 @@ public class MOTDRandomizer {
             "git commit -m \"What can I break this time?\" && git push --force", //reference to a "What can I break this time"-type git commit
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
             "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
-            "for(Player p : onlinePlayers) { p.sendMessage(\"You're awesome!\"); }" //reference to a for loop sending everyone online a message saying "You're awesome!"
+            "for(Player p : onlinePlayers) { p.sendMessage(\"You're awesome!\"); }", //reference to a for loop sending everyone online a message saying "You're awesome!"
+            "Now has tokens!" //reference to the recently implemented tokens system
     };
 
     public static String randomize() {

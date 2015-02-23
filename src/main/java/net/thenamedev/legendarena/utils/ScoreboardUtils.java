@@ -9,7 +9,7 @@ import org.jetbrains.annotations.*;
 /**
  * Tutorial used is <a href="http://bukkit.org/threads/tutorial-scoreboards-teams-with-the-bukkit-api.139655/">here</a>
  * <br><br>
- * I'm not sure if I need to give official credit, but I might as well say this much..
+ * I'm not sure if I need to give "official" credit, but I might as well say this much..
  * @author TheNameMan
  */
 public class ScoreboardUtils {
@@ -49,13 +49,9 @@ public class ScoreboardUtils {
 
     public static boolean requiresRefresh(Player p) {
         if(getScoreboardTeam(p) == null) {
-            return true;
+            return !member.hasPlayer(p);
         }
-        if(!getScoreboardTeam(p).hasPlayer(p)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !getScoreboardTeam(p).hasPlayer(p);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -123,19 +119,19 @@ public class ScoreboardUtils {
     public static Team getScoreboardTeam(Player p) {
         Rank r = Rank.getRank(p);
         if(r == Rank.Owner) {
-            return ScoreboardUtils.owner;
+            return owner;
         } else if(r == Rank.Dev) {
-            return ScoreboardUtils.dev;
+            return dev;
         } else if(r == Rank.GM) {
-            return ScoreboardUtils.gm;
-        } else if(r == Rank.Mod || r == Rank.SrMod) { //srmod is stuck in here temporarily so I don't have to make another team right now
-            return ScoreboardUtils.mod;
+            return gm;
+        } else if(r == Rank.Mod || r == Rank.SrMod) {
+            return mod;
         } else if(r == Rank.Helper) {
-            return ScoreboardUtils.helper;
+            return helper;
         } else if(r == Rank.VIP) {
-            return ScoreboardUtils.vip;
+            return vip;
         } else {
-            return null;
+            return member;
         }
     }
 
