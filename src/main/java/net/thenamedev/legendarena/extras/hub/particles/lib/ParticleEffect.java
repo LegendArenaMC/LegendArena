@@ -460,6 +460,7 @@ public enum ParticleEffect {
      * @param name Name of the particle effect
      * @return The particle effect
      */
+    @Nullable
     public static ParticleEffect fromName(String name) {
         for (@NotNull Entry<String, ParticleEffect> entry : NAME_MAP.entrySet()) {
             if (!entry.getKey().equalsIgnoreCase(name)) {
@@ -476,6 +477,7 @@ public enum ParticleEffect {
      * @param id Id of the particle effect
      * @return The particle effect
      */
+    @Nullable
     public static ParticleEffect fromId(int id) {
         for (@NotNull Entry<Integer, ParticleEffect> entry : ID_MAP.entrySet()) {
             if (entry.getKey() != id) {

@@ -77,6 +77,7 @@ public final class ReflectionUtils {
      * @throws InvocationTargetException If the desired constructor cannot be invoked
      * @throws NoSuchMethodException If the desired constructor with the specified arguments cannot be found
      */
+    @NotNull
     public static Object instantiateObject(@NotNull Class<?> clazz, Object... arguments) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
         return getConstructor(clazz, DataType.getPrimitive(arguments)).newInstance(arguments);
     }
@@ -96,6 +97,7 @@ public final class ReflectionUtils {
      * @throws ClassNotFoundException If the desired target class with the specified name and package cannot be found
      * @see #instantiateObject(Class, Object...)
      */
+    @NotNull
     public static Object instantiateObject(String className, @NotNull PackageType packageType, Object... arguments) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
         return instantiateObject(packageType.getClass(className), arguments);
     }
@@ -422,6 +424,7 @@ public final class ReflectionUtils {
          *
          * @return The server version
          */
+        @NotNull
         public static String getServerVersion() {
             return Bukkit.getServer().getClass().getPackage().getName().substring(23);
         }

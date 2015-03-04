@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendarena.extras.menu.core.*;
 import net.thenamedev.legendarena.extras.hub.particles.*;
 import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.*;

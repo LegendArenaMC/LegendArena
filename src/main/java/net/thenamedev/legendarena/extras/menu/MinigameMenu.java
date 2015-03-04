@@ -1,32 +1,31 @@
 package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendarena.extras.menu.core.*;
+import net.thenamedev.legendapi.inventory.InventoryManager;
+import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.inventory.*;
-import org.bukkit.event.player.PlayerTeleportEvent.*;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.*;
-import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
-public class MinigameMenu implements Listener, Menu {
+public class MinigameMenu implements Listener {
 
-    @Deprecated
-    private final Inventory inv;
+    private static InventoryManager invMan = new InventoryManager();
 
     public MinigameMenu(Plugin plugin) {
-        inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Minigames");
+        /*inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Minigames");
 
+        */
         ItemStack spl = MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Splegg");
         ItemStack sp = MenuCore.createItem(Material.GOLD_SPADE, ChatColor.GREEN + "Spleef");
         ItemStack hub = MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub");
         ItemStack more = MenuCore.createItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14), ChatColor.RED + "Coming Soon[tm]", ChatColor.YELLOW + "Check back later!");
         ItemStack sg = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games");
-
+        /*
 
         inv.setItem(1, sp);
         inv.setItem(7, spl);
@@ -34,16 +33,16 @@ public class MinigameMenu implements Listener, Menu {
         inv.setItem(13, hub);
         inv.setItem(25, sg);
 
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);*/
     }
 
-    public void show(@NotNull Player p) {
-        p.openInventory(inv);
+    public void show(Player p) {
+        //p.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(@NotNull InventoryClickEvent e) {
-        if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
+    public void onInventoryClick(InventoryClickEvent e) {
+        /*if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
             if(e.getCurrentItem().getItemMeta() == null) return;
             if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Survival Games")) {
@@ -77,7 +76,7 @@ public class MinigameMenu implements Listener, Menu {
             }
         } catch(Exception ignore) {
             // Ignore the error
-        }
+        }*/
     }
 
 }

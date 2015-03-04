@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.extras.banhammer;
 
-import net.thenamedev.legendarena.extras.menu.core.*;
+import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;

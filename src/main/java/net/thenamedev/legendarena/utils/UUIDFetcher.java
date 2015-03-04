@@ -66,13 +66,15 @@ public class UUIDFetcher {
 		return connection;
 	}
 
-	private static UUID getUUID(@NotNull String id) {
+	@NotNull
+    private static UUID getUUID(@NotNull String id) {
 		return UUID.fromString(id.substring(0, 8) + "-" + id.substring(8, 12)
 				+ "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-"
 				+ id.substring(20, 32));
 	}
 
-	public static byte[] toBytes(@NotNull UUID uuid) {
+	@NotNull
+    public static byte[] toBytes(@NotNull UUID uuid) {
 		@NotNull ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
 		byteBuffer.putLong(uuid.getMostSignificantBits());
 		byteBuffer.putLong(uuid.getLeastSignificantBits());

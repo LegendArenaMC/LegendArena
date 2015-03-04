@@ -5,13 +5,14 @@ import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author TheNameMan
  */
 public class Token implements CommandExecutor {
 
-    private void help(CommandSender sender) {
+    private void help(@NotNull CommandSender sender) {
         sender.sendMessage(ChatUtils.formattedCmd("Staff Commands", true));
         sender.sendMessage(ChatColor.YELLOW + "/tokens add <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Adds tokens to a player's account.");
         sender.sendMessage(ChatColor.YELLOW + "/tokens remove <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes tokens from a player's account.");
@@ -19,11 +20,12 @@ public class Token implements CommandExecutor {
         sender.sendMessage(formattedHelpLine("info", "Shows your tokens info."));
     }
 
+    @NotNull
     private String formattedHelpLine(String cmd, String info) {
         return ChatColor.YELLOW + "/tokens " + cmd + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + info;
     }
 
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, @NotNull String[] args) {
         if(!(sender instanceof  Player))
             return true;
         TokenCore.init(); //make sure the token core is indeed initalized

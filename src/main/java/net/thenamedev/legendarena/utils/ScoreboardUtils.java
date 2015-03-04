@@ -48,8 +48,8 @@ public class ScoreboardUtils {
     }
 
     public static boolean requiresRefresh(Player p) {
-        if(getScoreboardTeam(p) == null) {
-            return !member.hasPlayer(p);
+        if(getScoreboardTeam(p) == member) {
+            return (member == null || !member.hasPlayer(p));
         }
         return !getScoreboardTeam(p).hasPlayer(p);
     }
@@ -57,15 +57,22 @@ public class ScoreboardUtils {
     @SuppressWarnings("ConstantConditions")
     public static void registerTeams() {
         //Init the teams
-        gm = sb.registerNewTeam("GMs");
-        mod = sb.registerNewTeam("Mods");
-        helper = sb.registerNewTeam("Helpers");
-        member = sb.registerNewTeam("Members");
-        vip = sb.registerNewTeam("VIPs");
+        if(gm == null)
+            gm = sb.registerNewTeam("GMs");
+        if(mod == null)
+            mod = sb.registerNewTeam("Mods");
+        if(helper == null)
+            helper = sb.registerNewTeam("Helpers");
+        if(member == null)
+            member = sb.registerNewTeam("Members");
+        if(vip == null)
+            vip = sb.registerNewTeam("VIPs");
 
         //Special teams
-        dev = sb.registerNewTeam("Dev");
-        owner = sb.registerNewTeam("Owner");
+        if(dev == null)
+            dev = sb.registerNewTeam("Dev");
+        if(owner == null)
+            owner = sb.registerNewTeam("Owner");
 
         try {
             //Set prefixes
@@ -79,7 +86,7 @@ public class ScoreboardUtils {
             owner.setPrefix("§aOwner §8| §4");
             dev.setPrefix("§4Dev §8| §c");
         } catch(NullPointerException ex) {
-            Bukkit.getLogger().severe("Error while registering prefixes - exiting...");
+            Bukkit.getLogger().severe("Error while registering nnameplate/tab list prefixes - exiting...");
             return;
         }
 
@@ -99,6 +106,7 @@ public class ScoreboardUtils {
         } catch(NullPointerException ignore) {}
     }
 
+    // 10/10 best class name NA
     public static class FixThings implements Runnable {
         public void run() {
             for(@NotNull Player p : Bukkit.getOnlinePlayers()) {
@@ -114,8 +122,9 @@ public class ScoreboardUtils {
     /**
      * Gets the correct scoreboard team for the specified player.
      * @param p The player to target
-     * @return The targeted team (null if member/unknown)
+     * @return The targeted team
      */
+    @Nullable
     public static Team getScoreboardTeam(Player p) {
         Rank r = Rank.getRank(p);
         if(r == Rank.Owner) {

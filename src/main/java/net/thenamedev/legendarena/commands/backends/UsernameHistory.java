@@ -138,7 +138,8 @@ public class UsernameHistory {
         }
 	}
 
-	private static OldUsername[] usernames(@NotNull String uuid, String current) {
+	@Nullable
+    private static OldUsername[] usernames(@NotNull String uuid, String current) {
 		@NotNull Gson gson = new GsonBuilder().create();
 		String compactUuid = uuid.replace("-", "");
 		try {
