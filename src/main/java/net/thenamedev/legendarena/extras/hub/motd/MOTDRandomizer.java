@@ -55,7 +55,17 @@ public class MOTDRandomizer {
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
             "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
             "for(Player p : onlinePlayers) { p.sendMessage(\"You're awesome!\"); }", //reference to a for loop sending everyone online a message saying "You're awesome!"
-            "Now has tokens!" //reference to the recently implemented tokens system
+            "Now has tokens!", //reference to the recently implemented tokens system
+            //BEGIN RANDOM MOTDS
+            "*debates over duck-sized horses and horse-sized ducks with self*",
+            "It's black and blue!",
+            "It's white and gold!",
+            "The owner is a noob -Griefers, 2014-2015",
+            "can i have mod pls i promise ill be gud",
+            "Hi, I'm from PMC, can I have OP?",
+            "The ban hammer has spoken!",
+            "Kicked by NullPointerException",
+            "JadenJFilms was slain by " + ChatColor.BLUE + "Bobbior" + ChatColor.GREEN
     };
 
     public static String randomize() {

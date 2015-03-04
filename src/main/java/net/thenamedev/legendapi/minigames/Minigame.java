@@ -34,11 +34,11 @@ public interface Minigame {
          * @param p The player to remove
          * @param kick Whether to act as if they were kicked from the game (true) or they just left it (false)
          */
-        void quitGame(Player p, boolean kick);
+        void quitGame(KickInfo kick);
 
         /**
          * Starts the minigame.
-         * @param startCool This can be 0 for an instant start.
+         * @param startCool This can be 0 for an instant start (and unless the minigame requires it, it should be an instant start with a 0 second cooldown)
          */
         void start(int startCool);
 

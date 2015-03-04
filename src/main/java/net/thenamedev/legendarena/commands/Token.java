@@ -16,23 +16,29 @@ public class Token implements CommandExecutor {
         sender.sendMessage(ChatColor.YELLOW + "/tokens add <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Adds tokens to a player's account.");
         sender.sendMessage(ChatColor.YELLOW + "/tokens remove <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes tokens from a player's account.");
         sender.sendMessage(ChatUtils.formattedCmd("User Commands", true));
-        sender.sendMessage(ChatColor.YELLOW + "/tokens info " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Shows your token info (such as amount of tokens)");
+        sender.sendMessage(formattedHelpLine("info", "Shows your tokens info."));
+    }
+
+    private String formattedHelpLine(String cmd, String info) {
+        return ChatColor.YELLOW + "/tokens " + cmd + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + info;
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if(!(sender instanceof  Player))
+            return true;
         TokenCore.init(); //make sure the token core is indeed initalized
         if(args.length == 0) {
             help(sender);
         } else {
             if(args[0].equalsIgnoreCase("info")) {
-                sender.sendMessage(ChatUtils.formattedCmd("Your Tokens", true));
+                sender.sendMessage(ChatUtils.formattedCmd("Your Tokens Info", true));
                 sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + TokenCore.getTokens((Player) sender));
-                sender.sendMessage(ChatColor.YELLOW + "Booster " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " Coming soon" + PluginUtils.chars[6] + " (for all the EULA fanboys - the boosters will be private and earned in game by playing minigames)");
+                sender.sendMessage(ChatColor.YELLOW + "Booster " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " Coming soon" + PluginUtils.chars[6]);
             } else if(args[0].equalsIgnoreCase("version")) {
-                sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core version " + TokenCore.ver + ".");
+                sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core version " + TokenCore.ver + " codename \"" + TokenCore.verName + "\".");
             } else if(args[0].equalsIgnoreCase("add")) {
-                if(!Rank.getRank(sender, Rank.Mod)) {
-                    Rank.noPermissions(sender, Rank.Mod);
+                if(!Rank.getRank(sender, Rank.GM)) {
+                    Rank.noPermissions(sender, Rank.GM);
                     return true;
                 }
                 if(args.length <= 2) {
@@ -51,11 +57,11 @@ public class Token implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Adding " + add + " token(s)...");
-                    TokenCore.addTokens(p, add, true);
+                    TokenCore.addTokens(p, add, true, false);
                 }
             } else if(args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("take")) {
-                if(!Rank.getRank(sender, Rank.Mod)) {
-                    Rank.noPermissions(sender, Rank.Mod);
+                if(!Rank.getRank(sender, Rank.GM)) {
+                    Rank.noPermissions(sender, Rank.GM);
                     return true;
                 }
                 if(args.length <= 2) {
@@ -78,7 +84,7 @@ public class Token implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Removing " + remove + " token(s)...");
-                    TokenCore.removeTokens(p, remove, true);
+                    TokenCore.removeTokens(p, remove, true, false);
                 }
             }
 

@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.utils;
 
+import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.*;
 import net.thenamedev.legendarena.commands.*;
@@ -27,113 +28,116 @@ public class InitUtils {
 
     public static void pluginInit() {
         if(init)
-            throw new NullPointerException();
+            return;
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading COMMANDS");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading COMMANDS");
         registerCommands();
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading LISTENERS");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading LISTENERS");
         registerListeners();
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading SCOREBOARD TEAMS");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading SCOREBOARD TEAMS");
         ScoreboardUtils.registerTeams();
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading SCHEDULERS");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading SCHEDULERS");
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HidePlayers(), 5l, 5l);
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Done loading!");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading TOKENS BACKEND");
+        TokenCore.init();
+        if(LegendArena.debugSwitch)
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Done loading!");
         init = true;
     }
 
     private static void registerListeners() {
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading SERVERPINGLISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading SERVERPINGLISTENER...");
         Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading HUBWARPER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading HUBWARPER...");
         Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading CHATLISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading CHATLISTENER...");
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading PLAYERMOVELISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading PLAYERMOVELISTENER...");
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading PLAYERJOINLISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading PLAYERJOINLISTENER...");
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading STAFFCHAT...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading STAFFCHAT...");
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading WORLDCHANGELISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading WORLDCHANGELISTENER...");
         Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading BANHAMMERLISTENER...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading BANHAMMERLISTENER...");
         Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Done loading listeners!");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Done loading listeners!");
     }
 
     private static void registerCommands() {
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading aliases...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading aliases...");
         registerAliases();
         // Commands
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /motdlist...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /motdlist...");
         Bukkit.getPluginCommand("motdlist").setExecutor(new MOTDList()); //MOTD list command [/motdlist]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /firework...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /firework...");
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /fly...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /fly...");
         Bukkit.getPluginCommand("fly").setExecutor(new Fly()); //Toggle flight command [/fly]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /gadgets...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /gadgets...");
         Bukkit.getPluginCommand("gadgets").setExecutor(new Gadgets()); //Hub gadgets toggle command [/gadgets]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /clearchat...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /clearchat...");
         Bukkit.getPluginCommand("clearchat").setExecutor(new ClearChat()); //Clearchat command [/clearchat, /cc]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /chat...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /chat...");
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /updatescoreboard...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /updatescoreboard...");
         Bukkit.getPluginCommand("updatescoreboard").setExecutor(new UpdateScoreboard()); //Update scoreboard command [/updatescoreboard]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /globalmute...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /globalmute...");
         Bukkit.getPluginCommand("globalmute").setExecutor(new GlobalMute()); //Globalmute command [/gmute]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /particles...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /particles...");
         Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles, /particle, /ps]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /warn...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /warn...");
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /warp...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /warp...");
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /freeze...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /freeze...");
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /banhammer...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /banhammer...");
         Bukkit.getPluginCommand("banhammer").setExecutor(new BanHammer()); //Ban hammer command [/banhammer]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /lalookup...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /lalookup...");
         Bukkit.getPluginCommand("lalookup").setExecutor(new LookupUser()); //User lookup command [/lalookup]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Loading /tokens...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Loading /tokens...");
         Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Done loading commands; adding aliases...");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Done loading commands; adding aliases...");
         // Aliases
         Bukkit.getPluginCommand("clearchat").setAliases(clearchat); //Clearchat alias
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
         if(LegendArena.debugSwitch)
-            ChatUtils.broadcast("Done loading aliases!");
+            ChatUtils.broadcast(PluginUtils.msgDebug + "Done loading aliases!");
     }
 
     private static void registerAliases() {

@@ -71,7 +71,7 @@ public class InventoryManager implements Listener {
 
     public void setInvItems(HashMap<Integer, ItemStack> items) {
         if(inv == null)
-            throw new NullPointerException("Run init() first, THEN this!");
+            throw new NullPointerException("Run init() first, THEN this (setInvItems())!");
         for(Integer slot : items.keySet())
             inv.setItem(slot, items.get(slot));
     }

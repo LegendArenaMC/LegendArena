@@ -1,24 +1,22 @@
 package net.thenamedev.legendapi.minigames;
 
-import net.thenamedev.legendapi.minigames.Minigame.*;
-
 /**
- * @author TheNameMan
+ * To use this, create a new instance via <code>new MinigameUtils(Minigame)</code>.
  */
 public class MinigameUtils {
 
-    public static Minigame getMinigameInstance(final Info info, final MinigameActions actions) {
-        return new Minigame() {
-            public Info info() {
-                return info;
-            }
+    Minigame targetMG;
 
-            public MinigameActions actions() {
-                return actions;
-            }
-        };
+    public MinigameUtils(Minigame mg) {
+        targetMG = mg;
     }
 
+    public String cooldownMsg(int left, String item) {
+        return "";
+    }
 
+    public String timeLeftMsg(int left) {
+        return "";
+    }
 
 }
