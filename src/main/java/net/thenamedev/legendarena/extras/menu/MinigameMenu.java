@@ -2,6 +2,7 @@ package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.inventory.InventoryManager;
 import net.thenamedev.legendapi.utils.MenuCore;
+import net.thenamedev.legendapi.utils.PluginUtils;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
@@ -38,6 +39,7 @@ public class MinigameMenu implements Listener {
 
     public void show(Player p) {
         //p.openInventory(inv);
+        p.sendMessage(PluginUtils.msgWarning + "The warper is going under minor maintenance right now - sorry - check back soon.");
     }
 
     @EventHandler

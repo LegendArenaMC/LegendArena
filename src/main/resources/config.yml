@@ -1,0 +1,1 @@
+# Before-warning: This is not yet implemented fully. I will eventually add it, but for now it's pretty much useless.# THE CHAR LIMIT FOR THE MOTD IS INCREASED BY ONE AUTOMATICALLY IN THE PLUGIN, SO 50 == 49, 30 == 29, ETC# To display NO notice on the MOTD, leave "notice" as "notice: """.motd:  randomizer:    enabled: true    charLimit: 49  notice: ""

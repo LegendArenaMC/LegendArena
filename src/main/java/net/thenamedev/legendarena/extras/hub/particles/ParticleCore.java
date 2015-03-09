@@ -125,7 +125,6 @@ public class ParticleCore implements Runnable {
             }
             ParticleEffect.FIREWORKS_SPARK.display(1, 1, 1, 1, 10, p.getLocation(), 30);
         }
-        ParticleEffect.FIREWORKS_SPARK.display(0, 6, 0, 0, 10, Bukkit.getWorld("hub").getSpawnLocation(), 50);
     }
 
     public static void addType(String player, Type type) {

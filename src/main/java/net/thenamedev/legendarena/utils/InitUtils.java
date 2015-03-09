@@ -4,6 +4,7 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.*;
 import net.thenamedev.legendarena.commands.*;
+import net.thenamedev.legendarena.commands.Firework;
 import net.thenamedev.legendarena.commands.dev.*;
 import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.hub.hideplayer.*;
@@ -12,6 +13,7 @@ import net.thenamedev.legendarena.extras.staffchat.*;
 import net.thenamedev.legendarena.extras.warp.*;
 import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.*;
+import org.bukkit.entity.*;
 
 import java.util.*;
 
@@ -46,6 +48,10 @@ public class InitUtils {
         if(LegendArena.debugSwitch)
             ChatUtils.broadcast(PluginUtils.msgDebug + "Loading TOKENS BACKEND");
         TokenCore.init();
+        if(LegendArena.debugSwitch)
+            ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", PluginUtils.msgDebug, TokenCore.ver, TokenCore.verName));
+        else
+            ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", PluginUtils.msgDebug, TokenCore.ver, TokenCore.verName), Rank.Dev);
         if(LegendArena.debugSwitch)
             ChatUtils.broadcast(PluginUtils.msgDebug + "Done loading!");
         init = true;

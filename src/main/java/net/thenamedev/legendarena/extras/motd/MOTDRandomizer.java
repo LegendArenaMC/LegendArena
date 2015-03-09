@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.hub.motd;
+package net.thenamedev.legendarena.extras.motd;
 
 import org.bukkit.*;
 import org.jetbrains.annotations.*;
@@ -14,13 +14,7 @@ public class MOTDRandomizer {
             "Can connect to server.", //joke of "Can't connect to server" when MC cannot ping a server.
             "Powered by magic.", //Let's be honest, who wouldn't love a server that's powered by MAGIC?
             "Not powered by Enjin.", //for whatever reasons, servers that use Enjin for their site have a "bad rep" - no idea how.
-            "Oh, hi. So. How are you holding up? BECAUSE I'M A POTATO.", //Portal joke
-            "Oh good. My slow clap proccessor made it into this thing.", //portal reference again
-            "[clap clap] Good that's still working.", //reference to one of the following lines of the above reference
-            "Just remember to land on one foot.", //portal reference yet again
-            "SPAAAAAACEEE", //bla bla bla, portal reference, you get the idea by now
             "The cake is a lie.", //bla bla bla, too lazy to repeat above sentence, bla bla bla
-            "No, nothing broke, what are you talking about?", //Reference to how I break things easily.
             "Contains jokes.", //I have no idea why this is here.
             "May contain peanuts.", //joke on legal-mumbo-jumbo about disclaimers about if [x] food product is produced in a factory that handles nuts/peanuts/etc
             "Server is Optifine-compatible.", //every server is optifine compatible basically, yet some idiots decide to ask anyways
@@ -34,43 +28,67 @@ public class MOTDRandomizer {
             "Does not contain donkeys.", //I have idea why I added this.
             "Can resolve hostname.", //joke of "Can't resolve hostname" when MC is given an invalid hostname, e.g. "mc.hypixel.nt"
             "Uses c0d3 sp3@k.", //I regret nothing of this one
-            "Lennart lennart = new Lennart();", //blatantly stolen from a splash screen
             "Has random MOTDs.", //reference to... well, this system.. I guess
             "Uses Bootstrap.", //reference to the site using a Bootstrap theme
             "OBJECTION!", //reference to Pheonix Wright
-            "What is a man? A miserable little pile of secrets.", //fine I'll admit it I just stole this quote from a top ten list of game quotes
             "All your base are belong to us.", //You know what this is a reference to.
             "What are 'ya buyin, stranger?", //reference to Resident Evil 4
             "Hey! Listen!", //hint: ZELDA. That's all you need.
-            "HEADSHOT!",
             "Snake? SNAAAKE!", //reference to a Metal Gear quote when Snake dies
             "Do a barrel roll!", //if you have no idea what this is from, you're a failure
             ChatColor.ITALIC + "askew" + ChatColor.GREEN, //try this in google. you'll get what this is then.
             "It's a me, Mario!", //if you don't know what this is from you're a massive failure
-            "I used to be an adventurer like you, then I took an arrow to the knee.", //if you have no idea what this is, you're an ultra failure.
             "War. War never changes.", //reference to Fallout 3/2/1
             "//Made in Java", //reference to Minecraft being made in Java, and thus basically everything that uses Minecraft pretty much needs to be in Java, or re-invent the wheel.
             "Caused by: java.lang.NullPointerException", //reference to a java NullPointerException (oh how I have been burned so many times by this one error...)
-            "git commit -m \"What can I break this time?\" && git push --force", //reference to a "What can I break this time"-type git commit
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
-            "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
-            "for(Player p : onlinePlayers) { p.sendMessage(\"You're awesome!\"); }", //reference to a for loop sending everyone online a message saying "You're awesome!"
             "Now has tokens!", //reference to the recently implemented tokens system
-            //BEGIN RANDOM MOTDS
-            "*debates over duck-sized horses and horse-sized ducks with self*",
-            "It's black and blue!",
-            "It's white and gold!",
-            "The owner is a noob -Griefers, 2014-2015",
+            "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
+            "No, Intel is not a person.", //reference to idiots reading "Intel Inside" like "Intel" is a person (I have no idea why this would happen either, but hey, the saying "Make something idiot proof and nature will find a way to make a better idiot" stands true to this day...)
+            "I am Alpha and Omega, the begenning and end.", //reference to the bible (if it isn't in there, the Fallout3 bible)
+            "igotthatreference.gif", //reference to "I Got That Reference" gifs
+            "Just remember to land on one foot.", //portal reference
+            "Good that's still working.", //portal...
+            "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
+            "you.sendMessage(\"You're awesome!\");", //reference to sending the player ("you") the message "You're awesome!"
+            "Do you copy, it's just as we thought.", //reference to a lyric in "Approaching Nirvana ft. Veela - 2nd Flight"
+            "Made something idiot-proof? Just wait.", //reference to the old saying "Make something idiot proof and nature will find a way to make a better idiot".
+            "It's black and blue!", //THE DRESS ;-;
+            "It's white and gold!", //THE DRESS [AGAIN] ;-;
+            "Hi, I'm from PMC, can I have OP?", //dare I explain this one
+            ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.GREEN, //default ban message for a LOT of servers
+            "We will start from the start...", //reference to "Tristam & Braken - Far Away"
+            "We no speak Americano", //reference to a song with that exact name
+            "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
+            "Out of sight and out of miiinddd..", //refence to "Au5 ft. Tasha Baxter - Snowblind"
+            "Cannot be shellshocked.", //reference to Shellshock, a Bash (Bourne Again SHell) vulnerability
+            "Can I have some sugar in my Java?", //java can mean coffee, so.. yeeeahhh.. yeah that was bad ill leave now
+            "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
+            //BEGIN STUPIDLY RANDOM MOTDS
+            "Tempbanned by null for null - expires on null",
+            "I can't even. I literally can't even right now.",
+            "<insert random MOTD here>",
+            "Does not use System.out.println()",
+            "*says no and nods head*",
+            "Contains references.",
+            "WOAH-OH-OH-AH-AH-AH-AAAA-HA",
+            "It took one look but you played me like a game...",
+            "Who's the bae?", //...why the hell did I add this MOTD
+            "It doesn't work? Oh well ¯\\(ツ)/¯",
+            "HEADSHOT!",
+            "Kappa",
+            "SourPls",
             "can i have mod pls i promise ill be gud",
-            "Hi, I'm from PMC, can I have OP?",
-            "The ban hammer has spoken!",
-            "Kicked by NullPointerException",
-            "JadenJFilms was slain by " + ChatColor.BLUE + "Bobbior" + ChatColor.GREEN
     };
 
     public static String randomize() {
         @NotNull Random r = new Random();
         int msgInt = r.nextInt(motdList.length);
+        while(motdList[msgInt].toCharArray().length > 49) { //sanity checks
+            msgInt = r.nextInt(motdList.length);
+            if(motdList[msgInt].toCharArray().length <= 49) //it's 44 [or less] chars, so break out of the while() loop (just incase)
+                break;
+        }
         return motdList[msgInt];
     }
 

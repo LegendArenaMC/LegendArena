@@ -31,7 +31,7 @@ public class Freeze implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                     return true;
                 }
-            } catch(Exception ex) { //safeguard to make sure if Spigot kills the Bukkit.getPlayer() method (for whatever reason) the command doesn't say internal error/etc
+            } catch(Exception ex) { //legacy try/catch - too lazy to remove it ;-;
                 sender.sendMessage(PluginUtils.msgError + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
                 ex.printStackTrace();
                 return true;

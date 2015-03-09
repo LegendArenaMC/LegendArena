@@ -1,28 +1,27 @@
-package net.thenamedev.legendarena.minigame.chickenmayhem;
+package net.thenamedev.legendarena.minigame.buildmything;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.minigames.*;
-import net.thenamedev.legendapi.utils.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import net.thenamedev.legendapi.minigames.KickInfo;
+import net.thenamedev.legendapi.minigames.Minigame;
+import net.thenamedev.legendapi.utils.Rank;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * Created on 3/2/2015
+ * Created on 3/4/2015
+ *
  * @author ThePixelDev
  */
-public class ChickenMayhem implements Minigame {
+public class BuildMyThing implements Minigame {
 
-    @NotNull
-    private static ArrayList<UUID> players = new ArrayList<>();
-
-    @Nullable
     private Info info = new Info() {
         public String name() {
-            return "Chicken Mayhem";
+            return "Build My Thing";
         }
 
         public Rank minJoinRank() {
@@ -30,7 +29,7 @@ public class ChickenMayhem implements Minigame {
         }
 
         public World getWorld() {
-            return Bukkit.getWorld("chickenmayhem");
+            return Bukkit.getWorld("bmt");
         }
 
         public ArrayList<UUID> playersInGame() {
@@ -38,7 +37,6 @@ public class ChickenMayhem implements Minigame {
         }
     };
 
-    @Nullable
     private MinigameActions actions = new MinigameActions() {
         private boolean enabled = true;
         private boolean running = false;
@@ -75,14 +73,12 @@ public class ChickenMayhem implements Minigame {
         }
     };
 
-    @Nullable
     public Info info() {
-        return this.info;
+        return null;
     }
 
-    @Nullable
     public MinigameActions actions() {
-        return this.actions;
+        return null;
     }
 
 }
