@@ -3,6 +3,7 @@ package net.thenamedev.legendarena.minigame.buildmything;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.minigames.KickInfo;
 import net.thenamedev.legendapi.minigames.Minigame;
+//import net.thenamedev.legendapi.minigames.MinigameUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -29,7 +30,7 @@ public class BuildMyThing implements Minigame {
         }
 
         public World getWorld() {
-            return Bukkit.getWorld("bmt");
+            return Bukkit.getWorld("buildmything");
         }
 
         public ArrayList<UUID> playersInGame() {
@@ -50,10 +51,8 @@ public class BuildMyThing implements Minigame {
             if(kick.isKick()) {
                 if(kick.kicker() == null) throw new MistakesWereMadeException("Kicker cannot be null");
                 //TODO: Broadcast kick message
-            } else {
-                //TODO: Add code stuff.. or something to that effect.. I guess.
             }
-            //TODO: Remove player from game
+            //MinigameUtils;
         }
 
         public void start(int startCool) {

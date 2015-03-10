@@ -48,10 +48,14 @@ public class ScoreboardUtils {
     }
 
     public static boolean requiresRefresh(Player p) {
-        if(getScoreboardTeam(p) == member) {
+        if(getScoreboardTeam(p) == member)
             return (member == null || !member.hasPlayer(p));
-        }
-        return !getScoreboardTeam(p).hasPlayer(p);
+        else if(p == null)
+            throw new NullPointerException();
+        else if(getScoreboardTeam(p) == null)
+        return true;
+        else
+            return getScoreboardTeam(p).hasPlayer(p);
     }
 
     @SuppressWarnings("ConstantConditions")
