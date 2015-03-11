@@ -5,8 +5,6 @@ import net.thenamedev.legendapi.minigames.*;
 import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -16,10 +14,8 @@ import java.util.*;
  */
 public class ChickenMayhem implements Minigame {
 
-    @NotNull
     private static ArrayList<UUID> players = new ArrayList<>();
 
-    @Nullable
     private Info info = new Info() {
         public String name() {
             return "Chicken Mayhem";
@@ -38,7 +34,6 @@ public class ChickenMayhem implements Minigame {
         }
     };
 
-    @Nullable
     private MinigameActions actions = new MinigameActions() {
         private boolean enabled = true;
         private boolean running = false;
@@ -47,7 +42,7 @@ public class ChickenMayhem implements Minigame {
             //
         }
 
-        public void quitGame(@NotNull KickInfo kick) {
+        public void quitGame(KickInfo kick) {
             if(kick.target() == null) throw new MistakesWereMadeException("Kick target cannot be null");
             if(kick.isKick()) {
                 if(kick.kicker() == null) throw new MistakesWereMadeException("Kicker cannot be null");
@@ -75,12 +70,10 @@ public class ChickenMayhem implements Minigame {
         }
     };
 
-    @Nullable
     public Info info() {
         return this.info;
     }
 
-    @Nullable
     public MinigameActions actions() {
         return this.actions;
     }

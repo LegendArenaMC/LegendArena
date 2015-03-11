@@ -1,8 +1,7 @@
 package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendapi.inventory.InventoryManager;
-import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.inventory.*;
+import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;

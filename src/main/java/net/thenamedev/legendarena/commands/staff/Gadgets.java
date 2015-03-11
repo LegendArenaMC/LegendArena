@@ -5,7 +5,6 @@ import net.thenamedev.legendarena.extras.hub.warp.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -14,7 +13,7 @@ import java.util.*;
  */
 public class Gadgets implements CommandExecutor {
 
-    public boolean onCommand(CommandSender sender, Command command, String s, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return true; //Do nothing if it's not a player

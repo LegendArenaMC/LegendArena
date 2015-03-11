@@ -4,7 +4,6 @@ import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.hub.warp.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
-import org.jetbrains.annotations.*;
 
 /**
  * @author ThePixelDev
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.*;
 public class WorldChangeListener implements Listener {
 
     @EventHandler
-    public void onWorldChange(@NotNull PlayerChangedWorldEvent ev) {
+    public void onWorldChange(PlayerChangedWorldEvent ev) {
         if(!ev.getFrom().getName().equalsIgnoreCase("hub") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("hub")) return;
         if(Rank.getRank(ev.getPlayer()) == Rank.VIP) {
             ev.getPlayer().setAllowFlight(false);

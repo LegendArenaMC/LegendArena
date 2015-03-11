@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.extras.motd;
 
 import org.bukkit.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -73,7 +72,7 @@ public class MOTDRandomizer {
     };
 
     public static String randomize() {
-        @NotNull Random r = new Random();
+        Random r = new Random();
         int msgInt = r.nextInt(motdList.length);
         while(motdList[msgInt].toCharArray().length > 49) { //sanity checks
             msgInt = r.nextInt(motdList.length);
@@ -83,7 +82,6 @@ public class MOTDRandomizer {
         return motdList[msgInt];
     }
 
-    @NotNull
     public static String[] getList() {
         return motdList;
     }

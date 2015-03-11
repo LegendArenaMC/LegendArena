@@ -3,7 +3,6 @@ package net.thenamedev.legendarena.commands.staff;
 import net.thenamedev.legendapi.utils.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -12,7 +11,6 @@ import java.util.*;
  */
 public class Fly implements CommandExecutor {
 
-    @NotNull
     private HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {

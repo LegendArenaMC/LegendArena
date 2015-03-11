@@ -5,28 +5,27 @@ import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author TheNameMan
  */
 public class Token implements CommandExecutor {
 
-    private void help(@NotNull CommandSender sender) {
+    private void help(CommandSender sender) {
         sender.sendMessage(ChatUtils.formattedCmd("Staff Commands", true));
         sender.sendMessage(formattedHelpLine("add <player> <amount>", "Adds tokens to a player's account."));
         sender.sendMessage(formattedHelpLine("remove <player> <amount>", "Takes tokens from a player's account."));
         sender.sendMessage(formattedHelpLine("reset <player>", "Resets a player's tokens to 0."));
         sender.sendMessage(ChatUtils.formattedCmd("User Commands", true));
         sender.sendMessage(formattedHelpLine("info", "Shows your tokens info."));
+        sender.sendMessage(formattedHelpLine("boosters", "Shows your available boosters you can use."));
     }
 
-    @NotNull
     private String formattedHelpLine(String cmd, String info) {
         return ChatColor.YELLOW + "/tokens " + cmd + " " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + info;
     }
 
-    public boolean onCommand(CommandSender sender, Command command, String s, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!(sender instanceof  Player))
             return true;
         try {

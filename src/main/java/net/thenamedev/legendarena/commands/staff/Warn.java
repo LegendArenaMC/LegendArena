@@ -5,14 +5,13 @@ import net.thenamedev.legendarena.extras.warn.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class Warn implements CommandExecutor {
 
-    public boolean onCommand(@NotNull CommandSender sender, Command label, String labelString, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command label, String labelString, String[] args) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return true; //Do nothing if it's not a player
@@ -29,10 +28,10 @@ public class Warn implements CommandExecutor {
             if(Bukkit.getPlayer(args[0]) == null) {
                 sender.sendMessage(ChatColor.RED + "That player was not found!");
             } else {
-                @NotNull WarnBackend warn = new WarnBackend();
+                WarnBackend warn = new WarnBackend();
                 Player warnPlayer = Bukkit.getPlayer(args[0]);
                 args[0] = "";
-                @NotNull String reason = ChatUtils.formatCast(args);
+                String reason = ChatUtils.formatCast(args);
                 warn.setup(warnPlayer, (Player) sender, reason);
                 warn.run();
             }

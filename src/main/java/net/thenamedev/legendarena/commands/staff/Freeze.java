@@ -6,7 +6,6 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.potion.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ public class Freeze implements CommandExecutor {
 
     public static final ArrayList<UUID> frozenPlayers = new ArrayList<>();
 
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
             return true;
@@ -34,6 +33,10 @@ public class Freeze implements CommandExecutor {
             } catch(Exception ex) { //legacy try/catch - too lazy to remove it ;-;
                 sender.sendMessage(PluginUtils.msgError + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
                 ex.printStackTrace();
+                return true;
+            }
+            if(Rank.getRank(Bukkit.getPlayer(args[0]), Rank.Mod)) {
+                sender.sendMessage(PluginUtils.msgNormal + "You must be fun at parties.");
                 return true;
             }
             if(!frozenPlayers.contains(Bukkit.getPlayer(args[0]).getUniqueId())) {

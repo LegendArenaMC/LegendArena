@@ -4,7 +4,6 @@ import net.thenamedev.legendapi.utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scoreboard.*;
-import org.jetbrains.annotations.*;
 
 /**
  * Tutorial used is <a href="http://bukkit.org/threads/tutorial-scoreboards-teams-with-the-bukkit-api.139655/">here</a>
@@ -19,24 +18,17 @@ public class ScoreboardUtils {
 
     //I trust you to not override these. Don't be evil.
 
-    @Nullable
     public static Team gm = null;
-    @Nullable
     public static Team mod = null;
-    @Nullable
     public static Team helper = null;
-    @Nullable
     public static Team vip = null;
-    @Nullable
     public static Team member = null;
 
     //Special ranks
-    @Nullable
     public static Team dev = null;
-    @Nullable
     public static Team owner = null;
 
-    public static void addPlayerToTeam(@Nullable Team t, @NotNull Player p) {
+    public static void addPlayerToTeam(Team t, Player p) {
         p.setScoreboard(sb);
         if(t == null) {
             if(member != null) {
@@ -110,10 +102,10 @@ public class ScoreboardUtils {
         } catch(NullPointerException ignore) {}
     }
 
-    // 10/10 best class name NA
+    // 10/10 best class name -IGN
     public static class FixThings implements Runnable {
         public void run() {
-            for(@NotNull Player p : Bukkit.getOnlinePlayers()) {
+            for(Player p : Bukkit.getOnlinePlayers()) {
                 if(!requiresRefresh(p)) {
                     continue;
                 }
@@ -128,7 +120,6 @@ public class ScoreboardUtils {
      * @param p The player to target
      * @return The targeted team
      */
-    @Nullable
     public static Team getScoreboardTeam(Player p) {
         Rank r = Rank.getRank(p);
         if(r == Rank.Owner) {

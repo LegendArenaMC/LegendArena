@@ -2,11 +2,9 @@ package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.menu.*;
-import net.thenamedev.legendarena.extras.menu.core.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -15,12 +13,11 @@ import java.util.*;
  */
 public class Particle implements CommandExecutor {
 
-    public static final Menu particlemenu = new ParticleMenu(Bukkit.getPluginManager().getPlugin("LegendArena"));
+    public static final ParticleMenu particlemenu = new ParticleMenu(Bukkit.getPluginManager().getPlugin("LegendArena"));
 
-    @NotNull
     private HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!Rank.getRank(sender, Rank.MemberPlus)) {
             Rank.noPermissions(sender, Rank.MemberPlus);
             return true;

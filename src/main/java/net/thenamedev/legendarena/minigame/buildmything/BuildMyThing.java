@@ -1,14 +1,12 @@
 package net.thenamedev.legendarena.minigame.buildmything;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.minigames.KickInfo;
-import net.thenamedev.legendapi.minigames.Minigame;
+import net.thenamedev.legendapi.minigames.*;
 //import net.thenamedev.legendapi.minigames.MinigameUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -46,7 +44,7 @@ public class BuildMyThing implements Minigame {
             //
         }
 
-        public void quitGame(@NotNull KickInfo kick) {
+        public void quitGame(KickInfo kick) {
             if(kick.target() == null) throw new MistakesWereMadeException("Kick target cannot be null");
             if(kick.isKick()) {
                 if(kick.kicker() == null) throw new MistakesWereMadeException("Kicker cannot be null");

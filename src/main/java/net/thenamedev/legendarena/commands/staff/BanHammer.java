@@ -4,14 +4,13 @@ import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.banhammer.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class BanHammer implements CommandExecutor {
 
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return true; //Do nothing if it's not a player
