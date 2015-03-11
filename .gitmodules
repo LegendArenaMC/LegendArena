@@ -1,0 +1,6 @@
+[submodule "Dependencies"]
+	path = Dependencies
+	url = https://github.com/LegendArenaMC/Dependencies
+[submodule "LegendAPI"]
+	path = LegendAPI
+	url = https://github.com/LegendArenaMC/LegendAPI
