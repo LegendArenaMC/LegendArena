@@ -1,4 +1,4 @@
-Legend Arena [![Build Status](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master/build_image)](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master)
+Legend Arena [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena)
 ====
 
 If you wish to help us get Legend Arena done faster, feel free to submit a pull request.

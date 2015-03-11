@@ -102,7 +102,7 @@ public class ScoreboardUtils {
         } catch(NullPointerException ignore) {}
     }
 
-    // 10/10 best class name -IGN
+    // 10/10 best class name ever -IGN
     public static class FixThings implements Runnable {
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
