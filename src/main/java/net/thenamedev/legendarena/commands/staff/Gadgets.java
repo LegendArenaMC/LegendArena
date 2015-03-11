@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendapi.utils.*;
-import net.thenamedev.legendarena.extras.warp.*;
+import net.thenamedev.legendarena.extras.hub.warp.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;

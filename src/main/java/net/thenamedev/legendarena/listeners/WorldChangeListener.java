@@ -1,13 +1,13 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.*;
-import net.thenamedev.legendarena.extras.warp.*;
+import net.thenamedev.legendarena.extras.hub.warp.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class WorldChangeListener implements Listener {
 

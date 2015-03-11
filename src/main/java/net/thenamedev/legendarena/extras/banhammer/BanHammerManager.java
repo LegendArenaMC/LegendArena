@@ -7,7 +7,7 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class BanHammerManager {
 

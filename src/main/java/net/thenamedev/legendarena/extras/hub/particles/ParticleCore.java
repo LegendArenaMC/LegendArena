@@ -7,7 +7,7 @@ import org.bukkit.entity.*;
 import java.util.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class ParticleCore implements Runnable {
 

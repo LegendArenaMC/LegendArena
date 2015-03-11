@@ -8,14 +8,14 @@ import org.bukkit.event.server.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class ServerPingListener implements Listener {
 
     @EventHandler
     public void onPingEvent(@NotNull ServerListPingEvent ev) {
         String msg = MOTDRandomizer.randomize();
-        ev.setMotd(String.format("%s%s\n%s", PluginUtils.msgNormal, msg, (ChatUtils.getNotice() == null ? "" : ChatUtils.getNotice())));
+        ev.setMotd(String.format("%s%s %s", PluginUtils.msgNormal, msg, ChatColor.YELLOW + "{PUBLIC ALPHA}"));
     }
 
 }

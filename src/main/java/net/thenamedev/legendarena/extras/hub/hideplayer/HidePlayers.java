@@ -1,13 +1,13 @@
 package net.thenamedev.legendarena.extras.hub.hideplayer;
 
 import net.thenamedev.legendapi.utils.*;
-import net.thenamedev.legendarena.extras.warp.*;
+import net.thenamedev.legendarena.extras.hub.warp.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class HidePlayers implements Runnable {
 

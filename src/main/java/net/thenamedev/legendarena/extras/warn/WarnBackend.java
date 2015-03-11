@@ -6,7 +6,7 @@ import org.bukkit.entity.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class WarnBackend {
 

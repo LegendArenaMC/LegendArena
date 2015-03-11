@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.extras.menu.core.*;
 import net.thenamedev.legendarena.extras.hub.particles.*;
 import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.*;
 import org.bukkit.*;
@@ -13,9 +12,10 @@ import org.bukkit.plugin.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
-public class ParticleMenu implements Menu, Listener {
+//will be migrated to the new system soon[tm]
+public class ParticleMenu implements Listener {
 
     private Inventory inv;
 

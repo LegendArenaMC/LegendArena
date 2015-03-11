@@ -10,7 +10,7 @@ import org.jetbrains.annotations.*;
  * Tutorial used is <a href="http://bukkit.org/threads/tutorial-scoreboards-teams-with-the-bukkit-api.139655/">here</a>
  * <br><br>
  * I'm not sure if I need to give "official" credit, but I might as well say this much..
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class ScoreboardUtils {
 

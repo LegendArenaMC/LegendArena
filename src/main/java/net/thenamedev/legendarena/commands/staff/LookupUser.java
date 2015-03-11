@@ -21,7 +21,7 @@ public class LookupUser implements CommandExecutor {
             return true;
         }
         if(args.length == 0) {
-            sender.sendMessage(PluginUtils.msgNormal + "Usage: /lalookup <history|info|bans> <player>");
+            sender.sendMessage(PluginUtils.msgNormal + "Usage: /lalookup <history|info> <player>");
             return true;
         }
         if(args[0].equalsIgnoreCase("history")) {
@@ -31,8 +31,7 @@ public class LookupUser implements CommandExecutor {
             args[0] = "";
             Info.run(sender, args);
         } else if(args[0].equalsIgnoreCase("bans")) {
-            args[0] = "";
-            Bans.run(sender, args);
+            sender.sendMessage(PluginUtils.msgError + "Sorry, the ban lookup system is now offline due to it BREAKING EVERY CI BUILD I TRIED TO DO. Sorry :(");
         } else {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /lalookup <history|info|bans> <player>");
             return true;

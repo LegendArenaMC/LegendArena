@@ -10,31 +10,34 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.*;
 
+import java.util.*;
+
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class MinigameMenu implements Listener {
 
     private static InventoryManager invMan = new InventoryManager();
 
     public MinigameMenu(Plugin plugin) {
-        /*inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Minigames");
+        //Lists
 
-        */
-        ItemStack spl = MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Splegg");
-        ItemStack sp = MenuCore.createItem(Material.GOLD_SPADE, ChatColor.GREEN + "Spleef");
-        ItemStack hub = MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub");
-        ItemStack more = MenuCore.createItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14), ChatColor.RED + "Coming Soon[tm]", ChatColor.YELLOW + "Check back later!");
-        ItemStack sg = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games");
-        /*
+        // Begin item list mayhem
+        HashMap<Integer, ItemStack> items = new HashMap<>();
+        items.put(1, MenuCore.createItem(Material.GOLD_SPADE, ChatColor.GREEN + "Spleef"));
+        items.put(7, MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Splegg"));
+        items.put(13, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
+        items.put(19, MenuCore.createItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14), ChatColor.RED + "Coming Soon[tm]", ChatColor.YELLOW + "Check back later!"));
+        items.put(25, MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games"));
 
-        inv.setItem(1, sp);
-        inv.setItem(7, spl);
-		inv.setItem(19, more);
-        inv.setItem(13, hub);
-        inv.setItem(25, sg);
+        // Begin action list mayhem
 
-        Bukkit.getPluginManager().registerEvents(this, plugin);*/
+        //Init stuffs
+        invMan.setInvName(ChatColor.GREEN + "Warper");
+        invMan.setActions(null);
+        invMan.setSlots(27);
+        invMan.init();
+        invMan.setInvItems(items);
     }
 
     public void show(Player p) {

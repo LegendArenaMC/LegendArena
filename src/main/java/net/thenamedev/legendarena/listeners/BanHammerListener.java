@@ -9,7 +9,7 @@ import org.bukkit.event.player.*;
 import org.jetbrains.annotations.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class BanHammerListener implements Listener {
 

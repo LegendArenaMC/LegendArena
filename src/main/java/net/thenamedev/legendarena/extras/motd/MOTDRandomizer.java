@@ -6,7 +6,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class MOTDRandomizer {
 
@@ -40,7 +40,6 @@ public class MOTDRandomizer {
             "It's a me, Mario!", //if you don't know what this is from you're a massive failure
             "War. War never changes.", //reference to Fallout 3/2/1
             "//Made in Java", //reference to Minecraft being made in Java, and thus basically everything that uses Minecraft pretty much needs to be in Java, or re-invent the wheel.
-            "Caused by: java.lang.NullPointerException", //reference to a java NullPointerException (oh how I have been burned so many times by this one error...)
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
             "Now has tokens!", //reference to the recently implemented tokens system
             "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
@@ -50,12 +49,8 @@ public class MOTDRandomizer {
             "Just remember to land on one foot.", //portal reference
             "Good that's still working.", //portal...
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
-            "you.sendMessage(\"You're awesome!\");", //reference to sending the player ("you") the message "You're awesome!"
-            "Do you copy, it's just as we thought.", //reference to a lyric in "Approaching Nirvana ft. Veela - 2nd Flight"
-            "Made something idiot-proof? Just wait.", //reference to the old saying "Make something idiot proof and nature will find a way to make a better idiot".
             "It's black and blue!", //THE DRESS ;-;
             "It's white and gold!", //THE DRESS [AGAIN] ;-;
-            "Hi, I'm from PMC, can I have OP?", //dare I explain this one
             ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.GREEN, //default ban message for a LOT of servers
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "We no speak Americano", //reference to a song with that exact name
@@ -65,20 +60,16 @@ public class MOTDRandomizer {
             "Can I have some sugar in my Java?", //java can mean coffee, so.. yeeeahhh.. yeah that was bad ill leave now
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
             //BEGIN STUPIDLY RANDOM MOTDS
-            "Tempbanned by null for null - expires on null",
-            "I can't even. I literally can't even right now.",
             "<insert random MOTD here>",
             "Does not use System.out.println()",
             "*says no and nods head*",
             "Contains references.",
             "WOAH-OH-OH-AH-AH-AH-AAAA-HA",
-            "It took one look but you played me like a game...",
             "Who's the bae?", //...why the hell did I add this MOTD
             "It doesn't work? Oh well ¯\\(ツ)/¯",
             "HEADSHOT!",
             "Kappa",
             "SourPls",
-            "can i have mod pls i promise ill be gud",
     };
 
     public static String randomize() {
