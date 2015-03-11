@@ -33,6 +33,14 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
+            <resource>
+                <directory>Dependencies/src</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>LegendAPI/src/main/java</directory>
+                <filtering>true</filtering>
+            </resource>
         </resources>
         <plugins>
             <plugin>
@@ -42,6 +50,19 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <defaultManifestFile>META-INF/MANIFEST.MF</defaultManifestFile>
+                    <excludes>
+                        "Dependencies",
+                        "LegendAPI"
+                    </excludes>
+                    <includePom>true</includePom>
                 </configuration>
             </plugin>
         </plugins>
