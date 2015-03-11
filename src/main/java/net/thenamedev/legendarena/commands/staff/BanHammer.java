@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.commands.staff;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.banhammer.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;

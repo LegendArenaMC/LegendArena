@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.commands.staff;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.*;
 import org.bukkit.*;
 import org.bukkit.command.*;

@@ -1,6 +1,8 @@
 package net.thenamedev.legendarena.extras.warn;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 

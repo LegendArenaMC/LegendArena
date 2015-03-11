@@ -1,7 +1,8 @@
 package net.thenamedev.legendarena.commands.staff;
 
-import net.thenamedev.legendapi.utils.*;
-import net.thenamedev.legendarena.*;
+import net.thenamedev.legendapi.LegendAPI;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -58,15 +59,15 @@ public class Freeze implements CommandExecutor {
                 p.setCanPickupItems(true);
                 if(!Rank.getRank(p, Rank.GM)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {
-                    if(LegendArena.debugSwitch)
+                    if(LegendAPI.debug)
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove MINING FATIGUE.");
                 }
                 try { p.removePotionEffect(PotionEffectType.JUMP); } catch(Exception ignore) {
-                    if(LegendArena.debugSwitch)
+                    if(LegendAPI.debug)
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove JUMP BOOST.");
                 }
                 try { p.removePotionEffect(PotionEffectType.WEAKNESS); } catch(Exception ignore) {
-                    if(LegendArena.debugSwitch)
+                    if(LegendAPI.debug)
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove WEAKNESS.");
                 }
                 p.setMaximumNoDamageTicks(0);

@@ -1,9 +1,10 @@
 package net.thenamedev.legendarena.utils;
 
-import net.thenamedev.legendapi.*;
-import net.thenamedev.legendapi.tokens.*;
-import net.thenamedev.legendapi.utils.*;
-import static net.thenamedev.legendapi.utils.PluginUtils.*;
+import legendapi.*;
+import net.thenamedev.legendapi.LegendAPI;
+import net.thenamedev.legendapi.tokens.TokenCore;
+import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.Firework;
 import net.thenamedev.legendarena.commands.dev.*;

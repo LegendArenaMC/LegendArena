@@ -1,8 +1,9 @@
 package net.thenamedev.legendarena.minigame.buildmything;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.minigames.*;
-//import net.thenamedev.legendapi.minigames.MinigameUtils;
+//import MinigameUtils;
+import net.thenamedev.legendapi.minigames.KickInfo;
+import net.thenamedev.legendapi.minigames.Minigame;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.World;

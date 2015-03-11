@@ -1,11 +1,11 @@
 package net.thenamedev.legendarena.commands.dev;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.staffchat.StaffChat;
 import net.thenamedev.legendarena.utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
-import org.bukkit.entity.*;
 
 /**
  * @author TheNameMan

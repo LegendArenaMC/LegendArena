@@ -1,17 +1,17 @@
 package net.thenamedev.legendarena.commands.dev;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.motd.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
-import org.jetbrains.annotations.*;
 
 /**
  * @author TheNameMan
  */
 public class MOTDList implements CommandExecutor {
 
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!Rank.getRank(sender, Rank.GM)) {
             Rank.noPermissions(sender, Rank.GM);
             return true;
@@ -21,8 +21,8 @@ public class MOTDList implements CommandExecutor {
             sender.sendMessage(ChatColor.YELLOW + "To show the MOTD list, run this command again, but with any arguments, so you can literally just smash your keyboard (don't actually smash it pls) to show it.");
             sender.sendMessage(PluginUtils.msgNormal + "List of MOTD messages: " + MOTDRandomizer.getList().length + " (DO YOU SEE WHAT I MEAN BY \"SO LARGE\" NOW?)");
         } else {
-            @NotNull String[] list = MOTDRandomizer.getList();
-            @NotNull String finishedList = PluginUtils.msgNormal;
+            String[] list = MOTDRandomizer.getList();
+            String finishedList = PluginUtils.msgNormal;
             for(String list1 : list) {
                 if(finishedList.equals(PluginUtils.msgNormal)) {
                     finishedList = finishedList + " \"" + list1 + "\"";

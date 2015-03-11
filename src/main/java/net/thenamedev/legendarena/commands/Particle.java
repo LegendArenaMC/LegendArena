@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.commands;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.Cooldown;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.menu.*;
 import org.bukkit.*;
 import org.bukkit.command.*;

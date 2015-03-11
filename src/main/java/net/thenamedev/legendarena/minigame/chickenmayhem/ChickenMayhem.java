@@ -1,8 +1,9 @@
 package net.thenamedev.legendarena.minigame.chickenmayhem;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.minigames.*;
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.minigames.KickInfo;
+import net.thenamedev.legendapi.minigames.Minigame;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 

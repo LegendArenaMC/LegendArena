@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.utils;
 
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scoreboard.*;

@@ -1,7 +1,9 @@
 package net.thenamedev.legendarena.commands;
 
-import net.thenamedev.legendapi.tokens.*;
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.tokens.TokenCore;
+import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
