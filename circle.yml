@@ -8,7 +8,4 @@ general:
 
 test:
   override:
-    - mvn package:
-        parallel: true
-        files:
-          - "src/main/java/**/*.java"
+    - mvn package
