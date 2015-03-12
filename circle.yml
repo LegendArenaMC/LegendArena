@@ -9,7 +9,6 @@ general:
 test:
   override:
     - mvn package:
-      parallel: true
-      files:
-        - target/**/*.class
-        - src/main/java/**/*.java 
+        parallel: true
+        files:
+          - "src/main/java/**/*.java"
