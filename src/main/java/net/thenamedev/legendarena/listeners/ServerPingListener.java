@@ -1,10 +1,11 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendarena.extras.motd.*;
-import org.bukkit.*;
-import org.bukkit.event.*;
-import org.bukkit.event.server.*;
+import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
+import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.ServerListPingEvent;
 
 /**
  * @author ThePixelDev

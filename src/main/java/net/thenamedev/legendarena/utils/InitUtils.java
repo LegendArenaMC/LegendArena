@@ -16,23 +16,25 @@
 
 package net.thenamedev.legendarena.utils;
 
-import static net.thenamedev.legendapi.utils.PluginUtils.*;
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
-import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
-import net.thenamedev.legendarena.commands.Firework;
-import net.thenamedev.legendarena.commands.dev.*;
+import net.thenamedev.legendarena.commands.dev.MOTDList;
+import net.thenamedev.legendarena.commands.dev.UpdateScoreboard;
 import net.thenamedev.legendarena.commands.staff.*;
-import net.thenamedev.legendarena.extras.hub.hideplayer.*;
-import net.thenamedev.legendarena.extras.hub.particles.*;
-import net.thenamedev.legendarena.extras.staffchat.*;
-import net.thenamedev.legendarena.extras.hub.warp.*;
+import net.thenamedev.legendarena.extras.hub.hideplayer.HidePlayers;
+import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
+import net.thenamedev.legendarena.extras.staffchat.StaffChat;
 import net.thenamedev.legendarena.listeners.*;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
 
 /**
  * @author ThePixelDev

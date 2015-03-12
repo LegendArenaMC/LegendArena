@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.minigame.buildmything;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-//import MinigameUtils;
 import net.thenamedev.legendapi.minigames.KickInfo;
 import net.thenamedev.legendapi.minigames.Minigame;
 import net.thenamedev.legendapi.utils.Rank;
@@ -11,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
+//import MinigameUtils;
 
 /**
  * Created on 3/4/2015

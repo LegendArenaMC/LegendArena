@@ -4,10 +4,12 @@ import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.minigames.KickInfo;
 import net.thenamedev.legendapi.minigames.Minigame;
 import net.thenamedev.legendapi.utils.Rank;
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created on 3/2/2015

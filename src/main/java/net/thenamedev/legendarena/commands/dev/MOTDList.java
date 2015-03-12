@@ -2,9 +2,11 @@ package net.thenamedev.legendarena.commands.dev;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.extras.motd.*;
+import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
 import org.bukkit.ChatColor;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 
 /**
  * @author TheNameMan

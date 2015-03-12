@@ -1,15 +1,17 @@
 package net.thenamedev.legendapi.tokens;
 
-import net.milkbowl.vault.economy.*;
+import net.milkbowl.vault.economy.Economy;
 import net.thenamedev.legendapi.exceptions.BoosterAlreadyActive;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.plugin.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * TO USE THIS YOU REQUIRE VAULT AND SOME ECONOMY PLUGIN!

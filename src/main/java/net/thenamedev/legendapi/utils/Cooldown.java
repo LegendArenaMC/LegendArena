@@ -1,6 +1,6 @@
 package net.thenamedev.legendapi.utils;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
 
 /**
  * Code stolen from: http://hastebin.com/noqemohuda.java with slight changes

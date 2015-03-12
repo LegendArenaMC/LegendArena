@@ -2,9 +2,11 @@ package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.commands.backends.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import net.thenamedev.legendarena.commands.backends.Info;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * @author TheNameMan

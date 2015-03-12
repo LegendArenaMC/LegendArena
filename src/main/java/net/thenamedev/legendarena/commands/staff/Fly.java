@@ -3,10 +3,13 @@ package net.thenamedev.legendarena.commands.staff;
 import net.thenamedev.legendapi.utils.Cooldown;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * @author TheNameMan

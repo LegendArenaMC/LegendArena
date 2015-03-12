@@ -1,9 +1,11 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.utils.Rank;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.scoreboard.*;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 
 /**
  * Tutorial used is <a href="http://bukkit.org/threads/tutorial-scoreboards-teams-with-the-bukkit-api.139655/">here</a>

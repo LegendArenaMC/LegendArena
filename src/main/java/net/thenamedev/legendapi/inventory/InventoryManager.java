@@ -3,13 +3,18 @@ package net.thenamedev.legendapi.inventory;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.inventory.action.Action;
 import net.thenamedev.legendapi.inventory.action.InvOpenAction;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.*;
-import org.bukkit.event.inventory.*;
-import org.bukkit.inventory.*;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Allows easier creation of GUI menus.<br><br>
@@ -30,24 +35,24 @@ public class InventoryManager implements Listener {
     int slots = 0;
     String invName;
     List<Action> actionList;
-    String plName = "LegendArena"; //This is the only field that is pre-set.
+    String plName = "LegendArena";
 
     /**
-     * This REQUIRES you to have run setInvItems(ItemStack[]), setSlots(int), setActions(List&lt;Action>) and setInvName(String) first!
+     * This REQUIRES you to have run setSlots(int), setActions(List&lt;Action>) and setInvName(String) first!
      */
     public void init() {
-        if(invItems != null)
-            throw new MistakesWereMadeException("Run setInvItems() AFTER this, you derp!");
+        if(invItems == null)
+            throw new MistakesWereMadeException("Run setInvItems() BEFORE this, you derp!");
         if(invName == null || invName.equals(""))
             throw new MistakesWereMadeException("Run setInvName() BEFORE this, you derp!");
-        if(slots < 1)
+        if(slots <= 0)
             throw new MistakesWereMadeException("Run setSlots() BEFORE this, you derp!");
         if(useOnOpen && invOpenAction == null)
             throw new MistakesWereMadeException("The flag useOnOpen was enabled, but the inventory open action event call was not set.");
 
         inv = Bukkit.createInventory(null, slots, invName);
+        inv.setContents(invItems);
         Bukkit.getPluginManager().registerEvents(this, Bukkit.getPluginManager().getPlugin(plName));
-        invItems = new ItemStack[] {};
     }
 
     /**
@@ -75,16 +80,14 @@ public class InventoryManager implements Listener {
     }
 
     public void setInvItems(HashMap<Integer, ItemStack> items) {
-        if(inv == null)
-            throw new NullPointerException("Run init() first, THEN this (setInvItems())!");
-        for(Integer slot : items.keySet())
-            inv.setItem(slot, items.get(slot));
+       for(Integer slot : items.keySet())
+            invItems[slot] = items.get(slot);
     }
 
     public void show(Player p) {
         if(inv != null) {
             Inventory pInv = Bukkit.createInventory(null, slots, invName);
-            pInv.setContents(inv.getContents());
+            pInv.setContents(invItems);
             p.openInventory(pInv);
         }
     }

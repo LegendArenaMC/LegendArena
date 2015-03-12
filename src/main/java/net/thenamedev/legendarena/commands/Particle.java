@@ -2,12 +2,15 @@ package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.utils.Cooldown;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.extras.menu.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import net.thenamedev.legendarena.extras.menu.ParticleMenu;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * @author TheNameMan

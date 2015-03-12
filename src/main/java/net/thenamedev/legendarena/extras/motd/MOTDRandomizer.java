@@ -1,8 +1,8 @@
 package net.thenamedev.legendarena.extras.motd;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
 
-import java.util.*;
+import java.util.Random;
 
 /**
  * @author ThePixelDev

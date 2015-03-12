@@ -4,7 +4,10 @@ import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.minigames.Minigame;
 import org.bukkit.Bukkit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created on 3/4/2015

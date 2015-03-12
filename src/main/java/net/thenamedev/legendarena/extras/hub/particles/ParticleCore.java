@@ -1,10 +1,10 @@
 package net.thenamedev.legendarena.extras.hub.particles;
 
-import net.thenamedev.legendarena.extras.hub.particles.lib.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import net.thenamedev.legendarena.extras.hub.particles.lib.ParticleEffect;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author ThePixelDev

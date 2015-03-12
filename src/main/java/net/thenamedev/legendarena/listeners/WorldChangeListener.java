@@ -1,9 +1,10 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.extras.hub.warp.*;
-import org.bukkit.event.*;
-import org.bukkit.event.player.*;
+import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 /**
  * @author ThePixelDev

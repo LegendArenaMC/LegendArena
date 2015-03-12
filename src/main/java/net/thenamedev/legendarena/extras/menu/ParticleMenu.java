@@ -1,14 +1,18 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.extras.hub.particles.*;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.*;
-import org.bukkit.event.inventory.*;
-import org.bukkit.inventory.*;
-import org.bukkit.plugin.*;
+import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 /**
  * @author ThePixelDev

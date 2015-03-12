@@ -1,9 +1,10 @@
 package net.thenamedev.legendarena.extras.banhammer;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 /**
  * @author ThePixelDev
  */

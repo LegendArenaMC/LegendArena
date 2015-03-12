@@ -1,6 +1,6 @@
 package net.thenamedev.legendapi.inventory.action;
 
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 
 /**
  * @author ThePixelDev

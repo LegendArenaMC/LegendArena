@@ -1,10 +1,11 @@
 package net.thenamedev.legendapi.minigames;
 
 import net.thenamedev.legendapi.utils.Rank;
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Base minigame API interface.

@@ -3,15 +3,20 @@ package net.thenamedev.legendarena.commands.staff;
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.potion.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * @author TheNameMan
+ * @author ThePixelDev
  */
 public class Freeze implements CommandExecutor {
 
@@ -26,14 +31,8 @@ public class Freeze implements CommandExecutor {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /freeze <player>");
             return true;
         } else {
-            try {
-                if(Bukkit.getPlayer(args[0]) == null) {
-                    sender.sendMessage(ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
-                    return true;
-                }
-            } catch(Exception ex) { //legacy try/catch - too lazy to remove it ;-;
-                sender.sendMessage(PluginUtils.msgError + "Encountered an error while checking if the player is online. Exiting. (error is dumped out in the console, by the way)");
-                ex.printStackTrace();
+            if(Bukkit.getPlayer(args[0]) == null) {
+                sender.sendMessage(ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                 return true;
             }
             if(Rank.getRank(Bukkit.getPlayer(args[0]), Rank.Mod)) {

@@ -1,8 +1,9 @@
 package net.thenamedev.legendarena.listeners;
 
-import net.thenamedev.legendarena.commands.staff.*;
-import org.bukkit.event.*;
-import org.bukkit.event.player.*;
+import net.thenamedev.legendarena.commands.staff.Freeze;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 /**
  * @author ThePixelDev

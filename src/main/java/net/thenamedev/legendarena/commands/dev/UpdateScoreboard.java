@@ -3,9 +3,11 @@ package net.thenamedev.legendarena.commands.dev;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.staffchat.StaffChat;
-import net.thenamedev.legendarena.utils.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
+import net.thenamedev.legendarena.utils.ScoreboardUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 
 /**
  * @author TheNameMan
