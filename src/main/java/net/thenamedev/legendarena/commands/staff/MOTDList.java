@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.dev;
+package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;

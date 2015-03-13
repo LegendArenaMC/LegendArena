@@ -116,11 +116,21 @@ public class InventoryManager implements Listener {
                 return;
             for(Action a : actionList)
                 if(a.useContains()) {
-                    if(ev.getCurrentItem().getItemMeta().getDisplayName().contains(a.itemName()))
+                    if(ev.getCurrentItem().getItemMeta().getDisplayName().contains(a.itemName())) {
                         a.whenClicked((Player) ev.getWhoClicked());
+                        if(a.cancelEvent())
+                            ev.setCancelled(true);
+                        if(a.closeInv())
+                            ev.getWhoClicked().closeInventory();
+                    }
                 } else { //I have to use brackets here. I feel sad now.
-                    if(ev.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(a.itemName()))
+                    if(ev.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(a.itemName())) {
                         a.whenClicked((Player) ev.getWhoClicked());
+                        if(a.cancelEvent())
+                            ev.setCancelled(true);
+                        if(a.closeInv())
+                            ev.getWhoClicked().closeInventory();
+                    }
                 }
         } catch(Exception ignore) {
             //ignore

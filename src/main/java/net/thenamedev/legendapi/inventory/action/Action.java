@@ -27,6 +27,11 @@ public interface Action {
     boolean cancelEvent();
 
     /**
+     * This is really just for my sanity so I can control if I want to close the inventory or not.
+     */
+    boolean closeInv();
+
+    /**
      * This automatically cancels the event for you. If you wish to not cancel the event, set cancelEvent() to return FALSE.
      */
     void whenClicked(Player p);

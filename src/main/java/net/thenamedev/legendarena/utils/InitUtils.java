@@ -21,7 +21,6 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
-import net.thenamedev.legendarena.commands.dev.MOTDList;
 import net.thenamedev.legendarena.commands.dev.UpdateScoreboard;
 import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.hub.hideplayer.HidePlayers;
@@ -144,7 +143,12 @@ public class InitUtils {
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
-        Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        try {
+            Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        } catch(Exception ex) {
+            if(LegendAPI.debug)
+                ChatUtils.broadcast(String.format("%sUnable to load /warp - continuing without it...", msgDebug));
+        }
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /freeze...", msgDebug));
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]

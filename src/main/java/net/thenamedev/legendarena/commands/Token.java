@@ -102,17 +102,19 @@ public class Token implements CommandExecutor {
                     Rank.noPermissions(sender, Rank.GM);
                     return true;
                 }
-                if(args.length <= 2) {
+                if(args.length < 2) {
                     sender.sendMessage(ChatColor.YELLOW + "/tokens reset <player> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes tokens from a player's account.");
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(p == null) {
-                        sender.sendMessage(ChatColor.RED + "That player wasn't found!");
+                        sender.sendMessage(ChatColor.RED + "That player wasn not found!");
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Resetting player's tokens...");
                     TokenCore.resetTokens(p, true, Rank.getFormattedName((Player) sender));
                 }
+            } else if(args[0].equalsIgnoreCase("boosters")) {
+                sender.sendMessage(ChatColor.YELLOW + "soon[tm]");
             }
 
             else {
