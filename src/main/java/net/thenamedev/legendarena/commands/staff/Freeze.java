@@ -32,7 +32,7 @@ public class Freeze implements CommandExecutor {
             return true;
         } else {
             if(Bukkit.getPlayer(args[0]) == null) {
-                sender.sendMessage(ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
+                sender.sendMessage(PluginUtils.msgWarning + ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                 return true;
             }
             if(Rank.getRank(Bukkit.getPlayer(args[0]), Rank.Mod)) {

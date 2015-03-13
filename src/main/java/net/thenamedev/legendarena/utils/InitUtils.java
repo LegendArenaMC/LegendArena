@@ -19,6 +19,7 @@ package net.thenamedev.legendarena.utils;
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.dev.UpdateScoreboard;
@@ -32,6 +33,7 @@ import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
 
@@ -72,6 +74,11 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", msgDebug, TokenCore.ver, TokenCore.verName));
         else
             ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", msgDebug, TokenCore.ver, TokenCore.verName), Rank.Dev);
+        Random r = new Random();
+        if(r.nextInt(200) == 100)
+            if(LegendAPI.debug)
+                //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
+                ChatUtils.broadcast(String.format("%sError 418: I'm a teapot", PluginUtils.msgWarning));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
         init = true;
