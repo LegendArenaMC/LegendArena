@@ -1,5 +1,8 @@
 package net.thenamedev.legendapi.tokens;
 
+import lib.PatPeter.SQLibrary.Database;
+import lib.PatPeter.SQLibrary.H2;
+import lib.PatPeter.SQLibrary.SQLite;
 import net.milkbowl.vault.economy.Economy;
 import net.thenamedev.legendapi.exceptions.BoosterAlreadyActive;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
@@ -21,9 +24,11 @@ public class TokenCore {
 
     private static Economy econ = null;
     private static boolean init = false;
+    public static boolean canUseBoosters = false;
     public static final String ver = "0.9";
     public static final String verName = "Pre-Liftoff";
 
+    public static final Database boosterDB = new SQLite(Bukkit.getLogger(), "TokensDB", Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath(), "");
     private static final HashMap<UUID, Integer> boosters = new HashMap<>();
 
     public static void init() {
@@ -33,6 +38,7 @@ public class TokenCore {
             throw new MistakesWereMadeException("Get Vault to use the Tokens system!");
         if(!econ.isEnabled())
             throw new MistakesWereMadeException("The Vault economy is not enabled! [do you have an economy plugin installed?]");
+        canUseBoosters = boosterDB.open();
         init = true;
     }
 
@@ -95,6 +101,8 @@ public class TokenCore {
      * @throws net.thenamedev.legendapi.exceptions.MistakesWereMadeException If any fields are null
      */
     public static void addBooster(Player p, BoosterInfo info) {
+        if(!canUseBoosters)
+            throw new MistakesWereMadeException("Boosters cannot be used! [Do you have the SQLibrary plugin?]");
         if(info == null)
             throw new MistakesWereMadeException("Booster info cannot be null");
         int hours = info.hours();

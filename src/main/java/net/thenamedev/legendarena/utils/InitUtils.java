@@ -148,14 +148,14 @@ public class InitUtils {
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /warn...", msgDebug));
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
-        if(LegendAPI.debug)
+        /*if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         try {
             Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         } catch(Exception ex) {
             if(LegendAPI.debug)
                 ChatUtils.broadcast(String.format("%sUnable to load /warp - continuing without it...", msgDebug));
-        }
+        }*/
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /freeze...", msgDebug));
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]

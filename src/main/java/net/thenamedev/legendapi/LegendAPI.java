@@ -16,6 +16,7 @@
 
 package net.thenamedev.legendapi;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -25,8 +26,28 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class LegendAPI extends JavaPlugin {
 
-    public static final String apiVersion = "0.1";
-    public static final String versionName = "Hello World";
+    public static final String apiVersion = "1.0";
+    public static final String versionName = "API Liftoff";
+
+    public static final String debugCat =
+            ChatColor.BLUE +
+            "                      _                        \n" +
+            "                      \\`*-.                    \n" +
+            "                       )  _`-.                 \n" +
+            "                      .  : `. .                \n" +
+            "                      : _   '  \\               \n" +
+            "                      ; *` _.   `*-._          \n" +
+            "                      `-.-'          `-.       \n" +
+            "                        ;       `       `.     \n" +
+            "                        :.       .        \\    \n" +
+            "                        . \\  .   :   .-'   .   \n" +
+            "                        '  `+.;  ;  '      :   \n" +
+            "                        :  '  |    ;       ;-. \n" +
+            "                        ; '   : :`-:     _.`* ;\n" +
+            "               [bug] .*' /  .*' ; .*`- +'  `*' \n" +
+            "                     `*-*   `*-*  `*-*'        \n" +
+            ChatColor.RED;
+    //yes that is what I do with my spare time. make debug cat ascii art. dont question it
 
     public static boolean debug = true;
 

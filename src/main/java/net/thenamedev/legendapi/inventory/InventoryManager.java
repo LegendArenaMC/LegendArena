@@ -17,13 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Allows easier creation of GUI menus.<br><br>
- *
- * To use this util, get an instance of this via <code>new InventoryManager()</code>. And please, for the love of pete:<br><br>
- *
- * <strong>DO NOT HAND CODE THE MENUS IF THIS WORKS JUST AS WELL</strong>
+ * Deprecated as this is very buggy, and I can't be arsed to fix it.
  * @author ThePixelDev
  */
+@Deprecated
 public class InventoryManager implements Listener {
 
     Inventory inv;

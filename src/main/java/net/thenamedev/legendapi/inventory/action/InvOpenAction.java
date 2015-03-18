@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 /**
  * @author ThePixelDev
  */
+@Deprecated
 public interface InvOpenAction {
 
     /**
