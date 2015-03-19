@@ -20,7 +20,7 @@ public class UpdateScoreboard implements CommandExecutor {
             return true;
         }
         sender.sendMessage(PluginUtils.msgWarning + "THIS SHOULD ONLY BE USED WHEN THINGS ARE BROKEN. If things aren't broken, you may have just fucked up.");
-        StaffChat.notice("The nametag system's scoreboard has forcefully been updated. Unless things are broken, throw " + sender.getName() + " off a bridge.", "Nametag System");
+        StaffChat.notice("The nametag system's scoreboard has forcefully been updated. Unless things are broken, throw " + sender.getName() + " off a bridge. (please don't literally do this)", "Nametag System");
         sender.sendMessage(PluginUtils.msgNormal + "Updating scoreboard... (if there's a lot of people on this may take a bit)");
         Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ScoreboardUtils.FixThings());
         sender.sendMessage(PluginUtils.msgNormal + "Scoreboard updated.");

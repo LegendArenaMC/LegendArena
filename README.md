@@ -12,11 +12,11 @@ should comply with said license.
 A copy of said license can be found in the [LICENSE.md](https://notabug.org/ThePixelDev/LegendArena/src/master/LICENSE.md) file.
 
 Post Notes
-----
+====
 
 I am aware the code isn't as neat as it could be; I will work on improving it, but for now it will (sadly) have to be this way. Sorry!
 
-/\/\/\/\/\/\/\/\
+========
 
 While we are getting the frameworking done, debug mode will be permanently on. If you don't like it that way, remember:
 

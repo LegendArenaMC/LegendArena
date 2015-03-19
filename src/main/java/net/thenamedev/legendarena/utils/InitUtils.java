@@ -78,7 +78,7 @@ public class InitUtils {
         if(r.nextInt(200) == 100)
             if(LegendAPI.debug)
                 //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
-                ChatUtils.broadcast(String.format("%sError 418: I'm a teapot", PluginUtils.msgWarning));
+                ChatUtils.broadcast(String.format("%HTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
         init = true;
@@ -148,14 +148,9 @@ public class InitUtils {
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /warn...", msgDebug));
         Bukkit.getPluginCommand("warn").setExecutor(new Warn()); //Warn command [/warn]
-        /*if(LegendAPI.debug)
+        if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
-        try {
-            Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
-        } catch(Exception ex) {
-            if(LegendAPI.debug)
-                ChatUtils.broadcast(String.format("%sUnable to load /warp - continuing without it...", msgDebug));
-        }*/
+        Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading /freeze...", msgDebug));
         Bukkit.getPluginCommand("freeze").setExecutor(new Freeze()); //Freeze command [/freeze]

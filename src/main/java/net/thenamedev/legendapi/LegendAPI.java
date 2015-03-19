@@ -29,6 +29,7 @@ public class LegendAPI extends JavaPlugin {
     public static final String apiVersion = "1.0";
     public static final String versionName = "API Liftoff";
 
+    //think of the following as you wish.
     public static final String debugCat =
             ChatColor.BLUE +
             "                      _                        \n" +

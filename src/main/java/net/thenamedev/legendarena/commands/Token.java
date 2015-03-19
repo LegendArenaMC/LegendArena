@@ -87,7 +87,7 @@ public class Token implements CommandExecutor {
                     try {
                         remove = Integer.parseInt(args[2]);
                     } catch(Exception ex) {
-                        sender.sendMessage(ChatColor.RED + "\"" + args[2] + "\" is not a double!");
+                        sender.sendMessage(ChatColor.RED + "\"" + args[2] + "\" is not an integer!");
                         return true;
                     }
                     if(remove > TokenCore.getTokens(p)) {
@@ -107,7 +107,7 @@ public class Token implements CommandExecutor {
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(p == null) {
-                        sender.sendMessage(ChatColor.RED + "That player wasn not found!");
+                        sender.sendMessage(ChatColor.RED + "That player was not found!");
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Resetting player's tokens...");

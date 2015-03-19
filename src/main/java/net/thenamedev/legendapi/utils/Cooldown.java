@@ -7,14 +7,11 @@ import org.bukkit.ChatColor;
  */
 public class Cooldown {
 
-    private int seconds;
-    private int total;
+    private double seconds;
     private long start;
 
-    public Cooldown(int seconds) {
+    public Cooldown(double seconds) {
         this.seconds = seconds;
-        this.total = seconds;
-
         this.start = System.currentTimeMillis();
     }
 
@@ -29,7 +26,7 @@ public class Cooldown {
     }
 
     public String getTimeRemaining() {
-        return PluginUtils.msgNormal + "Cooldown: " + ChatColor.YELLOW + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.YELLOW + total + "s";
+        return PluginUtils.msgNormal + "Cooldown: " + ChatColor.YELLOW + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.YELLOW + seconds + "s";
     }
 
 }

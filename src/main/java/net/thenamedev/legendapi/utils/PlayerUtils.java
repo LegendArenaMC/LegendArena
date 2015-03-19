@@ -40,4 +40,8 @@ public class PlayerUtils {
         return playersInMinigames.get(p);
     }
 
+    public static boolean isInMinigame(UUID p) {
+        return getPlayerMinigame(p) != null;
+    }
+
 }

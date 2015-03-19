@@ -1,5 +1,7 @@
 package net.thenamedev.legendarena.utils;
 
+import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
+import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,8 +24,10 @@ public class ScoreboardUtils {
 
     public static Team gm = null;
     public static Team mod = null;
+    public static Team srmod = null;
     public static Team helper = null;
     public static Team vip = null;
+    public static Team memberPlus = null;
     public static Team member = null;
 
     //Special ranks
@@ -45,11 +49,10 @@ public class ScoreboardUtils {
         if(getScoreboardTeam(p) == member)
             return (member == null || !member.hasPlayer(p));
         else if(p == null)
-            throw new NullPointerException();
-        else if(getScoreboardTeam(p) == null)
-        return true;
-        else
-            return getScoreboardTeam(p).hasPlayer(p);
+            throw new MistakesWereMadeException("Player cannot be null");
+        //if(!p.isOnline())
+            //throw new MistakesWereMadeException("Player is not online");
+        return getScoreboardTeam(p).hasPlayer(p);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -57,6 +60,8 @@ public class ScoreboardUtils {
         //Init the teams
         if(gm == null)
             gm = sb.registerNewTeam("GMs");
+        if(srmod == null)
+            srmod = sb.registerNewTeam("SrMod");
         if(mod == null)
             mod = sb.registerNewTeam("Mods");
         if(helper == null)
@@ -65,6 +70,8 @@ public class ScoreboardUtils {
             member = sb.registerNewTeam("Members");
         if(vip == null)
             vip = sb.registerNewTeam("VIPs");
+        if(memberPlus == null)
+            memberPlus = sb.registerNewTeam("MemberPlus");
 
         //Special teams
         if(dev == null)
@@ -74,18 +81,29 @@ public class ScoreboardUtils {
 
         try {
             //Set prefixes
-            mod.setPrefix("§5Mod §8| §6");
+            mod.setPrefix("§5Mod §8| §a");
+            srmod.setPrefix("§cSrMod §8 | §a");
             helper.setPrefix("§1Helper §8| §a");
-            vip.setPrefix("§6VIP §8| §b");
+            vip.setPrefix("§6VIP §8| §5");
             member.setPrefix("§9Member §8| §e");
-            gm.setPrefix("§4GM §8| §c");
-
-            //Special ranks prefix/suffixes
-            owner.setPrefix("§aOwner §8| §4");
-            dev.setPrefix("§4Dev §8| §c");
+            memberPlus.setPrefix("§9Member+ §8| §5");
+            gm.setPrefix("§4GM §8| §a");
+            owner.setPrefix("§4Owner §8| §a");
+            dev.setPrefix("§4Dev §8| §a");
         } catch(NullPointerException ex) {
             Bukkit.getLogger().severe("Error while registering nnameplate/tab list prefixes - exiting...");
             return;
+        }
+
+        try {
+            mod.setSuffix(" §8| §5" + PluginUtils.chars[6]);
+            srmod.setSuffix(" §8| §5" + PluginUtils.chars[6]);
+            helper.setSuffix(" §8| §5" + PluginUtils.chars[6]);
+            gm.setSuffix(" §8| §5" + PluginUtils.chars[6]);
+            owner.setSuffix(" §8| §5" + PluginUtils.chars[8]);
+            dev.setSuffix(" §8| §5" + PluginUtils.chars[8]);
+        } catch(NullPointerException ex) {
+            Bukkit.getLogger().warning("Cannot register suffixes; continuing (hey, the suffixes are just asthetical anyways..)");
         }
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new FixThings(), 40l, 40l);
@@ -108,9 +126,10 @@ public class ScoreboardUtils {
     public static class FixThings implements Runnable {
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
-                if(!requiresRefresh(p)) {
+                if(!requiresRefresh(p))
                     continue;
-                }
+                if(p == null)
+                    continue;
                 removePlayer(p);
                 addPlayerToTeam(getScoreboardTeam(p), p);
             }
