@@ -18,16 +18,12 @@ public class Token implements CommandExecutor {
 
     private void help(CommandSender sender) {
         sender.sendMessage(ChatUtils.formattedCmd("Staff Commands", true));
-        sender.sendMessage(formattedHelpLine("add <player> <amount>", "Adds tokens to a player's account."));
-        sender.sendMessage(formattedHelpLine("remove <player> <amount>", "Takes tokens from a player's account."));
-        sender.sendMessage(formattedHelpLine("reset <player>", "Resets a player's tokens to 0."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/tokens add <player> <amount>", "Adds tokens to a player's account."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/tokens remove <player> <amount>", "Takes tokens from a player's account."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/tokens reset <player>", "Resets a player's tokens to 0."));
         sender.sendMessage(ChatUtils.formattedCmd("User Commands", true));
-        sender.sendMessage(formattedHelpLine("info", "Shows your tokens info."));
-        sender.sendMessage(formattedHelpLine("boosters", "Shows your available boosters you can use."));
-    }
-
-    private String formattedHelpLine(String cmd, String info) {
-        return ChatColor.YELLOW + "/tokens " + cmd + " " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + info;
+        sender.sendMessage(Help.getFormattedHelpMsg("/tokens info", "Shows your tokens info."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/tokens boosters", "Shows your available boosters you can use."));
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {

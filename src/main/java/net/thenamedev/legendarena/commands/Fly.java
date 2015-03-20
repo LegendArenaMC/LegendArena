@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.staff;
+package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.utils.Cooldown;
 import net.thenamedev.legendapi.utils.PluginUtils;

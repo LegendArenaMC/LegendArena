@@ -18,31 +18,18 @@ public class WarnBackend {
 
     public void run() {
         ChatUtils.broadcast(
-                ChatColor.RED + "Legend Arena " + ChatColor.GRAY
-                        + PluginUtils.chars[1] + ChatColor.BLUE
-                        + " Staff member " + ChatColor.RED
-                        + Rank.getFormattedName(staff) + ChatColor.BLUE
-                        + " warned player " + ChatColor.YELLOW
-                        + warnPlayer.getName() + ChatColor.BLUE
-                        + " for reason: " + ChatColor.LIGHT_PURPLE
-                        + reason,
-                Rank.Mod
+                String.format("%sLegend Arena %s%s%s Staff member %s%s%s warned player %s%s%s for reason: %s%s", ChatColor.RED, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.BLUE, ChatColor.RED, Rank.getFormattedName(staff), ChatColor.BLUE, ChatColor.YELLOW, warnPlayer.getName(), ChatColor.BLUE, ChatColor.LIGHT_PURPLE, reason),
+                Rank.Helper
         );
 
         warnPlayer.sendMessage("");
         warnPlayer.sendMessage("");
         warnPlayer.sendMessage(
-                ChatColor.RED + "-=+ [Warned] +=-"
-                        + '\n'
-                        + ChatColor.LIGHT_PURPLE + "Warned by staff member: " + ChatColor.RED + staff.getName()
-                        + '\n'
-                        + ChatColor.LIGHT_PURPLE + "Reason: " + ChatColor.RED + reason
-                        + '\n'
-                        + ChatColor.RED + "-=+ [Warned] +=-"
+                String.format("%s-=+ {Warned} +=-\n%sWarned by staff member: %s%s\n%sReason: %s%s\n%s-=+ [Warned] +=-", ChatColor.RED, ChatColor.LIGHT_PURPLE, ChatColor.RED, staff.getName(), ChatColor.LIGHT_PURPLE, ChatColor.RED, reason, ChatColor.RED)
         );
         warnPlayer.sendMessage("");
         warnPlayer.sendMessage("");
-        warnPlayer.playSound(warnPlayer.getLocation(), Sound.BLAZE_DEATH, 2, 1);
+        warnPlayer.playSound(warnPlayer.getLocation(), Sound.ANVIL_LAND, 2, 1);
     }
 
     public void setup(Player warned, Player staffMember, String reason) {

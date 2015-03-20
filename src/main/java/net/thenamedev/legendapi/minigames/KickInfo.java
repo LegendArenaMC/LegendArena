@@ -31,7 +31,16 @@ public interface KickInfo {
 
     /**
      * The reason of quitting. Can be "Kicked: [Optional reason]" if a quit, or "Quit: [Optional reason]" if it's a quit.
-     * @return The reason of quitting the game.
+     *
+     * This is recommended to be set, but not required. Examples of use includes:
+     *
+     * <ul>
+     *     <li>Quit server</li>
+     *     <li>Used quit command</li>
+     *     <li>Kicked by [staff] (for [reason])</li>
+     * </ul>
+     *
+     * @return The reason of quitting the game (empty string if not provided).
      */
     String reason();
 

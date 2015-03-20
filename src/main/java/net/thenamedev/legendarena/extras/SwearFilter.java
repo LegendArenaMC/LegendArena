@@ -12,7 +12,8 @@ public class SwearFilter {
             "bitch",
             "shit",
             "crap",
-            "whore"
+            "whore",
+            "ass"
     };
 
     public static String getFilteredMsg(String msg) {

@@ -1,12 +1,10 @@
-package net.thenamedev.legendarena.commands.staff;
+package net.thenamedev.legendarena.commands.backends;
 
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -18,28 +16,27 @@ import java.util.UUID;
 /**
  * @author ThePixelDev
  */
-public class Freeze implements CommandExecutor {
+public class Freeze {
 
     public static final ArrayList<UUID> frozenPlayers = new ArrayList<>();
 
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public static void run(CommandSender sender, String[] args) {
         if(!Rank.getRank(sender, Rank.Mod)) {
             Rank.noPermissions(sender, Rank.Mod);
-            return true;
+            return;
         }
-        if(args.length == 0) {
+        if(args.length < 2) {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /freeze <player>");
-            return true;
         } else {
-            if(Bukkit.getPlayer(args[0]) == null) {
+            if(Bukkit.getPlayer(args[1]) == null) {
                 sender.sendMessage(PluginUtils.msgWarning + ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
-                return true;
+                return;
             }
             if(Rank.getRank(Bukkit.getPlayer(args[0]), Rank.Mod)) {
                 sender.sendMessage(PluginUtils.msgNormal + "You must be fun at parties.");
-                return true;
+                return;
             }
-            if(!frozenPlayers.contains(Bukkit.getPlayer(args[0]).getUniqueId())) {
+            if(!frozenPlayers.contains(Bukkit.getPlayer(args[1]).getUniqueId())) {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(false);
                 p.setSleepingIgnored(true);
@@ -51,8 +48,9 @@ public class Freeze implements CommandExecutor {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100000, 100, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 130, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100000, 20, true));
-                sender.sendMessage(PluginUtils.msgNormal + "Froze player " + p.getName() + " successfully.");
                 frozenPlayers.add(p.getUniqueId());
+                p.sendMessage(PluginUtils.msgNormal + "You were frozen!");
+                sender.sendMessage(PluginUtils.msgNormal + "Froze player " + p.getName() + " successfully.");
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
@@ -74,10 +72,10 @@ public class Freeze implements CommandExecutor {
                     p.setAllowFlight(true);
                 p.setWalkSpeed((float) 0.2);
                 frozenPlayers.remove(p.getUniqueId());
-                sender.sendMessage(ChatColor.GREEN + "Unfroze player " + p.getName() + " successfully.");
+                p.sendMessage(PluginUtils.msgNormal + "You were unfrozen!");
+                sender.sendMessage(PluginUtils.msgNormal + "Unfroze player " + p.getName() + " successfully.");
             }
         }
-        return true;
     }
 
 }

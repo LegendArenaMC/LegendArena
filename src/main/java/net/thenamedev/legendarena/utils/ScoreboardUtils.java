@@ -18,7 +18,7 @@ import org.bukkit.scoreboard.Team;
 public class ScoreboardUtils {
 
     private static final ScoreboardManager manager = Bukkit.getScoreboardManager();
-    private static final Scoreboard sb = manager.getNewScoreboard();
+    public static final Scoreboard sb = manager.getNewScoreboard();
 
     //I trust you to not override these. Don't be evil.
 

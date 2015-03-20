@@ -2,7 +2,6 @@ package net.thenamedev.legendarena.minigame.buildmything;
 
 import net.thenamedev.legendapi.utils.PlayerUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -42,8 +41,6 @@ public class BMTUtils {
                 builder.sendMessage(PluginUtils.msgNormal + "You are now the BUILDER!");
                 builder.teleport(getBuilderLocation());
                 builder.playSound(builder.getLocation(), Sound.BLAZE_DEATH, 1, 1);
-                Title t = new Title(ChatColor.BLUE + "Your word:", ChatColor.DARK_PURPLE + word);
-                t.sendTo(builder);
             }).run();
         } else {
             //

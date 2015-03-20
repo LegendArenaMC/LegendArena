@@ -15,7 +15,7 @@ public class ServerPingListener implements Listener {
     @EventHandler
     public void onPingEvent(ServerListPingEvent ev) {
         String msg = MOTDRandomizer.randomize();
-        ev.setMotd(String.format("%s%s %s", PluginUtils.msgNormal, msg, ChatColor.YELLOW + "{PUBLIC ALPHA}"));
+        ev.setMotd(String.format("%s%s %s", PluginUtils.msgNormal, msg, ChatColor.YELLOW + "{" + MOTDRandomizer.getNotice().toUpperCase() + "}"));
     }
 
 }

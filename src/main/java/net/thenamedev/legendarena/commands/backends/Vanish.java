@@ -1,11 +1,9 @@
-package net.thenamedev.legendarena.commands.staff;
+package net.thenamedev.legendarena.commands.backends;
 
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,32 +17,32 @@ import java.util.UUID;
  *
  * @author ThePixelDev
  */
-public class Vanish implements CommandExecutor {
+public class Vanish {
 
     private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
     public static List<UUID> vanishedPlayers = new ArrayList<>();
 
-    public boolean onCommand(CommandSender sender, Command label, String labelString, String[] args) {
-        if(!Rank.getRank(sender, Rank.VIP)) {
-            Rank.noPermissions(sender, Rank.VIP);
-            return true;
+    public static void run(CommandSender sender, String[] args) {
+        if(!Rank.getRank(sender, Rank.Helper)) {
+            sender.sendMessage(Rank.noPermissions(Rank.Helper));
+            return;
         }
         if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {
             sender.sendMessage(cooldown.get(((Player) sender).getUniqueId()).getTimeRemaining());
-            return true;
+            return;
         }
         try {
-            if(args.length == 0 || args.length > 1) {
+            if(args.length == 1 || args.length > 2) {
                 vanishPlayer((Player) sender, false, null);
             } else {
                 if(!Rank.getRank(sender, Rank.SrMod)) {
                     vanishPlayer((Player) sender, false, null);
-                    return true;
+                    return;
                 }
                 if(Bukkit.getPlayer(args[0]) == null) {
-                    sender.sendMessage(PluginUtils.msgWarning + "That player (\"" + args[0] + "\") was not found!");
+                    sender.sendMessage(PluginUtils.msgWarning + "That player (\"" + args[1] + "\") was not found!");
                 } else {
-                    Player target = Bukkit.getPlayer(args[0]);
+                    Player target = Bukkit.getPlayer(args[1]);
                     if(Rank.getRank(target, Rank.SrMod)) {
                         sender.sendMessage(PluginUtils.msgWarning + "You must be fun at parties.");
                     }
@@ -57,10 +55,9 @@ public class Vanish implements CommandExecutor {
             ex.printStackTrace();
         }
         cooldown.put(((Player) sender).getUniqueId(), new Cooldown(10));
-        return true;
     }
 
-    private void vanishPlayer(Player target, boolean forced, Player sender) {
+    private static void vanishPlayer(Player target, boolean forced, Player sender) {
         if(forced) {
             if(vanishedPlayers.contains(target.getUniqueId())) {
                 target.sendMessage(PluginUtils.msgNormal + "You were unvanished by the staff member " + Rank.getFormattedName((Player) sender) + ChatColor.LIGHT_PURPLE + "!");

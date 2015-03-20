@@ -9,7 +9,7 @@ License
 The entire Legend Arena plugin source code is licensed under the ```Apache 2``` license. Any and all usage of this plugin
 should comply with said license.
 
-A copy of said license can be found in the [LICENSE.md](https://notabug.org/ThePixelDev/LegendArena/src/master/LICENSE.md) file.
+A copy of said license can be found in the [LICENSE.md](https://notabug.org/LegendArenaMC/LegendArena/src/master/LICENSE.md) file.
 
 Post Notes
 ====
@@ -23,3 +23,7 @@ While we are getting the frameworking done, debug mode will be permanently on. I
 - We are in public alpha as a minigames server
 - There is currently a core one-man team working on the entire plugin (on a laptop with 2G of RAM, mind you)
 - We are not fully launched, and thus we basically can mess things up and probably no one would care (again; public alpha is public alpha)
+
+========
+
+YOU NEED JAVA 1.8 TO USE THIS. So unless you want to do massive rewrites to support Java 6/7, you'll need Java 8. Sorry!

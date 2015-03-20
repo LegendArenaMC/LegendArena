@@ -3,6 +3,7 @@ package net.thenamedev.legendarena.listeners;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
  */
 public class WorldChangeListener implements Listener {
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onWorldChange(PlayerChangedWorldEvent ev) {
         if(!ev.getFrom().getName().equalsIgnoreCase("hub") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("hub")) return;
         if(Rank.getRank(ev.getPlayer()) == Rank.VIP) {

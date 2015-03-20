@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.commands.staff;
+package net.thenamedev.legendarena.commands.backends;
 
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
@@ -6,42 +6,40 @@ import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.warn.WarnBackend;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
  * @author TheNameMan
  */
-public class Warn implements CommandExecutor {
+public class Warn {
 
-    public boolean onCommand(CommandSender sender, Command label, String labelString, String[] args) {
+    public static void run(CommandSender sender, String[] args) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
-            return true; //Do nothing if it's not a player
+            return; //Do nothing if it's not a player
         }
-        if(!Rank.getRank(sender, Rank.Mod)) {
-            Rank.noPermissions(sender, Rank.Mod);
-            return true;
+        if(!Rank.getRank(sender, Rank.Helper)) {
+            sender.sendMessage(Rank.noPermissions(Rank.Helper));
+            return;
         }
-        if(args.length == 0) {
+        if(args.length == 1) {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
-        } else if(args.length == 1) {
+        } else if(args.length == 2) {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
         } else {
-            if(Bukkit.getPlayer(args[0]) == null) {
+            if(Bukkit.getPlayer(args[1]) == null) {
                 sender.sendMessage(ChatColor.RED + "That player was not found!");
             } else {
                 WarnBackend warn = new WarnBackend();
-                Player warnPlayer = Bukkit.getPlayer(args[0]);
+                Player warnPlayer = Bukkit.getPlayer(args[1]);
                 args[0] = "";
+                args[1] = "";
                 String reason = ChatUtils.formatCast(args);
                 warn.setup(warnPlayer, (Player) sender, reason);
                 warn.run();
             }
         }
-        return true;
     }
 
 }

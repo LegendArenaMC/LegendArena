@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.extras.hub.hideplayer;
 
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.commands.staff.Vanish;
+import net.thenamedev.legendarena.commands.backends.Vanish;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

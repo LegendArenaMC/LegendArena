@@ -1,7 +1,6 @@
 package net.thenamedev.legendapi.tokens;
 
 import lib.PatPeter.SQLibrary.Database;
-import lib.PatPeter.SQLibrary.H2;
 import lib.PatPeter.SQLibrary.SQLite;
 import net.milkbowl.vault.economy.Economy;
 import net.thenamedev.legendapi.exceptions.BoosterAlreadyActive;

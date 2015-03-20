@@ -22,6 +22,10 @@
             <name>Dakani Nexus Repo</name>
             <url>http://repo.dakanilabs.com/content/repositories/public</url>
         </repository>
+        <repository>
+            <id>confuser-repo</id>
+            <url>http://ci.frostcast.net/plugin/repository/everything</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -40,6 +44,11 @@
             <groupId>lib.PatPeter.SQLibrary</groupId>
             <artifactId>SQLibrary</artifactId>
             <version>7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.confuser</groupId>
+            <artifactId>BarAPI</artifactId>
+            <version>3.0</version>
         </dependency>
     </dependencies>
     <build>

@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.motd;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.Random;
@@ -9,6 +10,7 @@ import java.util.Random;
  */
 public class MOTDRandomizer {
 
+    private static String notice = "PUBLIC ALPHA";
     private static final String[] motdList = {
             "Can connect to server.", //joke of "Can't connect to server" when MC cannot ping a server.
             "Powered by magic.", //Let's be honest, who wouldn't love a server that's powered by MAGIC?
@@ -44,7 +46,7 @@ public class MOTDRandomizer {
             "I am Alpha and Omega, the begenning and end.", //reference to Fallout 3
             "igotthatreference.gif", //reference to "I Got That Reference" gifs
             "Wake up and smell the ashes.", //half life 2 reference
-            "Join us, would you kindly?", //bioshock reference
+            "Run, would you kindly?", //bioshock reference
             "Just remember to land on one foot.", //portal reference
             "Good that's still working.", //portal...
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
@@ -82,6 +84,15 @@ public class MOTDRandomizer {
 
     public static String[] getList() {
         return motdList;
+    }
+
+    public static String getNotice() {
+        return notice;
+    }
+
+    public static void setNotice(String newNotice) {
+        notice = newNotice.toUpperCase();
+        Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set("motdNotice", newNotice.toUpperCase());
     }
 
 }
