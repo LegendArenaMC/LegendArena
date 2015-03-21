@@ -22,8 +22,6 @@ import java.util.List;
  */
 public class MinigameMenu implements Listener {
 
-    private static InventoryManager invMan = new InventoryManager();
-
     public MinigameMenu(Plugin plugin) {
         //Lists
 
@@ -200,15 +198,15 @@ public class MinigameMenu implements Listener {
         });
 
         //Init stuffs
-        invMan.setInvName(ChatColor.GREEN + "Warper");
+        /*invMan.setInvName(ChatColor.GREEN + "Warper");
         invMan.setActions(actionList);
         invMan.setSlots(27);
         invMan.setInvItems(items);
-        invMan.init();
+        invMan.init();*/
     }
 
     public void show(Player p) {
-        invMan.show(p);
+        //invMan.show(p);
     }
 
     /*@EventHandler
