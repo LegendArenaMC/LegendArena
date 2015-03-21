@@ -40,10 +40,7 @@ public class Staff implements CommandExecutor {
                 else
                     Freeze.run(sender, args);
             } else if(args[0].equalsIgnoreCase("vanish")) {
-                if(args.length == 1)
-                    sender.sendMessage(Help.getFormattedHelpMsg("/staff vanish [player]", "Poof."));
-                else
-                    Vanish.run(sender, args);
+                Vanish.run(sender, args);
             } else if(args[0].equalsIgnoreCase("motd")) {
                 MOTDList.run(sender, args);
             } else if(args[0].equalsIgnoreCase("chat")) {

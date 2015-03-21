@@ -41,7 +41,6 @@ public class MOTDList {
             } else {
                 args[0] = "";
                 args[1] = "";
-                sender.sendMessage(PluginUtils.msgWarning + "BY USING THIS EXCESSIVELY, YOU RISK BEING REMOVED FROM THE TEAM - ALL USES OF THIS IS LOGGED!");
                 StaffChat.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args) + "\"", "MOTD Notice");
                 MOTDRandomizer.setNotice(ChatUtils.formatCast(args));
             }
