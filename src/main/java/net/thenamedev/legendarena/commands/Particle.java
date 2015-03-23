@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.utils.Cooldown;
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendarena.extras.menu.ParticleMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,8 +22,8 @@ public class Particle implements CommandExecutor {
     private HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!Rank.getRank(sender, Rank.MemberPlus)) {
-            Rank.noPermissions(sender, Rank.MemberPlus);
+        if(!OldRank.getRank(sender, OldRank.MemberPlus)) {
+            OldRank.noPermissions(sender, OldRank.MemberPlus);
             return true;
         }
         if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {

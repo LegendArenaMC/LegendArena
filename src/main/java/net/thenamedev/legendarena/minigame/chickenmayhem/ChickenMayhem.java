@@ -3,7 +3,7 @@ package net.thenamedev.legendarena.minigame.chickenmayhem;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.minigames.KickInfo;
 import net.thenamedev.legendapi.minigames.Minigame;
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.utils.OldRank;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -24,7 +24,7 @@ public class ChickenMayhem implements Minigame {
             return "Chicken Mayhem";
         }
 
-        public Rank minJoinRank() {
+        public OldRank minJoinRank() {
             return null;
         }
 

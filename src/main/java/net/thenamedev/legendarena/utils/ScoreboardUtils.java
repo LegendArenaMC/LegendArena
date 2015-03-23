@@ -2,6 +2,7 @@ package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,17 +23,20 @@ public class ScoreboardUtils {
 
     //I trust you to not override these. Don't be evil.
 
-    public static Team gm = null;
+    public static Team admin = null;
     public static Team mod = null;
     public static Team srmod = null;
     public static Team helper = null;
-    public static Team vip = null;
     public static Team memberPlus = null;
     public static Team member = null;
 
+    public static Team twitch = null;
+    public static Team youtube = null;
+    public static Team famous = null;
+
     //Special ranks
-    public static Team dev = null;
-    public static Team owner = null;
+    //public static Team dev = null;
+    public static Team founder = null;
 
     public static void addPlayerToTeam(Team t, Player p) {
         p.setScoreboard(sb);
@@ -47,19 +51,19 @@ public class ScoreboardUtils {
 
     public static boolean requiresRefresh(Player p) {
         if(getScoreboardTeam(p) == member)
-            return (member == null || !member.hasPlayer(p));
-        else if(p == null)
-            throw new MistakesWereMadeException("Player cannot be null");
+            return !member.hasPlayer(p);
+        //else if(p == null)
+            //throw new MistakesWereMadeException("Player cannot be null");
         //if(!p.isOnline())
             //throw new MistakesWereMadeException("Player is not online");
-        return getScoreboardTeam(p).hasPlayer(p);
+        return !getScoreboardTeam(p).hasPlayer(p);
     }
 
     @SuppressWarnings("ConstantConditions")
     public static void registerTeams() {
         //Init the teams
-        if(gm == null)
-            gm = sb.registerNewTeam("GMs");
+        if(admin == null)
+            admin = sb.registerNewTeam("Admins");
         if(srmod == null)
             srmod = sb.registerNewTeam("SrMod");
         if(mod == null)
@@ -68,42 +72,37 @@ public class ScoreboardUtils {
             helper = sb.registerNewTeam("Helpers");
         if(member == null)
             member = sb.registerNewTeam("Members");
-        if(vip == null)
-            vip = sb.registerNewTeam("VIPs");
+        if(famous == null)
+            famous = sb.registerNewTeam("Famous");
+        if(twitch == null)
+            twitch = sb.registerNewTeam("Twitch");
+        if(youtube == null)
+            youtube = sb.registerNewTeam("YouTube");
         if(memberPlus == null)
             memberPlus = sb.registerNewTeam("MemberPlus");
 
         //Special teams
-        if(dev == null)
-            dev = sb.registerNewTeam("Dev");
-        if(owner == null)
-            owner = sb.registerNewTeam("Owner");
+        //if(dev == null)
+            //dev = sb.registerNewTeam("Dev");
+        if(founder == null)
+            founder = sb.registerNewTeam("Founder");
 
         try {
             //Set prefixes
             mod.setPrefix("§5Mod §8| §a");
             srmod.setPrefix("§cSrMod §8 | §a");
             helper.setPrefix("§1Helper §8| §a");
-            vip.setPrefix("§6VIP §8| §5");
+            twitch.setPrefix("§6Streamer §8| §5");
+            youtube.setPrefix("§6YouTuber §8| §5");
+            famous.setPrefix("§6Famous §8| §5");
             member.setPrefix("§9Member §8| §e");
             memberPlus.setPrefix("§9Member+ §8| §5");
-            gm.setPrefix("§4GM §8| §a");
-            owner.setPrefix("§4Owner §8| §a");
-            dev.setPrefix("§4Dev §8| §a");
+            admin.setPrefix("§4Admin §8| §a");
+            founder.setPrefix("§4§lFounder §8| §a");
+            //dev.setPrefix("§4Dev §8| §a");
         } catch(NullPointerException ex) {
             Bukkit.getLogger().severe("Error while registering nnameplate/tab list prefixes - exiting...");
             return;
-        }
-
-        try {
-            mod.setSuffix(" §8| §5" + PluginUtils.chars[6]);
-            srmod.setSuffix(" §8| §5" + PluginUtils.chars[6]);
-            helper.setSuffix(" §8| §5" + PluginUtils.chars[6]);
-            gm.setSuffix(" §8| §5" + PluginUtils.chars[6]);
-            owner.setSuffix(" §8| §5" + PluginUtils.chars[8]);
-            dev.setSuffix(" §8| §5" + PluginUtils.chars[8]);
-        } catch(NullPointerException ex) {
-            Bukkit.getLogger().warning("Cannot register suffixes; continuing (hey, the suffixes are just asthetical anyways..)");
         }
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new FixThings(), 40l, 40l);
@@ -113,22 +112,23 @@ public class ScoreboardUtils {
     public static void removePlayer(Player p) {
         try {
             member.removePlayer(p);
-            vip.removePlayer(p);
+            famous.removePlayer(p);
+            twitch.removePlayer(p);
+            youtube.removePlayer(p);
             helper.removePlayer(p);
             mod.removePlayer(p);
-            gm.removePlayer(p);
-            dev.removePlayer(p);
-            owner.removePlayer(p);
+            admin.removePlayer(p);
+            //dev.removePlayer(p);
+            founder.removePlayer(p);
         } catch(NullPointerException ignore) {}
     }
 
-    // 10/10 best class name ever -IGN
     public static class FixThings implements Runnable {
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(!requiresRefresh(p))
                     continue;
-                if(p == null)
+                if(p == null || !p.isOnline())
                     continue;
                 removePlayer(p);
                 addPlayerToTeam(getScoreboardTeam(p), p);
@@ -143,20 +143,30 @@ public class ScoreboardUtils {
      */
     public static Team getScoreboardTeam(Player p) {
         Rank r = Rank.getRank(p);
-        if(r == Rank.Owner) {
-            return owner;
-        } else if(r == Rank.Dev) {
-            return dev;
-        } else if(r == Rank.GM) {
-            return gm;
-        } else if(r == Rank.Mod || r == Rank.SrMod) {
-            return mod;
-        } else if(r == Rank.Helper) {
-            return helper;
-        } else if(r == Rank.VIP) {
-            return vip;
-        } else {
-            return member;
+        switch(r) {
+            case FOUNDER:
+                return founder;
+            //case DEV:
+                //return dev;
+            case ADMIN:
+                return admin;
+            case MOD:
+                return mod;
+            case SRMOD:
+                return mod;
+            case HELPER:
+                return helper;
+            case FAMOUS:
+                return famous;
+            case TWITCH:
+                return twitch;
+            case YOUTUBE:
+                return youtube;
+            case MEMBERPLUS:
+                return memberPlus;
+
+            default:
+                return member;
         }
     }
 

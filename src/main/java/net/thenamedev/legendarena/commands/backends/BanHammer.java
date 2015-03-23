@@ -15,8 +15,8 @@ public class BanHammer {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return; //Do nothing if it's not a player
         }
-        if(!Rank.getRank(sender, Rank.Mod)) {
-            Rank.noPermissions(sender, Rank.Mod);
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return;
         }
         ((Player) sender).getInventory().addItem(BanHammerManager.getBanHammerItem(sender.getName()));

@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendarena.extras.banhammer.BanHammerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,9 +21,9 @@ public class BanHammerListener implements Listener {
         if(!(ev.getRightClicked() instanceof Player))
             return;
         Player target = (Player) ev.getRightClicked();
-        if(!Rank.getRank(staff, Rank.Mod))
+        if(!OldRank.getRank(staff, OldRank.Mod))
             return;
-        if(Rank.getRank(target, Rank.Mod)) {
+        if(OldRank.getRank(target, OldRank.Mod)) {
             staff.sendMessage(PluginUtils.msgNormal + "You must be fun at parties.");
             return;
         }

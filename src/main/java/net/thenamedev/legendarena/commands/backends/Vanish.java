@@ -23,8 +23,8 @@ public class Vanish {
     public static List<UUID> vanishedPlayers = new ArrayList<>();
 
     public static void run(CommandSender sender, String[] args) {
-        if(!Rank.getRank(sender, Rank.Helper)) {
-            sender.sendMessage(Rank.noPermissions(Rank.Helper));
+        if(!Rank.isRanked(sender, Rank.HELPER)) {
+            sender.sendMessage(Rank.noPermissions(Rank.HELPER));
             return;
         }
         if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {
@@ -35,7 +35,7 @@ public class Vanish {
             if(args.length == 1 || args.length > 2) {
                 vanishPlayer((Player) sender, false, null);
             } else {
-                if(!Rank.getRank(sender, Rank.SrMod)) {
+                if(!Rank.isRanked(sender, Rank.SRMOD)) {
                     vanishPlayer((Player) sender, false, null);
                     return;
                 }
@@ -43,7 +43,7 @@ public class Vanish {
                     sender.sendMessage(PluginUtils.msgWarning + "That player (\"" + args[1] + "\") was not found!");
                 } else {
                     Player target = Bukkit.getPlayer(args[1]);
-                    if(Rank.getRank(target, Rank.SrMod)) {
+                    if(Rank.isRanked(target, Rank.SRMOD)) {
                         sender.sendMessage(PluginUtils.msgWarning + "You must be fun at parties.");
                     }
                     vanishPlayer(target, true, (Player) sender);
@@ -60,11 +60,11 @@ public class Vanish {
     private static void vanishPlayer(Player target, boolean forced, Player sender) {
         if(forced) {
             if(vanishedPlayers.contains(target.getUniqueId())) {
-                target.sendMessage(PluginUtils.msgNormal + "You were unvanished by the staff member " + Rank.getFormattedName((Player) sender) + ChatColor.LIGHT_PURPLE + "!");
+                target.sendMessage(PluginUtils.msgNormal + "You were unvanished by the staff member " + OldRank.getFormattedName(sender) + ChatColor.LIGHT_PURPLE + "!");
                 vanishedPlayers.remove(target.getUniqueId());
                 sender.sendMessage(PluginUtils.msgNormal + "Unvanished " + target.getName() + ".");
             } else {
-                target.sendMessage(PluginUtils.msgNormal + "You were vanished by the staff member " + Rank.getFormattedName((Player) sender) + ChatColor.LIGHT_PURPLE + "!");
+                target.sendMessage(PluginUtils.msgNormal + "You were vanished by the staff member " + OldRank.getFormattedName(sender) + ChatColor.LIGHT_PURPLE + "!");
                 vanishedPlayers.add(target.getUniqueId());
                 sender.sendMessage(PluginUtils.msgNormal + "Vanished " + target.getName() + ".");
             }
@@ -73,12 +73,12 @@ public class Vanish {
                 if(vanishedPlayers.contains(sender.getUniqueId())) {
                     sender.sendMessage(PluginUtils.msgNormal + "You are now visible! *poof*");
                     vanishedPlayers.remove(target.getUniqueId());
-                    ChatUtils.broadcast(PluginUtils.msgNormal + "Player " + target.getName() + " has unvanished.", Rank.Mod);
+                    ChatUtils.broadcast(PluginUtils.msgNormal + "Player " + target.getName() + " has unvanished.", Rank.MOD);
 
                 } else {
                     sender.sendMessage(PluginUtils.msgNormal + "You are now invisible! *poof*");
                     vanishedPlayers.add(target.getUniqueId());
-                    ChatUtils.broadcast(PluginUtils.msgNormal + "Player " + target.getName() + " has vanished.", Rank.Mod);
+                    ChatUtils.broadcast(PluginUtils.msgNormal + "Player " + target.getName() + " has vanished.", Rank.MOD);
                 }
             }
         }

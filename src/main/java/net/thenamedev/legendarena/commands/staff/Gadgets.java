@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import org.bukkit.Bukkit;
@@ -22,8 +23,8 @@ public class Gadgets implements CommandExecutor {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return true; //Do nothing if it's not a player
         }
-        if(!Rank.getRank(sender, Rank.Mod)) {
-            Rank.noPermissions(sender, Rank.Mod);
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return true;
         }
         if(args.length == 0) {

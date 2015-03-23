@@ -3,7 +3,7 @@ package net.thenamedev.legendarena.commands;
 import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.utils.OldRank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -44,8 +44,8 @@ public class Token implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("version")) {
                 sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core v" + TokenCore.ver + ", codenamed \"" + TokenCore.verName + "\".");
             } else if(args[0].equalsIgnoreCase("add")) {
-                if(!Rank.getRank(sender, Rank.GM)) {
-                    Rank.noPermissions(sender, Rank.GM);
+                if(!OldRank.getRank(sender, OldRank.GM)) {
+                    OldRank.noPermissions(sender, OldRank.GM);
                     return true;
                 }
                 if(args.length <= 2) {
@@ -67,8 +67,8 @@ public class Token implements CommandExecutor {
                     TokenCore.addTokens(p, add, true, false);
                 }
             } else if(args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("take")) {
-                if(!Rank.getRank(sender, Rank.GM)) {
-                    Rank.noPermissions(sender, Rank.GM);
+                if(!OldRank.getRank(sender, OldRank.GM)) {
+                    OldRank.noPermissions(sender, OldRank.GM);
                     return true;
                 }
                 if(args.length <= 2) {
@@ -94,8 +94,8 @@ public class Token implements CommandExecutor {
                     TokenCore.removeTokens(p, remove, true, false);
                 }
             } else if(args[0].equalsIgnoreCase("reset")) {
-                if(!Rank.getRank(sender, Rank.GM)) {
-                    Rank.noPermissions(sender, Rank.GM);
+                if(!OldRank.getRank(sender, OldRank.GM)) {
+                    OldRank.noPermissions(sender, OldRank.GM);
                     return true;
                 }
                 if(args.length < 2) {
@@ -107,7 +107,7 @@ public class Token implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Resetting player's tokens...");
-                    TokenCore.resetTokens(p, true, Rank.getFormattedName((Player) sender));
+                    TokenCore.resetTokens(p, true, OldRank.getFormattedName((Player) sender));
                 }
             } else if(args[0].equalsIgnoreCase("boosters")) {
                 sender.sendMessage(ChatColor.YELLOW + "soon[tm]");

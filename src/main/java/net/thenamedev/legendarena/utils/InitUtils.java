@@ -1,19 +1,3 @@
-/*
-    Copyright 2015 Legend Arena Developers
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
- */
-
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.LegendAPI;
@@ -33,6 +17,7 @@ import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,7 +41,11 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading CONFIG", msgDebug));
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
-        MOTDRandomizer.setNotice(conf.getString("motdNotice"));
+        try {
+            MOTDRandomizer.setNotice(conf.getString("motdNotice"));
+        } catch(IOException e) {
+            //do nothing
+        }
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", msgDebug, LegendAPI.apiVersion, LegendAPI.versionName));
         if(LegendAPI.debug)
@@ -70,24 +59,24 @@ public class InitUtils {
         ScoreboardUtils.registerTeams();
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", msgDebug));
+        if(LegendAPI.debug)
+            ChatUtils.broadcast(String.format("%sLoading TOKENS BACKEND", msgDebug));
+        TokenCore.init();
+        Random r = new Random();
+        if(r.nextInt(200) == 100)
+            //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
+            ChatUtils.broadcast(String.format("%HTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
+        if(LegendAPI.debug)
+            ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
+        init = true;
+    }
+
+    private static void registerSchedulers() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HidePlayers(), 5l, 5l);
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading TOKENS BACKEND", msgDebug));
-        TokenCore.init();
-        if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", msgDebug, TokenCore.ver, TokenCore.verName));
-        else
-            ChatUtils.broadcast(String.format("%sUtilizing tokens core v%s, codenamed \"%s\".", msgDebug, TokenCore.ver, TokenCore.verName), Rank.Dev);
-        Random r = new Random();
-        if(r.nextInt(200) == 100)
-            if(LegendAPI.debug)
-                //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
-                ChatUtils.broadcast(String.format("%HTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
-        if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
-        init = true;
+            ChatUtils.broadcast(String.format("%sSchedulers loaded!", msgDebug));
     }
 
     private static void registerListeners() {
@@ -116,7 +105,7 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading BANHAMMERLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sDone loading listeners!", msgDebug));
+            ChatUtils.broadcast(String.format("%sListeners loaded!", msgDebug));
     }
 
     private static void registerCommands() {
@@ -124,45 +113,42 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading aliases...", msgDebug));
         registerAliases();
         // Commands
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /firework...", msgDebug));
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
-        if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading /fly...", msgDebug));
-        Bukkit.getPluginCommand("fly").setExecutor(new Fly()); //Toggle flight command [/fly]
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /help...", msgDebug));
+        Bukkit.getPluginCommand("help").setExecutor(new Help()); //Help command [/help]
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /gadgets...", msgDebug));
         Bukkit.getPluginCommand("gadgets").setExecutor(new Gadgets()); //Hub gadgets toggle command [/gadgets]
-        if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading /chat...", msgDebug));
-        Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/c, /channel, /sc]
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /particles...", msgDebug));
         Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles, /particle, /ps]
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /staff...", msgDebug));
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /tokens...", msgDebug));
         Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
-        if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sDone loading commands; adding aliases...", msgDebug));
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sDone loading main commands; now loading aliases...", msgDebug));
         // Aliases
-        Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /particles aliases...", msgDebug));
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sDone loading aliases!", msgDebug));
+            ChatUtils.broadcast(String.format("%sCommands loaded!", msgDebug));
     }
 
     private static void registerAliases() {
-        chat.add("say");
-        chat.add("sc");
-        chat.add("c");
         particles.add("particle");
         particles.add("ps");
+        if(LegendAPI.debug)
+            ChatUtils.broadcast(String.format("%sAliases loaded!", msgDebug));
     }
 
 }

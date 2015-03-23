@@ -17,8 +17,8 @@ public class GlobalMute {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return; //Do nothing if it's not a player
         }
-        if(!Rank.getRank(sender, Rank.Mod)) {
-            sender.sendMessage(Rank.noPermissions(Rank.Mod));
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return;
         }
         if(LegendArena.isChatMuted()) {

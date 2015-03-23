@@ -3,7 +3,7 @@ package net.thenamedev.legendapi.utils;
 import org.bukkit.ChatColor;
 
 /**
- * Code stolen from: http://hastebin.com/noqemohuda.java with slight changes
+ * Code stolen from: http://hastebin.com/noqemohuda.java with various changes
  */
 public class Cooldown {
 

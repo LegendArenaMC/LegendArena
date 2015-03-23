@@ -19,7 +19,7 @@ public class WarnBackend {
     public void run() {
         ChatUtils.broadcast(
                 String.format("%sLegend Arena %s%s%s Staff member %s%s%s warned player %s%s%s for reason: %s%s", ChatColor.RED, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.BLUE, ChatColor.RED, Rank.getFormattedName(staff), ChatColor.BLUE, ChatColor.YELLOW, warnPlayer.getName(), ChatColor.BLUE, ChatColor.LIGHT_PURPLE, reason),
-                Rank.Helper
+                Rank.HELPER
         );
 
         warnPlayer.sendMessage("");

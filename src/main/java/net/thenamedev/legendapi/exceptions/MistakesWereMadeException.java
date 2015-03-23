@@ -9,9 +9,13 @@ package net.thenamedev.legendapi.exceptions;
  */
 public class MistakesWereMadeException extends RuntimeException {
 
-    public MistakesWereMadeException() {super("mistakes.");}
+    public MistakesWereMadeException() {
+        super("mistakes.");
+    }
 
-    public MistakesWereMadeException(String msg) {super(msg);}
+    public MistakesWereMadeException(String msg) {
+        super(msg);
+    }
 
     /**
      * USE AT YOUR OWN DAMN RISK.

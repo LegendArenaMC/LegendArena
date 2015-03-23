@@ -3,6 +3,7 @@ package net.thenamedev.legendarena.extras.motd;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -14,18 +15,15 @@ public class MOTDRandomizer {
     private static final String[] motdList = {
             "Can connect to server.", //joke of "Can't connect to server" when MC cannot ping a server.
             "Powered by magic.", //Let's be honest, who wouldn't love a server that's powered by MAGIC?
-            "Not powered by Enjin.", //for whatever reasons, servers that use Enjin for their site have a "bad rep" - no idea how.
             "The cake is a lie.", //dare I explain this? DARE I?
             "May contain peanuts.", //joke on legal-mumbo-jumbo about disclaimers about if [x] food product is produced in a factory that handles nuts/peanuts/etc
             "Server is Optifine-compatible.", //just about every server is optifine compatible basically, yet some idiots decide to ask anyways
             "Does not support the Adventure Update.", //the Adventure Update is /Beta/ 1.8 - this is normal 1.8 we're on
-            "May contain reaction GIFs.", //this is obvious.
             "May contain Javert.", //reference to an Imgur joke
             "Has cookies.", //everyone likes cookies, right?
             "Dispenses fun.", //..is this seriously not obvious
             "Not seen on TV.", //joke of "As seen on TV"
             "Fun for the whole family!", //reference to TV commercials really
-            "Does not contain donkeys.", //I have idea why I added this.
             "Can resolve hostname.", //joke of "Can't resolve hostname" when MC is given an invalid hostname, e.g. "mc.hypixel.nt"
             "Has random MOTDs.", //reference to... well, this system.. I guess
             "Uses Bootstrap.", //reference to the site using a Bootstrap theme
@@ -56,11 +54,16 @@ public class MOTDRandomizer {
             "We no speak Americano", //reference to a song with that exact name
             "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
             "Out of sight and out of miiinddd..", //refence to "Au5 ft. Tasha Baxter - Snowblind"
+            "Stephen Kappa - On Top of the DansGame", //pun on "Stephen [Walking] - On Top of The [World]"
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
+            "#WhatDelay", //reference to Beam having a 3-sec delay (btw: https://beam.pro/ is the URL for beam)
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
+            "Not powered by Enjin.",
+            "Does not contain donkeys.",
+            "May contain reaction GIFs.",
             "<insert random MOTD here>",
             "Does not use System.out.println()",
             "*says no and nods head*",
@@ -71,9 +74,9 @@ public class MOTDRandomizer {
             "HEADSHOT!",
             "Contains jokes.",
             "Uses c0d3 sp3@k.",
-            "Kappa",
-            //"SourPls",
-            ""
+            "*hugs*",
+            "dinnerbone pls can i has hug",
+            "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?" //don't mind me just poking fun at the butthurt fanboys
     };
 
     public static String randomize() {
@@ -90,9 +93,10 @@ public class MOTDRandomizer {
         return notice;
     }
 
-    public static void setNotice(String newNotice) {
+    public static void setNotice(String newNotice) throws IOException {
         notice = newNotice.toUpperCase();
         Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set("motdNotice", newNotice.toUpperCase());
+        Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().save(Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().getCurrentPath());
     }
 
 }

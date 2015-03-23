@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.extras.hub.hideplayer;
 
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendarena.commands.backends.Vanish;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import org.bukkit.Bukkit;
@@ -15,7 +15,7 @@ public class HidePlayers implements Runnable {
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(HubWarper.hidePlayers.contains(p.getUniqueId())) {
                 for(Player h : Bukkit.getOnlinePlayers()) {
-                    if(Rank.getRank(h, Rank.Helper)) continue;
+                    if(OldRank.getRank(h, OldRank.Helper)) continue;
                     p.hidePlayer(h);
                 }
             } else {

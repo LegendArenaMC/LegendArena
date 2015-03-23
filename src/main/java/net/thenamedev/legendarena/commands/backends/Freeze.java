@@ -21,8 +21,8 @@ public class Freeze {
     public static final ArrayList<UUID> frozenPlayers = new ArrayList<>();
 
     public static void run(CommandSender sender, String[] args) {
-        if(!Rank.getRank(sender, Rank.Mod)) {
-            Rank.noPermissions(sender, Rank.Mod);
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return;
         }
         if(args.length < 2) {
@@ -32,7 +32,7 @@ public class Freeze {
                 sender.sendMessage(PluginUtils.msgWarning + ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                 return;
             }
-            if(Rank.getRank(Bukkit.getPlayer(args[0]), Rank.Mod)) {
+            if(Rank.isRanked(Bukkit.getPlayer(args[0]), Rank.MOD)) {
                 sender.sendMessage(PluginUtils.msgNormal + "You must be fun at parties.");
                 return;
             }
@@ -54,7 +54,7 @@ public class Freeze {
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 p.setCanPickupItems(true);
-                if(!Rank.getRank(p, Rank.GM)) p.setSleepingIgnored(false);
+                if(!Rank.isRanked(p, Rank.ADMIN)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {
                     if(LegendAPI.debug)
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove MINING FATIGUE.");
@@ -68,7 +68,7 @@ public class Freeze {
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove WEAKNESS.");
                 }
                 p.setMaximumNoDamageTicks(0);
-                if(Rank.getRank(p, Rank.Mod) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
+                if(Rank.isRanked(p, Rank.MOD) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
                     p.setAllowFlight(true);
                 p.setWalkSpeed((float) 0.2);
                 frozenPlayers.remove(p.getUniqueId());

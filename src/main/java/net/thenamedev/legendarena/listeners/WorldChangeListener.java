@@ -15,7 +15,7 @@ public class WorldChangeListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onWorldChange(PlayerChangedWorldEvent ev) {
         if(!ev.getFrom().getName().equalsIgnoreCase("hub") && !ev.getPlayer().getWorld().getName().equalsIgnoreCase("hub")) return;
-        if(Rank.getRank(ev.getPlayer()) == Rank.VIP) {
+        if(Rank.getRank(ev.getPlayer()) == Rank.YOUTUBE || Rank.getRank(ev.getPlayer()) == Rank.TWITCH || Rank.getRank(ev.getPlayer()) == Rank.FAMOUS) {
             ev.getPlayer().setAllowFlight(false);
             ev.getPlayer().setFlying(false);
         }

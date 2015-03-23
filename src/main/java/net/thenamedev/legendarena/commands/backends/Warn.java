@@ -2,7 +2,6 @@ package net.thenamedev.legendarena.commands.backends;
 
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.warn.WarnBackend;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,10 +17,6 @@ public class Warn {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return; //Do nothing if it's not a player
-        }
-        if(!Rank.getRank(sender, Rank.Helper)) {
-            sender.sendMessage(Rank.noPermissions(Rank.Helper));
-            return;
         }
         if(args.length == 1) {
             sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
