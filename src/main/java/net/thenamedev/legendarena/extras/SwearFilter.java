@@ -19,6 +19,7 @@ public class SwearFilter {
     public static String getFilteredMsg(String msg) {
         String parsedMsg = msg;
         for(String a : swearList) {
+            if(!msg.contains(a)) continue;
             parsedMsg = parsedMsg.replace(a, "****");
         }
         return parsedMsg;

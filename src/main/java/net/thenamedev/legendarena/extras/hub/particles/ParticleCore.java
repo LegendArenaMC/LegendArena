@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.hub.particles;
 
+import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendarena.extras.hub.particles.lib.ParticleEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,6 +20,7 @@ public class ParticleCore implements Runnable {
     private static final ArrayList<String> villager2Effects = new ArrayList<>();
     private static final ArrayList<String> critEffects = new ArrayList<>();
     private static final ArrayList<String> fireworkEffects = new ArrayList<>();
+    private static final ArrayList<String> colorfulEffects = new ArrayList<>();
 
     public void run() {
         for(final String s : heartEffects) {
@@ -125,11 +127,25 @@ public class ParticleCore implements Runnable {
             }
             ParticleEffect.FIREWORKS_SPARK.display(1, 1, 1, 1, 10, p.getLocation(), 30);
         }
+        for(final String s : colorfulEffects) {
+            Player p = Bukkit.getPlayerExact(s);
+            if(p == null) {
+                Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
+                    @Override
+                    public void run() {
+                        colorfulEffects.remove(s);
+                    }
+                });
+                continue;
+            }
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(15, 35, 30), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(50, 84, 45), p.getLocation(), 1);
+        }
     }
 
     public static void addType(String player, Type type) {
         removePlayer(player);
-        if(type == Type.HEART) {
+        /*if(type == Type.HEART) {
             heartEffects.add(player);
         } else if(type == Type.SLIME) {
             slimeEffects.add(player);
@@ -145,6 +161,36 @@ public class ParticleCore implements Runnable {
             critEffects.add(player);
         } else if(type == Type.FIREWORK) {
             fireworkEffects.add(player);
+        }*/
+        switch(type) {
+            case HEART:
+                heartEffects.add(player);
+                break;
+            case SLIME:
+                slimeEffects.add(player);
+                break;
+            case PORTAL:
+                portalEffects.add(player);
+                break;
+            case ENCHANT:
+                enchantEffects.add(player);
+                break;
+            case HAPPYVILL:
+                villagerEffects.add(player);
+                break;
+            case ANGRYVILL:
+                villager2Effects.add(player);
+                break;
+            case CRIT:
+                critEffects.add(player);
+                Bukkit.getPlayer(player).sendMessage(PluginUtils.msgWarning + "The particles you have active now (CRIT) is deprecated, and will be phased out in a future update. It is recommended you do not use this particle effect.");
+                break;
+            case FIREWORK:
+                fireworkEffects.add(player);
+                break;
+            case COLORFULEFFCTS:
+                colorfulEffects.add(player);
+                break;
         }
     }
 
@@ -180,7 +226,8 @@ public class ParticleCore implements Runnable {
         ANGRYVILL,
         ENCHANT,
         CRIT,
-        FIREWORK
+        FIREWORK,
+        COLORFULEFFCTS
     }
 
 }

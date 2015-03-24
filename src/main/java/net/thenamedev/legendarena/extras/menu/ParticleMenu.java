@@ -33,6 +33,7 @@ public class ParticleMenu implements Listener {
         ItemStack villager2 = MenuCore.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!");
         ItemStack crit = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Crit", ChatColor.BLUE + "Critical Hit particles. Yay!");
         ItemStack fw = MenuCore.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!");
+        ItemStack coloEff = MenuCore.createItem(Material.FIREWORK, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!");
 
         ItemStack off = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.");
 
@@ -44,6 +45,7 @@ public class ParticleMenu implements Listener {
         inv.setItem(5, villager2);
         inv.setItem(6, crit);
         inv.setItem(7, fw);
+        inv.setItem(8, coloEff);
 
         inv.setItem(17, off);
 
@@ -107,7 +109,15 @@ public class ParticleMenu implements Listener {
                 p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "FIREWORK SPARK" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.FIREWORK);
                 e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
+            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Colourful")) {
+                e.setCancelled(true);
+                Player p = (Player) e.getWhoClicked();
+                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "COLOURFUL EFFECTS" + ChatColor.GREEN + " particles.");
+                ParticleCore.addType(p.getName(), Type.COLORFULEFFCTS);
+                e.getWhoClicked().closeInventory();
+            }
+
+            else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
                 e.setCancelled(true);
                 Player p = (Player) e.getWhoClicked();
                 p.sendMessage(ChatColor.GREEN + "Turned off particles. I feel sad now.");

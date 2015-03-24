@@ -51,7 +51,7 @@ public class LegendAPI extends JavaPlugin {
     //yes that is what I do with my spare time. make debug cat ascii art. dont question my logic ;-; -pixel
 
     public static boolean debug = true;
-    public static boolean extraDebug = false; //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
+    public static boolean extraDebug = true; //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
 
     public void onEnable() {
         //

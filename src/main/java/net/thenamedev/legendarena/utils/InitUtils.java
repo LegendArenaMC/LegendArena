@@ -4,11 +4,9 @@ import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.Gadgets;
 import net.thenamedev.legendarena.commands.staff.Staff;
-import net.thenamedev.legendarena.extras.hub.hideplayer.HidePlayers;
 import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
@@ -55,10 +53,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading LISTENERS", msgDebug));
         registerListeners();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading SCOREBOARD TEAMS", msgDebug));
-        ScoreboardUtils.registerTeams();
-        if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", msgDebug));
+        registerSchedulers();
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading TOKENS BACKEND", msgDebug));
         TokenCore.init();
@@ -74,34 +70,33 @@ public class InitUtils {
     private static void registerSchedulers() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HidePlayers(), 5l, 5l);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sSchedulers loaded!", msgDebug));
     }
 
     private static void registerListeners() {
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading SERVERPINGLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading HUBWARPER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading CHATLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading PLAYERMOVELISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading PLAYERJOINLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading STAFFCHAT...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading WORLDCHANGELISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.debug)
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading BANHAMMERLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)

@@ -28,11 +28,11 @@ public class Gadgets implements CommandExecutor {
             return true;
         }
         if(args.length == 0) {
-            if(HubWarper.exempt.contains(((Player) sender).getUniqueId())) {
-                HubWarper.exempt.remove(((Player) sender).getUniqueId());
+            if(HubWarper.isExempt(((Player) sender).getUniqueId())) {
+                HubWarper.toggleExemption(((Player) sender).getUniqueId());
                 sender.sendMessage(PluginUtils.msgNormal + "Removed from gadgets exempt list.");
             } else {
-                HubWarper.exempt.add(((Player) sender).getUniqueId());
+                HubWarper.toggleExemption(((Player) sender).getUniqueId());
                 sender.sendMessage(PluginUtils.msgNormal + "Added to gadgets exempt list.");
             }
         } else {
@@ -41,11 +41,11 @@ public class Gadgets implements CommandExecutor {
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 UUID u = p.getUniqueId();
-                if(HubWarper.exempt.contains(u)) {
-                    HubWarper.exempt.remove(u);
+                if(HubWarper.isExempt(u)) {
+                    HubWarper.toggleExemption(u);
                     sender.sendMessage(PluginUtils.msgNormal + "Removed player " + p.getName() + " from gadgets exemption list.");
                 } else {
-                    HubWarper.exempt.add(u);
+                    HubWarper.toggleExemption(u);
                     sender.sendMessage(PluginUtils.msgNormal + "Added player " + p.getName() + " to gadgets exemption list.");
                 }
             }

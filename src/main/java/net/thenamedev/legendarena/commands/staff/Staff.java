@@ -41,8 +41,6 @@ public class Staff implements CommandExecutor {
                     sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
                 else
                     Freeze.run(sender, args);
-            } else if(args[0].equalsIgnoreCase("vanish")) {
-                Vanish.run(sender, args);
             } else if(args[0].equalsIgnoreCase("motd")) {
                 MOTDList.run(sender, args);
             } else if(args[0].equalsIgnoreCase("chtmng")) {
@@ -63,7 +61,7 @@ public class Staff implements CommandExecutor {
                 }
             } else if(args[0].equalsIgnoreCase("banhammer")) {
                 BanHammer.run(sender);
-            } else if(args[0].equalsIgnoreCase("channel")) {
+            } else if(args[0].equalsIgnoreCase("chat")) {
                 Chat.run(sender, args);
             } else if(args[0].equalsIgnoreCase("fly")) {
                 Fly.run(sender, args);
@@ -101,7 +99,7 @@ public class Staff implements CommandExecutor {
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff vanish [player]", "Poof."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff fly", "Take to the skies and SOAR!"));
-                sender.sendMessage(Help.getFormattedHelpMsg("/staff channel", "Change your chat channels."));
+                sender.sendMessage(Help.getFormattedHelpMsg("/staff chat <channel> [msg]", "Change your chat channels."));
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [1/2] }.----");
                 break;
             case "2":

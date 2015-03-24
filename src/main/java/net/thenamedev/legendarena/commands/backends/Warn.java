@@ -18,23 +18,15 @@ public class Warn {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return; //Do nothing if it's not a player
         }
-        if(args.length == 1) {
-            sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
-        } else if(args.length == 2) {
-            sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
-        } else {
-            if(Bukkit.getPlayer(args[1]) == null) {
+        if(args.length == 1)
+            sender.sendMessage(PluginUtils.msgNormal + "Usage: /staff warn <player> <reason>");
+        else if(args.length == 2)
+            sender.sendMessage(PluginUtils.msgNormal + "Usage: /staff warn <player> <reason>");
+        else
+            if(Bukkit.getPlayer(args[1]) == null)
                 sender.sendMessage(ChatColor.RED + "That player was not found!");
-            } else {
-                WarnBackend warn = new WarnBackend();
-                Player warnPlayer = Bukkit.getPlayer(args[1]);
-                args[0] = "";
-                args[1] = "";
-                String reason = ChatUtils.formatCast(args);
-                warn.setup(warnPlayer, (Player) sender, reason);
-                warn.run();
-            }
-        }
+            else
+                new WarnBackend(Bukkit.getPlayer(args[1]), sender, ChatUtils.formatCast(args, 0, 1)).run();
     }
 
 }

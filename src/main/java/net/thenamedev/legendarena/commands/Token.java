@@ -1,9 +1,7 @@
 package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.tokens.TokenCore;
-import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,11 +16,11 @@ import org.bukkit.entity.Player;
 public class Token implements CommandExecutor {
 
     private void help(CommandSender sender) {
-        sender.sendMessage(ChatUtils.formattedCmd("Staff Commands", true));
+        sender.sendMessage(Help.getFormattedHeader("Staff Commands"));
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens add <player> <amount>", "Adds tokens to a player's account."));
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens remove <player> <amount>", "Takes tokens from a player's account."));
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens reset <player>", "Resets a player's tokens to 0."));
-        sender.sendMessage(ChatUtils.formattedCmd("User Commands", true));
+        sender.sendMessage(Help.getFormattedHeader("User Commands"));
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens info", "Shows your tokens info."));
     }
 
@@ -38,9 +36,8 @@ public class Token implements CommandExecutor {
             help(sender);
         } else {
             if(args[0].equalsIgnoreCase("info")) {
-                sender.sendMessage(ChatUtils.formattedCmd("Your Tokens Info", true));
+                sender.sendMessage(Help.getFormattedHeader("Your Tokens Info"));
                 sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + TokenCore.getTokens((Player) sender));
-                sender.sendMessage(ChatColor.YELLOW + "Booster " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " Coming soon" + PluginUtils.chars[6]);
             } else if(args[0].equalsIgnoreCase("version")) {
                 sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core v" + TokenCore.ver + ", codenamed \"" + TokenCore.verName + "\".");
             } else if(args[0].equalsIgnoreCase("add")) {

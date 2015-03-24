@@ -122,7 +122,7 @@ public enum Rank {
         Rank r = getRank(p);
         switch(r) {
             case FOUNDER:
-                return ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + p.getName();
+                return ChatUtils.randomRainbow(p.getName());
             case ADMIN:
                 return ChatColor.BLUE + p.getName();
             case SRMOD:

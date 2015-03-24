@@ -5,6 +5,7 @@ import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -12,31 +13,43 @@ import org.bukkit.entity.Player;
  */
 public class WarnBackend {
 
-    private Player warnPlayer;
-    private Player staff;
-    private String reason;
+    Player warnPlayer;
+
+    String formattedMsg = "";
+    String staffFormattedMsg = "";
+
+    public WarnBackend(Player warnPlayer, CommandSender staff, String reason) {
+        this.warnPlayer = warnPlayer;
+
+        staffFormattedMsg = String.format(
+                "%sStaff member %s has warned player %s for %s.",
+
+                PluginUtils.msgNormal,
+                Rank.getFormattedName((Player) staff) + ChatColor.LIGHT_PURPLE,
+                Rank.getFormattedName(warnPlayer) + ChatColor.LIGHT_PURPLE,
+                ChatColor.YELLOW + reason + ChatColor.LIGHT_PURPLE
+        );
+        formattedMsg = String.format(
+                "%sYou were warned by staff member %s for %s.",
+
+                PluginUtils.msgNormal,
+                Rank.getFormattedName((Player) staff) + ChatColor.LIGHT_PURPLE,
+                ChatColor.YELLOW + reason + ChatColor.LIGHT_PURPLE
+        );
+    }
 
     public void run() {
         ChatUtils.broadcast(
-                String.format("%sLegend Arena %s%s%s Staff member %s%s%s warned player %s%s%s for reason: %s%s", ChatColor.RED, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.BLUE, ChatColor.RED, Rank.getFormattedName(staff), ChatColor.BLUE, ChatColor.YELLOW, warnPlayer.getName(), ChatColor.BLUE, ChatColor.LIGHT_PURPLE, reason),
+                staffFormattedMsg,
                 Rank.HELPER
         );
 
-        warnPlayer.sendMessage("");
-        warnPlayer.sendMessage("");
-        warnPlayer.sendMessage(
-                String.format("%s-=+ {Warned} +=-\n%sWarned by staff member: %s%s\n%sReason: %s%s\n%s-=+ [Warned] +=-", ChatColor.RED, ChatColor.LIGHT_PURPLE, ChatColor.RED, staff.getName(), ChatColor.LIGHT_PURPLE, ChatColor.RED, reason, ChatColor.RED)
-        );
-        warnPlayer.sendMessage("");
-        warnPlayer.sendMessage("");
-        warnPlayer.playSound(warnPlayer.getLocation(), Sound.ANVIL_LAND, 2, 1);
-    }
-
-    public void setup(Player warned, Player staffMember, String reason) {
-        if(warned == null || staffMember == null || reason == null) throw new NullPointerException();
-        this.reason = reason;
-        warnPlayer = warned;
-        staff = staffMember;
+        warnPlayer.sendMessage(ChatColor.RED + "--  --");
+        warnPlayer.sendMessage(" ");
+        warnPlayer.sendMessage(formattedMsg);
+        warnPlayer.sendMessage(" ");
+        warnPlayer.sendMessage(ChatColor.RED + "--  --");
+        warnPlayer.playSound(warnPlayer.getLocation(), Sound.DONKEY_DEATH, 2, 2);
     }
 
 }

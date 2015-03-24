@@ -17,6 +17,7 @@ public class BanHammerManager {
     public static ItemStack getBanHammerItem(String playerName) {
         if(playerName == null)
             throw new NullPointerException();
+
         return MenuCore.createItem(Material.GOLD_SPADE, ChatColor.LIGHT_PURPLE + playerName + ChatColor.RED + "'s Ban Hammer", "Use with caution.");
     }
 

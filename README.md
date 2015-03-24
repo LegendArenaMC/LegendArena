@@ -18,11 +18,11 @@ I am aware the code isn't as neat as it could be; I will work on improving it, b
 
 //.\\\\
 
-While we are getting the frameworking done, debug mode will be permanently on. If you don't like it that way, remember:
+While we are getting the main API and such done, debug mode will be permanently on. If you don't like it that way, remember:
 
 - We are in public alpha as a minigames server
-- There is currently a core one-man team working on the entire plugin (on a laptop with 2G of RAM, mind you)
-- We are not fully launched, and thus we basically can mess things up and probably no one would care (again; public alpha is public alpha)
+- There is currently a core one-man team working on the entire plugin
+- We are not fully launched, and thus we basically can mess things up and almost no one would care (again; public alpha *is* public alpha)
 
 //.\\\\
 
