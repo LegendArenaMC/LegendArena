@@ -1,6 +1,6 @@
 package net.thenamedev.legendapi.minigames;
 
-import net.thenamedev.legendapi.utils.OldRank;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -61,7 +61,6 @@ public interface Minigame {
          * @return True if it's enabled, false otherwise
          */
         boolean isEnabled();
-
     }
 
     interface Info {
@@ -76,11 +75,10 @@ public interface Minigame {
          * Use null to signify "All players can join".
          * @return The minimum rank required to join, or null for no minimum rank (everyone can join)
          */
-        OldRank minJoinRank();
+        Rank minJoinRank();
 
         World getWorld();
 
         ArrayList<UUID> playersInGame();
-
     }
 }

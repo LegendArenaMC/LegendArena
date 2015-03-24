@@ -29,19 +29,21 @@ public class BMTUtils {
                 if(!(PlayerUtils.getPlayerMinigame(a.getUniqueId()) instanceof BuildMyThing)) continue;
                 a.sendMessage(PluginUtils.msgNormal + "The round is now over! The word was \"" + ChatColor.DARK_PURPLE + word + ChatColor.LIGHT_PURPLE + "\" ");
             }
-            ((Runnable) () -> {
-                builder.teleport(getMainLocation());
-                try {
-                    Thread.sleep(5000);
-                } catch(InterruptedException ex) {
-                    //do nothing
+            new Runnable() {
+                public void run() {
+                    builder.teleport(getMainLocation());
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException ex) {
+                        //do nothing
+                    }
+                    builder = getRandomPlayer();
+                    word = getRandomWord();
+                    builder.sendMessage(PluginUtils.msgNormal + "You are now the BUILDER!");
+                    builder.teleport(getBuilderLocation());
+                    builder.playSound(builder.getLocation(), Sound.BLAZE_DEATH, 1, 1);
                 }
-                builder = getRandomPlayer();
-                word = getRandomWord();
-                builder.sendMessage(PluginUtils.msgNormal + "You are now the BUILDER!");
-                builder.teleport(getBuilderLocation());
-                builder.playSound(builder.getLocation(), Sound.BLAZE_DEATH, 1, 1);
-            }).run();
+            }.run();
         } else {
             //
         }

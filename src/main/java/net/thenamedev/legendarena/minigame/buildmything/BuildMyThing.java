@@ -3,15 +3,13 @@ package net.thenamedev.legendarena.minigame.buildmything;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.minigames.KickInfo;
 import net.thenamedev.legendapi.minigames.Minigame;
-import net.thenamedev.legendapi.utils.OldRank;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-//import MinigameUtils;
 
 /**
  * Created on 3/4/2015
@@ -25,7 +23,7 @@ public class BuildMyThing implements Minigame {
             return "Build My Thing";
         }
 
-        public OldRank minJoinRank() {
+        public Rank minJoinRank() {
             return null;
         }
 

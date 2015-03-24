@@ -4,6 +4,7 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.OldRank;
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,11 +24,10 @@ public class Token implements CommandExecutor {
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens reset <player>", "Resets a player's tokens to 0."));
         sender.sendMessage(ChatUtils.formattedCmd("User Commands", true));
         sender.sendMessage(Help.getFormattedHelpMsg("/tokens info", "Shows your tokens info."));
-        sender.sendMessage(Help.getFormattedHelpMsg("/tokens boosters", "Shows your available boosters you can use."));
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!(sender instanceof  Player))
+        if(!(sender instanceof Player))
             return true;
         try {
             TokenCore.init(); //make sure the token core is indeed initalized
@@ -44,8 +44,8 @@ public class Token implements CommandExecutor {
             } else if(args[0].equalsIgnoreCase("version")) {
                 sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core v" + TokenCore.ver + ", codenamed \"" + TokenCore.verName + "\".");
             } else if(args[0].equalsIgnoreCase("add")) {
-                if(!OldRank.getRank(sender, OldRank.GM)) {
-                    OldRank.noPermissions(sender, OldRank.GM);
+                if(!Rank.isRanked(sender, Rank.ADMIN)) {
+                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return true;
                 }
                 if(args.length <= 2) {
@@ -67,8 +67,8 @@ public class Token implements CommandExecutor {
                     TokenCore.addTokens(p, add, true, false);
                 }
             } else if(args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("take")) {
-                if(!OldRank.getRank(sender, OldRank.GM)) {
-                    OldRank.noPermissions(sender, OldRank.GM);
+                if(!Rank.isRanked(sender, Rank.ADMIN)) {
+                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return true;
                 }
                 if(args.length <= 2) {
@@ -94,8 +94,8 @@ public class Token implements CommandExecutor {
                     TokenCore.removeTokens(p, remove, true, false);
                 }
             } else if(args[0].equalsIgnoreCase("reset")) {
-                if(!OldRank.getRank(sender, OldRank.GM)) {
-                    OldRank.noPermissions(sender, OldRank.GM);
+                if(!Rank.isRanked(sender, Rank.ADMIN)) {
+                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return true;
                 }
                 if(args.length < 2) {
@@ -107,10 +107,8 @@ public class Token implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Resetting player's tokens...");
-                    TokenCore.resetTokens(p, true, OldRank.getFormattedName((Player) sender));
+                    TokenCore.resetTokens(p, true, Rank.getFormattedName((Player) sender));
                 }
-            } else if(args[0].equalsIgnoreCase("boosters")) {
-                sender.sendMessage(ChatColor.YELLOW + "soon[tm]");
             }
 
             else {

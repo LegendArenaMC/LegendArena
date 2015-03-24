@@ -23,8 +23,6 @@ public class TokenCore {
     public static final String ver = "1.0";
     public static final String verName = "Magic Rainclouds";
 
-    private static final HashMap<UUID, Integer> boosters = new HashMap<>();
-
     public static void init() {
         if(init && econ != null)
             return; //silently exit as the economy field is already setup, and not null

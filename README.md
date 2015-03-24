@@ -26,5 +26,4 @@ While we are getting the frameworking done, debug mode will be permanently on. I
 
 //.\\\\
 
-YOU NEED JAVA 1.8 TO USE THIS. So unless you want to do massive rewrites to support Java 6, you'll need Java 8. Sorry!
-(please note: re-writing this to support Java 7 wouldn't be too bad, just quite a lot of files to go through)
+YOU NEED JAVA 7 TO USE THIS. So unless you want to do massive rewrites to support Java 6, you'll need Java 7. Sorry!
