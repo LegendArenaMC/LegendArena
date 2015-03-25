@@ -22,7 +22,7 @@ public class WarnBackend {
         this.warnPlayer = warnPlayer;
 
         staffFormattedMsg = String.format(
-                "%sStaff member %s has warned player %s for %s.",
+                "%sStaff member %s has warned player %s for \"%s\".",
 
                 PluginUtils.msgNormal,
                 Rank.getFormattedName((Player) staff) + ChatColor.LIGHT_PURPLE,
@@ -30,9 +30,9 @@ public class WarnBackend {
                 ChatColor.YELLOW + reason + ChatColor.LIGHT_PURPLE
         );
         formattedMsg = String.format(
-                "%sYou were warned by staff member %s for %s.",
+                "%sWarner: %s\n \nReason: %s",
 
-                PluginUtils.msgNormal,
+                ChatColor.LIGHT_PURPLE,
                 Rank.getFormattedName((Player) staff) + ChatColor.LIGHT_PURPLE,
                 ChatColor.YELLOW + reason + ChatColor.LIGHT_PURPLE
         );
@@ -44,12 +44,12 @@ public class WarnBackend {
                 Rank.HELPER
         );
 
-        warnPlayer.sendMessage(ChatColor.RED + "--  --");
+        warnPlayer.sendMessage(ChatColor.RED + "-- WARNING --");
         warnPlayer.sendMessage(" ");
         warnPlayer.sendMessage(formattedMsg);
         warnPlayer.sendMessage(" ");
-        warnPlayer.sendMessage(ChatColor.RED + "--  --");
-        warnPlayer.playSound(warnPlayer.getLocation(), Sound.DONKEY_DEATH, 2, 2);
+        warnPlayer.sendMessage(ChatColor.RED + "-- WARNING --");
+        warnPlayer.playSound(warnPlayer.getLocation(), Sound.ANVIL_LAND, 2, 2);
     }
 
 }

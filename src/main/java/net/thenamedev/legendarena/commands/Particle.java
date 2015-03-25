@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.commands;
 
 import net.thenamedev.legendapi.utils.Cooldown;
-import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.menu.ParticleMenu;
 import org.bukkit.Bukkit;

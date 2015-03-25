@@ -99,6 +99,10 @@ public class Token implements CommandExecutor {
                     sender.sendMessage(ChatColor.YELLOW + "/tokens reset <player> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes tokens from a player's account.");
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
+                    if(Rank.isRanked(p, Rank.SRMOD)) {
+                        sender.sendMessage(PluginUtils.msgWarning + "You must be fun at parties.");
+                        return true;
+                    }
                     if(p == null) {
                         sender.sendMessage(ChatColor.RED + "That player was not found!");
                         return true;

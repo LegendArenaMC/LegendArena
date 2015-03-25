@@ -19,10 +19,8 @@ public class Cooldown {
         return ((System.currentTimeMillis() - start) > seconds * 1000);
     }
 
-    private String remainingSeconds() {
-        long number = System.currentTimeMillis() - start;
-
-        return String.format("%.1f", seconds - (number / 1000.0));
+    public String remainingSeconds() {
+        return String.format("%.1f", seconds - ((System.currentTimeMillis() - start) / 1000.0));
     }
 
     public String getTimeRemaining() {

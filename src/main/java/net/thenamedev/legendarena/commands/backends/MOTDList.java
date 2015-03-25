@@ -45,11 +45,7 @@ public class MOTDList {
                 args[0] = "";
                 args[1] = "";
                 StaffChat.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args) + "\"", "MOTD Notice");
-                try {
-                    MOTDRandomizer.setNotice(ChatUtils.formatCast(args));
-                } catch(IOException ex) {
-                    sender.sendMessage(LegendAPI.debugCat + "Cannot save to config to save message: " + ex.getMessage());
-                }
+                MOTDRandomizer.setNotice(ChatUtils.formatCast(args));
             }
         } else if(args[1].equalsIgnoreCase("random")) {
             sender.sendMessage(PluginUtils.msgNormal + MOTDRandomizer.randomize());

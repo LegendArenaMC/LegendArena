@@ -188,4 +188,48 @@ public enum Rank {
         return null;
     }
 
+    public static String getFormattedName(String name, Rank rank) {
+        switch(rank) {
+            case FOUNDER:
+                return ChatUtils.randomRainbow(name);
+            case ADMIN:
+                return ChatColor.BLUE + name;
+            case SRMOD:
+                return ChatColor.BLUE + name;
+            case MOD:
+                return ChatColor.AQUA + name;
+            case HELPER:
+                return ChatColor.AQUA + name;
+            case TWITCH:
+                return ChatColor.DARK_PURPLE + name;
+            case YOUTUBE:
+                char[] nameChars = name.toCharArray();
+                String b = "";
+                int c = 0;
+                ChatColor color = ChatColor.RED;
+                for(char a : nameChars) {
+                    if(nameChars.length >= 12) {
+                        if(c == 4) {
+                            color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                        }
+                        c++;
+                    } else if(nameChars.length >= 8 && nameChars.length <= 11) {
+                        if(c == 2) {
+                            color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                        }
+                        c++;
+                    } else {
+                        color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                    }
+                    b = b + color + a;
+                }
+                return b;
+            case FAMOUS:
+                return ChatColor.GOLD + name;
+            case MEMBERPLUS:
+                return ChatColor.DARK_BLUE + name;
+            default:
+                return ChatColor.GRAY + name;
+        }
+    }
 }

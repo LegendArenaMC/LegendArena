@@ -5,6 +5,7 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendarena.commands.*;
+import net.thenamedev.legendarena.commands.staff.Dev;
 import net.thenamedev.legendarena.commands.staff.Gadgets;
 import net.thenamedev.legendarena.commands.staff.Staff;
 import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
@@ -39,11 +40,9 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading CONFIG", msgDebug));
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
-        try {
-            MOTDRandomizer.setNotice(conf.getString("motdNotice"));
-        } catch(IOException e) {
-            //do nothing
-        }
+        MOTDRandomizer.setNotice(conf.getString("motdNotice"));
+        if(conf.getBoolean("liveServer"))
+            LegendAPI.extraDebug = false;
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", msgDebug, LegendAPI.apiVersion, LegendAPI.versionName));
         if(LegendAPI.debug)
@@ -123,6 +122,9 @@ public class InitUtils {
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
+        Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /staff...", msgDebug));
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]

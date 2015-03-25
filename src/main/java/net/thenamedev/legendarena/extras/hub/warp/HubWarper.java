@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class HubWarper implements Listener {
     public static final List<UUID> hidePlayersHolding = new ArrayList<>();
 
     public static void toggleExemption(UUID p) {
-        if(exempt.contains(p))
+        if(isExempt(p))
             exempt.remove(p);
         else
             exempt.add(p);
@@ -73,6 +75,7 @@ public class HubWarper implements Listener {
                 p.getInventory().clear();
                 //p.getInventory().setItem(3, getWarper());
                 p.getInventory().setItem(4, getSoonTM());
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 1, true));
             }
         }
 

@@ -32,19 +32,17 @@ public class Freeze {
                 sender.sendMessage(PluginUtils.msgWarning + ChatColor.RED + "The player \"" + ChatColor.YELLOW + args[0] + ChatColor.RED + "\" was not found!");
                 return;
             }
-            if(Rank.isRanked(Bukkit.getPlayer(args[0]), Rank.MOD)) {
+            if(Rank.isRanked(Bukkit.getPlayer(args[1]), Rank.MOD) && (args.length <= 2 || !args[2].equals("--FORCE"))) {
                 sender.sendMessage(PluginUtils.msgNormal + "You must be fun at parties.");
                 return;
             }
             if(!frozenPlayers.contains(Bukkit.getPlayer(args[1]).getUniqueId())) {
-                Player p = Bukkit.getPlayer(args[0]);
+                Player p = Bukkit.getPlayer(args[1]);
                 p.setCanPickupItems(false);
-                p.setSleepingIgnored(true);
-                p.setMaximumNoDamageTicks(40);
+                p.setMaximumNoDamageTicks(4000);
                 p.setAllowFlight(false);
-                p.resetMaxHealth();
                 p.setFlying(false);
-                p.setWalkSpeed((float) 0.0);
+                p.setWalkSpeed((float) 0);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100000, 100, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 130, true));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100000, 20, true));
@@ -52,7 +50,7 @@ public class Freeze {
                 p.sendMessage(PluginUtils.msgNormal + "You were frozen!");
                 sender.sendMessage(PluginUtils.msgNormal + "Froze player " + p.getName() + " successfully.");
             } else {
-                Player p = Bukkit.getPlayer(args[0]);
+                Player p = Bukkit.getPlayer(args[1]);
                 p.setCanPickupItems(true);
                 if(!Rank.isRanked(p, Rank.ADMIN)) p.setSleepingIgnored(false);
                 try { p.removePotionEffect(PotionEffectType.SLOW_DIGGING); } catch (Exception ignore) {
@@ -68,8 +66,6 @@ public class Freeze {
                         sender.sendMessage(PluginUtils.msgDebug + "Could not remove WEAKNESS.");
                 }
                 p.setMaximumNoDamageTicks(0);
-                if(Rank.isRanked(p, Rank.MOD) || (p.getWorld().getName().equalsIgnoreCase("plotworld") || p.getWorld().getName().equalsIgnoreCase("freebuild")))
-                    p.setAllowFlight(true);
                 p.setWalkSpeed((float) 0.2);
                 frozenPlayers.remove(p.getUniqueId());
                 p.sendMessage(PluginUtils.msgNormal + "You were unfrozen!");

@@ -19,9 +19,9 @@ public class Warn {
             return; //Do nothing if it's not a player
         }
         if(args.length == 1)
-            sender.sendMessage(PluginUtils.msgNormal + "Usage: /staff warn <player> <reason>");
+            sender.sendMessage(PluginUtils.msgNormal + "Usage: /warn <player> <reason>");
         else if(args.length == 2)
-            sender.sendMessage(PluginUtils.msgNormal + "Usage: /staff warn <player> <reason>");
+            new WarnBackend(Bukkit.getPlayer(args[1]), sender, "Rule violation").run();
         else
             if(Bukkit.getPlayer(args[1]) == null)
                 sender.sendMessage(ChatColor.RED + "That player was not found!");

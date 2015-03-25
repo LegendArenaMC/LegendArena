@@ -1,7 +1,7 @@
-[Legend Arena](http://thenamedev.net/legendarena/)
-====
+# [Legend Arena](http://thenamedev.net/legendarena/)
 
-If you wish to help us get Legend Arena done faster, feel free to submit a pull request.
+The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
+We have decided to open source the plugin in order to allow people to help us out.
 
 License
 ----
@@ -11,19 +11,11 @@ must comply with said license.
 
 A copy of said license can be found in the [LICENSE.md](https://notabug.org/LegendArenaMC/LegendArena/src/master/LICENSE.md) file.
 
-Post Notes
+Notes
 ====
 
 I am aware the code isn't as neat as it could be; I will work on improving it, but for now it will (sadly) have to be this way. Sorry!
 
 //.\\\\
 
-While we are getting the main API and such done, debug mode will be permanently on. If you don't like it that way, remember:
-
-- We are in public alpha as a minigames server
-- There is currently a core one-man team working on the entire plugin
-- We are not fully launched, and thus we basically can mess things up and almost no one would care (again; public alpha *is* public alpha)
-
-//.\\\\
-
-YOU NEED JAVA 7 TO USE THIS. So unless you want to do massive rewrites to support Java 6, you'll need Java 7. Sorry!
+YOU NEED (AT MINIMUM) JAVA 7 TO USE THIS. So unless you want to do rewrites to support Java 6, you'll need Java 7. Sorry!

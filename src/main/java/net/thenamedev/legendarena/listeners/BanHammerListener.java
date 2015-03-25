@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendapi.utils.OldRank;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.banhammer.BanHammerManager;
 import org.bukkit.entity.Player;

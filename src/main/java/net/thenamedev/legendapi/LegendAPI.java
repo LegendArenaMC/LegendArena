@@ -26,32 +26,17 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class LegendAPI extends JavaPlugin {
 
-    public static final String apiVersion = "1.1";
-    public static final String versionName = "Magic Rainclouds";
+    public static final String apiVersion = "1.2";
+    public static final String versionName = "Hopeful Clouds";
 
     public static final String debugCat =
             ChatColor.BLUE +
-            "                      _                        \n" +
-            "                      \\`*-.                    \n" +
-            "                       )  _`-.                 \n" +
-            "                      .  : `. .                \n" +
-            "                      : _   '  \\               \n" +
-            "                      ; *` _.   `*-._          \n" +
-            "                      `-.-'          `-.       \n" +
-            "                        ;       `       `.     \n" +
-            "                        :.       .        \\    \n" +
-            "                        . \\  .   :   .-'   .   \n" +
-            "                        '  `+.;  ;  '      :   \n" +
-            "                        :  '  |    ;       ;-. \n" +
-            "                        ; '   : :`-:     _.`* ;\n" +
-            "               [bug] .*' /  .*' ; .*`- +'  `*' \n" +
-            "                     `*-*   `*-*  `*-*'        \n" +
-            "(pardon the semi-large ASCII art)\n\n" +
+            "<insert an ASCII cat here>\n" +
             ChatColor.RED;
     //yes that is what I do with my spare time. make debug cat ascii art. dont question my logic ;-; -pixel
 
     public static boolean debug = true;
-    public static boolean extraDebug = true; //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
+    public static boolean extraDebug = false; //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
 
     public void onEnable() {
         //
