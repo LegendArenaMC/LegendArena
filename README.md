@@ -1,4 +1,4 @@
-# [Legend Arena](http://thenamedev.net/legendarena/)
+# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://drone.io/github.com/TheNameDev/LegendArena/status.png)](https://drone.io/github.com/TheNameDev/LegendArena/latest)
 
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
@@ -9,7 +9,7 @@ License
 The entire Legend Arena plugin source code is licensed under the `MIT` license. Any and all usage of this plugin
 must comply with said license.
 
-A copy of said license can be found in the [LICENSE.md](https://notabug.org/LegendArenaMC/LegendArena/src/master/LICENSE.md) file.
+A copy of said license can be found in the [LICENSE.md](https://github.com/TheNameDev/LegendArena/blob/master/LICENSE.md) file.
 
 Notes
 ====
