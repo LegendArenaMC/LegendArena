@@ -51,6 +51,7 @@ public class MOTDRandomizer {
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
             "#WhatDelay", //reference to Beam having a 3-sec delay (btw: https://beam.pro/ is the URL for beam)
+            "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
