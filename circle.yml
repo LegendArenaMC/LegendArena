@@ -1,3 +1,7 @@
 test:
   override:
     - ./build.sh
+
+general:
+  artifacts:
+    - build/*
