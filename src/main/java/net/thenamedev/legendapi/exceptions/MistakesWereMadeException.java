@@ -1,8 +1,6 @@
 package net.thenamedev.legendapi.exceptions;
 
 /**
- * Never ask why this was made.. I was most likely drunk at the time of making this.
- *
  * Created on 3/3/2015
  *
  * @author ThePixelDev

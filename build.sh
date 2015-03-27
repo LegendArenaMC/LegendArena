@@ -4,4 +4,4 @@
 # (that is, if you aren't using CircleCI - if you are using CircleCI you should be all good)
 
 mkdir build
-mvn package | tee build/build.log && mv target/*.jar build/LegendArena-$CIRCLE_BUILD_NUM-$CIRCLE_SHA1.jar
+mvn package | tee build/build.log && mv target/*.jar build/LegendArena-Build-$CIRCLE_BUILD_NUM.jar

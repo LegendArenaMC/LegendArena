@@ -1,60 +1,27 @@
-/*
-    Copyright 2015 Legend Arena Developers
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
- */
-
 package net.thenamedev.legendapi;
 
+import net.thenamedev.legendapi.utils.DebugInfo;
 import org.bukkit.ChatColor;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Created on 3/4/2015
  *
  * @author ThePixelDev
  */
-public class LegendAPI extends JavaPlugin {
+public class LegendAPI {
 
     public static final String apiVersion = "1.2";
     public static final String versionName = "Hopeful Clouds";
 
+    @Deprecated
     public static final String debugCat =
             ChatColor.BLUE +
             "<insert an ASCII cat here>\n" +
             ChatColor.RED;
-    //yes that is what I do with my spare time. make debug cat ascii art. dont question my logic ;-; -pixel
 
-    public static boolean debug = true;
-    public static boolean extraDebug = false; //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
+    public static final DebugInfo debugInfo = new DebugInfo();
 
-    public void onEnable() {
-        //
-    }
-
-    public void onDisable() {
-        //
-    }
-
-    /**
-     * Just throws a NullPointerException with the message "I FOUND THE UNDEFINED FUNCTION". That's it.
-     *
-     * No really, that's all this does.<br><br>
-     *
-     * and yes was stupidly drunk when making this
-     */
-    public static void undefined() {
-        throw new NullPointerException("I FOUND THE UNDEFINED FUNCTION");
-    }
+    public static boolean debug = debugInfo.isDebugOn();
+    public static boolean extraDebug = debugInfo.isExtraDebugOn(); //this exact mode, can be VERY, VERY, VERY spammy. Only use this if you need it - please.
 
 }

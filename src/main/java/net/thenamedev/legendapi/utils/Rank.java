@@ -2,7 +2,6 @@ package net.thenamedev.legendapi.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -47,6 +46,10 @@ public enum Rank {
      * Famous rank (eqivilant to VIP in the previous rank system)
      */
     FAMOUS,
+    /**
+     * Catch-all rank for the above ranks (YouTube, Twitch and Famous).
+     */
+    VIP,
 
     //The above ranks are not in any particular order; they're basically the same with just different prefixes.
 
@@ -65,16 +68,31 @@ public enum Rank {
      * @return If the player is ranked after all (true) or not (false)
      */
     public static boolean isRanked(CommandSender p, Rank r) {
-        if((p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms")) && p.isOp() && r == FOUNDER) return true;
-        else if(p.hasPermission("legendarena.rank.admin") && r == ADMIN) return true;
-        else if(p.hasPermission("legendarena.rank.srmod") && r == SRMOD) return true;
-        else if(p.hasPermission("legendarena.rank.mod") && r == MOD) return true;
-        else if(p.hasPermission("legendarena.rank.helper") && r == HELPER) return true;
-        else if(p.hasPermission("legendarena.rank.twitch") && r == TWITCH) return true;
-        else if(p.hasPermission("legendarena.rank.youtube") && r == YOUTUBE) return true;
-        else if(p.hasPermission("legendarena.rank.famous") && r == FAMOUS) return true;
-        else if(p.hasPermission("legendarena.rank.memberplus") && r == MEMBERPLUS) return true;
-        else return false;
+        switch(r) {
+            case FOUNDER:
+                return (p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms"));
+            case ADMIN:
+                return p.hasPermission("legendarena.rank.admin");
+            case SRMOD:
+                return p.hasPermission("legendarena.rank.srmod");
+            case MOD:
+                return p.hasPermission("legendarena.rank.mod");
+            case HELPER:
+                return p.hasPermission("legendarena.rank.helper");
+            case TWITCH:
+                return p.hasPermission("legendarena.rank.twitch");
+            case YOUTUBE:
+                return p.hasPermission("legendarena.rank.youtube");
+            case FAMOUS:
+                return p.hasPermission("legendarena.rank.famous");
+            case VIP:
+                return p.hasPermission("legendarena.rank.famous") || p.hasPermission("legendarena.rank.youtube") || p.hasPermission("legendarena.rank.twitch");
+            case MEMBERPLUS:
+                return p.hasPermission("legendarena.rank.memberplus");
+
+            default:
+                return false;
+        }
     }
 
     /**
@@ -82,8 +100,7 @@ public enum Rank {
      * @return The player's rank
      */
     public static Rank getRank(Player p) {
-        if(p instanceof ConsoleCommandSender) return ADMIN;
-        else if(p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms")) return FOUNDER;
+        if(p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms")) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
@@ -101,7 +118,26 @@ public enum Rank {
      * @return The prefix
      */
     public static String getRankPrefix(Rank r) {
-        if(r == FOUNDER) return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Founder";
+        switch(r) {
+            case FOUNDER:
+                return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Founder";
+            case ADMIN:
+                return ChatColor.RED + "Admin";
+            case SRMOD:
+                return ChatColor.RED + "SrMod";
+            case MOD:
+                return ChatColor.GREEN + "Mod";
+            case HELPER:
+                return ChatColor.GREEN + "Helper";
+            case TWITCH:
+                return ChatColor.GOLD + "Twitch";
+            case YOUTUBE:
+                return ChatColor.WHITE + "You" + ChatColor.RED + "Tuber";
+
+            default:
+                return ChatColor.GRAY + "Member";
+        }
+        /*if(r == FOUNDER) return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Founder";
         else if(r == ADMIN) return ChatColor.RED + "Admin";
         else if(r == SRMOD) return ChatColor.RED + "SrMod";
         else if(r == MOD) return ChatColor.GREEN + "Mod";
@@ -110,7 +146,7 @@ public enum Rank {
         else if(r == YOUTUBE) return ChatColor.GOLD + "YouTuber";
         else if(r == FAMOUS) return ChatColor.GOLD + "Famous";
         else if(r == MEMBERPLUS) return ChatColor.BLUE + "Member+";
-        else return ChatColor.GRAY + "Member";
+        else return ChatColor.GRAY + "Member";*/
     }
 
     /**
