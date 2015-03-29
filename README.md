@@ -1,4 +1,4 @@
-# [Legend Arena](http://thenamedev.net/legendarena/) 
+# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/badge/icon)](https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/)
 
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.

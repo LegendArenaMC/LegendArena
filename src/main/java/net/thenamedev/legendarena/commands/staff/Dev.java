@@ -8,9 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-/**
- * Created by thepixeldev on 3/24/15.
- */
 public class Dev implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -35,6 +32,7 @@ public class Dev implements CommandExecutor {
             ChatUtils.broadcast(" ");
             ChatUtils.broadcast(" ");
             ChatUtils.broadcast("              your head");
+            // don't ask. just don't.
         } else if(args[0].equals("TEAPOT")) {
             if(!Rank.isRanked(sender, Rank.FOUNDER)) {
                 return true;

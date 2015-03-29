@@ -1,84 +1,192 @@
 package net.thenamedev.legendarena.minigame.chickenmayhem;
 
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.minigames.KickInfo;
-import net.thenamedev.legendapi.minigames.Minigame;
+import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 /**
- * Created on 3/2/2015
+ * Chicken Mayhem - A minigame in which breaking blocks spawns chickens (purely for asthetical reasons).<br><br>
+ *
+ * The player with the most blocks broken at the end wins.
  * @author ThePixelDev
  */
-public class ChickenMayhem implements Minigame {
+public class ChickenMayhem implements Listener {
 
-    private static ArrayList<UUID> players = new ArrayList<>();
+    private static boolean isRunning = false;
+    private static List<UUID> players = new ArrayList<>();
+    private static HashMap<UUID, Integer> blocksBroken = new HashMap<>();
 
-    private Info info = new Info() {
-        public String name() {
-            return "Chicken Mayhem";
-        }
+    public static boolean isRunning() {
+        return isRunning;
+    }
 
-        public Rank minJoinRank() {
-            return null;
-        }
-
-        public World getWorld() {
-            return Bukkit.getWorld("chickenmayhem");
-        }
-
-        public ArrayList<UUID> playersInGame() {
-            return null;
-        }
-    };
-
-    private MinigameActions actions = new MinigameActions() {
-        private boolean enabled = true;
-        private boolean running = false;
-
-        public void joinGame(Player p) {
-            //
-        }
-
-        public void quitGame(KickInfo kick) {
-            if(kick.target() == null) throw new MistakesWereMadeException("Kick target cannot be null");
-            if(kick.isKick()) {
-                if(kick.kicker() == null) throw new MistakesWereMadeException("Kicker cannot be null");
-                //TODO: Broadcast kick message
-            } else {
-                //TODO: Add code stuff.. or something to that effect.. I guess.
+    public static void start() {
+        if(isRunning)
+            throw new MistakesWereMadeException("The minigame is already running!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
             }
-            //TODO: Remove player from game
+            p2.sendMessage(ChatColor.YELLOW + "Chicken Mayhem " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + "The game is starting! Good luck!");
         }
-
-        public void start(int startCool) {
-            if(running) return;
-        }
-
-        public void end(int endCool) {
-            if(!running) return;
-        }
-
-        public void toggleStatus() {
-            enabled = !enabled;
-        }
-
-        public boolean isEnabled() {
-            return enabled;
-        }
-    };
-
-    public Info info() {
-        return this.info;
+        isRunning = true;
     }
 
-    public MinigameActions actions() {
-        return this.actions;
+    public static void start(Player starter) {
+        if(isRunning)
+            throw new MistakesWereMadeException("The minigame is already running!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            p2.sendMessage(ChatColor.YELLOW + "Chicken Mayhem " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + "The game has been force started by " + Rank.getFormattedName(starter) + ChatColor.GREEN + " - good luck!");
+        }
+        isRunning = true;
     }
 
+    public static void end() {
+        if(!isRunning)
+            throw new MistakesWereMadeException("The minigame is not currently running!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            p2.sendMessage(ChatColor.YELLOW + "Chicken Mayhem " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + "The game has ended! The victor was " + Rank.getFormattedName(((Player) getLeadingPlayer()[0])) + ChatColor.GREEN + " with " + getLeadingPlayer()[1] + " blocks broken!");
+            p2.teleport(Bukkit.getWorld("hub").getSpawnLocation());
+        }
+        isRunning = false;
+        blocksBroken.clear();
+    }
+
+    public static void end(Player p) {
+        if(!isRunning)
+            throw new MistakesWereMadeException("The minigame is not currently running!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            p2.sendMessage(ChatColor.YELLOW + "Chicken Mayhem " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + "The game was force ended by " + Rank.getFormattedName(p) + ChatColor.GREEN + "! The victor was " + Rank.getFormattedName(((Player) getLeadingPlayer()[0])) + ChatColor.GREEN + " with " + getLeadingPlayer()[1] + " blocks broken!");
+            quit(p, true);
+        }
+        isRunning = false;
+        blocksBroken.clear();
+    }
+
+    public static void join(Player p) {
+        join(p, false);
+    }
+
+    public static void join(Player p, boolean silence) {
+        if(isRunning)
+            //TODO: Implement spectator system
+            return;
+        if(players.contains(p.getUniqueId()))
+            throw new MistakesWereMadeException("The player is already in the minigame!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            if(!silence)
+                p2.sendMessage(ChatColor.GRAY + "Join " + PluginUtils.chars[1] + " " + Rank.getFormattedName(p));
+        }
+        players.add(p.getUniqueId());
+        p.teleport(Bukkit.getWorld("chickenmayhem").getSpawnLocation());
+    }
+
+    public static void quit(Player p) {
+        quit(p, false);
+    }
+
+    public static void quit(Player p, boolean silence) {
+        if(!isRunning)
+            throw new MistakesWereMadeException("A player can't quit a non-running game!");
+        if(!players.contains(p.getUniqueId()))
+            throw new MistakesWereMadeException("The player isn't in the minigame!");
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            if(!silence)
+                p2.sendMessage(ChatColor.GRAY + "Quit " + PluginUtils.chars[1] + " " + Rank.getFormattedName(p));
+        }
+        p.teleport(Bukkit.getWorld("hub").getSpawnLocation());
+    }
+
+    /**
+     * Formatting for the returned Object[] is as follows:<br><br>
+     *
+     * <ul>
+     *     <li>The player (Player)</li>
+     *     <li>The amount of blocks broken (Integer)</li>
+     * </ul>
+     * @return The Object[] if the game is running (and the HashMap contains objects), null otherwise
+     */
+    public static Object[] getLeadingPlayer() {
+        if(!isRunning)
+            return null; //sanity check
+        HashMap<Integer, Player> leaders = new HashMap<>(); //yes, yes, yes, hacky workaround, but it works - if you know of a better way to do this, by all means, please submit a PR!
+        for(UUID u : blocksBroken.keySet())
+            leaders.put(blocksBroken.get(u), Bukkit.getPlayer(u)); //add to leaders scoreboard
+        for(Integer i : leaders.keySet())
+            return new Object[] { i, leaders.get(i) }; //return the first hit
+        return null; //fallback
+    }
+
+    @EventHandler
+    public void listenForBlockBreak(BlockBreakEvent ev) {
+        if(!isRunning)
+            return; //ignore the event
+        if(!ev.getPlayer().getWorld().equals(Bukkit.getWorld("chickenmayhem")))
+            return; //ignore the event
+        if(!players.contains(ev.getPlayer().getUniqueId()))
+            return; //ignore the event
+        Random random = new Random();
+        int randomInt = random.nextInt(5);
+        while(randomInt == 0)
+            randomInt = random.nextInt(5);
+        for(int i = randomInt; i > 0; i--)
+            ev.getBlock().getWorld().spawn(ev.getBlock().getLocation(), Chicken.class).setBaby();
+    }
+
+    @EventHandler
+    public void listenForChat(AsyncPlayerChatEvent ev) {
+        if(!isRunning)
+            return; //ignore the event
+        if(!ev.getPlayer().getWorld().equals(Bukkit.getWorld("chickenmayhem")))
+            return; //ignore the event
+        if(!players.contains(ev.getPlayer().getUniqueId()))
+            return; //ignore the event
+        ev.setCancelled(true);
+        for(UUID u : players) {
+            Player p2 = Bukkit.getPlayer(u);
+            if(p2 == null) {
+                players.remove(u);
+                continue;
+            }
+            p2.sendMessage(ChatUtils.getFormattedChat(ev.getMessage(), ev.getPlayer()));
+        }
+    }
 }

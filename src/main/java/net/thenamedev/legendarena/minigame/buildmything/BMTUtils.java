@@ -41,7 +41,7 @@ public class BMTUtils {
                     word = getRandomWord();
                     builder.sendMessage(PluginUtils.msgNormal + "You are now the BUILDER!");
                     builder.teleport(getBuilderLocation());
-                    builder.playSound(builder.getLocation(), Sound.BLAZE_DEATH, 1, 1);
+                    builder.playSound(builder.getLocation(), Sound.CHEST_OPEN, 1, 1);
                 }
             }.run();
         } else {

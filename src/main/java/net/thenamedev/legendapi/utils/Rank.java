@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.utils;
 
+import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -113,9 +114,9 @@ public enum Rank {
     }
 
     /**
-     * Gets the rank prefix (i.e. colored rank) for a rank.
+     * Gets the rank prefix (i.e. colored rank name) for a rank.
      * @param r The rank to get the prefix for
-     * @return The prefix
+     * @return The rank prefix requested
      */
     public static String getRankPrefix(Rank r) {
         switch(r) {
@@ -133,6 +134,12 @@ public enum Rank {
                 return ChatColor.GOLD + "Twitch";
             case YOUTUBE:
                 return ChatColor.WHITE + "You" + ChatColor.RED + "Tuber";
+            case FAMOUS:
+                return ChatColor.GOLD + "Famous";
+            case VIP:
+                throw new MistakesWereMadeException("..you're kidding me.. right?");
+            case MEMBERPLUS:
+                return ChatColor.BLUE + "Member+";
 
             default:
                 return ChatColor.GRAY + "Member";
@@ -268,4 +275,5 @@ public enum Rank {
                 return ChatColor.GRAY + name;
         }
     }
+
 }

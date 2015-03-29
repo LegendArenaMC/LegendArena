@@ -16,12 +16,12 @@ import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
+import static net.thenamedev.legendapi.utils.PluginUtils.msgWarning;
 
 /**
  * @author ThePixelDev
@@ -41,8 +41,11 @@ public class InitUtils {
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
-        if(conf.getBoolean("liveServer"))
+        if(conf.getBoolean("liveServer")) {
+            if(LegendAPI.extraDebug)
+                ChatUtils.broadcast(String.format("%sEXTRA DEBUG IS ON, YET THE LIVE SERVER FLAG IS SET TO TRUE - THIS SHOULD NOT HAPPEN!!!", msgWarning));
             LegendAPI.extraDebug = false;
+        }
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", msgDebug, LegendAPI.apiVersion, LegendAPI.versionName));
         if(LegendAPI.debug)
@@ -122,6 +125,9 @@ public class InitUtils {
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
+        Bukkit.getPluginCommand("chickenmayhem").setExecutor(new ChickenMayhemCmd());
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
         Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]

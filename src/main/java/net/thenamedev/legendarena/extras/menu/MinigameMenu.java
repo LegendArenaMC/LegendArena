@@ -59,7 +59,7 @@ public class MinigameMenu implements Listener {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
                 //noinspection RedundantCast
-                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://notabug.org/LegendArenaMC/LegendArena");
+                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://github.com/TheNameDev/LegendArena");
             }
 
             else { //failsafe
