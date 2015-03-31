@@ -3,7 +3,6 @@ package net.thenamedev.legendarena.extras.motd;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -14,11 +13,10 @@ public class MOTDRandomizer {
     private static String notice = "PUBLIC ALPHA";
     private static final String[] motdList = {
             "Can connect to server.", //joke of "Can't connect to server" when MC cannot ping a server.
-            "The cake is a lie.", //dare I explain this? DARE I?
+            "Can resolve hostname.", //joke of "Can't resolve hostname" when MC is given an invalid hostname, e.g. "mc.hypixel.nt"
             "Server is Optifine-compatible.", //just about every server is optifine compatible basically, yet some idiots decide to ask anyways
             "Does not support the Adventure Update.", //the Adventure Update is /Beta/ 1.8 - this is release 1.8 we're on
             "May contain Javert.", //reference to an Imgur joke
-            "Can resolve hostname.", //joke of "Can't resolve hostname" when MC is given an invalid hostname, e.g. "mc.hypixel.nt"
             "Has random MOTDs.", //reference to... well, this system.. I guess
             "OBJECTION!", //reference to Pheonix Wright
             "All your base are belong to us.", //You know what this is a reference to.
@@ -32,14 +30,15 @@ public class MOTDRandomizer {
             "//Made in Java", //reference to Minecraft being made in Java, and thus basically everything that uses Minecraft pretty much needs to be in Java, or re-invent the wheel. (also a reference to a code comment)
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
             "Uses Bukkit.getOnlinePlayers()", //reference to the Bukkit.getOnlinePlayers() function
-            "No, Intel is not a person.", //reference to idiots reading "Intel Inside" like "Intel" is a person (I have no idea why this would happen either, but hey, the saying "Make something idiot proof and nature will find a way to make a better idiot" stands true to this day...)
             "I am Alpha and Omega, the beginning and end.", //reference to Fallout 3
             "igotthatreference.gif", //reference to "I Got That Reference" gifs
             "Wake up and smell the ashes.", //half life 2 reference
-            "Not to imply that you have been sleeping on the job", //hl2..
+            "No one is more deserving of a rest", //hl2...
+            "Rise and shine, Mr. Freeman. Rise and shine.", //*yawn* hl2..
             "Run, would you kindly?", //bioshock (infinite?) reference
             "Just remember to land on one foot.", //portal reference
-            "Good that's still working.", //portal...
+            "The cake is a lie.", //portal...
+            "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
             ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //default ban message for a LOT of servers (and I mean a damn lot)
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
@@ -52,9 +51,16 @@ public class MOTDRandomizer {
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
             "#WhatDelay", //reference to Beam having a 3-sec delay (btw: https://beam.pro/ is the URL for beam)
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
+            "Uses `mvn package`.", //reference to how the plugin is [usually] built
+            "Uses Jenkins.", //reference to the jenkins setup
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
+            "i like magic",
+            "$ echo \"Hello, world!\"",
+            "\"When is HL3 released?\" In 3034- correction: 3035.",
+            "Hello, world!",
+            "No, Intel is not a person.",
             "Not powered by Enjin.",
             "Does not contain donkeys.",
             "Powered by magic.",

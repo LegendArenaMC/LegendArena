@@ -43,7 +43,7 @@ public class HubWarper implements Listener {
     }
 
     private static ItemStack getSoonTM() {
-        return MenuCore.createItem(Material.STAINED_GLASS_PANE, "Soon[tm]", "Soon[tm]");
+        return MenuCore.createItem(Material.STAINED_GLASS_PANE, "Soon[tm]", "User error; insert new user and press any key to continue.");
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -73,9 +73,9 @@ public class HubWarper implements Listener {
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
                 p.getInventory().clear();
-                //p.getInventory().setItem(3, getWarper());
-                p.getInventory().setItem(4, getSoonTM());
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 1, true));
+                p.getInventory().setItem(3, getWarper());
+                p.getInventory().setItem(5, getSoonTM());
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1, true));
             }
         }
 

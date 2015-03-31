@@ -28,7 +28,7 @@ public class MinigameMenu implements Listener {
         HashMap<Integer, ItemStack> items = new HashMap<>();
         //items.put(1, MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games"));
         //items.put(7, MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Chicken Mayhem"));
-        items.put(12, MenuCore.createItem(Material.SNOW_BALL, ChatColor.GREEN + "Plugin: Now FOSS!", ChatColor.YELLOW + "https://notabug.org/LegendArenaMC/LegendArena"));
+        items.put(12, MenuCore.createItem(Material.SNOW_BALL, ChatColor.GREEN + "Plugin: Now FOSS!", ChatColor.YELLOW + "https://github.com/TheNameDev/LegendArena"));
         items.put(14, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
         //items.put(25, MenuCore.createItem(Material.BRICK, ChatColor.GREEN + "Build My Thing"));
 
@@ -59,7 +59,7 @@ public class MinigameMenu implements Listener {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
                 //noinspection RedundantCast
-                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://github.com/TheNameDev/LegendArena");
+                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://github.com/TheNameDev/LegendArena\n" + ChatColor.BLUE + "Jenkins: " + ChatColor.BOLD + "https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/");
             }
 
             else { //failsafe

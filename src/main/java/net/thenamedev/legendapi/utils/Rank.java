@@ -144,16 +144,6 @@ public enum Rank {
             default:
                 return ChatColor.GRAY + "Member";
         }
-        /*if(r == FOUNDER) return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Founder";
-        else if(r == ADMIN) return ChatColor.RED + "Admin";
-        else if(r == SRMOD) return ChatColor.RED + "SrMod";
-        else if(r == MOD) return ChatColor.GREEN + "Mod";
-        else if(r == HELPER) return ChatColor.GREEN + "Helper";
-        else if(r == TWITCH) return ChatColor.GOLD + "Twitch";
-        else if(r == YOUTUBE) return ChatColor.GOLD + "YouTuber";
-        else if(r == FAMOUS) return ChatColor.GOLD + "Famous";
-        else if(r == MEMBERPLUS) return ChatColor.BLUE + "Member+";
-        else return ChatColor.GRAY + "Member";*/
     }
 
     /**
@@ -185,16 +175,17 @@ public enum Rank {
                     if(nameChars.length >= 12) {
                         if(c == 4) {
                             color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                            c = 0;
                         }
                         c++;
                     } else if(nameChars.length >= 8 && nameChars.length <= 11) {
                         if(c == 2) {
                             color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                            c = 0;
                         }
                         c++;
-                    } else {
+                    } else
                         color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
-                    }
                     b = b + color + a;
                 }
                 return b;
@@ -254,16 +245,17 @@ public enum Rank {
                     if(nameChars.length >= 12) {
                         if(c == 4) {
                             color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                            c = 0;
                         }
                         c++;
                     } else if(nameChars.length >= 8 && nameChars.length <= 11) {
                         if(c == 2) {
                             color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
+                            c = 0;
                         }
                         c++;
-                    } else {
+                    } else
                         color = (color == ChatColor.RED ? ChatColor.WHITE : ChatColor.RED);
-                    }
                     b = b + color + a;
                 }
                 return b;

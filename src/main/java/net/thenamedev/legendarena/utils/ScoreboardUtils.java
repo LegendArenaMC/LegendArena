@@ -1,0 +1,21 @@
+package net.thenamedev.legendarena.utils;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.*;
+
+/**
+ * Created on 3/30/15
+ *
+ * @author ThePixelDev
+ */
+public class ScoreboardUtils {
+
+    private static final ScoreboardManager manager = Bukkit.getScoreboardManager();
+    final Scoreboard board = manager.getNewScoreboard();
+
+    public static void registerPlayer(Player p) {
+        //
+    }
+
+}

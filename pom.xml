@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>LegendArena</groupId>
     <artifactId>LegendArena</artifactId>
-    <version>2.0A</version>
+    <version>DEV</version>
     <name>LegendArena</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

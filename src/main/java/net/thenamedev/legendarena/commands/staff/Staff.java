@@ -46,7 +46,7 @@ public class Staff implements CommandExecutor {
                     Freeze.run(sender, args);
             } else if (args[0].equalsIgnoreCase("motd")) {
                 MOTDList.run(sender, args);
-            } else if (args[0].equalsIgnoreCase("chtmng")) {
+            } else if (args[0].equalsIgnoreCase("chat")) {
                 if (args.length == 1) {
                     sender.sendMessage(ChatColor.LIGHT_PURPLE + "Chat Management suboptions:");
                     sender.sendMessage(ChatColor.YELLOW + "- CLEARCHAT [reason]");
@@ -64,8 +64,6 @@ public class Staff implements CommandExecutor {
                 }
             } else if (args[0].equalsIgnoreCase("banhammer")) {
                 BanHammer.run(sender);
-            } else if (args[0].equalsIgnoreCase("chat")) {
-                Chat.run(sender, args);
             } else if (args[0].equalsIgnoreCase("fly")) {
                 Fly.run(sender, args);
             } else if (args[0].equalsIgnoreCase("warn")) {
@@ -88,12 +86,11 @@ public class Staff implements CommandExecutor {
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff fly", "Take to the skies and SOAR!"));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff warn <player> [reason]", "Warns a player, with an optional reason."));
-                sender.sendMessage(Help.getFormattedHelpMsg("/staff chat <channel> [msg]", "Change your chat channels."));
+                sender.sendMessage(Help.getFormattedHelpMsg("/staff chat <various suboptions...>", "Chat managment tools."));
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [1/2] }.----");
                 break;
             case "2":
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [2/2] }.----");
-                sender.sendMessage(Help.getFormattedHelpMsg("/staff chtmng <various suboptions...>", "Chat managment tools."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff banhammer", "Receive the all-mighty ban hammer."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff motd [various suboptions...]", "MOTD-related info."));
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [2/2] }.----");

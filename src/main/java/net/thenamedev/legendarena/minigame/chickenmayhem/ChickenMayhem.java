@@ -4,6 +4,7 @@ import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Chicken;
@@ -26,6 +27,7 @@ public class ChickenMayhem implements Listener {
     private static boolean isRunning = false;
     private static List<UUID> players = new ArrayList<>();
     private static HashMap<UUID, Integer> blocksBroken = new HashMap<>();
+    private static Object[] leadingPlayer = { null, 0 };
 
     public static boolean isRunning() {
         return isRunning;
@@ -97,8 +99,7 @@ public class ChickenMayhem implements Listener {
 
     public static void join(Player p, boolean silence) {
         if(isRunning)
-            //TODO: Implement spectator system
-            return;
+            throw new MistakesWereMadeException("The minigame is currently running!");
         if(players.contains(p.getUniqueId()))
             throw new MistakesWereMadeException("The player is already in the minigame!");
         for(UUID u : players) {
@@ -110,8 +111,10 @@ public class ChickenMayhem implements Listener {
             if(!silence)
                 p2.sendMessage(ChatColor.GRAY + "Join " + PluginUtils.chars[1] + " " + Rank.getFormattedName(p));
         }
-        players.add(p.getUniqueId());
         p.teleport(Bukkit.getWorld("chickenmayhem").getSpawnLocation());
+        players.add(p.getUniqueId());
+        if(!HubWarper.isExempt(p.getUniqueId()))
+            HubWarper.toggleExemption(p.getUniqueId());
     }
 
     public static void quit(Player p) {
@@ -133,6 +136,9 @@ public class ChickenMayhem implements Listener {
                 p2.sendMessage(ChatColor.GRAY + "Quit " + PluginUtils.chars[1] + " " + Rank.getFormattedName(p));
         }
         p.teleport(Bukkit.getWorld("hub").getSpawnLocation());
+        players.remove(p.getUniqueId());
+        if(HubWarper.isExempt(p.getUniqueId()))
+            HubWarper.toggleExemption(p.getUniqueId());
     }
 
     /**

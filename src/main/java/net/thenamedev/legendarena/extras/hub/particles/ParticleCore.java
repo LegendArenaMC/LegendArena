@@ -22,6 +22,7 @@ public class ParticleCore implements Runnable {
     private static final ArrayList<String> fireworkEffects = new ArrayList<>();
     private static final ArrayList<String> colorfulEffects = new ArrayList<>();
 
+    @SuppressWarnings("deprecation")
     public void run() {
         for(final String s : heartEffects) {
             Player p = Bukkit.getPlayerExact(s);
@@ -138,30 +139,14 @@ public class ParticleCore implements Runnable {
                 });
                 continue;
             }
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(15, 35, 30), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(62, 100, 72), p.getLocation(), 1);
             ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(50, 84, 45), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(163, 210, 105), p.getLocation(), 1);
         }
     }
 
     public static void addType(String player, Type type) {
         removePlayer(player);
-        /*if(type == Type.HEART) {
-            heartEffects.add(player);
-        } else if(type == Type.SLIME) {
-            slimeEffects.add(player);
-        } else if(type == Type.PORTAL) {
-            portalEffects.add(player);
-        } else if(type == Type.ENCHANT) {
-            enchantEffects.add(player);
-        } else if(type == Type.HAPPYVILL) {
-            villagerEffects.add(player);
-        } else if(type == Type.ANGRYVILL) {
-            villager2Effects.add(player);
-        } else if(type == Type.CRIT) {
-            critEffects.add(player);
-        } else if(type == Type.FIREWORK) {
-            fireworkEffects.add(player);
-        }*/
         switch(type) {
             case HEART:
                 heartEffects.add(player);
@@ -202,7 +187,8 @@ public class ParticleCore implements Runnable {
                 || villagerEffects.contains(player)
                 || villager2Effects.contains(player)
                 || critEffects.contains(player)
-                || fireworkEffects.contains(player);
+                || fireworkEffects.contains(player)
+                || colorfulEffects.contains(player);
     }
 
     public static void removePlayer(String player) {

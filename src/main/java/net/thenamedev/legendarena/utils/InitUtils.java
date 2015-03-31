@@ -5,6 +5,7 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendarena.commands.*;
+import net.thenamedev.legendarena.commands.staff.Chat;
 import net.thenamedev.legendarena.commands.staff.Dev;
 import net.thenamedev.legendarena.commands.staff.Gadgets;
 import net.thenamedev.legendarena.commands.staff.Staff;
@@ -138,11 +139,17 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /tokens...", msgDebug));
         Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
         if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /chat...", msgDebug));
+        Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/chat, /c]
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sDone loading main commands; now loading aliases...", msgDebug));
         // Aliases
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /particles aliases...", msgDebug));
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /chat aliases...", msgDebug));
+        Bukkit.getPluginCommand("chat").setAliases(chat);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sCommands loaded!", msgDebug));
     }
@@ -150,6 +157,8 @@ public class InitUtils {
     private static void registerAliases() {
         particles.add("particle");
         particles.add("ps");
+        chat.add("c");
+        chat.add("sc");
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sAliases loaded!", msgDebug));
     }

@@ -34,7 +34,7 @@ public class BMTUtils {
                     builder.teleport(getMainLocation());
                     try {
                         Thread.sleep(5000);
-                    } catch (InterruptedException ex) {
+                    } catch(InterruptedException ex) {
                         //do nothing
                     }
                     builder = getRandomPlayer();
