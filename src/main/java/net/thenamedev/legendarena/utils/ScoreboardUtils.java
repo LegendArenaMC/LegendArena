@@ -12,7 +12,7 @@ import org.bukkit.scoreboard.*;
 public class ScoreboardUtils {
 
     private static final ScoreboardManager manager = Bukkit.getScoreboardManager();
-    final Scoreboard board = manager.getNewScoreboard();
+    private static final Scoreboard board = manager.getNewScoreboard();
 
     public static void registerPlayer(Player p) {
         //

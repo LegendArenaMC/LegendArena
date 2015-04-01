@@ -41,6 +41,7 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading CONFIG", msgDebug));
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
+        Bukkit.getPluginManager().getPlugin("LegendArena").saveConfig();
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
         if(conf.getBoolean("liveServer")) {
             if(LegendAPI.extraDebug)
