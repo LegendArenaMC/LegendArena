@@ -56,9 +56,10 @@ public class MOTDRandomizer {
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
+            "Does not contain Darude - Sandstorm.", //CAN WE PLEASE FUCKING KILL THE DARUDE SANDSTORM JOKE NOW IT'S DRIVING ME INSANE -PIXEL
             "i like magic",
             "$ echo \"Hello, world!\"",
-            "\"When is HL3 released?\" In 3034- correction: 3035.",
+            "\"When is HL3 released?\" In 3034- I mean, 3035.",
             "Hello, world!",
             "No, Intel is not a person.",
             "Not powered by Enjin.",

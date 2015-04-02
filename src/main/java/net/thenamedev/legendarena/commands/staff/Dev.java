@@ -8,6 +8,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.util.Calendar;
+
 public class Dev implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -18,6 +20,8 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(ChatColor.BLUE + "Free memory: " + Runtime.getRuntime().freeMemory() + " bits");
             sender.sendMessage(ChatColor.BLUE + "Used memory: " + Runtime.getRuntime().totalMemory() + " bits");
             sender.sendMessage(ChatColor.BLUE + "Max memory: " + Runtime.getRuntime().maxMemory() + " bits");
+            sender.sendMessage(ChatColor.BLUE + "Day: " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+            sender.sendMessage(ChatColor.BLUE + "Month: " + Calendar.getInstance().get(Calendar.MONTH));
             sender.sendMessage(ChatColor.YELLOW + "--.{ Server Info }.--");
             return true;
         }

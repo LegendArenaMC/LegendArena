@@ -71,7 +71,7 @@ public enum Rank {
     public static boolean isRanked(CommandSender p, Rank r) {
         switch(r) {
             case FOUNDER:
-                return (p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms"));
+                return (p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin"));
             case ADMIN:
                 return p.hasPermission("legendarena.rank.admin");
             case SRMOD:
@@ -101,7 +101,7 @@ public enum Rank {
      * @return The player's rank
      */
     public static Rank getRank(Player p) {
-        if(p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms")) return FOUNDER;
+        if(p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin")) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
