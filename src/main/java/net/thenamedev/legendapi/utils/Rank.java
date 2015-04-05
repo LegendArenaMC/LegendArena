@@ -113,6 +113,14 @@ public enum Rank {
         else return MEMBER;
     }
 
+    @Deprecated
+    /**
+     * Semi-legacy method.
+     */
+    public static boolean getRank(Player p, Rank r) {
+        return isRanked(p, r);
+    }
+
     /**
      * Gets the rank prefix (i.e. colored rank name) for a rank.
      * @param r The rank to get the prefix for

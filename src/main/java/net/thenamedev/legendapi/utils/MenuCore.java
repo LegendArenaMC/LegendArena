@@ -26,7 +26,8 @@ public class MenuCore {
         ItemStack i = new ItemStack(m);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(n);
-        im.setLore(Collections.singletonList(l));
+        if(!l.equals(""))
+            im.setLore(Collections.singletonList(l));
         i.setItemMeta(im);
         return i;
     }

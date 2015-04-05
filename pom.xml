@@ -32,18 +32,11 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.7.9-R0.2</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>lib.PatPeter.SQLibrary</groupId>
-            <artifactId>SQLibrary</artifactId>
-            <version>7.1</version>
         </dependency>
         <dependency>
             <groupId>me.confuser</groupId>

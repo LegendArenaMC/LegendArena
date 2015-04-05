@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
  */
 public class LegendAPI {
 
-    public static final String apiVersion = "1.2";
+    public static final String apiVersion = "0.3";
     public static final String versionName = "Hopeful Clouds";
 
     @Deprecated

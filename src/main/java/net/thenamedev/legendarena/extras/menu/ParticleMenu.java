@@ -17,7 +17,6 @@ import org.bukkit.plugin.Plugin;
 /**
  * @author ThePixelDev
  */
-//will be migrated to the new system soon[tm]
 public class ParticleMenu implements Listener {
 
     private Inventory inv;

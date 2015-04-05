@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.motd;
 
+import net.thenamedev.legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -46,16 +47,20 @@ public class MOTDRandomizer {
             "We no speak Americano", //reference to a song with that exact name
             "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
             "Out of sight and out of miiinddd..", //refence to "Au5 ft. Tasha Baxter - Snowblind"
+            "Talent goes by...", //reference to "Tristam - Talent Goes By"
             "Stephen Kappa - On Top of the DansGame", //pun on "Stephen [Walking] - On Top of The [World]"
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
             "#WhatDelay", //reference to Beam having a 3-sec delay (btw: https://beam.pro/ is the URL for beam)
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
             "Uses `mvn package`.", //reference to how the plugin is [usually] built
+            "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
             "Uses Jenkins.", //reference to the jenkins setup
+            "(dance break) I quit.", //reference to "An Interpretive Dance For My Boss Set To Kanye West's Gone"
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
+            "Syncs data via magic.",
             "Does not contain Darude - Sandstorm.", //CAN WE PLEASE FUCKING KILL THE DARUDE SANDSTORM JOKE NOW IT'S DRIVING ME INSANE -PIXEL
             "i like magic",
             "$ echo \"Hello, world!\"",
@@ -83,10 +88,14 @@ public class MOTDRandomizer {
             "Uses c0d3 sp3@k.",
             "*hugs*",
             "dinnerbone pls can i has hug",
+            "Read more JComic!",
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?" //don't mind me, just poking fun at the butthurt fanboys
     };
 
     public static String randomize() {
+        if(LegendArena.isAprilFools()) {
+            return "DARUDE - SANDSTORM (April Fools <3)"; //shhh....
+        }
         Random r = new Random();
         int msgInt = r.nextInt(motdList.length);
         return motdList[msgInt];

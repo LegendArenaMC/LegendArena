@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.utils;
 
+import net.thenamedev.legendapi.exceptions.DoYouEvenKnowWhatYourDoingException;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
 
 /**
@@ -24,7 +25,7 @@ public class DebugInfo {
 
     public void lock() {
         if(locked)
-            throw new MistakesWereMadeException("Debug info is already locked!");
+            throw new DoYouEvenKnowWhatYourDoingException("Debug info is already locked!");
         locked = true;
     }
 
