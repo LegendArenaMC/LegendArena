@@ -39,7 +39,7 @@ public class TokenCore {
         if(rsp == null)
             return false;
         econ = rsp.getProvider();
-        return !(econ == null);
+        return econ != null;
     }
 
     public static Economy getEcon() {

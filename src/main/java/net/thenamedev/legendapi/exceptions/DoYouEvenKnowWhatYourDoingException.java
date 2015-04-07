@@ -9,4 +9,8 @@ public class DoYouEvenKnowWhatYourDoingException extends RuntimeException {
     public DoYouEvenKnowWhatYourDoingException(String s) {
         super(s);
     }
+
+    public DoYouEvenKnowWhatYourDoingException() {
+        super();
+    }
 }

@@ -17,6 +17,10 @@ public class Day {
         this.month = month;
     }
 
+    public boolean isAprilFools() {
+        return getDay() == 1 && getMonth() == APRIL;
+    }
+
     public int getDay() {
         return day;
     }

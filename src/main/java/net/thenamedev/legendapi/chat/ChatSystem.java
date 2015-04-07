@@ -1,14 +1,16 @@
 package net.thenamedev.legendapi.chat;
 
+import net.thenamedev.legendapi.exceptions.NotEnoughPermissionsException;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.LegendArena;
-import net.thenamedev.legendarena.commands.backends.GlobalMute;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,8 +21,13 @@ import java.util.UUID;
 public class ChatSystem {
 
     private static HashMap<UUID, Channels> channels = new HashMap<>();
+    private static List<UUID> ignoreStaffChat = new ArrayList<>();
+    private static boolean isSqlSetup = false;
 
     public static void setChannel(UUID p, Channels c) {
+        Player verify = Bukkit.getPlayer(p);
+        if(!Rank.isRanked(verify, c.getRankRequired()))
+            throw new NotEnoughPermissionsException();
         channels.put(p, c);
     }
 
@@ -30,6 +37,17 @@ public class ChatSystem {
 
     public static boolean isInGlobal(UUID p) {
         return !channels.containsKey(p);
+    }
+
+    public static boolean ignoresStaffChat(UUID p) {
+        return ignoreStaffChat.contains(p);
+    }
+
+    public static void toggleIgnore(UUID p) {
+        if(ignoresStaffChat(p))
+            ignoreStaffChat.add(p);
+        else
+            ignoreStaffChat.remove(p);
     }
 
     public static void proccessChat(Player p, String msg) {
@@ -43,8 +61,8 @@ public class ChatSystem {
             for(Player p1 : Bukkit.getOnlinePlayers()) {
                 p1.sendMessage(chat);
             }
-            return;
-        }
+        } else
+            new ChatMessage(getChannel(p.getUniqueId()), msg, p).run();
     }
 
 }

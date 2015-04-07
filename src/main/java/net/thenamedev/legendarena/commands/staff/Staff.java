@@ -4,10 +4,12 @@ import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.Help;
 import net.thenamedev.legendarena.commands.backends.*;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * Created on 3/19/2015
@@ -17,8 +19,8 @@ import org.bukkit.command.CommandSender;
 public class Staff implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(args.length >= 1 && args[0].equalsIgnoreCase("monstercat")) {
-            sender.sendMessage(ChatColor.BLUE + "Irrelevent Jokes " + ChatColor.GRAY + PluginUtils.chars[1] + " " + ChatColor.LIGHT_PURPLE + "That's a bad kitty!");
+        if(args.length >= 1 && args[0].equalsIgnoreCase("monstercat")) { //sshh....
+            sender.sendMessage(String.format("%sIrrelevent Jokes %s%s %sThat's a bad kitty!", ChatColor.BLUE, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.LIGHT_PURPLE));
             return true;
         }
         if(!Rank.isRanked(sender, Rank.HELPER)) {
@@ -28,33 +30,32 @@ public class Staff implements CommandExecutor {
         if(args.length == 0) {
             help(sender, "1");
         } else {
-            if (args[0].equalsIgnoreCase("help")) {
-                if (args.length == 1) {
+            if(args[0].equalsIgnoreCase("help")) {
+                if(args.length == 1)
                     help(sender, "1");
-                } else {
+                else
                     help(sender, args[1]);
-                }
-            } else if (args[0].equalsIgnoreCase("info")) {
-                if (args.length == 1)
+            } else if(args[0].equalsIgnoreCase("info")) {
+                if(args.length == 1)
                     sender.sendMessage(Help.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."));
                 else
                     Info.run(sender, args);
-            } else if (args[0].equalsIgnoreCase("freeze")) {
-                if (args.length == 1)
+            } else if(args[0].equalsIgnoreCase("freeze")) {
+                if(args.length == 1)
                     sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
                 else
                     Freeze.run(sender, args);
-            } else if (args[0].equalsIgnoreCase("motd")) {
+            } else if(args[0].equalsIgnoreCase("motd")) {
                 MOTDList.run(sender, args);
-            } else if (args[0].equalsIgnoreCase("chat")) {
-                if (args.length == 1) {
+            } else if(args[0].equalsIgnoreCase("chat")) {
+                if(args.length == 1) {
                     sender.sendMessage(ChatColor.LIGHT_PURPLE + "Chat Management suboptions:");
                     sender.sendMessage(ChatColor.YELLOW + "- CLEARCHAT [reason]");
                     sender.sendMessage(ChatColor.YELLOW + "- GLOBALMUTE");
                 } else {
-                    if (args[1].equalsIgnoreCase("globalmute")) {
+                    if(args[1].equalsIgnoreCase("globalmute")) {
                         GlobalMute.run(sender);
-                    } else if (args[1].equalsIgnoreCase("clearchat")) {
+                    } else if(args[1].equalsIgnoreCase("clearchat")) {
                         ClearChat.run(sender, args);
                     } else {
                         sender.sendMessage(ChatColor.LIGHT_PURPLE + "Chat Management suboptions:");
@@ -62,12 +63,26 @@ public class Staff implements CommandExecutor {
                         sender.sendMessage(ChatColor.YELLOW + "- GLOBALMUTE");
                     }
                 }
-            } else if (args[0].equalsIgnoreCase("banhammer")) {
+            } else if(args[0].equalsIgnoreCase("banhammer")) {
                 BanHammer.run(sender);
-            } else if (args[0].equalsIgnoreCase("fly")) {
+            } else if(args[0].equalsIgnoreCase("fly")) {
                 Fly.run(sender, args);
-            } else if (args[0].equalsIgnoreCase("warn")) {
+            } else if(args[0].equalsIgnoreCase("warn")) {
                 Warn.run(sender, args);
+            } else if(args[0].equalsIgnoreCase("pmctroll")) {
+                if(!Rank.isRanked(sender, Rank.ADMIN)) {
+                    help(sender, "unknown");
+                    return true;
+                }
+                if(args.length == 1) {
+                    sender.sendMessage(Help.getFormattedHelpMsg("/staff pmctroll <player>", "Trolls a PMC nub and changes their display name to \"OP\"."));
+                } else {
+                    Player t = Bukkit.getPlayer(args[1]);
+                    if(t == null) {
+                        sender.sendMessage(PluginUtils.msgWarning + "The player \"" + args[1] + "\" was not found :(");
+                        return true;
+                    }
+                }
             }
 
             else {

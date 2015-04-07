@@ -57,10 +57,7 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(PluginUtils.msgDebug + "SRMOD: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.SRMOD));
             sender.sendMessage(PluginUtils.msgDebug + "MOD: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MOD));
             sender.sendMessage(PluginUtils.msgDebug + "HELPER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.HELPER));
-            sender.sendMessage(PluginUtils.msgDebug + "TWITCH: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.TWITCH));
-            sender.sendMessage(PluginUtils.msgDebug + "YOUTUBE: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.YOUTUBE));
-            sender.sendMessage(PluginUtils.msgDebug + "FAMOUS: " + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.FAMOUS));
-            sender.sendMessage(PluginUtils.msgDebug + "MEMBER+: " + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MEMBERPLUS));
+            sender.sendMessage(PluginUtils.msgDebug + "TWITCH: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.VIP));
             sender.sendMessage(PluginUtils.msgDebug + "MEMBER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MEMBER));
         }
         return true;
