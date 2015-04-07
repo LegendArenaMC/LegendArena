@@ -38,8 +38,6 @@ public class Token implements CommandExecutor {
             if(args[0].equalsIgnoreCase("info")) {
                 sender.sendMessage(Help.getFormattedHeader("Your Tokens Info"));
                 sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + TokenCore.getTokens((Player) sender));
-            } else if(args[0].equalsIgnoreCase("version")) {
-                sender.sendMessage(ChatColor.GOLD + "Utilizing tokens core v" + TokenCore.ver + ", codenamed \"" + TokenCore.verName + "\".");
             } else if(args[0].equalsIgnoreCase("add")) {
                 if(!Rank.isRanked(sender, Rank.ADMIN)) {
                     sender.sendMessage(Rank.noPermissions(Rank.ADMIN));

@@ -1,6 +1,5 @@
 package net.thenamedev.legendarena.commands.backends;
 
-import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
@@ -8,8 +7,6 @@ import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
 import net.thenamedev.legendarena.extras.staffchat.StaffChat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-
-import java.io.IOException;
 
 /**
  * @author TheNameMan
