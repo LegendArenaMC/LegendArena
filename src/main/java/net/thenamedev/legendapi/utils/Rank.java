@@ -74,16 +74,9 @@ public enum Rank {
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
+        else if(p.hasPermission("legendarena.rank.helper")) return HELPER;
         else if(p.hasPermission("legendarena.rank.vip")) return VIP;
         else return MEMBER;
-    }
-
-    /**
-     * Legacy method.
-     * @deprecated Use isRanked(Player, Rank).
-     */
-    public static boolean getRank(Player p, Rank r) {
-        return isRanked(p, r);
     }
 
     /**
