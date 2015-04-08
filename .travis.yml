@@ -1,8 +1,6 @@
 language: java
 sudo: false
 script: gradle build
-jdk:
-  - openjdk6
-  - openjdk7
+jdk: openjdk7
 notifications:
   email: false
