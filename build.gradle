@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = "1.0"
+
+jar {
+	archiveName = "LegendArena.jar"
+	
+    manifest {
+        attributes 'Implementation-Title': 'Legend Arena', 'Implementation-Version': version
+    }
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
+}
+
+repositories {
+
+	// For JUnit Lib Access
+	mavenCentral()
+
+	// Bukkit Repo
+	maven {
+		url "http://repo.bukkit.org/content/groups/public/"
+	}
+
+	maven {
+		url "http://nexus.theyeticave.net/content/repositories/pub_releases"
+	}
+}
+
+dependencies {
+	compile group: 'org.bukkit', name: 'bukkit', version: '1.7.9-R0.2'
+	compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1' //ahh Spigot Hub how I hate you...
+	testCompile 'junit:junit:4.8.2'
+}
+
+test {
+	maxParallelForks = 5
+	forkEvery = 50
+}
+
+processResources {
+    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [version: project.version])
+}
