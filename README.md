@@ -1,4 +1,4 @@
-# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/badge/icon)](https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/)
+# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://travis-ci.org/TheNameDev/LegendArena.svg?branch=dev)](https://travis-ci.org/TheNameDev/LegendArena)
 
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
@@ -11,11 +11,10 @@ must comply with said license.
 
 A copy of said license can be found in the [LICENSE.md](https://github.com/TheNameDev/LegendArena/blob/master/LICENSE.md) file.
 
-Notes
+Building
 ====
 
-I am aware the code isn't as neat as it could be; I will work on improving it, but for now it will (sadly) have to be this way. Sorry!
-
-//.\\\\
-
-YOU NEED (AT MINIMUM) JAVA 7 TO USE THIS. So unless you want to do rewrites to support Java 6, you'll need Java 7. Sorry!
+```
+git clone https://github.com/TheNameDev/LegendArena.git
+./gradlew build
+```
