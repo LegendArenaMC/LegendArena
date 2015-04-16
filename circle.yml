@@ -1,3 +1,8 @@
 general:
   artifacts:
     - build/libs/*.jar
+
+# thanks Gradle...
+dependencies:
+  override:
+    - ./dummy.sh
