@@ -15,7 +15,7 @@ public class Dev implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(args.length == 0) {
             if(!Rank.isRanked(sender, Rank.FOUNDER))
-                return true;
+                return false;
             sender.sendMessage(ChatColor.YELLOW + "--.{ Server Info }.--");
             sender.sendMessage(ChatColor.BLUE + "Free memory: " + Runtime.getRuntime().freeMemory() + " bits");
             sender.sendMessage(ChatColor.BLUE + "Used memory: " + Runtime.getRuntime().totalMemory() + " bits");
@@ -28,7 +28,7 @@ public class Dev implements CommandExecutor {
 
         if(args[0].equalsIgnoreCase("thejoke")) {
             if(!Rank.isRanked(sender, Rank.ADMIN))
-                return true;
+                return false;
             ChatUtils.broadcast("the joke");
             ChatUtils.broadcast(" ");
             ChatUtils.broadcast(" ");
@@ -39,19 +39,18 @@ public class Dev implements CommandExecutor {
             // don't ask. just don't.
         } else if(args[0].equals("TEAPOT")) {
             if(!Rank.isRanked(sender, Rank.FOUNDER))
-                return true;
+                return false;
             ChatUtils.broadcast(String.format("%sHTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
         } else if(args[0].equals("TESTMSGS")) {
             if(!Rank.isRanked(sender, Rank.FOUNDER))
-                return true;
+                return false;
             sender.sendMessage(PluginUtils.msgDebug + "Hello, world");
             sender.sendMessage(PluginUtils.msgError + "Hello, world");
             sender.sendMessage(PluginUtils.msgNormal + "Hello, world");
             sender.sendMessage(PluginUtils.msgWarning + "Hello, world");
         } else if(args[0].equalsIgnoreCase("testRankNames")) {
-            if(!Rank.isRanked(sender, Rank.FOUNDER)) {
-                return true;
-            }
+            if(!Rank.isRanked(sender, Rank.FOUNDER))
+                return false;
             sender.sendMessage(PluginUtils.msgDebug + "FOUNDER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.FOUNDER));
             sender.sendMessage(PluginUtils.msgDebug + "ADMIN: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.ADMIN));
             sender.sendMessage(PluginUtils.msgDebug + "SRMOD: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.SRMOD));
@@ -59,7 +58,11 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(PluginUtils.msgDebug + "HELPER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.HELPER));
             sender.sendMessage(PluginUtils.msgDebug + "TWITCH: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.VIP));
             sender.sendMessage(PluginUtils.msgDebug + "MEMBER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MEMBER));
+        } else if(args[0].equalsIgnoreCase("checkVersion")) {
+            if(!Rank.isRanked(sender, Rank.FOUNDER))
+                return false;
+            //
         }
-        return true;
+        return false;
     }
 }

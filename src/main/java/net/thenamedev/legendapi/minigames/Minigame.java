@@ -11,6 +11,7 @@ import java.util.UUID;
  * Base minigame API interface.
  * @author ThePixelDev
  */
+@Deprecated
 public interface Minigame {
 
     /**

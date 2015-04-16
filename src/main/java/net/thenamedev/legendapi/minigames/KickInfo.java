@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
  *
  * @author ThePixelDev
  */
+@Deprecated
 public interface KickInfo {
 
     /**

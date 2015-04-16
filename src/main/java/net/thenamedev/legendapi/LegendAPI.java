@@ -12,6 +12,7 @@ public class LegendAPI {
 
     public static final String apiVersion = "0.3";
     public static final String versionName = "Hopeful Clouds";
+    public static final long backendVersionId = 1;
 
     @Deprecated
     public static final String debugCat =

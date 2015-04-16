@@ -131,6 +131,9 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
         Bukkit.getPluginCommand("chickenmayhem").setExecutor(new ChickenMayhemCmd());
         if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
+        Bukkit.getPluginCommand("stafflist").setExecutor(new StaffList());
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
         Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]
         if(LegendAPI.extraDebug)

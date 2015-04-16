@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
  */
 public class BanHammer {
 
+    @Deprecated
     public static void run(CommandSender sender) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");

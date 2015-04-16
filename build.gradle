@@ -1,13 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+compileJava.options.encoding = 'UTF-8'
 
 version = "1.0"
+beta = true
 
 jar {
-	archiveName = "LegendArena.jar"
+	archiveName = "LegendArena-" + version + (beta ? "BETA" : "") + ".jar"
 	
     manifest {
-        attributes 'Implementation-Title': 'Legend Arena', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'Legend Arena'
     }
 }
 
@@ -22,7 +24,7 @@ repositories {
 
 	// Bukkit Repo
 	maven {
-		url "http://repo.bukkit.org/content/groups/public/"
+		url "https://hub.spigotmc.org/nexus/content/groups/public/"
 	}
 
 	maven {
@@ -31,14 +33,10 @@ repositories {
 }
 
 dependencies {
-	compile group: 'org.bukkit', name: 'bukkit', version: '1.7.9-R0.2'
-	compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1' //ahh Spigot Hub how I hate you...
+	compile group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+	compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1'
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
 	testCompile 'junit:junit:4.8.2'
-}
-
-test {
-	maxParallelForks = 5
-	forkEvery = 50
 }
 
 processResources {

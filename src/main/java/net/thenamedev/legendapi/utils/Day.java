@@ -46,4 +46,8 @@ public class Day {
     public static final int NOVEMBER = 11;
     public static final int DECEMBER = 12;
 
+    public enum SpecialDays {
+
+    }
+
 }

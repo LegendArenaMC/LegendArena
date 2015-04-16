@@ -3,6 +3,7 @@ package net.thenamedev.legendapi.minigames;
 /**
  * To use this, create a new instance via <code>new MinigameUtils(Minigame)</code>.
  */
+@Deprecated
 public class MinigameUtils {
 
     Minigame targetMG;

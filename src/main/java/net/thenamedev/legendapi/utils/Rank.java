@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 /**
  * Created on 3/21/2015
  *
@@ -12,7 +14,7 @@ import org.bukkit.entity.Player;
 public enum Rank {
 
     /**
-     * Special founder role. Only given to Pixel and Jaden.
+     * Special founder role. Only given to people listed in the config.
      */
     FOUNDER,
     /**
@@ -48,7 +50,9 @@ public enum Rank {
     public static boolean isRanked(CommandSender p, Rank r) {
         switch(r) {
             case FOUNDER:
-                return (p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin"));
+                //#BlameIntelliJ
+                //noinspection unchecked
+                return ((List<String>) ConfigUtils.get(ConfigUtils.Config.FOUNDERS)).contains(p.getName());
             case ADMIN:
                 return p.hasPermission("legendarena.rank.admin");
             case SRMOD:
@@ -70,7 +74,9 @@ public enum Rank {
      * @return The player's rank
      */
     public static Rank getRank(Player p) {
-        if(p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin")) return FOUNDER;
+        //blame IntelliJ...
+        //noinspection unchecked
+        if(((List<String>) ConfigUtils.get(ConfigUtils.Config.FOUNDERS)).contains(p.getName())) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
