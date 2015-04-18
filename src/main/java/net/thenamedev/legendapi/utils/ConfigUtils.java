@@ -14,9 +14,9 @@ public class ConfigUtils {
     public enum Config {
         LIVESERVER("liveServer", Type.BOOLEAN),
         UPDATECHECK("updateCheck", Type.BOOLEAN),
-        FOUNDERS("founders", Type.STRINGLIST),
         MOTDNOTICE("motdNotice", Type.STRING),
-        ANNOUNCELIST("annnoticeList", Type.STRINGLIST);
+        ANNOUNCELIST("annnoticeList", Type.STRINGLIST),
+        FOUNDERS("founders", Type.STRINGLIST);
 
         private String path;
         private Type type;
@@ -53,13 +53,13 @@ public class ConfigUtils {
     public static Object get(Config setting) {
         switch(setting.getType()) {
             case STRING:
-                return "";
+                return Getters.getString(setting);
             case STRINGLIST:
-                return null;
+                return Getters.getStringList(setting);
             case BOOLEAN:
-                return false;
+                return Getters.getBoolean(setting);
             case DOUBLE:
-                return 0;
+                return Getters.getDouble(setting);
 
             default:
                 return null;
@@ -72,12 +72,14 @@ public class ConfigUtils {
                 Setters.setString(setting, (String) set);
             case STRINGLIST:
                 //thank IntelliJ for the following comment... >.>
-                //noinspection unchecked
+                //noinspection unchecked,ConstantConditions
                 Setters.setStringList(setting, (List<String>) set);
             case BOOLEAN:
-                Setters.setBoolean(setting, (Boolean) set);
+                //noinspection ConstantConditions
+                Setters.setBoolean(setting, Boolean.parseBoolean((String) set));
             case DOUBLE:
-                Setters.setDouble(setting, (Double) set);
+                //noinspection ConstantConditions
+                Setters.setDouble(setting, Double.parseDouble((String) set));
         }
     }
 
@@ -107,13 +109,13 @@ public class ConfigUtils {
     private static class Setters {
 
         public static void setBoolean(Config setting, boolean set) {
-            if(Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().getBoolean(setting.getPath()) == set)
+            if(Getters.getBoolean(setting) == set)
                 return;
             Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set(setting.getPath(), set);
         }
 
         public static void setString(Config setting, String set) {
-            if(Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().getString(setting.getPath()).equals(set))
+            if(Getters.getString(setting).equals(set))
                 return;
             Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set(setting.getPath(), set);
         }

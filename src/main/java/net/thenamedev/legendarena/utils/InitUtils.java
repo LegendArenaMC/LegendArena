@@ -33,6 +33,7 @@ public class InitUtils {
 
     private final static List<String> chat = new ArrayList<>();
     private final static List<String> particles = new ArrayList<>();
+    private final static List<String> stafflist = new ArrayList<>();
 
     public static void pluginInit() {
         if(init)
@@ -65,7 +66,7 @@ public class InitUtils {
         Random r = new Random();
         if(r.nextInt(200) == 100)
             //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
-            ChatUtils.broadcast(String.format("%HTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
+            ChatUtils.broadcast(String.format("%sHTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
         init = true;
@@ -96,6 +97,7 @@ public class InitUtils {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading STAFFCHAT...", msgDebug));
+        //noinspection deprecation
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading WORLDCHANGELISTENER...", msgDebug));
@@ -154,6 +156,9 @@ public class InitUtils {
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chat aliases...", msgDebug));
         Bukkit.getPluginCommand("chat").setAliases(chat);
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /stafflist aliases...", msgDebug));
+        Bukkit.getPluginCommand("stafflist").setAliases(stafflist);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sCommands loaded!", msgDebug));
     }
@@ -161,6 +166,8 @@ public class InitUtils {
     private static void registerAliases() {
         particles.add("particle");
         particles.add("ps");
+        stafflist.add("sl");
+        stafflist.add("liststaff");
         chat.add("c");
         chat.add("sc");
         if(LegendAPI.debug)

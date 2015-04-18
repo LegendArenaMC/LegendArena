@@ -17,6 +17,8 @@ public class ChatMenu {
     private static boolean isInit = false;
     private static Inventory inv;
 
+    //suppress warnings on Material.getMaterial()
+    @SuppressWarnings("deprecation")
     public static void init() {
         if(isInit)
             return;
@@ -34,10 +36,10 @@ public class ChatMenu {
     }
 
     public static void show(Player p) {
-        init();
-        Inventory playerInv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Chat Selector");
-        playerInv.setContents(inv.getContents());
-        p.openInventory(playerInv);
+        init(); //sanity check to make sure the chat menu is setup
+        Inventory playerInv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Chat Selector"); //create an inv for the player
+        playerInv.setContents(inv.getContents()); //set the contents
+        p.openInventory(playerInv); //open the inventory
     }
 
 }

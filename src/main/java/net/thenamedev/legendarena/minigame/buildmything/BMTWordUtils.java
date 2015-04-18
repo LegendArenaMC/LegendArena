@@ -21,6 +21,9 @@ public class BMTWordUtils {
             "admin",
             "string",
             "boat",
+            "youtube",
+            "twitch",
+            "firework",
             ""
     };
 

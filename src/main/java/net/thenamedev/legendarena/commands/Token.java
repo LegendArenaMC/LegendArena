@@ -25,8 +25,6 @@ public class Token implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!(sender instanceof Player))
-            return true;
         try {
             TokenCore.init(); //make sure the token core is indeed initalized
         } catch(Exception ex) {

@@ -50,9 +50,7 @@ public enum Rank {
     public static boolean isRanked(CommandSender p, Rank r) {
         switch(r) {
             case FOUNDER:
-                //#BlameIntelliJ
-                //noinspection unchecked
-                return ((List<String>) ConfigUtils.get(ConfigUtils.Config.FOUNDERS)).contains(p.getName());
+                return (p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin"));
             case ADMIN:
                 return p.hasPermission("legendarena.rank.admin");
             case SRMOD:
@@ -76,7 +74,7 @@ public enum Rank {
     public static Rank getRank(Player p) {
         //blame IntelliJ...
         //noinspection unchecked
-        if(((List<String>) ConfigUtils.get(ConfigUtils.Config.FOUNDERS)).contains(p.getName())) return FOUNDER;
+        if(p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin")) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
@@ -170,6 +168,12 @@ public enum Rank {
             default:
                 return ChatColor.GRAY + name;
         }
+    }
+
+    //Hack-ish workaround for rank updating in the User tools
+
+    private static void update(Player p) {
+        //
     }
 
 }

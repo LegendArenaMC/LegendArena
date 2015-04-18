@@ -1,68 +1,76 @@
 package net.thenamedev.legendapi.chat;
 
-import net.thenamedev.legendapi.exceptions.NotEnoughPermissionsException;
-import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 /**
- * Created on 4/4/2015
+ * Created on 4/17/15
  *
  * @author ThePixelDev
  */
 public class ChatSystem {
 
     private static HashMap<UUID, Channels> channels = new HashMap<>();
-    private static List<UUID> ignoreStaffChat = new ArrayList<>();
-    private static boolean isSqlSetup = false;
 
-    public static void setChannel(UUID p, Channels c) {
-        Player verify = Bukkit.getPlayer(p);
-        if(!Rank.isRanked(verify, c.getRankRequired()))
-            throw new NotEnoughPermissionsException();
-        channels.put(p, c);
+    public enum Channels {
+        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}"),
+        ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GREEN + "{MESSAGE}"),
+        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}"),
+        GLOBAL(Rank.MEMBER, ChatColor.YELLOW + "{RANK} " + ChatColor.GRAY + "|" + ChatColor.GRAY + " {USERDISPLAY} " + ChatColor.DARK_GRAY + PluginUtils.chars[1] + ChatColor.WHITE + " {MESSAGE}");
+
+        private Rank rank;
+        private String format;
+
+        Channels(Rank rank, String format) {
+            this.rank = rank;
+            this.format = format;
+        }
+
+        public Rank getRank() {
+            return rank;
+        }
+
+        public String getFormat() {
+            return format;
+        }
     }
 
-    public static Channels getChannel(UUID p) {
-        return channels.get(p);
+    public static Channels getChannel(Player p) {
+        if(!channels.containsKey(p.getUniqueId()))
+            return Channels.GLOBAL;
+        return channels.get(p.getUniqueId());
     }
 
-    public static boolean isInGlobal(UUID p) {
-        return !channels.containsKey(p);
+    public static void add(Player p, Channels channel) {
+        UUID pUUID = p.getUniqueId();
+        if(channels.containsKey(pUUID))
+            channels.remove(pUUID);
+        channels.put(pUUID, channel);
     }
 
-    public static boolean ignoresStaffChat(UUID p) {
-        return ignoreStaffChat.contains(p);
+    public static void remove(Player p) {
+        if(!channels.containsKey(p.getUniqueId()))
+            return;
+        channels.remove(p.getUniqueId());
     }
 
-    public static void toggleIgnore(UUID p) {
-        if(ignoresStaffChat(p))
-            ignoreStaffChat.add(p);
-        else
-            ignoreStaffChat.remove(p);
-    }
-
-    public static void proccessChat(Player p, String msg) {
+    public static void msg(Player p, String msg) {
         Rank pR = Rank.getRank(p);
-        if(isInGlobal(p.getUniqueId())) {
-            if(LegendArena.isChatMuted() && !Rank.isRanked(p, Rank.HELPER)) {
-                p.sendMessage(ChatColor.RED + "Chat is globally muted!");
-                return;
-            }
-            String chat = ChatUtils.getFormattedChat(msg, p);
-            for(Player p1 : Bukkit.getOnlinePlayers()) {
-                p1.sendMessage(chat);
-            }
-        } else
-            new ChatMessage(getChannel(p.getUniqueId()), msg, p).run();
+        for(Player p1 : Bukkit.getOnlinePlayers()) {
+            if(!Rank.isRanked(p1, getChannel(p).getRank()))
+                continue;
+            String sayMsg = getChannel(p).getFormat()
+                    .replace("{USERDISPLAY}", Rank.getFormattedName(p))
+                    .replace("{MESSAGE}", msg)
+                    .replace("{RANK}", Rank.getRank(p) + /*hacky workaround, coming through*/ "");
+            p1.sendMessage(sayMsg);
+        }
     }
 
 }

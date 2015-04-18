@@ -17,7 +17,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import java.util.*;
 
 /**
- * Chicken Mayhem - A minigame in which breaking blocks spawns chickens (purely for asthetical reasons).<br><br>
+ * Chicken Mayhem - A minigame in which breaking blocks spawns chickens (chickens for asthetical reasons).<br><br>
  *
  * The player with the most blocks broken at the end wins.
  * @author ThePixelDev
@@ -27,6 +27,7 @@ public class ChickenMayhem implements Listener {
     private static boolean isRunning = false;
     private static List<UUID> players = new ArrayList<>();
     private static HashMap<UUID, Integer> blocksBroken = new HashMap<>();
+    @SuppressWarnings("MismatchedReadAndWriteOfArray")
     private static Object[] leadingPlayer = { null, 0 };
 
     public static boolean isRunning() {
@@ -61,6 +62,7 @@ public class ChickenMayhem implements Listener {
         isRunning = true;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static void end() {
         if(!isRunning)
             throw new MistakesWereMadeException("The minigame is not currently running!");
@@ -77,6 +79,7 @@ public class ChickenMayhem implements Listener {
         blocksBroken.clear();
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static void end(Player p) {
         if(!isRunning)
             throw new MistakesWereMadeException("The minigame is not currently running!");

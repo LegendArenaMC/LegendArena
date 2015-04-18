@@ -3,7 +3,6 @@ package net.thenamedev.legendapi.tokens;
 import net.milkbowl.vault.economy.Economy;
 import net.thenamedev.legendapi.LegendAPI;
 import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
-import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -53,34 +52,34 @@ public class TokenCore {
     }
 
     public static void removeTokens(Player p, int amount, boolean showMsg, boolean silence) {
-        if(amount < 1)
-            throw new NullPointerException();
-        getEcon().withdrawPlayer(p, amount);
-        if(!silence)
-            if(getTokens(p) < 10000 && getTokens(p) + amount >= 10000)
-                ChatUtils.broadcast(ChatColor.GREEN + "Aww, " + ChatColor.DARK_PURPLE + p.getName() + ChatColor.LIGHT_PURPLE + " went below 10k tokens. I feel sad now.");
-        if(showMsg && !silence)
-            p.sendMessage(PluginUtils.msgNormal + "You lost " + ChatColor.DARK_PURPLE + amount + ChatColor.LIGHT_PURPLE + " token(s). You now have " + ChatColor.DARK_PURPLE + getTokens(p) + ChatColor.LIGHT_PURPLE + " token(s).");
+        removeTokens(p, amount, silence);
     }
 
     public static void addTokens(Player p, int amount, boolean showMsg, boolean silence) {
+        addTokens(p, amount, silence);
+    }
+
+    public static void removeTokens(Player p, int amount, boolean showMsg) {
+        if(amount < 1)
+            throw new NullPointerException();
+        getEcon().withdrawPlayer(p, amount);
+        if(showMsg)
+            p.sendMessage(PluginUtils.msgNormal + "You lost " + ChatColor.DARK_PURPLE + amount + ChatColor.LIGHT_PURPLE + " token(s). You now have " + ChatColor.DARK_PURPLE + getTokens(p) + ChatColor.LIGHT_PURPLE + " token(s).");
+    }
+
+    public static void addTokens(Player p, int amount, boolean showMsg) {
         if(amount < 1)
             throw new NullPointerException();
         econ.depositPlayer(p, amount);
         int newAmount = getTokens(p);
-        if(newAmount - amount < 10000 && newAmount > 10000) {
-            if(!silence)
-                ChatUtils.broadcast(ChatColor.GREEN + "Congratlations to " + ChatColor.DARK_PURPLE + p.getName() + ChatColor.LIGHT_PURPLE + " for getting " + ChatColor.BOLD + "10k tokens!");
-        }
-        if(showMsg && !silence)
+        if(showMsg)
             p.sendMessage(PluginUtils.msgNormal + "You gained " + ChatColor.DARK_PURPLE + amount + ChatColor.LIGHT_PURPLE + " token(s)! You now have " + ChatColor.DARK_PURPLE + getTokens(p) + ChatColor.LIGHT_PURPLE + " token(s)!");
     }
 
     public static void resetTokens(Player p, boolean showMsg, String resetter) {
         if(resetter.equals(""))
             resetter = "*CONSOLE*";
-        int pTokens = getTokens(p);
-        removeTokens(p, pTokens, false, true);
+        removeTokens(p, getTokens(p), false);
         p.sendMessage(PluginUtils.msgNormal + "Aww. Your tokens was reset to 0 by " + ChatColor.DARK_PURPLE + resetter + ChatColor.LIGHT_PURPLE + ".");
     }
 

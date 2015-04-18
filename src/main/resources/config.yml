@@ -14,10 +14,3 @@
 
 motdNotice: "PUBLIC ALPHA"
 liveServer: false
-founders:
-  - ThePixelDev
-  - ThePixelDevin
-updateCheck: false
-
-announceList:
-  - Test announcement
