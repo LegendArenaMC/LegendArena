@@ -6,3 +6,10 @@ general:
 dependencies:
   override:
     - . ./dummy.sh
+
+# shh...
+
+#test:
+  #post:
+    #- ./gradlew javadoc
+    #- mkdir ./build/out/ && zip ./build/docs/javadoc && mv ./build/libs/*LegendArena*.jar ./build/out/ && mv ./build/docs/**/*.zip ./build/out/

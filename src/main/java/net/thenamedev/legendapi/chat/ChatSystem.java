@@ -21,8 +21,7 @@ public class ChatSystem {
     public enum Channels {
         ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}"),
         ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GREEN + "{MESSAGE}"),
-        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}"),
-        GLOBAL(Rank.MEMBER, ChatColor.YELLOW + "{RANK} " + ChatColor.GRAY + "|" + ChatColor.GRAY + " {USERDISPLAY} " + ChatColor.DARK_GRAY + PluginUtils.chars[1] + ChatColor.WHITE + " {MESSAGE}");
+        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}");
 
         private Rank rank;
         private String format;
@@ -43,7 +42,7 @@ public class ChatSystem {
 
     public static Channels getChannel(Player p) {
         if(!channels.containsKey(p.getUniqueId()))
-            return Channels.GLOBAL;
+            return null;
         return channels.get(p.getUniqueId());
     }
 

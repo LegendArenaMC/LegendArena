@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author ThePixelDev
@@ -139,9 +140,15 @@ public class ParticleCore implements Runnable {
                 });
                 continue;
             }
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(62, 100, 72), p.getLocation(), 1);
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(50, 84, 45), p.getLocation(), 1);
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(163, 210, 105), p.getLocation(), 1);
+            //Ah, overkill amount of particles how I love you...
+            Random r = new Random();
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), p.getLocation(), 1);
         }
     }
 

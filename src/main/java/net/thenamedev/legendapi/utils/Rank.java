@@ -72,8 +72,6 @@ public enum Rank {
      * @return The player's rank
      */
     public static Rank getRank(Player p) {
-        //blame IntelliJ...
-        //noinspection unchecked
         if(p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin")) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;

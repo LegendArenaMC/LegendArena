@@ -19,7 +19,7 @@ public class Help implements CommandExecutor {
     }
     
     public static String getFormattedHelpMsg(String cmd, String desc) {
-        return ChatColor.YELLOW + cmd + " " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + desc;
+        return ChatColor.YELLOW + cmd + " " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD  + "//" + ChatColor.GREEN + " " + desc;
     }
 
     public static String getFormattedHeader(String header) {

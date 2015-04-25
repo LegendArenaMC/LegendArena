@@ -1,18 +1,12 @@
 apply plugin: 'java'
 
-version = "1.0"
-//beta = true
+compileJava.options.encoding = 'UTF-8' //gradle, pls. just, pls. #gradlepls
 
 repositories {
-
-	// For JUnit Lib Access
 	mavenCentral()
-
-	// Bukkit Repo
 	maven {
 		url "https://hub.spigotmc.org/nexus/content/groups/public/"
 	}
-
 	maven {
 		url "http://nexus.theyeticave.net/content/repositories/pub_releases"
 	}
@@ -21,6 +15,5 @@ repositories {
 dependencies {
 	compile group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
 	compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1'
-	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
 	testCompile 'junit:junit:4.8.2'
 }
