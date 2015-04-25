@@ -1,6 +1,6 @@
 general:
   artifacts:
-    - build/libs/*.jar
+    - build/libs/
 
 # thanks, Gradle...
 dependencies:
