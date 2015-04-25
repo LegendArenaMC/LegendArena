@@ -1,6 +1,6 @@
 general:
   artifacts:
-    - build/libs/
+    - build/libs/*
 
 # thanks, Gradle...
 dependencies:
@@ -9,7 +9,9 @@ dependencies:
 
 # shh...
 
-#test:
+test:
+  override:
+    - ./gradlew build
   #post:
     #- ./gradlew javadoc
     #- mkdir ./build/out/ && zip ./build/docs/javadoc && mv ./build/libs/*LegendArena*.jar ./build/out/ && mv ./build/docs/**/*.zip ./build/out/
