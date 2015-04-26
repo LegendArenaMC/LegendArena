@@ -24,7 +24,10 @@ import java.util.UUID;
 public class HubWarper implements Listener {
 
     private static final List<UUID> exempt = new ArrayList<>();
+
+    @Deprecated
     public static final List<UUID> hidePlayers = new ArrayList<>();
+    @Deprecated
     public static final List<UUID> hidePlayersHolding = new ArrayList<>();
 
     public static void toggleExemption(UUID p) {

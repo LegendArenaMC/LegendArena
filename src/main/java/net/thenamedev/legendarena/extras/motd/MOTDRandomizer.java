@@ -43,20 +43,20 @@ public class MOTDRandomizer {
             "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
             ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //default ban message for a LOT of servers (and I mean a damn lot)
-            "#WhatDelay", //reference to Beam having a 3-sec delay (btw: https://beam.pro/ is the URL for beam)
+            "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
             "(dance break) I quit.", //reference to "An Interpretive Dance For My Boss Set To Kanye West's Gone"
             "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
-            "Uses Jenkins.", //reference to the jenkins ci setup
             "The catch? Catch-22.", //reference to Catch-22, in which fighting a situation would be accepting it (wikipedia has a slightly better explanation, but obviously don't /fully/ trust it)
-            "Uses `mvn package`.", //reference to how the plugin is [usually] built
+            "Uses `./gradlew build`.", //reference to how the plugin is [usually] built
 
             // BEGIN MASS SONG REFERENCES
 
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "When all of your wind, is gone...", //again, reference to the above song
+            "The girl that time forgot...", //reference to "Hellberg - The Girl"
             "We no speak Americano", //reference to a song with that exact name
             "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
             "Out of sight and out of miiinddd..", //refence to "Au5 ft. Tasha Baxter - Snowblind"
@@ -81,14 +81,13 @@ public class MOTDRandomizer {
             "Fun for the whole family!",
             "Dispenses fun.",
             "May contain reaction GIFs.",
-            "<insert random MOTD here>",
             "Does not use System.out.println()",
             "Uses Bukkit.getOnlinePlayers()",
             "*says no and nods head*",
             "Contains references.",
             "WOAH-OH-OH-AH-AH-AH-AAAA-HA",
             "Who's the bae?", //...why the hell did I add this MOTD
-            "It doesn't work? Oh well ¯\\(ツ)/¯",
+            "It doesn't work? Oh well.",
             "HEADSHOT!",
             "Contains jokes.",
             "Uses c0d3 sp3@k.",

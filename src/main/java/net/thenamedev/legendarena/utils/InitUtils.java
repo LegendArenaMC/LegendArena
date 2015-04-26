@@ -5,10 +5,7 @@ import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendarena.commands.*;
-import net.thenamedev.legendarena.commands.staff.Chat;
-import net.thenamedev.legendarena.commands.staff.Dev;
-import net.thenamedev.legendarena.commands.staff.Gadgets;
-import net.thenamedev.legendarena.commands.staff.Staff;
+import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
 import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
 import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
@@ -130,11 +127,11 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
-        Bukkit.getPluginCommand("chickenmayhem").setExecutor(new ChickenMayhemCmd());
+            ChatUtils.broadcast(String.format("%sLoading /troll...", msgDebug));
+        Bukkit.getPluginCommand("troll").setExecutor(new Troll()); //Troll command [/troll]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
-        Bukkit.getPluginCommand("stafflist").setExecutor(new StaffList());
+        Bukkit.getPluginCommand("stafflist").setExecutor(new StaffList()); //Staff list command [/stafflist, /sl, /liststaff]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
         Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]

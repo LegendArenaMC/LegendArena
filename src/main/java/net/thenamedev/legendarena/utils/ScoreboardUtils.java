@@ -18,4 +18,12 @@ public class ScoreboardUtils {
         //
     }
 
+    private static class MainTimer implements Runnable {
+
+        public void run() {
+            //
+        }
+
+    }
+
 }
