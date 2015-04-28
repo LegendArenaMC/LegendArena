@@ -16,7 +16,7 @@ public class Fly {
 
     private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
-    public static void run(CommandSender sender, String[] args) {
+    public static void run(CommandSender sender) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
             return; //Do nothing if it's not a player

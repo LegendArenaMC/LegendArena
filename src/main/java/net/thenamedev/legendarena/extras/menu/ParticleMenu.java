@@ -1,8 +1,8 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.Type;
+import net.thenamedev.legendarena.extras.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.particles.ParticleCore.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

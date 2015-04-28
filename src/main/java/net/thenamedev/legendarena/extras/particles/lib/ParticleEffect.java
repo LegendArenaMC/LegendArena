@@ -1,6 +1,6 @@
-package net.thenamedev.legendarena.extras.hub.particles.lib;
+package net.thenamedev.legendarena.extras.particles.lib;
 
-import net.thenamedev.legendarena.extras.hub.particles.lib.ReflectionUtils.PackageType;
+import net.thenamedev.legendarena.extras.particles.lib.ReflectionUtils.PackageType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

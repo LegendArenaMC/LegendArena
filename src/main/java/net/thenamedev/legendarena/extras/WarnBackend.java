@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.warn;
+package net.thenamedev.legendarena.extras;
 
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;

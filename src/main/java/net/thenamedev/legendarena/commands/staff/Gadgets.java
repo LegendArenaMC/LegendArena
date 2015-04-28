@@ -2,7 +2,7 @@ package net.thenamedev.legendarena.commands.staff;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
+import net.thenamedev.legendarena.extras.HubWarper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

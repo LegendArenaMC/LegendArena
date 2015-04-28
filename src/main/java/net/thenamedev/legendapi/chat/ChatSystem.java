@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.chat;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
@@ -61,14 +62,20 @@ public class ChatSystem {
 
     public static void msg(Player p, String msg) {
         Rank pR = Rank.getRank(p);
-        for(Player p1 : Bukkit.getOnlinePlayers()) {
-            if(!Rank.isRanked(p1, getChannel(p).getRank()))
-                continue;
-            String sayMsg = getChannel(p).getFormat()
-                    .replace("{USERDISPLAY}", Rank.getFormattedName(p))
-                    .replace("{MESSAGE}", msg)
-                    .replace("{RANK}", Rank.getRank(p) + /*hacky workaround, coming through*/ "");
-            p1.sendMessage(sayMsg);
+
+        if(getChannel(p) == null) {
+            ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
+            return;
+        }
+
+        //noinspection ConstantConditions
+        switch(getChannel(p)) {
+            case ADMIN:
+                break;
+            case ALERT:
+                break;
+            case STAFF:
+                break;
         }
     }
 

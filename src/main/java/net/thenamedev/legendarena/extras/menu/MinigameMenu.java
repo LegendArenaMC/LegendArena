@@ -2,10 +2,8 @@ package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -2,7 +2,7 @@ package net.thenamedev.legendarena.commands.backends;
 
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendarena.extras.warn.WarnBackend;
+import net.thenamedev.legendarena.extras.WarnBackend;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -14,7 +14,7 @@ import java.util.List;
 public enum Rank {
 
     /**
-     * Special founder role. Only given to people listed in the config.
+     * Special founder role. Only given to Pixel and Jaden.
      */
     FOUNDER,
     /**
@@ -166,12 +166,6 @@ public enum Rank {
             default:
                 return ChatColor.GRAY + name;
         }
-    }
-
-    //Hack-ish workaround for rank updating in the User tools
-
-    private static void update(Player p) {
-        //
     }
 
 }

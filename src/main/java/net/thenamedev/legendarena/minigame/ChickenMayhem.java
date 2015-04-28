@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.minigame.chickenmayhem;
+package net.thenamedev.legendarena.minigame;
 
 /**
  * Chicken Mayhem - A minigame in which breaking blocks spawns chickens (chickens for asthetical reasons (and because - well, why the fuck not)).<br><br>

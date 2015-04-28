@@ -32,15 +32,6 @@ public class MenuCore {
         return i;
     }
 
-    @Deprecated
-    public static ItemStack createItem(ItemStack i, String n, String l) {
-        ItemMeta im = i.getItemMeta();
-        im.setDisplayName(n);
-        im.setLore(Collections.singletonList(l));
-        i.setItemMeta(im);
-        return i;
-    }
-
     public static ItemStack createItem(Material m, String n, String... l) {
         ItemStack i = new ItemStack(m);
         ItemMeta im = i.getItemMeta();

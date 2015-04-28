@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.motd;
+package net.thenamedev.legendarena.extras;
 
 import net.thenamedev.legendapi.utils.Day;
 import net.thenamedev.legendarena.LegendArena;

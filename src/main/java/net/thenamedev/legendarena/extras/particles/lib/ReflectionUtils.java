@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.hub.particles.lib;
+package net.thenamedev.legendarena.extras.particles.lib;
 
 import org.bukkit.Bukkit;
 

@@ -6,9 +6,9 @@ import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.*;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
-import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
-import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
+import net.thenamedev.legendarena.extras.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.HubWarper;
+import net.thenamedev.legendarena.extras.MOTDRandomizer;
 import net.thenamedev.legendarena.extras.staffchat.StaffChat;
 import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.Bukkit;
@@ -97,11 +97,8 @@ public class InitUtils {
         //noinspection deprecation
         Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading WORLDCHANGELISTENER...", msgDebug));
-        Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading BANHAMMERLISTENER...", msgDebug));
-        Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+            ChatUtils.broadcast(String.format("%sLoading COMMANDFILTER...", msgDebug));
+        Bukkit.getPluginManager().registerEvents(new CommandFilter(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sListeners loaded!", msgDebug));
     }

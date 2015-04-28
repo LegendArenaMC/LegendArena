@@ -1,4 +1,4 @@
-package net.thenamedev.legendarena.extras.hub.warp;
+package net.thenamedev.legendarena.extras;
 
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.PluginUtils;

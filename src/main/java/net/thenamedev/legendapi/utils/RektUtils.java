@@ -1,7 +1,12 @@
 package net.thenamedev.legendapi.utils;
 
+import org.bukkit.Bukkit;
+
+import java.util.Random;
+import java.util.logging.Level;
+
 /**
- * dear god i rektgret nothing (no really I regret nothing - especially of that joke)
+ * dear god i rektgret nothing (no really I regret nothing - especially of that (horrible) pun)
  *
  * Created on 4/23/2015
  *
@@ -9,11 +14,25 @@ package net.thenamedev.legendapi.utils;
  */
 public class RektUtils {
 
+    public static String getRandomRekt() {
+        Random r = new Random();
+        int random = r.nextInt(3);
+        while(random > 2 || random < 1) {
+            random = r.nextInt(3);
+        }
+        Bukkit.getLogger().log(Level.INFO, "Debug: " + random);
+        if(random == 1)
+            return "☐ Not rekt\n" + rekt[r.nextInt(rekt.length)];
+        else if(random == 2)
+            return "☐ Not rekt\n" + rektgretNothingRekts[r.nextInt(rektgretNothingRekts.length)];
+        else
+            return "ERROR";
+    }
+
     public static final String[] rekt = {
             "☑ Rekt",
             "☑ Really Rekt",
             "☑ Tyrannosaurus Rekt",
-            "☑ Cash4Rekt.com",
             "☑ Grapes of Rekt",
             "☑ Ship Rekt",
             "☑ Rekt markes the spot",
@@ -89,7 +108,6 @@ public class RektUtils {
      * <em>okay yeah i'll show myself the way out</em>
      */
     public static final String[] rektgretNothingRekts = {
-            "☑ REKT",
             "☑ anoREKTic",
             "☑ anoREKTics",
             "☑ bidiREKTional",
@@ -326,17 +344,5 @@ public class RektUtils {
             "☑ vitREKTomies",
             "☑ vitREKTomy"
     };
-
-    /**
-     * I'll show myself out now...
-     */
-    public static String ultraRekt =
-             "REKT REKT REKT REKT\n" +
-             "REKT REKT REKT REKT\n" +
-             "REKT REKT REKT REKT\n" +
-             "REKT REKT REKT REKT\n" +
-             "REKT REKT REKT REKT\n" +
-             "REKT REKT REKT REKT\n" +
-            "REKT REKT REKT REKT";
 
 }
