@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.extras;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendarena.extras.menu.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,11 +25,6 @@ public class HubWarper implements Listener {
 
     private static final List<UUID> exempt = new ArrayList<>();
 
-    @Deprecated
-    public static final List<UUID> hidePlayers = new ArrayList<>();
-    @Deprecated
-    public static final List<UUID> hidePlayersHolding = new ArrayList<>();
-
     public static void toggleExemption(UUID p) {
         if(isExempt(p))
             exempt.remove(p);
@@ -41,12 +36,8 @@ public class HubWarper implements Listener {
         return exempt.contains(p);
     }
 
-    private static ItemStack getWarper() {
-        return MenuCore.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ChatColor.BLUE + "Warp around the server; in style.");
-    }
-
-    private static ItemStack getSoonTM() {
-        return MenuCore.createItem(Material.STAINED_GLASS_PANE, "Soon[tm]", "User error; insert new user and press any key to continue.");
+    private static ItemStack getCustomization() {
+        return MenuCore.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", "");
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -60,10 +51,8 @@ public class HubWarper implements Listener {
         try {
             if(isExempt(ev.getPlayer().getUniqueId())) return;
             ev.setCancelled(true);
-            if(ev.getItem().getItemMeta().getDisplayName().contains("Warp")) {
-                ev.getPlayer().performCommand("warp");
-            } else if(ev.getItem().getItemMeta().getDisplayName().contains("Soon")) {
-                ev.getPlayer().sendMessage(PluginUtils.msgNormal + "soon[tm]");
+            if(ev.getItem().getItemMeta().getDisplayName().contains("Main Menu")) {
+                MainMenu.show(ev.getPlayer());
             }
         } catch(Exception ex) {
             //ignore
@@ -75,9 +64,8 @@ public class HubWarper implements Listener {
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
-                p.getInventory().clear();
-                p.getInventory().setItem(3, getWarper());
-                p.getInventory().setItem(5, getSoonTM());
+                p.getInventory().clear(); //TODO: Give this inventory clear call a way to have mercy on mods+
+                p.getInventory().setItem(4, getCustomization());
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1, true));
             }
         }

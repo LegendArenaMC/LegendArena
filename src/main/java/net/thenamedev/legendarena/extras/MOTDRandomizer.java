@@ -59,17 +59,15 @@ public class MOTDRandomizer {
             "The girl that time forgot...", //reference to "Hellberg - The Girl"
             "We no speak Americano", //reference to a song with that exact name
             "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
-            "Out of sight and out of miiinddd..", //refence to "Au5 ft. Tasha Baxter - Snowblind"
+            "Out of sight and out of miiinddd..", //reference to "Au5 ft. Tasha Baxter - Snowblind"
+            "We could be legends...", //reference to "Razihel ft. TeamMate - Legends"
             "Talent goes by...", //reference to "Tristam - Talent Goes By"
             "Stephen Kappa - On Top of the DansGame", //pun on "Stephen [Walking] - On Top of The [World]"
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
-            "Syncs data via magic.",
-            "Does not contain Darude - Sandstorm.", //CAN WE PLEASE FUCKING KILL THE DARUDE SANDSTORM JOKE NOW IT'S DRIVING ME INSANE -PIXEL
-            "i like magic",
-            "$ echo \"Hello, world!\"",
-            "\"When is HL3 released?\" In 3034- I mean, 3035.",
+            "\"When is HL3 released?\" In 2198-- I mean, 2200.",
+            "WELCOME, TO THE MONSTERCAT PODCAST.",
             "Hello, world!",
             "No, Intel is not a person.",
             "Not powered by Enjin.",
@@ -85,14 +83,10 @@ public class MOTDRandomizer {
             "Uses Bukkit.getOnlinePlayers()",
             "*says no and nods head*",
             "Contains references.",
-            "WOAH-OH-OH-AH-AH-AH-AAAA-HA",
-            "Who's the bae?", //...why the hell did I add this MOTD
-            "It doesn't work? Oh well.",
             "HEADSHOT!",
             "Contains jokes.",
-            "Uses c0d3 sp3@k.",
             "*hugs*",
-            "dinnerbone pls can i has hug",
+            "dinnerbone pls can i has hug i want a hug",
             "Read more JComic!",
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?" //don't mind me, just poking fun at the butthurt fanboys
     };

@@ -1,10 +1,10 @@
 package net.thenamedev.legendarena.commands.backends;
 
+import net.thenamedev.legendapi.chat.ChatSystem;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.MOTDRandomizer;
-import net.thenamedev.legendarena.extras.staffchat.StaffChat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -14,8 +14,8 @@ import org.bukkit.command.CommandSender;
 public class MOTDList {
 
     public static void run(CommandSender sender, String[] args) {
-        if(!Rank.isRanked(sender, Rank.ADMIN)) {
-            sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return;
         }
         if(args.length == 1) {
@@ -37,12 +37,14 @@ public class MOTDList {
             sender.sendMessage(finishedList);
         } else if(args[1].equalsIgnoreCase("notice")) {
             if(args.length == 2) {
-                sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current notice: " + MOTDRandomizer.getNotice());
+                sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDRandomizer.getNotice());
             } else {
-                args[0] = "";
-                args[1] = "";
-                StaffChat.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args) + "\"", "MOTD Notice");
-                MOTDRandomizer.setNotice(ChatUtils.formatCast(args));
+                if(!Rank.isRanked(sender, Rank.SRMOD)) {
+                    sender.sendMessage(Rank.noPermissions(Rank.SRMOD));
+                    return;
+                }
+                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"");
+                MOTDRandomizer.setNotice(ChatUtils.formatCast(args, 0, 1));
             }
         } else if(args[1].equalsIgnoreCase("random")) {
             sender.sendMessage(PluginUtils.msgNormal + MOTDRandomizer.randomize());

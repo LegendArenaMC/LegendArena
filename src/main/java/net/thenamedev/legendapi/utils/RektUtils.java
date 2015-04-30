@@ -1,9 +1,6 @@
 package net.thenamedev.legendapi.utils;
 
-import org.bukkit.Bukkit;
-
 import java.util.Random;
-import java.util.logging.Level;
 
 /**
  * dear god i rektgret nothing (no really I regret nothing - especially of that (horrible) pun)
@@ -16,17 +13,10 @@ public class RektUtils {
 
     public static String getRandomRekt() {
         Random r = new Random();
-        int random = r.nextInt(3);
-        while(random > 2 || random < 1) {
-            random = r.nextInt(3);
-        }
-        Bukkit.getLogger().log(Level.INFO, "Debug: " + random);
-        if(random == 1)
+        if(PluginUtils.random(2, 1))
             return "☐ Not rekt\n" + rekt[r.nextInt(rekt.length)];
-        else if(random == 2)
-            return "☐ Not rekt\n" + rektgretNothingRekts[r.nextInt(rektgretNothingRekts.length)];
         else
-            return "ERROR";
+            return "☐ Not rekt\n" + rektgretNothingRekts[r.nextInt(rektgretNothingRekts.length)];
     }
 
     public static final String[] rekt = {

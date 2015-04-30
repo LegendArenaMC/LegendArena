@@ -18,10 +18,6 @@ public class TokenCore {
 
     private static Economy econ = null;
     private static boolean init = false;
-    @Deprecated
-    public static final String ver = LegendAPI.apiVersion;
-    @Deprecated
-    public static final String verName = LegendAPI.versionName;
 
     public static void init() {
         if(init && econ != null)

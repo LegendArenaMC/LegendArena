@@ -20,9 +20,9 @@ public class ChatSystem {
     private static HashMap<UUID, Channels> channels = new HashMap<>();
 
     public enum Channels {
-        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}"),
-        ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GREEN + "{MESSAGE}"),
-        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.BLUE + " {MESSAGE}");
+        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.RED + " {MESSAGE}"),
+        ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GOLD + "{MESSAGE}"),
+        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.DARK_GREEN + " {MESSAGE}");
 
         private Rank rank;
         private String format;
@@ -60,9 +60,15 @@ public class ChatSystem {
         channels.remove(p.getUniqueId());
     }
 
-    public static void msg(Player p, String msg) {
-        Rank pR = Rank.getRank(p);
+    public static void notice(String msg) {
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            if(!Rank.isRanked(p, Rank.MOD))
+                continue;
+            p.sendMessage(ChatColor.GOLD + "NOTICE" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + msg);
+        }
+    }
 
+    public static void msg(Player p, String msg) {
         if(getChannel(p) == null) {
             ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
             return;
@@ -71,10 +77,22 @@ public class ChatSystem {
         //noinspection ConstantConditions
         switch(getChannel(p)) {
             case ADMIN:
+                for(Player p1 : Bukkit.getOnlinePlayers()) {
+                    if(!Rank.isRanked(p1, Rank.ADMIN))
+                        continue;
+                    p1.sendMessage(Channels.ADMIN.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
+                }
                 break;
             case ALERT:
+                for(Player p1 : Bukkit.getOnlinePlayers())
+                    p1.sendMessage(Channels.ALERT.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
                 break;
             case STAFF:
+                for(Player p1 : Bukkit.getOnlinePlayers()) {
+                    if(!Rank.isRanked(p1, Rank.HELPER))
+                        continue;
+                    p1.sendMessage(Channels.STAFF.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
+                }
                 break;
         }
     }

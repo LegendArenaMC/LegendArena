@@ -24,11 +24,8 @@ public class MinigameMenu implements Listener {
 
     public MinigameMenu(Plugin p) {
         HashMap<Integer, ItemStack> items = new HashMap<>();
-        //items.put(1, MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games"));
-        //items.put(7, MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Chicken Mayhem"));
-        items.put(12, MenuCore.createItem(Material.SNOW_BALL, ChatColor.GREEN + "Plugin: Now FOSS!", ChatColor.YELLOW + "https://github.com/TheNameDev/LegendArena"));
-        items.put(14, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
-        //items.put(25, MenuCore.createItem(Material.BRICK, ChatColor.GREEN + "Build My Thing"));
+        items.put(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
+        items.put(22, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
 
         inv = Bukkit.createInventory(null, 27, PluginUtils.msgNormal + "Warper");
         for(int a : items.keySet())
@@ -51,13 +48,11 @@ public class MinigameMenu implements Listener {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
                 Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.BLUE + "Warping you to " + ChatColor.RED + "HUB" + ChatColor.BLUE + "...");
-                p.teleport(Bukkit.getWorld("hub").getSpawnLocation());
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("FOSS")) {
+                p.teleport(Bukkit.getWorld("world").getSpawnLocation());
+            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
-                //noinspection RedundantCast
-                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://github.com/TheNameDev/LegendArena");
+                MainMenu.show((Player) e.getWhoClicked());
             }
 
             else { //failsafe
