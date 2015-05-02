@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 public class Help implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask a staff member?", PluginUtils.msgNormal));
+        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask an admin?", PluginUtils.msgNormal));
         return true;
     }
     

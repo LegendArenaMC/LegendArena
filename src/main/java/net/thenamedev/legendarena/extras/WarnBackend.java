@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 public class WarnBackend {
 
     Player warnPlayer;
-
     String formattedMsg = "";
     String staffFormattedMsg = "";
 
@@ -30,7 +29,7 @@ public class WarnBackend {
                 ChatColor.YELLOW + reason + ChatColor.LIGHT_PURPLE
         );
         formattedMsg = String.format(
-                "%sWarner: %s\n \nReason: %s",
+                "%sIssuing staff: %s\n \nReason: %s",
 
                 ChatColor.LIGHT_PURPLE,
                 Rank.getFormattedName((Player) staff) + ChatColor.LIGHT_PURPLE,

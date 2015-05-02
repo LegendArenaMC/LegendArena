@@ -2,6 +2,8 @@ package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.tokens.TokenCore;
 import net.thenamedev.legendapi.utils.MenuCore;
+import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendarena.extras.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -55,6 +57,13 @@ public class MainMenu implements Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Chat")) {
                 ev.getWhoClicked().closeInventory();
                 ((Player) ev.getWhoClicked()).performCommand("chat menu");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Customization")) {
+                ev.getWhoClicked().closeInventory();
+                ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), PluginUtils.msgNormal + "Customization coming soon[tm]");
+            }
+            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Tokens")) {
+                ev.getWhoClicked().closeInventory();
+                ev.getWhoClicked().sendMessage(ChatColor.RED + "You actually expected this to do something? That's impressive.");
             }
             ev.setCancelled(true);
         } catch(Exception ignore) {

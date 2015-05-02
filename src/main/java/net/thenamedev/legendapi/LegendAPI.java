@@ -10,15 +10,9 @@ import org.bukkit.ChatColor;
  */
 public class LegendAPI {
 
-    public static final String apiVersion = "0.3";
-    public static final String versionName = "Hopeful Clouds";
+    public static final String apiVersion = "0.4";
+    public static final String versionName = "Stick o' Trust";
     public static final long backendVersionId = 1;
-
-    @Deprecated
-    public static final String debugCat =
-            ChatColor.BLUE +
-            "<insert an ASCII cat here>\n" +
-            ChatColor.RED;
 
     public static final DebugInfo debugInfo = new DebugInfo();
 

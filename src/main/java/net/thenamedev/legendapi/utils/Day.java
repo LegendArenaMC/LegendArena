@@ -49,7 +49,6 @@ public class Day {
     public enum SpecialDays {
         NEWYEAR(JANUARY, 1),
         APRILFOOLS(APRIL, 1),
-        COLUMBUSDAY(OCTOBER, 12),
         HALLOWEEN(OCTOBER, 31),
         CHRISTMASEVE(DECEMBER, 24),
         CHRISTMAS(DECEMBER, 25);

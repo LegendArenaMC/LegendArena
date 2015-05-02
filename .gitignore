@@ -84,3 +84,7 @@ release.properties
 dependency-reduced-pom.xml
 
 build.sh
+
+### Visual Studio Code
+
+.settings/tmp/

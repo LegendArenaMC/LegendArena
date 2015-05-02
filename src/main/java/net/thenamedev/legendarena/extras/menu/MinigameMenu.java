@@ -25,7 +25,8 @@ public class MinigameMenu implements Listener {
     public MinigameMenu(Plugin p) {
         HashMap<Integer, ItemStack> items = new HashMap<>();
         items.put(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
-        items.put(22, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
+        items.put(21, MenuCore.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
+        items.put(23, MenuCore.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"));
 
         inv = Bukkit.createInventory(null, 27, PluginUtils.msgNormal + "Warper");
         for(int a : items.keySet())
@@ -49,6 +50,10 @@ public class MinigameMenu implements Listener {
                 e.getWhoClicked().closeInventory();
                 Player p = (Player) e.getWhoClicked();
                 p.teleport(Bukkit.getWorld("world").getSpawnLocation());
+            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Build My Thing")) {
+                e.setCancelled(true);
+                e.getWhoClicked().closeInventory();
+                e.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here (/s)");
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();

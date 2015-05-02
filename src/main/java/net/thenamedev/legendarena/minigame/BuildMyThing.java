@@ -4,10 +4,13 @@ import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.HubWarper;
 import org.bukkit.Bukkit;
+import net.thenamedev.legendarena.utils.BMTWordUtils;
+import org.bukkit.Location;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -19,10 +22,14 @@ public class BuildMyThing {
     private static String word;
     private static HashMap<UUID, Boolean> players = new HashMap<>();
 
+    public static Location getBuilderLocation() {
+        return new Location(Bukkit.getWorld("buildmything"), 0, 100, 0);
+    }
+
     public static void start() {
         if(running)
             return;
-        //
+        running = true;
     }
 
     public static void end() {
@@ -32,14 +39,20 @@ public class BuildMyThing {
             Player p = Bukkit.getPlayer(u);
             leave(p);
         }
-        //
+        running = false;
     }
 
-    public static void generateWord() {
-        //
+    public static String generateWord() {
+        String genWord;
+        Random r = new Random();
+        int a = r.nextInt(BMTWordUtils.words.length);
+        genWord = BMTWordUtils.words[a];
+        return genWord;
     }
 
     public static void join(Player p) {
+        if(running && !Rank.isRanked(p, Rank.VIP))
+            return;
         if(!HubWarper.isExempt(p.getUniqueId())) HubWarper.toggleExemption(p.getUniqueId());
         players.put(p.getUniqueId(), false);
         sendToPlayers("Join > " + Rank.getFormattedName(p));
@@ -60,7 +73,8 @@ public class BuildMyThing {
 
     public static void setBuilder(Player p) {
         removeBuilder();
-        //
+        word = generateWord();
+        
     }
 
     public static void removeBuilder() {

@@ -10,11 +10,31 @@ public class BMTWordUtils {
             "penguin",
             "windows",
             "google",
-            "twitter",
-            "boat",
+            "twitter", //tweeter tweet
+            "boat", //WHY DO YOU KEEP BREAKING GOSH DARNIT
             "grass block",
             "tall grass",
-            ""
+            "question",
+            "sheep",
+            "cow",
+            "pig",
+            "stick",
+            "admin",
+            "diamond",
+            "emerald",
+            "button",
+            "timer",
+            "potato",
+            "couch",
+            "bow",
+            "ruler",
+            "squirrel",
+            "cat",
+            "monster",
+            "circle", //shh... we must never speak of this...
+            "Half Life 3",
+            "pokeball",
+            "gaben" //GABEN IS OUR LOR- oh wait that joke is no longer relevant okay bye
     };
 
 }
