@@ -53,7 +53,7 @@ public class MinigameMenu implements Listener {
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Build My Thing")) {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
-                e.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here (/s)");
+                e.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>");
             } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();

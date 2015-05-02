@@ -18,6 +18,7 @@ public class ParticleCore implements Runnable {
     private static final ArrayList<UUID> enchantEffects = new ArrayList<>();
     private static final ArrayList<UUID> heartEffects = new ArrayList<>();
     private static final ArrayList<UUID> portalEffects = new ArrayList<>();
+    private static final ArrayList<UUID> flameEffects = new ArrayList<>();
     private static final ArrayList<UUID> villagerEffects = new ArrayList<>();
     private static final ArrayList<UUID> villager2Effects = new ArrayList<>();
     private static final ArrayList<UUID> fireworkEffects = new ArrayList<>();
@@ -104,6 +105,9 @@ public class ParticleCore implements Runnable {
             case COLORFULEFFCTS:
                 colorfulEffects.add(Bukkit.getPlayer(player).getUniqueId());
                 break;
+            case FLAME:
+                flameEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                break;
         }
     }
 
@@ -141,7 +145,8 @@ public class ParticleCore implements Runnable {
         ANGRYVILL,
         ENCHANT,
         FIREWORK,
-        COLORFULEFFCTS
+        COLORFULEFFCTS,
+        FLAME
     }
 
     public static class ColorfulEffects implements Runnable {

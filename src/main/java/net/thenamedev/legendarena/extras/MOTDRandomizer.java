@@ -37,12 +37,14 @@ public class MOTDRandomizer {
             "Wake up and smell the ashes.", //half life 2 reference
             "No one is more deserving of a rest", //hl2...
             "Rise and shine, Mr. Freeman. Rise and shine.", //*yawn* hl2..
+            "Wake up, and smell the ashes.", //bla bla bla you get the idea by now, HL2 bla bla bla
+            "Has a subreddit (psst: /r/LegendArena).", //reference to /r/LegendArena
             "Run, would you kindly?", //bioshock (infinite?) reference
             "Just remember to land on one foot.", //portal reference
             "The cake is a lie.", //portal...
             "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
-            ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //default ban message for a LOT of servers (and I mean a damn lot)
+            ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //default ban message for a LOT of servers (and I mean a damned lot (though mainly nubby servers with Essentials as their ban plugin (which, btw, is a fucking bad idea)))
             "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
@@ -51,21 +53,30 @@ public class MOTDRandomizer {
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
             "The catch? Catch-22.", //reference to Catch-22, in which fighting a situation would be accepting it (wikipedia has a slightly better explanation, but obviously don't /fully/ trust it)
             "Uses `./gradlew build`.", //reference to how the plugin is [usually] built
+            "Uses IntelliJ IDEA 14", //reference to what Pixel uses to code the plugin
 
-            // BEGIN MASS SONG REFERENCES
+            // BEGIN SONG REFERENCES THAT HAVE NO REASON TO BE HERE BUT FUCK IT WHO WOULD CARE ANYWAYS, IT'S RANDOM MOTDS, AAAAND NOW I'M RAMBLING IN ALL CAPS, FACK
 
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "When all of your wind, is gone...", //again, reference to the above song
             "The girl that time forgot...", //reference to "Hellberg - The Girl"
             "We no speak Americano", //reference to a song with that exact name
             "We can stay right here and play...", //reference to "Tristam & Braken - Frame of Mind"
-            "Out of sight and out of miiinddd..", //reference to "Au5 ft. Tasha Baxter - Snowblind"
+            "Out of sight and out of miiinddd...", //reference to "Au5 ft. Tasha Baxter - Snowblind"
             "We could be legends...", //reference to "Razihel ft. TeamMate - Legends"
             "Talent goes by...", //reference to "Tristam - Talent Goes By"
             "Stephen Kappa - On Top of the DansGame", //pun on "Stephen [Walking] - On Top of The [World]"
+            "The other day...", //reference to "Insan3lik3 - The Other Day"
+            "These walls are cold and empty...", //reference to "Muzzy - The Destroyer" (Two Thirds remix)
+            "TASTES LIKE CHIKIN", //reference to "Pegboard Nerds - Bassline Kickin" (seriously, the lyrics do kind of sound like this)
+            "I'm giving up on leaving you...", //reference to "Savoy, Sound Remedy & Jojee - Leaving You" (also how many artists is the world record? I wonder...)
 
             //BEGIN VERY STUPIDLY RANDOM MOTDS
 
+            "HYPE TRAIN INBOUND", //THE HYPE TRAIN HAS NO BRAKES, CHOO CHOOO
+            "Pika-pika!",
+            "$ echo \"~/Coding/LA/build.sh\" > ~/.zshrc #Aaaand it's gone", //run that in the command line with ZSH. you'll see what this is. (pro tip: use `>>` to append)
+            "Rekt-22", //shhh...
             "\"When is HL3 released?\" In 2198-- I mean, 2200.",
             "WELCOME, TO THE MONSTERCAT PODCAST.",
             "Hello, world!",
@@ -94,6 +105,8 @@ public class MOTDRandomizer {
     public static String randomize() {
         if(Day.getDate().isAprilFools())
             return "DARUDE - SANDSTORM (April Fools <3)"; //shhh.... don't tell the players...
+        else if(Day.getDate().getDay() == 3 && Day.getDate().getMonth() == Day.MAY)
+            return "Happy birthday, Pixel! <3"; //sh...
         Random r = new Random();
         int msgInt = r.nextInt(motdList.length);
         return motdList[msgInt];

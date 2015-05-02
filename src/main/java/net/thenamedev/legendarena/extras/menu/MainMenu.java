@@ -27,7 +27,7 @@ public class MainMenu implements Listener {
         inv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Main Menu");
 
         inv.setItem(4, MenuCore.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ""));
-        inv.setItem(19, MenuCore.createItem(Material.LEATHER_HELMET, ChatColor.GREEN + "Customization", ""));
+        inv.setItem(19, MenuCore.createItem(Material.STAINED_GLASS_PANE, ChatColor.RED + "Soon[tm]", ""));
         inv.setItem(22, MenuCore.createItem(Material.PAPER, ChatColor.GREEN + "Chat Selector", ""));
         inv.setItem(25, MenuCore.createItem(Material.YELLOW_FLOWER, ChatColor.GREEN + "Particles", ""));
 
@@ -57,11 +57,7 @@ public class MainMenu implements Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Chat")) {
                 ev.getWhoClicked().closeInventory();
                 ((Player) ev.getWhoClicked()).performCommand("chat menu");
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Customization")) {
-                ev.getWhoClicked().closeInventory();
-                ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), PluginUtils.msgNormal + "Customization coming soon[tm]");
-            }
-            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Tokens")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Tokens") || ev.getCurrentItem().getItemMeta().getDisplayName().contains("Soon[tm]")) {
                 ev.getWhoClicked().closeInventory();
                 ev.getWhoClicked().sendMessage(ChatColor.RED + "You actually expected this to do something? That's impressive.");
             }
