@@ -19,9 +19,9 @@ commands:
   gadgets:
     description: Gadgets control command.
     usage: /gadgets [player]
-  tokens:
-    description: Front-end command for the tokens system.
-    usage: /tokens <suboption> [args]
+  emeralds:
+    description: Front-end command for the Emeralds system.
+    usage: /emeralds <suboption> [args]
   staff:
     description: Various staff commands.
     usage: /staff <suboption> [args]

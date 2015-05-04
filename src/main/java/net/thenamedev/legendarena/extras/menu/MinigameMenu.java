@@ -20,9 +20,12 @@ import java.util.HashMap;
  */
 public class MinigameMenu implements Listener {
 
-    Inventory inv;
+    private static Inventory inv;
+    private static boolean init = false;
 
-    public MinigameMenu(Plugin p) {
+    private static void init(Plugin p) {
+        if(init) return;
+
         HashMap<Integer, ItemStack> items = new HashMap<>();
         items.put(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
         items.put(21, MenuCore.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
@@ -32,36 +35,39 @@ public class MinigameMenu implements Listener {
         for(int a : items.keySet())
             inv.setItem(a, items.get(a));
 
-        Bukkit.getPluginManager().registerEvents(this, p);
+        Bukkit.getPluginManager().registerEvents(new MinigameMenu(), p);
+
+        init = true;
     }
 
-    public void show(Player p) {
+    public static void show(Player p) {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         p.closeInventory();
         p.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
-        if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
+    public void onInventoryClick(InventoryClickEvent ev) {
+        if(!ev.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
-            if(e.getCurrentItem().getItemMeta() == null) return;
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                Player p = (Player) e.getWhoClicked();
+            if(ev.getCurrentItem().getItemMeta() == null) return;
+            if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                Player p = (Player) ev.getWhoClicked();
                 p.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Build My Thing")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                e.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>");
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                MainMenu.show((Player) e.getWhoClicked());
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Build My Thing")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                ev.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                MainMenu.show((Player) ev.getWhoClicked());
             }
 
             else { //failsafe
-                e.setCancelled(true);
+                ev.setCancelled(true);
             }
         } catch(Exception ignore) {
             // Ignore the error

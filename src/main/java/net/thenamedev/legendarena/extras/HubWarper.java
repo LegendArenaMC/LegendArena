@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras;
 
+import net.thenamedev.legendapi.utils.Cooldown;
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendarena.extras.menu.MainMenu;
 import org.bukkit.Bukkit;
@@ -8,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +27,7 @@ import java.util.UUID;
 public class HubWarper implements Listener {
 
     private static final List<UUID> exempt = new ArrayList<>();
+    private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
     public static void toggleExemption(UUID p) {
         if(isExempt(p))
@@ -49,10 +53,22 @@ public class HubWarper implements Listener {
     @EventHandler
     public void listenForInteract(PlayerInteractEvent ev) {
         try {
-            if(isExempt(ev.getPlayer().getUniqueId())) return;
-            ev.setCancelled(true);
-            if(ev.getItem().getItemMeta().getDisplayName().contains("Main Menu")) {
+            if(!isExempt(ev.getPlayer().getUniqueId()))
+                ev.setCancelled(true);
+            if(ev.getAction() != Action.RIGHT_CLICK_AIR && ev.getAction() != Action.RIGHT_CLICK_BLOCK)
+                return;
+            if(ev.getItem().equals(getCustomization())) {
+                if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
+                    Cooldown c = cooldown.get(ev.getPlayer().getUniqueId());
+                    if(!c.done()) {
+                        ev.getPlayer().sendMessage(ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )");
+                        return;
+                    }
+                }
                 MainMenu.show(ev.getPlayer());
+                if(!ev.isCancelled())
+                    ev.setCancelled(true);
+                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(2));
             }
         } catch(Exception ex) {
             //ignore

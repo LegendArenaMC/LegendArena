@@ -4,13 +4,6 @@
 #     DEBUG REPORTS IF ENABLED IN THE CODE, WHICH YOU ALMOST
 #     LIKELY DO NOT WANT USERS TO SEE. THE SETTING IS THERE FOR
 #     A REASON, AND THAT REASON IS SANITY CHECKS. ***
-# ----------
-# Also, the updateCheck boolean only requests a json file from the TheNameDev site, just to obtain the latest version and changelog.
-# If you're seriously paranoid, you can look at the source code of the system itself that looks for updates. It's just a bit of code that
-# connects to the `dl.thenamedev.net` site, gets the JSON file it needs, then checks the version from what it received.
-# There's a more detailed explanation of the system in the source of the system for anyone interested.
-# And FYI: until the backend of the plugin-side system is coded, it'll be disabled by default (but if you're a daredevil you can enable it, but please:
-# ONLY DO SO ON TEST SERVERS (hence why it WILL do sanity checks and see if liveServer is set to FALSE first, and if not, bitch like hell.))
 
 motdNotice: "PUBLIC ALPHA"
 liveServer: false

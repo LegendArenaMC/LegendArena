@@ -31,4 +31,24 @@ public class MenuCore {
         return i;
     }
 
+    public static ItemStack createItem(Material m, String n, int amount, String... l) {
+        ItemStack i = new ItemStack(m);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(n);
+        im.setLore(Arrays.asList(l));
+        i.setAmount(amount);
+        i.setItemMeta(im);
+        return i;
+    }
+
+    public static ItemStack createItem(Material m, String n, int amount) {
+        ItemStack i = new ItemStack(m);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(n);
+        im.setLore(Collections.singletonList(ChatColor.BLUE + "Warp to " + n));
+        i.setAmount(amount);
+        i.setItemMeta(im);
+        return i;
+    }
+
 }

@@ -1,6 +1,6 @@
-package net.thenamedev.legendarena.extras.menu;
+package net.thenamedev.legendarena.extras.menu.staff;
 
-import net.thenamedev.legendapi.tokens.TokenCore;
+import net.thenamedev.legendarena.extras.menu.StaffMenu;
 import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,7 +21,7 @@ public class ChatMenu implements Listener {
     private static boolean init = false;
 
     private static void init(Plugin p) {
-        if(init) return; //if we've already initialized the main menu, don't do anything
+        if(init) return; //if we've already initialized the chat menu, don't do anything
         inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Chat Selector");
 
         inv.setItem(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
@@ -42,7 +42,6 @@ public class ChatMenu implements Listener {
         p.openInventory(pInv);
     }
 
-    @SuppressWarnings("unused")
     @EventHandler
     public void onInventoryClick(InventoryClickEvent ev) {
         try {
@@ -62,7 +61,7 @@ public class ChatMenu implements Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
                 ev.setCancelled(true);
                 ev.getWhoClicked().closeInventory();
-                MainMenu.show((Player) ev.getWhoClicked());
+                StaffMenu.show((Player) ev.getWhoClicked());
             }
             ev.setCancelled(true);
         } catch(Exception ignore) {

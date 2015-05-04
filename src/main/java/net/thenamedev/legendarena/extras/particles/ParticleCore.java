@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -14,15 +15,17 @@ import java.util.UUID;
  */
 public class ParticleCore implements Runnable {
 
-    private static final ArrayList<UUID> slimeEffects = new ArrayList<>();
-    private static final ArrayList<UUID> enchantEffects = new ArrayList<>();
-    private static final ArrayList<UUID> heartEffects = new ArrayList<>();
-    private static final ArrayList<UUID> portalEffects = new ArrayList<>();
-    private static final ArrayList<UUID> flameEffects = new ArrayList<>();
-    private static final ArrayList<UUID> villagerEffects = new ArrayList<>();
-    private static final ArrayList<UUID> villager2Effects = new ArrayList<>();
-    private static final ArrayList<UUID> fireworkEffects = new ArrayList<>();
-    private static final ArrayList<UUID> colorfulEffects = new ArrayList<>();
+    private static final List<UUID> slimeEffects = new ArrayList<>();
+    private static final List<UUID> enchantEffects = new ArrayList<>();
+    private static final List<UUID> heartEffects = new ArrayList<>();
+    private static final List<UUID> portalEffects = new ArrayList<>();
+    private static final List<UUID> flameEffects = new ArrayList<>();
+    private static final List<UUID> villagerEffects = new ArrayList<>();
+    private static final List<UUID> villager2Effects = new ArrayList<>();
+    private static final List<UUID> fireworkEffects = new ArrayList<>();
+    private static final List<UUID> colorfulEffects = new ArrayList<>();
+
+    public static final List<UUID> multiParicle = new ArrayList<>();
 
     @SuppressWarnings("deprecation")
     public void run() {
@@ -58,15 +61,8 @@ public class ParticleCore implements Runnable {
         }
         for(final UUID s : villager2Effects) {
             Player p = Bukkit.getPlayer(s);
-            if(p == null) {
-                Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
-                    @Override
-                    public void run() {
-                        villager2Effects.remove(s);
-                    }
-                });
+            if(p == null)
                 continue;
-            }
             ParticleEffect.VILLAGER_ANGRY.display(1, 1, 1, 1, 10, p.getLocation(), 30);
         }
         for(final UUID s : fireworkEffects) {
@@ -79,62 +75,95 @@ public class ParticleCore implements Runnable {
 
     @SuppressWarnings("deprecation")
     public static void addType(String player, Type type) {
-        removePlayer(player);
+        Player p = Bukkit.getPlayer(player);
+        if(!multiParicle.contains(p.getUniqueId()))
+            removePlayer(player);
         switch(type) {
             case HEART:
-                heartEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(heartEffects.contains(p.getUniqueId()))
+                    break;
+                heartEffects.add(p.getUniqueId());
                 break;
             case SLIME:
-                slimeEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(slimeEffects.contains(p.getUniqueId()))
+                    break;
+                slimeEffects.add(p.getUniqueId());
                 break;
             case PORTAL:
-                portalEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(portalEffects.contains(p.getUniqueId()))
+                    break;
+                portalEffects.add(p.getUniqueId());
                 break;
             case ENCHANT:
-                enchantEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(enchantEffects.contains(p.getUniqueId()))
+                    break;
+                enchantEffects.add(p.getUniqueId());
                 break;
             case HAPPYVILL:
-                villagerEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(villagerEffects.contains(p.getUniqueId()))
+                    break;
+                villagerEffects.add(p.getUniqueId());
                 break;
             case ANGRYVILL:
-                villager2Effects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(villager2Effects.contains(p.getUniqueId()))
+                    break;
+                villager2Effects.add(p.getUniqueId());
                 break;
             case FIREWORK:
-                fireworkEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(fireworkEffects.contains(p.getUniqueId()))
+                    break;
+                fireworkEffects.add(p.getUniqueId());
                 break;
             case COLORFULEFFCTS:
-                colorfulEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(colorfulEffects.contains(p.getUniqueId()))
+                    break;
+                colorfulEffects.add(p.getUniqueId());
                 break;
             case FLAME:
-                flameEffects.add(Bukkit.getPlayer(player).getUniqueId());
+                if(flameEffects.contains(p.getUniqueId()))
+                    break;
+                flameEffects.add(p.getUniqueId());
                 break;
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public static boolean hasParticles(String player) {
-        return slimeEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || heartEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || portalEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || enchantEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || villagerEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || villager2Effects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || fireworkEffects.contains(Bukkit.getPlayer(player).getUniqueId())
-                || colorfulEffects.contains(Bukkit.getPlayer(player).getUniqueId());
+    public static int amountOfActiveParticles(Player p) {
+        int ids = 0;
+        if(slimeEffects.contains(p.getUniqueId()))
+            ids++;
+        if(heartEffects.contains(p.getUniqueId()))
+            ids++;
+        if(portalEffects.contains(p.getUniqueId()))
+            ids++;
+        if(enchantEffects.contains(p.getUniqueId()))
+            ids++;
+        if(villager2Effects.contains(p.getUniqueId()))
+            ids++;
+        if(villager2Effects.contains(p.getUniqueId()))
+            ids++;
+        if(fireworkEffects.contains(p.getUniqueId()))
+            ids++;
+        if(colorfulEffects.contains(p.getUniqueId()))
+            ids++;
+        if(flameEffects.contains(p.getUniqueId()))
+            ids++;
+        return ids;
     }
 
     @SuppressWarnings("deprecation")
     public static void removePlayer(String player) {
-        if(!hasParticles(player))
+        Player p = Bukkit.getPlayer(player);
+        if(amountOfActiveParticles(p) < 1)
             return; //sanity check
-        if(slimeEffects.contains(Bukkit.getPlayer(player).getUniqueId())) slimeEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(portalEffects.contains(Bukkit.getPlayer(player).getUniqueId())) portalEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(heartEffects.contains(Bukkit.getPlayer(player).getUniqueId())) heartEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(enchantEffects.contains(Bukkit.getPlayer(player).getUniqueId())) enchantEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(villagerEffects.contains(Bukkit.getPlayer(player).getUniqueId())) villagerEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(villager2Effects.contains(Bukkit.getPlayer(player).getUniqueId())) villager2Effects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(fireworkEffects.contains(Bukkit.getPlayer(player).getUniqueId())) fireworkEffects.remove(Bukkit.getPlayer(player).getUniqueId());
-        if(colorfulEffects.contains(Bukkit.getPlayer(player).getUniqueId())) colorfulEffects.remove(Bukkit.getPlayer(player).getUniqueId());
+        if(slimeEffects.contains(p.getUniqueId())) slimeEffects.remove(p.getUniqueId());
+        if(portalEffects.contains(p.getUniqueId())) portalEffects.remove(p.getUniqueId());
+        if(heartEffects.contains(p.getUniqueId())) heartEffects.remove(p.getUniqueId());
+        if(enchantEffects.contains(p.getUniqueId())) enchantEffects.remove(p.getUniqueId());
+        if(villagerEffects.contains(p.getUniqueId())) villagerEffects.remove(p.getUniqueId());
+        if(villager2Effects.contains(p.getUniqueId())) villager2Effects.remove(p.getUniqueId());
+        if(fireworkEffects.contains(p.getUniqueId())) fireworkEffects.remove(p.getUniqueId());
+        if(colorfulEffects.contains(p.getUniqueId())) colorfulEffects.remove(p.getUniqueId());
+        if(flameEffects.contains(p.getUniqueId())) flameEffects.remove(p.getUniqueId());
     }
 
     public enum Type {
@@ -156,10 +185,8 @@ public class ParticleCore implements Runnable {
                 @SuppressWarnings("deprecation") Player p = Bukkit.getPlayer(s);
                 if(p == null)
                     continue;
-                //Ah, massively overkill amount of particles, how I love you...
                 Random r = new Random();
-                Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 0.5, p.getLocation().getZ());
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+                Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 2.1, p.getLocation().getZ());
                 ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
                 ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
                 ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);

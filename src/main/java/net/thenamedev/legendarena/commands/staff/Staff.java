@@ -20,7 +20,7 @@ public class Staff implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(args.length >= 1 && args[0].equalsIgnoreCase("monstercat")) { //sshh....
-            sender.sendMessage(String.format("%sIrrelevent Jokes %s%s %sThat's a bad kitty!", ChatColor.BLUE, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.LIGHT_PURPLE));
+            sender.sendMessage(String.format("%sIrrelevent Jokes %s%s %sWELCOME, TO THE MONSTERCAT PODCAST", ChatColor.BLUE, ChatColor.GRAY, PluginUtils.chars[1], ChatColor.LIGHT_PURPLE));
             return true;
         }
         if(!Rank.isRanked(sender, Rank.HELPER)) {

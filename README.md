@@ -1,12 +1,7 @@
-# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://travis-ci.org/TheNameDev/LegendArena.svg?branch=dev)](https://travis-ci.org/TheNameDev/LegendArena)
+# [Legend Arena](http://thenamedev.net/legendarena/) [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena/tree/dev.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena/tree/dev)
 
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
-
-Obligatory Sponge Release Freeze Warning (or something along that name)
-====
-
-Once Spigot (both server and API) have been released, the Bukkit version of the plugin will be halted, and all development will be directed to the Sponge version of the plugin.
 
 License
 ====

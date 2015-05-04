@@ -1,9 +1,8 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.LegendAPI;
-import net.thenamedev.legendapi.tokens.TokenCore;
+import net.thenamedev.legendapi.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
-import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.*;
@@ -16,7 +15,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
 import static net.thenamedev.legendapi.utils.PluginUtils.msgWarning;
@@ -58,8 +56,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", msgDebug));
         registerSchedulers();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading TOKENS BACKEND", msgDebug));
-        TokenCore.init();
+            ChatUtils.broadcast(String.format("%sLoading EMERALDS CORE", msgDebug));
+        EmeraldsCore.init();
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
         init = true;
@@ -67,7 +65,7 @@ public class InitUtils {
 
     private static void registerSchedulers() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore.ColorfulEffects(), 5l, 5l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore.ColorfulEffects(), 3l, 3l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sSchedulers loaded!", msgDebug));
@@ -129,8 +127,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /staff...", msgDebug));
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]
         if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /tokens...", msgDebug));
-        Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
+            ChatUtils.broadcast(String.format("%sLoading /emeralds...", msgDebug));
+        Bukkit.getPluginCommand("emeralds").setExecutor(new EmeraldCmd()); //Emeralds command [/emeralds]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chat...", msgDebug));
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/chat, /c]

@@ -2,16 +2,6 @@ general:
   artifacts:
     - build/libs/*
 
-# thanks, Gradle...
-dependencies:
-  override:
-    - . ./dummy.sh
-
-# shh...
-
 test:
   override:
-    - ./gradlew build
-  #post:
-    #- ./gradlew javadoc
-    #- mkdir ./build/out/ && zip ./build/docs/javadoc && mv ./build/libs/*LegendArena*.jar ./build/out/ && mv ./build/docs/**/*.zip ./build/out/
+    - ./build.sh

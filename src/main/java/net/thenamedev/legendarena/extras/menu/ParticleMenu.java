@@ -20,10 +20,13 @@ import org.bukkit.plugin.Plugin;
  */
 public class ParticleMenu implements Listener {
 
-    private Inventory inv;
+    private static Inventory inv;
+    private static boolean init = false;
 
-    public ParticleMenu(Plugin p) {
-        inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Particle Selector");
+    private static void init(Plugin p) {
+        if(init) return;
+
+        inv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Particle Selector");
 
         ItemStack back = MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
 
@@ -35,99 +38,127 @@ public class ParticleMenu implements Listener {
         ItemStack villager2 = MenuCore.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!");
         ItemStack fw = MenuCore.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!");
         ItemStack coloEff = MenuCore.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!");
+        ItemStack flames = MenuCore.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!");
+
         ItemStack off = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.");
 
         inv.setItem(8, off);
         inv.setItem(4, back);
 
-        inv.setItem(18, hearts);
-        inv.setItem(19, slime);
-        inv.setItem(20, portal);
-        inv.setItem(21, enchant);
-        inv.setItem(22, villager);
-        inv.setItem(23, villager2);
-        inv.setItem(24, fw);
-        inv.setItem(25, coloEff);
+        inv.setItem(27, hearts);
+        inv.setItem(28, slime);
+        inv.setItem(29, portal);
+        inv.setItem(30, enchant);
+        inv.setItem(31, villager);
+        inv.setItem(32, villager2);
+        inv.setItem(33, fw);
+        inv.setItem(34, coloEff);
+        inv.setItem(35, flames);
 
-        Bukkit.getPluginManager().registerEvents(this, p);
+        Bukkit.getPluginManager().registerEvents(new ParticleMenu(), p);
+
+        init = true;
     }
 
-    public void show(Player p) {
-        p.openInventory(inv);
+    public static void show(Player p) {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Inventory pInv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Particle Selector");
+        pInv.setContents(inv.getContents());
+        if(ParticleCore.multiParicle.contains(p.getUniqueId()))
+            pInv.setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+        else
+            pInv.setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+        p.openInventory(pInv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
-        if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
+    public void onInventoryClick(InventoryClickEvent ev) {
+        if(!ev.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
-            if(e.getCurrentItem().getItemMeta() == null) return;
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Slime")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            if(ev.getCurrentItem().getItemMeta() == null) return;
+            if(!ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()) && !ev.getCurrentItem().getItemMeta().getDisplayName().contains("Multi-Particle"))
+                ev.getWhoClicked().closeInventory();
+            if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Slime")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "SLIME" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.SLIME);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hearts")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Hearts")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "HEART" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.HEART);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Portal")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Portal")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "PORTAL" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.PORTAL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Enchant")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Enchant")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "ENCHANT" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.ENCHANT);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Happy Villager")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Happy Villager")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "HAPPY VILLAGER" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.HAPPYVILL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Angry Villager")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Angry Villager")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "ANGRY VILLAGER" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.ANGRYVILL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Firework")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Firework")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "FIREWORK SPARK" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.FIREWORK);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Colourful")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Colourful")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "COLOURFUL EFFECTS" + ChatColor.GREEN + " particles.");
                 ParticleCore.addType(p.getName(), Type.COLORFULEFFCTS);
-                e.getWhoClicked().closeInventory();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Flame")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Enabled " + ChatColor.RED + "FLAME" + ChatColor.GREEN + " particles.");
+                ParticleCore.addType(p.getName(), Type.FLAME);
             }
 
-            else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
+            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
                 ActionBarAPI.sendActionBar(p, ChatColor.GREEN + "Disabled particles.");
                 ParticleCore.removePlayer(p.getName());
-                e.getWhoClicked().closeInventory();
+                if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
+                    ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                }
             }
 
-            else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                MainMenu.show((Player) e.getWhoClicked());
+            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                MainMenu.show((Player) ev.getWhoClicked());
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Multi-Particle")) {
+                ev.setCancelled(true);
+                if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
+                    ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), ChatColor.GREEN + "Disabled multi-particle selection!");
+                    ParticleCore.removePlayer(ev.getWhoClicked().getName());
+                    if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()))
+                        ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                } else {
+                    ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), ChatColor.GREEN + "Enabled multi-particle selection!");
+                    ParticleCore.multiParicle.add(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+                }
             }
 
             else { //failsafe
-                e.setCancelled(true);
+                ev.setCancelled(true);
             }
+
         } catch(Exception ignore) {
             // Ignore the error
         }
