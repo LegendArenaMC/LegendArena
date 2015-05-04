@@ -1,3 +1,3 @@
 rootProject.name = 'LegendArena'
-include 'GameManager'
+include 'GameMan'
 
