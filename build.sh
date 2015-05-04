@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./gradlew build && mv GameManager/build/libs/*.jar build/libs/
+./gradlew build && mv GameMan/build/libs/*.jar build/libs/
