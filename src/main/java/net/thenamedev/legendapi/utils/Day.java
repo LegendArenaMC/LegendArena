@@ -46,4 +46,28 @@ public class Day {
     public static final int NOVEMBER = 11;
     public static final int DECEMBER = 12;
 
+    public enum SpecialDays {
+        NEWYEAR(JANUARY, 1),
+        APRILFOOLS(APRIL, 1),
+        HALLOWEEN(OCTOBER, 31),
+        CHRISTMASEVE(DECEMBER, 24),
+        CHRISTMAS(DECEMBER, 25);
+
+        private int month;
+        private int day;
+
+        SpecialDays(int month, int day) {
+            this.month = month;
+            this.day = day;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+    }
+
 }

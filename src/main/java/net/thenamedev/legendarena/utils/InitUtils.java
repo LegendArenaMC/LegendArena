@@ -1,25 +1,20 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.LegendAPI;
-import net.thenamedev.legendapi.tokens.TokenCore;
+import net.thenamedev.legendapi.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
-import net.thenamedev.legendarena.commands.staff.Chat;
-import net.thenamedev.legendarena.commands.staff.Dev;
-import net.thenamedev.legendarena.commands.staff.Gadgets;
-import net.thenamedev.legendarena.commands.staff.Staff;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
-import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
-import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
-import net.thenamedev.legendarena.extras.staffchat.StaffChat;
+import net.thenamedev.legendarena.commands.staff.*;
+import net.thenamedev.legendarena.extras.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.HubWarper;
+import net.thenamedev.legendarena.extras.MOTDRandomizer;
 import net.thenamedev.legendarena.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
 import static net.thenamedev.legendapi.utils.PluginUtils.msgWarning;
@@ -33,6 +28,7 @@ public class InitUtils {
 
     private final static List<String> chat = new ArrayList<>();
     private final static List<String> particles = new ArrayList<>();
+    private final static List<String> stafflist = new ArrayList<>();
 
     public static void pluginInit() {
         if(init)
@@ -45,7 +41,7 @@ public class InitUtils {
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
         if(conf.getBoolean("liveServer")) {
             if(LegendAPI.extraDebug)
-                ChatUtils.broadcast(String.format("%sEXTRA DEBUG IS ON, YET THE LIVE SERVER FLAG IS SET TO TRUE - THIS SHOULD NOT HAPPEN!!!", msgWarning));
+                ChatUtils.broadcast(String.format("%sEXTRA DEBUG IS ON, YET THE LIVE SERVER FLAG IS SET TO TRUE - THIS SHOULD NOT HAPPEN!!!", msgWarning), Rank.ADMIN);
             LegendAPI.extraDebug = false;
         }
         if(LegendAPI.debug)
@@ -60,12 +56,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", msgDebug));
         registerSchedulers();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading TOKENS BACKEND", msgDebug));
-        TokenCore.init();
-        Random r = new Random();
-        if(r.nextInt(200) == 100)
-            //see: http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol#Commands_and_replies
-            ChatUtils.broadcast(String.format("%HTTP/1.1 418 I'm a teapot", PluginUtils.msgWarning));
+            ChatUtils.broadcast(String.format("%sLoading EMERALDS CORE", msgDebug));
+        EmeraldsCore.init();
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
         init = true;
@@ -73,6 +65,7 @@ public class InitUtils {
 
     private static void registerSchedulers() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore.ColorfulEffects(), 3l, 3l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sSchedulers loaded!", msgDebug));
@@ -95,14 +88,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading PLAYERJOINLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading STAFFCHAT...", msgDebug));
-        Bukkit.getPluginManager().registerEvents(new StaffChat(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading WORLDCHANGELISTENER...", msgDebug));
-        Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading BANHAMMERLISTENER...", msgDebug));
-        Bukkit.getPluginManager().registerEvents(new BanHammerListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+            ChatUtils.broadcast(String.format("%sLoading COMMANDFILTER...", msgDebug));
+        Bukkit.getPluginManager().registerEvents(new CommandFilter(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sListeners loaded!", msgDebug));
     }
@@ -128,8 +115,11 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
         if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /troll...", msgDebug));
+        Bukkit.getPluginCommand("troll").setExecutor(new Troll()); //Troll command [/troll]
+        if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
-        Bukkit.getPluginCommand("chickenmayhem").setExecutor(new ChickenMayhemCmd());
+        Bukkit.getPluginCommand("stafflist").setExecutor(new StaffList()); //Staff list command [/stafflist, /sl, /liststaff]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
         Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]
@@ -137,8 +127,8 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading /staff...", msgDebug));
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]
         if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /tokens...", msgDebug));
-        Bukkit.getPluginCommand("tokens").setExecutor(new Token()); //Tokens command [/tokens]
+            ChatUtils.broadcast(String.format("%sLoading /emeralds...", msgDebug));
+        Bukkit.getPluginCommand("emeralds").setExecutor(new EmeraldCmd()); //Emeralds command [/emeralds]
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chat...", msgDebug));
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/chat, /c]
@@ -151,6 +141,9 @@ public class InitUtils {
         if(LegendAPI.extraDebug)
             ChatUtils.broadcast(String.format("%sLoading /chat aliases...", msgDebug));
         Bukkit.getPluginCommand("chat").setAliases(chat);
+        if(LegendAPI.extraDebug)
+            ChatUtils.broadcast(String.format("%sLoading /stafflist aliases...", msgDebug));
+        Bukkit.getPluginCommand("stafflist").setAliases(stafflist);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sCommands loaded!", msgDebug));
     }
@@ -158,6 +151,8 @@ public class InitUtils {
     private static void registerAliases() {
         particles.add("particle");
         particles.add("ps");
+        stafflist.add("sl");
+        stafflist.add("liststaff");
         chat.add("c");
         chat.add("sc");
         if(LegendAPI.debug)

@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.listeners;
 
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendarena.extras.motd.MOTDRandomizer;
+import net.thenamedev.legendarena.extras.MOTDRandomizer;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

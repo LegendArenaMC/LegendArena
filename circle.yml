@@ -1,0 +1,7 @@
+general:
+  artifacts:
+    - build/libs/*
+
+test:
+  override:
+    - ./build.sh

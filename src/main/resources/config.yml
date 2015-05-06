@@ -1,6 +1,9 @@
 # The `liveServer` variable is quite simply just an internal debugging value so I can have sanity checks for production servers.
-# If you're working on the plugin in a development server, you can leave it as-is. Otherwise, please:
-# ***SET LIVESERVER TO TRUE. OTHERWISE THERE WILL BE DETAILED DEBUG REPORTS WHICH YOU ALMOST LIKELY DO NOT WANT USERS TO SEE.***
+# *** If you're working on the plugin in a development server, you can leave it as-is. Otherwise, please: ***
+# *** SET LIVESERVER TO TRUE. OTHERWISE THERE WILL BE DETAILED
+#     DEBUG REPORTS IF ENABLED IN THE CODE, WHICH YOU ALMOST
+#     LIKELY DO NOT WANT USERS TO SEE. THE SETTING IS THERE FOR
+#     A REASON, AND THAT REASON IS SANITY CHECKS. ***
 
 motdNotice: "PUBLIC ALPHA"
 liveServer: false

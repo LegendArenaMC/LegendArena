@@ -10,8 +10,6 @@ import net.thenamedev.legendapi.exceptions.MistakesWereMadeException;
  */
 public class DebugInfo {
 
-    boolean locked = false;
-
     boolean extraDebug = false;
     boolean debug = true;
 
@@ -21,24 +19,6 @@ public class DebugInfo {
 
     public boolean isDebugOn() {
         return debug;
-    }
-
-    public void lock() {
-        if(locked)
-            throw new DoYouEvenKnowWhatYourDoingException("Debug info is already locked!");
-        locked = true;
-    }
-
-    public void toggleExtraDebug() {
-        if(locked)
-            throw new MistakesWereMadeException("Debug modes are locked!");
-        extraDebug = !extraDebug;
-    }
-
-    public void toggleDebug() {
-        if(locked)
-            throw new MistakesWereMadeException("Debug modes are locked!");
-        debug = !debug;
     }
 
 }

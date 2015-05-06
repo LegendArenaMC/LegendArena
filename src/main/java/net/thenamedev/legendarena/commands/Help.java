@@ -14,12 +14,12 @@ import org.bukkit.command.CommandSender;
 public class Help implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask a staff member?", PluginUtils.msgNormal));
+        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask an admin?", PluginUtils.msgNormal));
         return true;
     }
     
     public static String getFormattedHelpMsg(String cmd, String desc) {
-        return ChatColor.YELLOW + cmd + " " + ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " " + desc;
+        return ChatColor.YELLOW + cmd + " " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD  + "//" + ChatColor.GREEN + " " + desc;
     }
 
     public static String getFormattedHeader(String header) {

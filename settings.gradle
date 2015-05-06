@@ -1,0 +1,5 @@
+rootProject.name = 'LegendArena'
+include 'GameMan'
+includeFlat 'Sponge-Plugin'
+findProject(':Sponge-Plugin')?.name = 'SpongePlugin'
+

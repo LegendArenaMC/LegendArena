@@ -1,6 +1,0 @@
-language: java
-sudo: false
-script: gradle build
-jdk: openjdk7
-notifications:
-  email: false
