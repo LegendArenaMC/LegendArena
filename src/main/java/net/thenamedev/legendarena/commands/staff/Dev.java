@@ -77,6 +77,7 @@ public class Dev implements CommandExecutor {
                 sender.sendMessage(Help.getFormattedHelpMsg("/dev menutest <slots>", "Opens a testing menu with a specified amount of slots."));
                 return true;
             }
+
             try {
                 //we don't give a shit about the return for this call, unless it's an exception
                 //noinspection ResultOfMethodCallIgnored
@@ -85,6 +86,7 @@ public class Dev implements CommandExecutor {
                 sender.sendMessage(ChatColor.RED + "The input \"" + args[1] + "\" is not an integer!");
                 return true;
             }
+
             try {
                 TestMenu testing = new TestMenu();
                 testing.init(Integer.parseInt(args[1]));

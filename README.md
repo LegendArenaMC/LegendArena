@@ -3,6 +3,10 @@
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
 
+# IMPORTANT - READ ME
+
+The Bukkit plugin is now frozen, and will not receive any new features. The [Sponge](https://spongepowered.org/) version of the plugin can be found [here](https://github.com/LegendArenaMC/Sponge-Plugin).
+
 License
 ====
 

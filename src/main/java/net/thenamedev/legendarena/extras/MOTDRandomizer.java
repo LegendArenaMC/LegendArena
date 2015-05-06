@@ -1,7 +1,6 @@
 package net.thenamedev.legendarena.extras;
 
 import net.thenamedev.legendapi.utils.Day;
-import net.thenamedev.legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -44,7 +43,7 @@ public class MOTDRandomizer {
             "The cake is a lie.", //portal...
             "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you get the idea by now
-            ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //default ban message for a LOT of servers (and I mean a damned lot (though mainly nubby servers with Essentials as their ban plugin (which, btw, is a fucking bad idea)))
+            ChatColor.DARK_RED + "The ban hammer has spoken!" + ChatColor.LIGHT_PURPLE, //inb4whydidyoubanmeisawitonthemotd
             "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
             "Cannot be shellshocked.", //reference to Shellshock, a Bash vulnerability
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
@@ -75,9 +74,10 @@ public class MOTDRandomizer {
 
             "HYPE TRAIN INBOUND", //THE HYPE TRAIN HAS NO BRAKES, CHOO CHOOO
             "Pika-pika!",
-            "$ echo \"~/Coding/LA/build.sh\" > ~/.zshrc #Aaaand it's gone", //run that in the command line with ZSH. you'll see what this is. (pro tip: use `>>` to append)
+            "$ echo \"alias 'build=~/Coding/LA/build.sh'\" > ~/.zshrc", //run that in the command line with ZSH. you'll see what this is. (pro tip: use `>>` to append)
+            "Aaand it's gone.",
             "Rekt-22", //shhh...
-            "\"When is HL3 released?\" In 2198-- I mean, 2200.",
+            "\"When is HL3 released?\" In 2198-- wait, I mean 2200.",
             "WELCOME, TO THE MONSTERCAT PODCAST.",
             "Hello, world!",
             "No, Intel is not a person.",

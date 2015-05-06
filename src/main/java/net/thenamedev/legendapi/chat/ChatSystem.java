@@ -3,6 +3,7 @@ package net.thenamedev.legendapi.chat;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -70,6 +71,11 @@ public class ChatSystem {
 
     public static void msg(Player p, String msg) {
         if(getChannel(p) == null) {
+            if(LegendArena.isChatMuted())
+                if(!Rank.isRanked(p, Rank.HELPER)) {
+                    p.sendMessage(PluginUtils.msgError + "Chat is currently muted!");
+                    return;
+                }
             ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
             return;
         }

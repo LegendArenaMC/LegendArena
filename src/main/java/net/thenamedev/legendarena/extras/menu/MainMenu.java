@@ -3,6 +3,7 @@ package net.thenamedev.legendarena.extras.menu;
 import net.thenamedev.legendapi.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendarena.extras.menu.util.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,7 +17,7 @@ import org.bukkit.plugin.Plugin;
 /**
  * @author ThePixelDev
  */
-public class MainMenu implements Listener {
+public class MainMenu implements Listener, Menu {
 
     private static Inventory inv;
     private static boolean init = false;
@@ -33,7 +34,7 @@ public class MainMenu implements Listener {
         init = true;
     }
 
-    public static void show(Player p) {
+    public void show(Player p) {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Main Menu");
         pInv.setContents(inv.getContents());

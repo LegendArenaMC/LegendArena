@@ -119,6 +119,10 @@ public class Troll implements CommandExecutor {
             }
         }
 
+        else if(args[0].equalsIgnoreCase("menu")) {
+            //
+        }
+
         else {
             help(sender);
             return true;
