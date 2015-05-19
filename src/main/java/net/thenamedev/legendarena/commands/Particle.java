@@ -19,8 +19,8 @@ public class Particle implements CommandExecutor {
     private HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!Rank.isRanked(sender, Rank.VIP)) {
-            sender.sendMessage(Rank.noPermissions(Rank.VIP));
+        if(!Rank.isRanked(sender, Rank.MEMBERPLUS)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MEMBERPLUS));
             return true;
         }
         if(cooldown.containsKey(((Player) sender).getUniqueId()) && !cooldown.get(((Player) sender).getUniqueId()).done()) {

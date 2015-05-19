@@ -3,7 +3,7 @@ package net.thenamedev.legendarena.commands.staff;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendapi.utils.RektUtils;
 import net.thenamedev.legendarena.commands.Help;
-import net.thenamedev.legendarena.extras.ActionBarAPI;
+import net.thenamedev.legendapi.utils.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,7 +26,7 @@ public class Troll implements CommandExecutor {
 
     public static final List<UUID> sheepleTroll = new ArrayList<>();
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation") //shut up, Bukkit.getPlayer(String) warnings. please. SHUT UP FOR FUCKS SAKES, SHUT UP SHUT UP SHUT THE FUCK UP </rant>
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!Rank.isRanked(sender, Rank.SRMOD)) {
             sender.sendMessage(Rank.noPermissions(Rank.SRMOD));
@@ -47,9 +47,7 @@ public class Troll implements CommandExecutor {
                     return true;
                 }
                 ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "PMC" + ChatColor.GREEN + ".");
-                p.chat("Hi, I'm from PMC, and I nee-- AAAAHHH, MY SPLEEEEEENN!");
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1000000, 0, true, false));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 1000000, 0, true, false));
+                p.chat("MY SPLEEEEEENN!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1000000, 10, true, false));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 10, true, false));
             }
@@ -117,10 +115,6 @@ public class Troll implements CommandExecutor {
                     p.removePotionEffect(potion.getType());
                 ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Stopped all trolls on " + p.getName() + ".");
             }
-        }
-
-        else if(args[0].equalsIgnoreCase("menu")) {
-            //
         }
 
         else {

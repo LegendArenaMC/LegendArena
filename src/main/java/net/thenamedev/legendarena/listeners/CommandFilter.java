@@ -17,7 +17,6 @@ public class CommandFilter implements Listener {
         String cmd = ev.getMessage().toLowerCase();
         if(cmd.startsWith("/pl ") || cmd.equals("/pl") || cmd.startsWith("/plugins ") || cmd.equals("/plugins") || cmd.startsWith("/bukkit:pl ") || cmd.equals("/bukkit:pl") || cmd.startsWith("/bukkit:plugins ") || cmd.equals("/bukkit:plugins")) {
             ev.setCancelled(true); //cancel the event
-            ev.getPlayer().chat("I am an idiot for trying to view the plugins!"); //call the player out by making them say this in chat
             ev.getPlayer().kickPlayer("I am an idiot for trying to view the plugins!"); //and kick them for being a giant douchebag and trying to use /pl, /plugins, et cetera
         }
     }

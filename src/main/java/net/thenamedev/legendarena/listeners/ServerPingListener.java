@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.listeners;
 
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendarena.extras.MOTDRandomizer;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -15,7 +15,12 @@ public class ServerPingListener implements Listener {
     @EventHandler
     public void onPingEvent(ServerListPingEvent ev) {
         String msg = MOTDRandomizer.randomize();
-        ev.setMotd(String.format("%s%s %s", PluginUtils.msgNormal, msg, ChatColor.YELLOW + "{" + MOTDRandomizer.getNotice().toUpperCase() + "}"));
+        ChatColor randomColour = ChatUtils.getRandomColour();
+        ChatColor randomColour2 = ChatUtils.getRandomColour();
+        if(randomColour == randomColour2)
+            randomColour2 = ChatUtils.getRandomColour();
+        ev.setMotd(randomColour + "Legend Arena " + ChatColor.YELLOW + "{" + MOTDRandomizer.getNotice().toUpperCase() + "}" + randomColour
+                + "\n" + randomColour2 + MOTDRandomizer.getRandomMOTD());
     }
 
 }

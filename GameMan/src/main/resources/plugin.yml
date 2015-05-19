@@ -1,5 +1,0 @@
-main: net.thenamedev.gamemanager.GameManager
-name: GameManager
-version: 1.0
-author: ThePixelDev
-description: "§dMinigame manager API."

@@ -24,7 +24,7 @@ public class Cooldown {
     }
 
     public String getTimeRemaining() {
-        return PluginUtils.msgNormal + "Cooldown: " + ChatColor.YELLOW + remainingSeconds() + ChatColor.LIGHT_PURPLE + "/" + ChatColor.YELLOW + seconds + "s";
+        return ChatUtils.Messages.getCustomMsg("Cooldown") + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.BLUE + seconds + "s";
     }
 
 }

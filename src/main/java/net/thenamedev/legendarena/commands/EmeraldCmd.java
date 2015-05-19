@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.commands;
 
-import net.thenamedev.legendapi.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
@@ -35,7 +36,7 @@ public class EmeraldCmd implements CommandExecutor {
         } else {
             if(args[0].equalsIgnoreCase("info")) {
                 sender.sendMessage(Help.getFormattedHeader("Your Emerald Info"));
-                sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getTokens((Player) sender));
+                sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds((Player) sender));
             } else if(args[0].equalsIgnoreCase("add")) {
                 if(!Rank.isRanked(sender, Rank.ADMIN)) {
                     sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
@@ -57,7 +58,7 @@ public class EmeraldCmd implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Adding " + add + " emerald(s)...");
-                    EmeraldsCore.addTokens(p, add, true);
+                    EmeraldsCore.addEmeralds(p, add, true);
                 }
             } else if(args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("take")) {
                 if(!Rank.isRanked(sender, Rank.ADMIN)) {
@@ -79,12 +80,12 @@ public class EmeraldCmd implements CommandExecutor {
                         sender.sendMessage(ChatColor.RED + "\"" + args[2] + "\" is not an integer!");
                         return true;
                     }
-                    if(remove > EmeraldsCore.getTokens(p)) {
+                    if(remove > EmeraldsCore.getEmeralds(p)) {
                         sender.sendMessage(ChatColor.RED + "That player does not have that many emeralds!");
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Removing " + remove + " emerald(s)...");
-                    EmeraldsCore.removeTokens(p, remove, true);
+                    EmeraldsCore.removeEmeralds(p, remove, true);
                 }
             } else if(args[0].equalsIgnoreCase("reset")) {
                 if(!Rank.isRanked(sender, Rank.ADMIN)) {
@@ -96,7 +97,7 @@ public class EmeraldCmd implements CommandExecutor {
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(Rank.isRanked(p, Rank.SRMOD)) {
-                        sender.sendMessage(PluginUtils.msgWarning + "You must be really fun at parties.");
+                        sender.sendMessage(ChatUtils.getCustomMsg("Staff") + "You must be really fun at parties.");
                         return true;
                     }
                     if(p == null) {
@@ -104,7 +105,7 @@ public class EmeraldCmd implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Setting player's emerald count to zero...");
-                    EmeraldsCore.resetTokens(p, true, Rank.getFormattedName((Player) sender));
+                    EmeraldsCore.resetEmeralds(p, true, ChatUtils.getFormattedName((Player) sender));
                 }
             }
 

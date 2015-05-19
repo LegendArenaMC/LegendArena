@@ -32,9 +32,13 @@ public enum Rank {
      */
     HELPER,
     /**
-     * VIP rank.
+     * "YouTuber" rank.
      */
-    VIP,
+    YOUTUBE,
+    /**
+     * "Donor" rank. Only gives cosmetic options.
+     */
+    MEMBERPLUS,
     /**
      * Default user rank. This is only here as a "catch-all return", really.
      */
@@ -48,7 +52,7 @@ public enum Rank {
     public static boolean isRanked(CommandSender p, Rank r) {
         switch(r) {
             case FOUNDER:
-                return (p.getName().equals("ThePixelDev") || p.getName().equals("ThePixelDevin"));
+                return (p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms"));
             case ADMIN:
                 return p.hasPermission("legendarena.rank.admin");
             case SRMOD:
@@ -57,8 +61,10 @@ public enum Rank {
                 return p.hasPermission("legendarena.rank.mod");
             case HELPER:
                 return p.hasPermission("legendarena.rank.helper");
-            case VIP:
-                return p.hasPermission("legendarena.rank.vip");
+            case YOUTUBE:
+                return p.hasPermission("legendarena.rank.yt");
+            case MEMBERPLUS:
+                return p.hasPermission("legendarena.rank.memberplus");
 
             default:
                 return false;
@@ -75,7 +81,8 @@ public enum Rank {
         else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
         else if(p.hasPermission("legendarena.rank.helper")) return HELPER;
-        else if(p.hasPermission("legendarena.rank.vip")) return VIP;
+        else if(p.hasPermission("legendarena.rank.yt")) return YOUTUBE;
+        else if(p.hasPermission("legendarena.rank.memeberplus")) return MEMBERPLUS;
         else return MEMBER;
     }
 
@@ -87,83 +94,42 @@ public enum Rank {
     public static String getRankPrefix(Rank r) {
         switch(r) {
             case FOUNDER:
-                return ChatColor.DARK_RED + "" + ChatColor.BOLD + "Founder";
+                return ChatColor.DARK_RED + "" + ChatColor.BOLD + "FOUNDER";
             case ADMIN:
-                return ChatColor.DARK_RED + "Admin";
+                return ChatColor.DARK_RED + "ADMIN";
             case SRMOD:
-                return ChatColor.DARK_RED + "SrMod";
+                return ChatColor.DARK_RED + "SRMOD";
             case MOD:
-                return ChatColor.RED + "Mod";
+                return ChatColor.RED + "MOD";
             case HELPER:
-                return ChatColor.BLUE + "Helper";
-            case VIP:
-                return ChatColor.GOLD + "VIP";
+                return ChatColor.RED + "HELPER";
+            case YOUTUBE:
+                return ChatColor.GOLD + "YT";
+            case MEMBERPLUS:
+                return ChatColor.BLUE + "MEMBER+";
 
             default:
-                return ChatColor.GRAY + "Member";
-        }
-    }
-
-    /**
-     * Gets a colored name, depending on the player's rank.
-     * @param p The player in question
-     * @return The player's colored name, depending on their rank.
-     */
-    public static String getFormattedName(Player p) {
-        Rank r = getRank(p);
-        switch(r) {
-            case FOUNDER:
-                return ChatUtils.randomRainbow(p.getName());
-            case ADMIN:
-                return ChatColor.DARK_RED + p.getName();
-            case SRMOD:
-                return ChatColor.DARK_RED + p.getName();
-            case MOD:
-                return ChatColor.RED + p.getName();
-            case HELPER:
-                return ChatColor.BLUE + p.getName();
-            case VIP:
-                return ChatColor.GOLD + p.getName();
-            default:
-                return ChatColor.GRAY + p.getName();
+                return ChatColor.GRAY + "";
         }
     }
 
     public static String noPermissions(Rank r) {
         switch(r) {
             case FOUNDER:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "FOUNDER";
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "FOUNDER";
             case ADMIN:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "ADMIN";
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "ADMIN";
             case SRMOD:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "SRMOD";
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "SRMOD";
             case MOD:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "MOD";
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "MOD";
             case HELPER:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "HELPER";
-            case VIP:
-                return PluginUtils.msgWarning + "Minimum rank required: " + ChatColor.GOLD + "VIP";
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "HELPER";
+            case YOUTUBE:
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "YT";
+            case MEMBERPLUS:
+                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "MEMBER+";
         }
         return null;
     }
-
-    public static String getFormattedName(String name, Rank rank) {
-        switch(rank) {
-            case FOUNDER:
-                return ChatUtils.randomRainbow(name);
-            case ADMIN:
-                return ChatColor.BLUE + name;
-            case SRMOD:
-                return ChatColor.BLUE + name;
-            case MOD:
-                return ChatColor.AQUA + name;
-            case HELPER:
-                return ChatColor.AQUA + name;
-            case VIP:
-                return ChatColor.GOLD + name;
-            default:
-                return ChatColor.GRAY + name;
-        }
-    }
-
 }

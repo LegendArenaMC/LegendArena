@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.minigame;
 
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.HubWarper;
 import org.bukkit.Bukkit;
@@ -51,23 +51,22 @@ public class BuildMyThing {
     }
 
     public static void join(Player p) {
-        if(running && !Rank.isRanked(p, Rank.VIP))
+        if(running && !Rank.isRanked(p, Rank.YOUTUBE))
+            //TODO: Implement spectator system
             return;
         if(!HubWarper.isExempt(p.getUniqueId())) HubWarper.toggleExemption(p.getUniqueId());
         players.put(p.getUniqueId(), false);
-        sendToPlayers("Join > " + Rank.getFormattedName(p));
     }
 
     public static void leave(Player p) {
         if(HubWarper.isExempt(p.getUniqueId())) HubWarper.toggleExemption(p.getUniqueId());
         players.remove(p.getUniqueId());
-        sendToPlayers("Quit > " + Rank.getFormattedName(p));
     }
 
     public static void sendToPlayers(String msg) {
         for(UUID u : players.keySet()) {
             Player p = Bukkit.getPlayer(u);
-            p.sendMessage(PluginUtils.msgNormal + "[BMT] " + ChatColor.GREEN + msg);
+            p.sendMessage(ChatUtils.getCustomMsg("BMT") + msg);
         }
     }
 

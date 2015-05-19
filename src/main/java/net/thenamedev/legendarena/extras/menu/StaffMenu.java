@@ -1,8 +1,7 @@
 package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendapi.chat.ChatSystem;
+import net.thenamedev.legendapi.core.chat.ChatSystem;
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -36,7 +35,7 @@ public class StaffMenu implements Listener {
         Inventory pInv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Staff Menu");
         pInv.setContents(inv.getContents());
         pInv.setItem(19, MenuCore.createItem(Material.GLASS, ChatColor.GREEN + "Chat Selector", ChatColor.BLUE + "Current channel: " + ChatColor.RED + (ChatSystem.getChannel(p) == null ? "PUBLIC" : ChatSystem.getChannel(p))));
-        pInv.setItem(22, MenuCore.createItem(Material.BARRIER, ChatColor.GREEN + "Global Mute", ChatColor.BLUE + "Current status: " + ChatColor.RED + (LegendArena.isChatMuted() ? "ON" : "OFF") + ChatColor.GRAY + " (click to toggle)"));
+        pInv.setItem(22, MenuCore.createItem(Material.BARRIER, ChatColor.GREEN + "Global Mute", ChatColor.BLUE + "Current status: " + ChatColor.RED + (ChatSystem.isChatMuted() ? "ON" : "OFF") + ChatColor.GRAY + " (click to toggle)"));
         p.openInventory(pInv);
     }
 
@@ -52,7 +51,7 @@ public class StaffMenu implements Listener {
                 MainMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Global Mute")) {
                 ((Player) ev.getWhoClicked()).performCommand("staff chat globalmute");
-                ev.getInventory().setItem(22, MenuCore.createItem(Material.BARRIER, ChatColor.GREEN + "Global Mute", ChatColor.BLUE + "Current status: " + ChatColor.RED + (LegendArena.isChatMuted() ? "ON" : "OFF") + ChatColor.GRAY + " (click to toggle)"));
+                ev.getInventory().setItem(22, MenuCore.createItem(Material.BARRIER, ChatColor.GREEN + "Global Mute", ChatColor.BLUE + "Current status: " + ChatColor.RED + (ChatSystem.isChatMuted() ? "ON" : "OFF") + ChatColor.GRAY + " (click to toggle)"));
             }
             ev.setCancelled(true);
         } catch(Exception ignore) {

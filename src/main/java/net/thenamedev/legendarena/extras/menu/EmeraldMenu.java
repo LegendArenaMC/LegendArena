@@ -1,6 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendapi.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,7 +35,7 @@ public class EmeraldMenu implements Listener {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Emeralds Menu");
         pInv.setContents(inv.getContents());
-        pInv.setItem(30, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getTokens(p) + ChatColor.YELLOW + " emeralds!"));
+        pInv.setItem(30, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         p.openInventory(pInv);
     }
 

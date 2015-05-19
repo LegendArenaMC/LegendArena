@@ -19,11 +19,11 @@ public class Help implements CommandExecutor {
     }
     
     public static String getFormattedHelpMsg(String cmd, String desc) {
-        return ChatColor.YELLOW + cmd + " " + ChatColor.DARK_GRAY + "" + ChatColor.BOLD  + "//" + ChatColor.GREEN + " " + desc;
+        return String.format("%s%s %s%s//%s %s", ChatColor.YELLOW, cmd, ChatColor.DARK_GRAY, ChatColor.BOLD, ChatColor.GREEN, desc);
     }
 
     public static String getFormattedHeader(String header) {
-        return ChatColor.LIGHT_PURPLE + "-•- [" + ChatColor.LIGHT_PURPLE + ChatColor.stripColor(header) + ChatColor.LIGHT_PURPLE + "] -•-";
+        return String.format("%s-•- [%s%s%s] -•-", ChatColor.LIGHT_PURPLE, ChatColor.LIGHT_PURPLE, ChatColor.stripColor(header), ChatColor.LIGHT_PURPLE);
     }
 
 }

@@ -102,7 +102,12 @@ public class MOTDRandomizer {
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?" //don't mind me, just poking fun at the butthurt fanboys
     };
 
+    @Deprecated
     public static String randomize() {
+        return getRandomMOTD();
+    }
+
+    public static String getRandomMOTD() {
         if(Day.getDate().isAprilFools())
             return "DARUDE - SANDSTORM (April Fools <3)"; //shhh.... don't tell the players...
         else if(Day.getDate().getDay() == 3 && Day.getDate().getMonth() == Day.MAY)

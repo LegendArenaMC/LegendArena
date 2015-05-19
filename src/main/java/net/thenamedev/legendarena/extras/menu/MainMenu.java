@@ -1,8 +1,7 @@
 package net.thenamedev.legendarena.extras.menu;
 
-import net.thenamedev.legendapi.emeralds.EmeraldsCore;
-import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -37,7 +36,7 @@ public class MainMenu implements Listener {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Main Menu");
         pInv.setContents(inv.getContents());
-        pInv.setItem(19, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getTokens(p) + ChatColor.YELLOW + " emeralds!"));
+        pInv.setItem(19, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         if(Rank.isRanked(p, Rank.HELPER)) {
             pInv.setItem(22, MenuCore.createItem(Material.PAPER, ChatColor.GREEN + "Staff Tools", ""));
         }
@@ -52,6 +51,12 @@ public class MainMenu implements Listener {
                 ev.getWhoClicked().closeInventory();
                 MinigameMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Particles")) {
+                if(Rank.isRanked(ev.getWhoClicked(), Rank.MEMBERPLUS)) {
+                    if(!(EmeraldsCore.getEmeralds((Player) ev.getWhoClicked()) > 15)) {
+                        ev.getWhoClicked().closeInventory();
+                        ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!");
+                    }
+                }
                 ev.getWhoClicked().closeInventory();
                 ParticleMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Staff Tools")) {

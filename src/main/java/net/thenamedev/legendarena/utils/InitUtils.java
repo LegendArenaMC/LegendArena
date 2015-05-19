@@ -1,9 +1,8 @@
 package net.thenamedev.legendarena.utils;
 
 import net.thenamedev.legendapi.LegendAPI;
-import net.thenamedev.legendapi.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.ChatUtils;
-import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.commands.*;
 import net.thenamedev.legendarena.commands.staff.*;
 import net.thenamedev.legendarena.extras.particles.ParticleCore;
@@ -16,8 +15,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.thenamedev.legendapi.utils.PluginUtils.msgDebug;
-import static net.thenamedev.legendapi.utils.PluginUtils.msgWarning;
+import static net.thenamedev.legendapi.utils.ChatUtils.Messages.*;
 
 /**
  * @author ThePixelDev
@@ -29,37 +27,33 @@ public class InitUtils {
     private final static List<String> chat = new ArrayList<>();
     private final static List<String> particles = new ArrayList<>();
     private final static List<String> stafflist = new ArrayList<>();
+    private final static List<String> punish = new ArrayList<>();
 
     public static void pluginInit() {
         if(init)
             return;
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading CONFIG", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading CONFIG", debugMsg));
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
         Bukkit.getPluginManager().getPlugin("LegendArena").saveConfig();
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
-        if(conf.getBoolean("liveServer")) {
-            if(LegendAPI.extraDebug)
-                ChatUtils.broadcast(String.format("%sEXTRA DEBUG IS ON, YET THE LIVE SERVER FLAG IS SET TO TRUE - THIS SHOULD NOT HAPPEN!!!", msgWarning), Rank.ADMIN);
-            LegendAPI.extraDebug = false;
-        }
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", msgDebug, LegendAPI.apiVersion, LegendAPI.versionName));
+            ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", debugMsg, LegendAPI.apiVersion, LegendAPI.versionName));
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading COMMANDS", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading COMMANDS", debugMsg));
         registerCommands();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading LISTENERS", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading LISTENERS", debugMsg));
         registerListeners();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading SCHEDULERS", debugMsg));
         registerSchedulers();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading EMERALDS CORE", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading EMERALDS CORE", debugMsg));
         EmeraldsCore.init();
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sDone loading!", msgDebug));
+            ChatUtils.broadcast(String.format("%sDone loading!", debugMsg));
         init = true;
     }
 
@@ -68,84 +62,44 @@ public class InitUtils {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore.ColorfulEffects(), 3l, 3l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sSchedulers loaded!", msgDebug));
+            ChatUtils.broadcast(String.format("%sSchedulers loaded!", debugMsg));
     }
 
     private static void registerListeners() {
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading SERVERPINGLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading HUBWARPER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading CHATLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading PLAYERMOVELISTENER...", msgDebug));
+        Bukkit.getPluginManager().registerEvents(new PlayerDamageListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading PLAYERJOINLISTENER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading COMMANDFILTER...", msgDebug));
         Bukkit.getPluginManager().registerEvents(new CommandFilter(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sListeners loaded!", msgDebug));
+            ChatUtils.broadcast(String.format("%sListeners loaded!", debugMsg));
     }
 
     private static void registerCommands() {
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading aliases...", msgDebug));
+            ChatUtils.broadcast(String.format("%sLoading aliases...", debugMsg));
         registerAliases();
         // Commands
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /firework...", msgDebug));
         Bukkit.getPluginCommand("firework").setExecutor(new Firework()); //Firework command [/firework, /fw]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /help...", msgDebug));
         Bukkit.getPluginCommand("help").setExecutor(new Help()); //Help command [/help]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /gadgets...", msgDebug));
         Bukkit.getPluginCommand("gadgets").setExecutor(new Gadgets()); //Hub gadgets toggle command [/gadgets]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /particles...", msgDebug));
         Bukkit.getPluginCommand("particles").setExecutor(new Particle()); //Particle selector command [/particles, /particle, /ps]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /warp...", msgDebug));
         Bukkit.getPluginCommand("warp").setExecutor(new Warp()); //Warp command [/warp]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /troll...", msgDebug));
         Bukkit.getPluginCommand("troll").setExecutor(new Troll()); //Troll command [/troll]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /chickenmayhem...", msgDebug));
         Bukkit.getPluginCommand("stafflist").setExecutor(new StaffList()); //Staff list command [/stafflist, /sl, /liststaff]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /dev...", msgDebug));
         Bukkit.getPluginCommand("dev").setExecutor(new Dev()); //Dev Tools command [/dev]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /staff...", msgDebug));
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /emeralds...", msgDebug));
         Bukkit.getPluginCommand("emeralds").setExecutor(new EmeraldCmd()); //Emeralds command [/emeralds]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /chat...", msgDebug));
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/chat, /c]
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sDone loading main commands; now loading aliases...", msgDebug));
+        Bukkit.getPluginCommand("explodeallthethings").setExecutor(new ExplodeAllTheThings()); //Explodeallthethings command
         // Aliases
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /particles aliases...", msgDebug));
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /chat aliases...", msgDebug));
-        Bukkit.getPluginCommand("chat").setAliases(chat);
-        if(LegendAPI.extraDebug)
-            ChatUtils.broadcast(String.format("%sLoading /stafflist aliases...", msgDebug));
-        Bukkit.getPluginCommand("stafflist").setAliases(stafflist);
+        Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
+        Bukkit.getPluginCommand("stafflist").setAliases(stafflist); //Stafflist aliases
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sCommands loaded!", msgDebug));
+            ChatUtils.broadcast(String.format("%sCommands loaded!", debugMsg));
     }
 
     private static void registerAliases() {
@@ -156,7 +110,7 @@ public class InitUtils {
         chat.add("c");
         chat.add("sc");
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sAliases loaded!", msgDebug));
+            ChatUtils.broadcast(String.format("%sAliases loaded!", debugMsg));
     }
 
 }

@@ -1,7 +1,7 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.extras.ActionBarAPI;
+import net.thenamedev.legendapi.utils.ActionBarAPI;
 import net.thenamedev.legendarena.extras.particles.ParticleCore;
 import net.thenamedev.legendarena.extras.particles.ParticleCore.Type;
 import org.bukkit.Bukkit;

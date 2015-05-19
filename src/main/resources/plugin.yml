@@ -3,8 +3,8 @@ name: LegendArena
 version: 1.0A
 website: http://reddit.com/r/LegendArena
 author: ThePixelDev
-authors: [Legend Arena Devs, FOSS Contributors]
-description: "§dLegend Arena plugin. §rThat's it. No, really, that's all there is to this plugin."
+authors: [FOSS Contributors]
+description: "§cLegend Arena custom plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"
 commands:
   firework:
     description: Fireworks! Yaaay!
@@ -40,3 +40,10 @@ commands:
     aliases: [sl, liststaff]
   troll:
     description: Trololololololololol, lololo!
+  explodeallthethings:
+    description: EXPLODE ALL THE THINGS! MWHAHAHAHAHA- *cough*
+  fly:
+    description: Magic.
+  punish:
+    description: Banned!
+    aliases: [warn, kick, ban, tempban]
