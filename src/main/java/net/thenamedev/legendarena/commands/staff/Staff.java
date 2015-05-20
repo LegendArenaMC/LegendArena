@@ -43,11 +43,6 @@ public class Staff implements CommandExecutor {
                     sender.sendMessage(Help.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."));
                 else
                     Info.run(sender, args);
-            } else if(args[0].equalsIgnoreCase("freeze")) {
-                if(args.length == 1)
-                    sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
-                else
-                    Freeze.run(sender, args);
             } else if(args[0].equalsIgnoreCase("motd")) {
                 MOTDList.run(sender, args);
             } else if(args[0].equalsIgnoreCase("chat")) {
@@ -66,12 +61,7 @@ public class Staff implements CommandExecutor {
                         sender.sendMessage(ChatColor.YELLOW + "- GLOBALMUTE");
                     }
                 }
-            } else if(args[0].equalsIgnoreCase("fly")) {
-                Fly.run(sender);
-            } else if(args[0].equalsIgnoreCase("warn")) {
-                WarnCmd.run(sender, args);
             }
-
             else {
                 help(sender, "unknown");
             }
@@ -85,8 +75,6 @@ public class Staff implements CommandExecutor {
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [1/1] }.----");
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff help [page]", "Displays this menu, or optionally, a help page."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."));
-                sender.sendMessage(Help.getFormattedHelpMsg("/staff freeze <player>", "Freezes (or unfreezes) a specified player."));
-                sender.sendMessage(Help.getFormattedHelpMsg("/staff fly", "Take to the skies and SOAR!"));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff chat <various suboptions...>", "Chat managment tools."));
                 sender.sendMessage(Help.getFormattedHelpMsg("/staff motd [various suboptions...]", "MOTD-related info."));
                 sender.sendMessage(ChatColor.YELLOW + "----.{ Staff [1/1] }.----");

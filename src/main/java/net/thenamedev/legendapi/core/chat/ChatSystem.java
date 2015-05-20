@@ -96,18 +96,18 @@ public class ChatSystem {
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
                     if(!Rank.isRanked(p1, Rank.ADMIN))
                         continue;
-                    p1.sendMessage(Channel.ADMIN.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.ADMIN.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
                 break;
             case ALERT:
                 for(Player p1 : Bukkit.getOnlinePlayers())
-                    p1.sendMessage(Channel.ALERT.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.ALERT.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
                 break;
             case STAFF:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
                     if(!Rank.isRanked(p1, Rank.HELPER))
                         continue;
-                    p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", Rank.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
                 break;
         }

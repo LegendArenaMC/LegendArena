@@ -27,6 +27,7 @@ public class ExplodeAllTheThings implements CommandExecutor {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(!Rank.isRanked(sender, Rank.FOUNDER)) {
             sender.sendMessage(Rank.noPermissions(Rank.FOUNDER));
@@ -49,7 +50,7 @@ public class ExplodeAllTheThings implements CommandExecutor {
             } else {
                 //both amount and fuse were specified
                 try {
-                    //we genuinely don't give a shit about the return of this if it's anything but an Exception
+                    //we genuinely don't give a shit about the return of this check if it's anything but an Exception
                     Integer.parseInt(args[0]);
                     Integer.parseInt(args[1]);
                 } catch(Exception ex) {

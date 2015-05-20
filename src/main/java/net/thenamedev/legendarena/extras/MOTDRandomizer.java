@@ -92,6 +92,7 @@ public class MOTDRandomizer {
             "May contain reaction GIFs.",
             "Does not use System.out.println()",
             "Uses Bukkit.getOnlinePlayers()",
+            "IT'S SNEAK PEEK, NOT SNEAK PEAK YOU FOOLS",
             "*says no and nods head*",
             "Contains references.",
             "HEADSHOT!",
@@ -108,9 +109,7 @@ public class MOTDRandomizer {
     }
 
     public static String getRandomMOTD() {
-        if(Day.getDate().isAprilFools())
-            return "DARUDE - SANDSTORM (April Fools <3)"; //shhh.... don't tell the players...
-        else if(Day.getDate().getDay() == 3 && Day.getDate().getMonth() == Day.MAY)
+        if(Day.getDate().getDay() == 3 && Day.getDate().getMonth() == Day.MAY)
             return "Happy birthday, Pixel! <3"; //sh...
         Random r = new Random();
         int msgInt = r.nextInt(motdList.length);

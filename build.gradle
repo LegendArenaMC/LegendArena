@@ -18,3 +18,7 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4.1'
 	testCompile 'junit:junit:4.8.2'
 }
+
+task dependencies() {
+    print 'circleci pls'
+}
