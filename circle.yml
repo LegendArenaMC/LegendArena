@@ -2,6 +2,10 @@ general:
   artifacts:
     - build/libs/*
 
+dependencies:
+  override:
+    - echo "circleci pls"
+
 test:
   override:
     - ./gradlew build
