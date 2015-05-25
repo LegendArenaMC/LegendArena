@@ -108,6 +108,7 @@ public class InitUtils {
         stafflist.add("sl");
         stafflist.add("liststaff");
         chat.add("c");
+        chat.add("say");
         chat.add("sc");
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sAliases loaded!", debugMsg));

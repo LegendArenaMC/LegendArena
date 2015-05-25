@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import org.bukkit.Bukkit;
@@ -31,7 +32,7 @@ public class MinigameMenu implements Listener {
         items.put(21, MenuCore.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
         items.put(23, MenuCore.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"));
 
-        inv = Bukkit.createInventory(null, 27, PluginUtils.msgNormal + "Warper");
+        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper");
         for(int a : items.keySet())
             inv.setItem(a, items.get(a));
 

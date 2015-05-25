@@ -31,9 +31,9 @@ public class EmeraldCmd implements CommandExecutor {
         } catch(Exception ex) {
             sender.sendMessage(ChatColor.RED + "Cannot initialize Emerald Core. Report this error on the bug tracker: " + ex.getMessage() + " ( https://github.com/LegendArenaMC/LegendArena/issues )");
         }
-        if(args.length == 0) {
+        if(args.length == 0)
             help(sender);
-        } else {
+        else {
             if(args[0].equalsIgnoreCase("info")) {
                 sender.sendMessage(Help.getFormattedHeader("Your Emerald Info"));
                 sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds((Player) sender));
@@ -42,9 +42,9 @@ public class EmeraldCmd implements CommandExecutor {
                     sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return true;
                 }
-                if(args.length <= 2) {
+                if(args.length <= 2)
                     sender.sendMessage(ChatColor.YELLOW + "/emeralds add <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Adds emeralds to a player's account.");
-                } else {
+                else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(p == null) {
                         sender.sendMessage(ChatColor.RED + "That player wasn't found!");

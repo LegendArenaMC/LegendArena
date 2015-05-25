@@ -19,6 +19,6 @@ dependencies {
 	testCompile 'junit:junit:4.8.2'
 }
 
-task dependencies() {
+task dependencies << {
     print 'circleci pls'
 }

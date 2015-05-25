@@ -4,6 +4,7 @@ import net.thenamedev.legendapi.core.chat.ChatSystem;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
+import net.thenamedev.legendarena.commands.Help;
 import net.thenamedev.legendarena.extras.MOTDRandomizer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -19,16 +20,15 @@ public class MOTDList {
             return;
         }
         if(args.length == 1) {
-            sender.sendMessage(PluginUtils.msgNormal + "List of MOTD messages: " + MOTDRandomizer.getList().length + " (DO YOU SEE WHAT I MEAN BY \"SO LARGE\" NOW?)");
-            sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current notice: " + MOTDRandomizer.getNotice());
-            sender.sendMessage(ChatColor.LIGHT_PURPLE + "To view/set the MOTD notice: /staff motd notice [notice]");
-            sender.sendMessage(ChatColor.LIGHT_PURPLE + "To view the MOTD list: /staff motd list");
-            sender.sendMessage(ChatColor.LIGHT_PURPLE + "To view a random MOTD: /staff motd random");
+            sender.sendMessage(Help.getFormattedHeader("MOTD Randomizer"));
+            sender.sendMessage(Help.getFormattedHelpMsg("Amount of MOTDs", MOTDRandomizer.getList().length + " (DO YOU SEE WHAT I MEAN BY \"SO LARGE\" NOW?)"));
+            sender.sendMessage(Help.getFormattedHelpMsg("Current notice", "\"" + MOTDRandomizer.getNotice() + "\""));
+            sender.sendMessage(Help.getFormattedHelpMsg("/staff motd notice [notice]", "Sets the MOTD notice"));
         } else if(args[1].equalsIgnoreCase("list")) {
             String[] list = MOTDRandomizer.getList();
-            String finishedList = PluginUtils.msgNormal;
+            String finishedList = ChatUtils.getCustomMsg("MOTD");
             for(String list1 : list) {
-                if(finishedList.equals(PluginUtils.msgNormal)) {
+                if(finishedList.equals(ChatUtils.getCustomMsg("MOTD"))) {
                     finishedList = finishedList + " \"" + list1 + "\"";
                 } else {
                     finishedList = finishedList + ", \"" + list1 + "\"";
@@ -46,8 +46,6 @@ public class MOTDList {
                 ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"");
                 MOTDRandomizer.setNotice(ChatUtils.formatCast(args, 0, 1));
             }
-        } else if(args[1].equalsIgnoreCase("random")) {
-            sender.sendMessage(PluginUtils.msgNormal + MOTDRandomizer.randomize());
         }
     }
 

@@ -15,10 +15,27 @@ public class CommandFilter implements Listener {
         if(Rank.isRanked(ev.getPlayer(), Rank.ADMIN))
             return;
         String cmd = ev.getMessage().toLowerCase();
-        if(cmd.startsWith("/pl ") || cmd.equals("/pl") || cmd.startsWith("/plugins ") || cmd.equals("/plugins") || cmd.startsWith("/bukkit:pl ") || cmd.equals("/bukkit:pl") || cmd.startsWith("/bukkit:plugins ") || cmd.equals("/bukkit:plugins")) {
+        if(isCmd(ev.getMessage().toLowerCase())) {
             ev.setCancelled(true); //cancel the event
             ev.getPlayer().kickPlayer("I am an idiot for trying to view the plugins!"); //and kick them for being a giant douchebag and trying to use /pl, /plugins, et cetera
+        } else if(isCmd(ev.getMessage().toLowerCase(), "/me", "/bukkit:me")) {
+            ev.setCancelled(true); //cancel the event
+            ev.getPlayer().chat("I am a nubcake for trying to do /me!");
         }
+    }
+
+    private boolean isCmd(String exec, String... cmd) {
+        boolean is = false;
+        for(String c : cmd) {
+            if(exec.startsWith(c + " ")) {
+                is = true;
+                break;
+            } else if(exec.equals(c)) {
+                is = true;
+                break;
+            }
+        }
+        return is;
     }
 
 }

@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import java.util.logging.Logger;
+
 /**
  * TO USE THIS YOU REQUIRE VAULT AND SOME ECONOMY PLUGIN!
  * @author ThePixelDev
@@ -20,9 +22,23 @@ public class EmeraldsCore {
     public static void init() {
         if(init && econ != null)
             return; //silently exit as the economy field is already setup, and not null
-        if(!setupEconomy())
-            throw new MistakesWereMadeException("Get Vault to use the Emeralds system!");
-        init = true;
+        if(setupEconomy())
+            init = true;
+        else {
+            try {
+                Bukkit.getPluginManager().getPlugin("Vault").getConfig();
+            } catch(Exception ex) {
+                Logger l = Bukkit.getLogger();
+                l.warning("===============================================");
+                l.warning("The Emeralds system will NOT work without Vault,");
+                l.warning("and some kind of economy plugin. You can get");
+                l.warning("Vault here:");
+                l.warning("(fyi, Essentials has a built-in economy system)");
+                l.warning("===============================================");
+                l.warning("    http://dev.bukkit.org/bukkit-plugins/vault/");
+                l.warning("===============================================");
+            }
+        }
     }
 
     private static boolean setupEconomy() {

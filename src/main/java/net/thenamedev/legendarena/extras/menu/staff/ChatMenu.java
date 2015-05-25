@@ -1,6 +1,5 @@
 package net.thenamedev.legendarena.extras.menu.staff;
 
-import net.thenamedev.legendarena.extras.menu.StaffMenu;
 import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -59,7 +58,6 @@ public class ChatMenu implements Listener {
                 ev.getWhoClicked().closeInventory();
                 ((Player) ev.getWhoClicked()).performCommand("chat staff");
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
-                ev.setCancelled(true);
                 ev.getWhoClicked().closeInventory();
                 StaffMenu.show((Player) ev.getWhoClicked());
             }

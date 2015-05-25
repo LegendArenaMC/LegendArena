@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.commands;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,12 +25,11 @@ public class StaffList implements CommandExecutor {
             if(Rank.isRanked(p, Rank.HELPER))
                 staffOnline.add(p);
         sender.sendMessage(Help.getFormattedHeader("Staff Members"));
-        if(staffOnline.isEmpty()) {
+        if(staffOnline.isEmpty())
             sender.sendMessage(ChatColor.RED + "There's no staff online :(");
-            return true;
-        }
-        for(Player p : staffOnline)
-            sender.sendMessage(ChatColor.RED + Rank.getFormattedName(p) + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + Rank.getRank(p));
+        else
+            for(Player p : staffOnline)
+                sender.sendMessage(ChatColor.RED + ChatUtils.getFormattedName(p) + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + Rank.getRank(p));
         return true;
     }
 

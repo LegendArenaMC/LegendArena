@@ -4,6 +4,7 @@ import net.thenamedev.legendapi.core.events.BanEvent;
 import net.thenamedev.legendapi.core.exceptions.CancelledEventException;
 import net.thenamedev.legendapi.core.exceptions.PlayerAlreadyBannedException;
 import net.thenamedev.legendapi.utils.ChatUtils;
+import net.thenamedev.legendapi.utils.Day;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -38,10 +39,15 @@ public class Ban {
      */
     public static void ban(String player, String reason, Date expiry, Player staff) {
         if(isBanned(player)) throw new PlayerAlreadyBannedException();
+        if(reason.equals("")) reason = "Rule violation";
         BanEvent banevent = new BanEvent(reason, staff, player);
         Bukkit.getPluginManager().callEvent(banevent);
         if(banevent.isCancelled())
             throw new CancelledEventException();
+        if(Bukkit.getPlayer(player) != null) {
+            String expiryDate = (expiry == null ? "Never" : Day.parseMonth(expiry.getMonth()) + " " + expiry.getDay() + ", " + expiry.getYear() + " at " + expiry.getHours() + ":" + expiry.getMinutes() + " " + expiry.getTimezoneOffset());
+            Bukkit.getPlayer(player).kickPlayer(ChatUtils.getCustomMsg("Punish") + "Banned by \"" + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + "\" for reason \"" + ChatColor.YELLOW + reason + ChatColor.BLUE + "\", which expires in " + ChatColor.YELLOW + expiryDate + ChatColor.BLUE + ".");
+        }
         Bukkit.getBanList(BanList.Type.NAME).addBan(player, reason, expiry, null);
         ChatUtils.broadcast(ChatUtils.Messages.getCustomMsg("Punish") + "Staff member " + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + " has unbanned player " + ChatColor.YELLOW + player + ChatColor.BLUE + " for the reason \"" + ChatColor.YELLOW + reason + ChatColor.BLUE + "\".");
     }

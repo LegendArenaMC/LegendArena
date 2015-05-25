@@ -34,7 +34,7 @@ commands:
   chat:
     description: Change your chat channel.
     usage: /chat <channel> [msg]
-    aliases: [c, sc]
+    aliases: [c, sc, say]
   stafflist:
     description: Shows currently online staff, and their ranks.
     aliases: [sl, liststaff]

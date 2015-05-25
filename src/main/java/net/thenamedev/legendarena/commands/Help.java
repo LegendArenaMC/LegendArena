@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.commands;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,7 +15,7 @@ import org.bukkit.command.CommandSender;
 public class Help implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask an admin?", PluginUtils.msgNormal));
+        sender.sendMessage(String.format("%sIt looks like you want help.\n \nMaybe you could ask an admin?", ChatUtils.getCustomMsg("Extras")));
         return true;
     }
     

@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.ActionBarAPI;
 import net.thenamedev.legendarena.extras.particles.ParticleCore;
@@ -26,7 +27,7 @@ public class ParticleMenu implements Listener {
     private static void init(Plugin p) {
         if(init) return;
 
-        inv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Particle Selector");
+        inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
 
         ItemStack back = MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
 
@@ -62,7 +63,7 @@ public class ParticleMenu implements Listener {
 
     public static void show(Player p) {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Inventory pInv = Bukkit.createInventory(null, 36, ChatColor.BLUE + "Particle Selector");
+        Inventory pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
         pInv.setContents(inv.getContents());
         if(ParticleCore.multiParicle.contains(p.getUniqueId()))
             pInv.setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));

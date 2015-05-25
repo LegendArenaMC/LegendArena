@@ -2,6 +2,7 @@ package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
 import net.thenamedev.legendapi.utils.*;
+import net.thenamedev.legendarena.extras.menu.staff.StaffMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,10 +23,10 @@ public class MainMenu implements Listener {
 
     private static void init(Plugin p) {
         if(init) return; //if we've already initialized the main menu, don't do anything
-        inv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Main Menu");
+        inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu");
 
         inv.setItem(4, MenuCore.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ""));
-        inv.setItem(40, MenuCore.createItem(Material.STAINED_GLASS_PANE, ChatColor.RED + "Soon[tm]", ""));
+        inv.setItem(40, MenuCore.createItem(Material.JUKEBOX, ChatColor.GREEN + "Music", ""));
         inv.setItem(25, MenuCore.createItem(Material.YELLOW_FLOWER, ChatColor.GREEN + "Particles", ""));
 
         Bukkit.getPluginManager().registerEvents(new MainMenu(), p);
@@ -34,7 +35,7 @@ public class MainMenu implements Listener {
 
     public static void show(Player p) {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Inventory pInv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Main Menu");
+        Inventory pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu");
         pInv.setContents(inv.getContents());
         pInv.setItem(19, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         if(Rank.isRanked(p, Rank.HELPER)) {
@@ -46,7 +47,7 @@ public class MainMenu implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent ev) {
         try {
-            if(!ev.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE + "Main Menu")) return;
+            if(!ev.getInventory().getName().equalsIgnoreCase(ChatUtils.getCustomMsg("Menus") + "Main Menu")) return;
             if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Warp")) {
                 ev.getWhoClicked().closeInventory();
                 MinigameMenu.show((Player) ev.getWhoClicked());
@@ -62,9 +63,9 @@ public class MainMenu implements Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Staff Tools")) {
                 ev.getWhoClicked().closeInventory();
                 StaffMenu.show((Player) ev.getWhoClicked());
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Soon[tm]")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Music")) {
                 ev.getWhoClicked().closeInventory();
-                ev.getWhoClicked().sendMessage(ChatColor.RED + "You actually expected this to do something? That's impressive.");
+                ev.getWhoClicked().sendMessage(ChatColor.RED + "Music selector coming soon, to a Legend Arena server near you.");
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Emeralds")) {
                 ev.getWhoClicked().closeInventory();
                 EmeraldMenu.show((Player) ev.getWhoClicked());

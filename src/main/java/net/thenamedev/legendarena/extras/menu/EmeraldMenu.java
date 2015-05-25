@@ -1,6 +1,7 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.MenuCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,7 +23,7 @@ public class EmeraldMenu implements Listener {
 
     private static void init(Plugin p) {
         if(init) return; //if we've already initialized the emeralds menu, don't do anything
-        inv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Emeralds Menu");
+        inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu");
 
         inv.setItem(13, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
         inv.setItem(32, MenuCore.createItem(Material.NETHER_BRICK_ITEM, ChatColor.GREEN + "Booster", ChatColor.RED + "Soon™"));
@@ -33,7 +34,7 @@ public class EmeraldMenu implements Listener {
 
     public static void show(Player p) {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Inventory pInv = Bukkit.createInventory(null, 45, ChatColor.BLUE + "Emeralds Menu");
+        Inventory pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu");
         pInv.setContents(inv.getContents());
         pInv.setItem(30, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         p.openInventory(pInv);
@@ -42,7 +43,7 @@ public class EmeraldMenu implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent ev) {
         try {
-            if(!ev.getInventory().getName().equalsIgnoreCase(ChatColor.BLUE + "Emeralds Menu")) return;
+            if(!ev.getInventory().getName().equalsIgnoreCase(ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")) return;
             if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Emeralds") || ev.getCurrentItem().getItemMeta().getDisplayName().contains("Booster")) {
                 ev.getWhoClicked().closeInventory();
                 ev.getWhoClicked().sendMessage("...you really expected that would do something. wow. I'm amazed. no, really, I'm amazed.");

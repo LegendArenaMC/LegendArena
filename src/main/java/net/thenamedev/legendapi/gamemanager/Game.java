@@ -6,6 +6,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -20,6 +21,7 @@ public class Game {
 
     private ArrayList<GameListener> listeners;
     private ArrayList<GameTimer> timers;
+    private ArrayList<GamePlayer> players;
     private HashMap<GameTimer, BukkitTask> tasks = new HashMap<>();
 
     public Game(PluginManager pm) {
@@ -58,6 +60,37 @@ public class Game {
 
     public ArrayList<GameListener> getListeners() {
         return listeners;
+    }
+
+    public void setPlayers(ArrayList<GamePlayer> p) {
+        this.players = p;
+    }
+
+    public void addPlayers(GamePlayer... players) {
+        if(this.players == null)
+            this.players = new ArrayList<>();
+        if(players.length == 1) {
+            this.players.add(players[0]);
+            return;
+        }
+        Collections.addAll(this.players, players);
+    }
+
+    public void removePlayers(GamePlayer... players) {
+        if(this.players == null)
+            this.players = new ArrayList<>();
+        if(players.length == 1) {
+            this.players.add(players[0]);
+            return;
+        }
+        for(GamePlayer p : players) {
+            if(!this.players.contains(p)) continue;
+            this.players.remove(p);
+        }
+    }
+
+    public ArrayList<GamePlayer> getPlayers() {
+        return players;
     }
 
     public void unregisterTimer(GameTimer timer) {
