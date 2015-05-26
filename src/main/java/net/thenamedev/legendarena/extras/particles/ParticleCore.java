@@ -151,8 +151,14 @@ public class ParticleCore implements Runnable {
     }
 
     @SuppressWarnings("deprecation")
+    @Deprecated
     public static void removePlayer(String player) {
-        Player p = Bukkit.getPlayer(player);
+        removePlayer(Bukkit.getPlayer(player));
+    }
+
+    public static void removePlayer(Player p) {
+        if(p == null)
+            return; //sanity check
         if(amountOfActiveParticles(p) < 1)
             return; //sanity check
         if(slimeEffects.contains(p.getUniqueId())) slimeEffects.remove(p.getUniqueId());

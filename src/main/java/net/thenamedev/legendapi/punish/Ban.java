@@ -3,6 +3,8 @@ package net.thenamedev.legendapi.punish;
 import net.thenamedev.legendapi.core.events.BanEvent;
 import net.thenamedev.legendapi.core.exceptions.CancelledEventException;
 import net.thenamedev.legendapi.core.exceptions.PlayerAlreadyBannedException;
+import net.thenamedev.legendapi.message.Message;
+import net.thenamedev.legendapi.message.MessageType;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Day;
 import net.thenamedev.legendapi.utils.Rank;
@@ -49,7 +51,7 @@ public class Ban {
             Bukkit.getPlayer(player).kickPlayer(ChatUtils.getCustomMsg("Punish") + "Banned by \"" + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + "\" for reason \"" + ChatColor.YELLOW + reason + ChatColor.BLUE + "\", which expires in " + ChatColor.YELLOW + expiryDate + ChatColor.BLUE + ".");
         }
         Bukkit.getBanList(BanList.Type.NAME).addBan(player, reason, expiry, null);
-        ChatUtils.broadcast(ChatUtils.Messages.getCustomMsg("Punish") + "Staff member " + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + " has unbanned player " + ChatColor.YELLOW + player + ChatColor.BLUE + " for the reason \"" + ChatColor.YELLOW + reason + ChatColor.BLUE + "\".");
+        ChatUtils.broadcast(ChatUtils.Messages.getCustomMsg("Punish") + "Staff member " + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + " has banned player " + ChatColor.YELLOW + player + ChatColor.BLUE + " for the reason \"" + ChatColor.YELLOW + reason + ChatColor.BLUE + "\".");
     }
 
     /**
@@ -59,7 +61,15 @@ public class Ban {
      */
     public static void unban(String player, Player staff) {
         Bukkit.getBanList(BanList.Type.NAME).pardon(player);
-        ChatUtils.broadcast(ChatUtils.Messages.getCustomMsg("Punish") + "Staff member " + ChatUtils.getFormattedName(staff) + ChatColor.BLUE + " has unbanned player " + ChatColor.YELLOW + player + ChatColor.BLUE + ".");
+
+        //Yes, yes, I get it, probably the worst possible way to make this, but, well - fuck it[tm]
+        new Message().append(ChatUtils.getCustomMsg("Punish"))
+                .append("Staff member ")
+                .append(ChatUtils.getFormattedName(staff))
+                .append(ChatColor.BLUE + " has unbanned player \"")
+                .append(ChatColor.YELLOW + player)
+                .append(ChatColor.BLUE + "\".")
+                .broadcast();
     }
 
     /**

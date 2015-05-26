@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 
+import java.text.MessageFormat;
+
 /**
  * @author ThePixelDev
  */
@@ -19,8 +21,7 @@ public class ServerPingListener implements Listener {
         ChatColor randomColour2 = ChatUtils.getRandomColour();
         if(randomColour == randomColour2)
             randomColour2 = ChatUtils.getRandomColour();
-        ev.setMotd(randomColour + "Legend Arena " + ChatColor.YELLOW + "{" + MOTDRandomizer.getNotice().toUpperCase() + "}" + randomColour
-                + "\n" + randomColour2 + MOTDRandomizer.getRandomMOTD());
+        ev.setMotd(MessageFormat.format("{0}Legend Arena {1}'{'{2}'}'{3}\n{4}//{5}{6}", randomColour, ChatColor.YELLOW, MOTDRandomizer.getNotice().toUpperCase(), randomColour, ChatColor.DARK_GRAY, randomColour2, MOTDRandomizer.getRandomMOTD()));
     }
 
 }

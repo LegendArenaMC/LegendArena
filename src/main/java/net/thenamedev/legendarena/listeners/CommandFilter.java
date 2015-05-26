@@ -1,5 +1,8 @@
 package net.thenamedev.legendarena.listeners;
 
+import net.thenamedev.legendapi.message.Message;
+import net.thenamedev.legendapi.message.MessageType;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +24,9 @@ public class CommandFilter implements Listener {
         } else if(isCmd(ev.getMessage().toLowerCase(), "/me", "/bukkit:me")) {
             ev.setCancelled(true); //cancel the event
             ev.getPlayer().chat("I am a nubcake for trying to do /me!");
+        } else if(isCmd(ev.getMessage().toLowerCase(), "/?", "/bukkit:?", "/bukkit:help")) {
+            ev.setCancelled(true);
+            new Message(MessageType.SUBTITLE).append(ChatUtils.getCustomMsg("Command Filter") + "Nice try...").send(ev.getPlayer());
         }
     }
 
