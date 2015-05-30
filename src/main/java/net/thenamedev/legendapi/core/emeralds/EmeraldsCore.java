@@ -51,7 +51,7 @@ public class EmeraldsCore {
         return econ != null;
     }
 
-    public static Economy getEcon() {
+    protected static Economy getEcon() {
         return econ;
     }
 

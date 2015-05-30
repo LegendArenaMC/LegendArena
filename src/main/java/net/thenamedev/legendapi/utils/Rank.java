@@ -129,6 +129,9 @@ public enum Rank {
                 return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "YT";
             case MEMBERPLUS:
                 return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "MEMBER+";
+
+            case MEMBER:
+                return ChatUtils.getCustomMsg("Sanity Check") + "A function seems to be drunk and calling Rank.noPermissions(Rank.MEMBER) - this really should not happen.";
         }
         return null;
     }

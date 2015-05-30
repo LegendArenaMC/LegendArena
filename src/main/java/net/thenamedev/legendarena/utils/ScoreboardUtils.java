@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.Team;
  *
  * @author ThePixelDev
  */
+@SuppressWarnings("AccessStaticViaInstance")
 public class ScoreboardUtils {
 
     private static final ScoreboardManager manager = Bukkit.getScoreboardManager();
@@ -33,7 +34,6 @@ public class ScoreboardUtils {
         return false;
     }
 
-    @SuppressWarnings("AccessStaticViaInstance")
     public static void removePlayer(Player p) {
         teams.founder.removePlayer(p);
     }
@@ -44,6 +44,25 @@ public class ScoreboardUtils {
         removePlayer(p);
         switch(Rank.getRank(p)) {
             case FOUNDER:
+                teams.founder.addPlayer(p);
+                break;
+            case ADMIN:
+                teams.admin.addPlayer(p);
+                break;
+            case SRMOD:
+                teams.srmod.addPlayer(p);
+                break;
+            case MOD:
+                teams.mod.addPlayer(p);
+                break;
+            case HELPER:
+                teams.helper.addPlayer(p);
+                break;
+            case YOUTUBE:
+                teams.vip.addPlayer(p);
+                break;
+            case MEMBERPLUS:
+                teams.memberplus.addPlayer(p);
                 break;
         }
     }
@@ -67,7 +86,7 @@ public class ScoreboardUtils {
         public static Team mod;
         public static Team helper;
         public static Team vip;
-        public static Team member;
+        public static Team memberplus;
 
         public Teams() {
             founder = board.registerNewTeam("Founders");
@@ -75,11 +94,16 @@ public class ScoreboardUtils {
             srmod = board.registerNewTeam("SrMods");
             mod = board.registerNewTeam("Mods");
             helper = board.registerNewTeam("Helpers");
-            vip = board.registerNewTeam("VIPs");
-            member = board.registerNewTeam("Members");
+            vip = board.registerNewTeam("YouTube");
+            memberplus = board.registerNewTeam("MemberPlus");
 
-            founder.setPrefix(Rank.getRankPrefix(Rank.FOUNDER) + ChatColor.GRAY + " | " + ChatColor.DARK_AQUA);
-            admin.setPrefix(Rank.getRankPrefix(Rank.ADMIN) + ChatColor.GRAY + " | " + ChatColor.DARK_RED);
+            founder.setPrefix(Rank.getRankPrefix(Rank.FOUNDER) + ChatColor.RESET + " ");
+            admin.setPrefix(Rank.getRankPrefix(Rank.ADMIN) + ChatColor.RESET + " ");
+            srmod.setPrefix(Rank.getRankPrefix(Rank.SRMOD) + ChatColor.RESET + " ");
+            mod.setPrefix(Rank.getRankPrefix(Rank.MOD) + ChatColor.RESET + " ");
+            helper.setPrefix(Rank.getRankPrefix(Rank.HELPER) + ChatColor.RESET + " ");
+            vip.setPrefix(Rank.getRankPrefix(Rank.YOUTUBE) + ChatColor.RESET + " ");
+            memberplus.setPrefix(Rank.getRankPrefix(Rank.MEMBERPLUS) + ChatColor.RESET + " ");
         }
 
     }

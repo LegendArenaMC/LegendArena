@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.gamemanager;
 
+import net.thenamedev.legendapi.core.emeralds.EmeraldPlayer;
 import net.thenamedev.legendapi.core.exceptions.PlayerNotOnlineException;
 import org.bukkit.entity.Player;
 
@@ -12,9 +13,11 @@ public class GamePlayer {
 
     private Player p;
     private GamePlayerState state;
+    private EmeraldPlayer ep;
 
     public GamePlayer(Player p, GamePlayerState state) {
         this.p = p;
+        this.ep = new EmeraldPlayer(p);
         this.state = state;
     }
 
@@ -30,4 +33,9 @@ public class GamePlayer {
     public void setState(GamePlayerState state) {
         this.state = state;
     }
+
+    public EmeraldPlayer getEmeralds() {
+        return ep;
+    }
+
 }

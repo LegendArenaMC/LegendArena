@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.message;
 
+import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -30,7 +31,7 @@ public class Message {
     }
 
     public void send(Player... players) {
-        String built = builder.toString();
+        String built = toString();
         for(Player p : players) {
             switch(type) {
                 case CHAT:
@@ -55,16 +56,27 @@ public class Message {
         }
     }
 
-    public void setTime(int in, int stay, int out) {
+    public String toString() {
+        return builder.toString();
+    }
+
+    public void setDisplayTime(int in, int stay, int out) {
         if(!(type == MessageType.TITLE || type == MessageType.SUBTITLE))
-            throw new ClassCastException("Cannot set time for chat or action bar messages");
+            throw new ClassCastException("Cannot set display time for chat or action bar messages");
         times[0] = in;
         times[1] = stay;
         times[2] = out;
     }
 
-    public int[] getTimes() {
+    public int[] getDisplayTimes() {
         return times.clone();
     }
 
+    public void broadcast(Rank r) {
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            if(!Rank.isRanked(p, r))
+                continue;
+            send(p);
+        }
+    }
 }

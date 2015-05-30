@@ -5,11 +5,12 @@ import net.thenamedev.legendapi.core.annotations.meta.BackendInfo;
 import java.lang.annotation.Documented;
 
 /**
- * Marks that the class or method is a hacky workaround to fix things, or make things more convenient.<br><br>
+ * Flags as a class as being a channel. Completely optional, but recommended. (ps: this will eventually have some use, for now it's just a random junk class)
  *
  * @author ThePixelDev
  */
 @Documented
 @BackendInfo
-public @interface HackyWorkaround {
+@Deprecated
+public @interface Channel {
 }

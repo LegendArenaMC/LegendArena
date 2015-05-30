@@ -7,7 +7,7 @@ package net.thenamedev.legendapi.gamemanager;
  */
 public enum GamePlayerState {
 
-    SPEC(false, false),
+    SPECTATOR(false, false),
     PLAYING(true, false),
     DEAD(false, true);
 

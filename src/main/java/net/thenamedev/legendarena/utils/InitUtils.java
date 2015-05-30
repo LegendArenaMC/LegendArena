@@ -53,6 +53,9 @@ public class InitUtils {
             ChatUtils.broadcast(String.format("%sLoading EMERALDS CORE", debugMsg));
         EmeraldsCore.init();
         if(LegendAPI.debug)
+            ChatUtils.broadcast(String.format("%sLoading SCOREBOARD UTILS", debugMsg));
+        ScoreboardUtils.init();
+        if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sDone loading!", debugMsg));
         init = true;
     }

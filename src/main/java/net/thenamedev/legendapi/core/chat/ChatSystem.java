@@ -82,7 +82,7 @@ public class ChatSystem {
     public static void msg(Player p, String msg) {
         if(getChannel(p) == null) {
             if(isChatMuted())
-                if(!Rank.isRanked(p, Rank.HELPER)) {
+                if(!Rank.isRanked(p, Rank.YOUTUBE)) {
                     p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
                     return;
                 }

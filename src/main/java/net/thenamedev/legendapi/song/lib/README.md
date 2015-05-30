@@ -1,1 +1,0 @@
-Code in here is taken from [NoteBlockAPI](https://github.com/xxmicloxx/NoteBlockAPI). Go check it out!
