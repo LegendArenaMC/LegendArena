@@ -1,8 +1,9 @@
 package net.thenamedev.legendarena.commands.staff;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.PluginUtils;
 import net.thenamedev.legendapi.utils.Rank;
-import net.thenamedev.legendarena.extras.hub.warp.HubWarper;
+import net.thenamedev.legendarena.extras.HubWarper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,7 +14,9 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 /**
- * @author TheNameMan
+ * Gadgets toggle command.
+ *
+ * @author ThePixelDev
  */
 public class Gadgets implements CommandExecutor {
 
@@ -29,23 +32,23 @@ public class Gadgets implements CommandExecutor {
         if(args.length == 0) {
             if(HubWarper.isExempt(((Player) sender).getUniqueId())) {
                 HubWarper.toggleExemption(((Player) sender).getUniqueId());
-                sender.sendMessage(PluginUtils.msgNormal + "Removed from gadgets exempt list.");
+                sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Removed from gadgets exempt list.");
             } else {
                 HubWarper.toggleExemption(((Player) sender).getUniqueId());
-                sender.sendMessage(PluginUtils.msgNormal + "Added to gadgets exempt list.");
+                sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Added to gadgets exempt list.");
             }
         } else {
             if(Bukkit.getPlayer(args[0]) == null) {
-                sender.sendMessage(ChatColor.RED + "Player \"" + args[0] + "\" was not found.");
+                sender.sendMessage(ChatUtils.Messages.errorMsg + "Player \"" + args[0] + "\" was not found.");
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
                 UUID u = p.getUniqueId();
                 if(HubWarper.isExempt(u)) {
                     HubWarper.toggleExemption(u);
-                    sender.sendMessage(PluginUtils.msgNormal + "Removed player " + p.getName() + " from gadgets exemption list.");
+                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Removed player " + p.getName() + " from gadgets exemption list.");
                 } else {
                     HubWarper.toggleExemption(u);
-                    sender.sendMessage(PluginUtils.msgNormal + "Added player " + p.getName() + " to gadgets exemption list.");
+                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Added player " + p.getName() + " to gadgets exemption list.");
                 }
             }
         }

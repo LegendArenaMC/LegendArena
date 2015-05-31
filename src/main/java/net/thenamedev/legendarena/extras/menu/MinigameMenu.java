@@ -1,11 +1,10 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.MenuCore;
 import net.thenamedev.legendapi.utils.PluginUtils;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,52 +17,60 @@ import org.bukkit.plugin.Plugin;
 import java.util.HashMap;
 
 /**
+ * Minigame selector menu.
+ *
  * @author ThePixelDev
  */
 public class MinigameMenu implements Listener {
 
-    Inventory inv;
+    private static Inventory inv;
+    private static boolean init = false;
 
-    public MinigameMenu(Plugin p) {
+    private static void init(Plugin p) {
+        if(init) return;
+
         HashMap<Integer, ItemStack> items = new HashMap<>();
-        //items.put(1, MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Survival Games"));
-        //items.put(7, MenuCore.createItem(Material.EGG, ChatColor.GREEN + "Chicken Mayhem"));
-        items.put(12, MenuCore.createItem(Material.SNOW_BALL, ChatColor.GREEN + "Plugin: Now FOSS!", ChatColor.YELLOW + "https://github.com/TheNameDev/LegendArena"));
-        items.put(14, MenuCore.createItem(Material.COMMAND, ChatColor.GREEN + "Hub"));
-        //items.put(25, MenuCore.createItem(Material.BRICK, ChatColor.GREEN + "Build My Thing"));
+        items.put(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
+        items.put(21, MenuCore.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
+        items.put(23, MenuCore.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"));
 
-        inv = Bukkit.createInventory(null, 27, PluginUtils.msgNormal + "Warper");
+        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper");
         for(int a : items.keySet())
             inv.setItem(a, items.get(a));
 
-        Bukkit.getPluginManager().registerEvents(this, p);
+        Bukkit.getPluginManager().registerEvents(new MinigameMenu(), p);
+
+        init = true;
     }
 
-    public void show(Player p) {
+    public static void show(Player p) {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         p.closeInventory();
         p.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
-        if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
+    public void onInventoryClick(InventoryClickEvent ev) {
+        if(!ev.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
-            if(e.getCurrentItem().getItemMeta() == null) return;
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.BLUE + "Warping you to " + ChatColor.RED + "HUB" + ChatColor.BLUE + "...");
-                p.teleport(Bukkit.getWorld("hub").getSpawnLocation());
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("FOSS")) {
-                e.setCancelled(true);
-                e.getWhoClicked().closeInventory();
-                //noinspection RedundantCast
-                ((Player) e.getWhoClicked()).sendMessage(ChatColor.BLUE + "Git repo: " + ChatColor.BOLD + "https://github.com/TheNameDev/LegendArena\n" + ChatColor.BLUE + "Jenkins: " + ChatColor.BOLD + "https://ci-thenamedev.rhcloud.com/job/Legend%20Arena/");
+            if(ev.getCurrentItem().getItemMeta() == null) return;
+            if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Hub")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                Player p = (Player) ev.getWhoClicked();
+                p.teleport(Bukkit.getWorld("world").getSpawnLocation());
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Build My Thing")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                ev.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                MainMenu.show((Player) ev.getWhoClicked());
             }
 
             else { //failsafe
-                e.setCancelled(true);
+                ev.setCancelled(true);
             }
         } catch(Exception ignore) {
             // Ignore the error

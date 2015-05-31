@@ -1,0 +1,12 @@
+general:
+  artifacts:
+    - build/libs/*
+
+dependencies:
+  override:
+    - echo "circleci pls" #pls
+
+test:
+  override:
+    - chmod +x ./gradlew #circleci pls i fna
+    - ./gradlew build

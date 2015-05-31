@@ -1,11 +1,15 @@
 package net.thenamedev.legendarena.extras.menu;
 
+import net.thenamedev.legendapi.message.Message;
+import net.thenamedev.legendapi.message.MessageType;
+import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.MenuCore;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore;
-import net.thenamedev.legendarena.extras.hub.particles.ParticleCore.Type;
+import net.thenamedev.legendarena.extras.particles.ParticleCore;
+import net.thenamedev.legendarena.extras.particles.ParticleCore.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,14 +19,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 /**
+ * Particles menu.
+ *
  * @author ThePixelDev
  */
 public class ParticleMenu implements Listener {
 
-    private Inventory inv;
+    private static Inventory inv;
+    private static boolean init = false;
 
-    public ParticleMenu(Plugin p) {
-        inv = Bukkit.createInventory(null, 18, ChatColor.BLUE + "Particle Selector");
+    private static void init(Plugin p) {
+        if(init) return;
+
+        inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
+
+        ItemStack back = MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
 
         ItemStack hearts = MenuCore.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!");
         ItemStack slime = MenuCore.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!");
@@ -30,103 +41,129 @@ public class ParticleMenu implements Listener {
         ItemStack enchant = MenuCore.createItem(Material.ENCHANTED_BOOK, ChatColor.GREEN + "Enchant", ChatColor.BLUE + "Enchant particles. Yay!");
         ItemStack villager = MenuCore.createItem(Material.DIAMOND_BLOCK, ChatColor.GREEN + "Happy Villager", ChatColor.BLUE + "Happy villager particles. Yay!");
         ItemStack villager2 = MenuCore.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!");
-        ItemStack crit = MenuCore.createItem(Material.DIAMOND_SWORD, ChatColor.GREEN + "Crit", ChatColor.BLUE + "Critical Hit particles. Yay!");
         ItemStack fw = MenuCore.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!");
         ItemStack coloEff = MenuCore.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!");
+        ItemStack flames = MenuCore.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!");
 
         ItemStack off = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.");
 
-        inv.setItem(0, hearts);
-        inv.setItem(1, slime);
-        inv.setItem(2, portal);
-        inv.setItem(3, enchant);
-        inv.setItem(4, villager);
-        inv.setItem(5, villager2);
-        inv.setItem(6, crit);
-        inv.setItem(7, fw);
-        inv.setItem(8, coloEff);
+        inv.setItem(8, off);
+        inv.setItem(4, back);
 
-        inv.setItem(17, off);
+        inv.setItem(27, hearts);
+        inv.setItem(28, slime);
+        inv.setItem(29, portal);
+        inv.setItem(30, enchant);
+        inv.setItem(31, villager);
+        inv.setItem(32, villager2);
+        inv.setItem(33, fw);
+        inv.setItem(34, coloEff);
+        inv.setItem(35, flames);
 
-        Bukkit.getPluginManager().registerEvents(this, p);
+        Bukkit.getPluginManager().registerEvents(new ParticleMenu(), p);
+
+        init = true;
     }
 
-    public void show(Player p) {
-        p.openInventory(inv);
+    public static void show(Player p) {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"));
+        Inventory pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
+        pInv.setContents(inv.getContents());
+        if(ParticleCore.multiParicle.contains(p.getUniqueId()))
+            pInv.setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+        else
+            pInv.setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+        p.openInventory(pInv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
-        if(!e.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
+    public void onInventoryClick(InventoryClickEvent ev) {
+        if(!ev.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
-            if(e.getCurrentItem().getItemMeta() == null) return;
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Slime")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "SLIME" + ChatColor.GREEN + " particles.");
+            if(ev.getCurrentItem().getItemMeta() == null) return;
+            if(!ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()) && !ev.getCurrentItem().getItemMeta().getDisplayName().contains("Multi-Particle"))
+                ev.getWhoClicked().closeInventory();
+            if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Slime")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "SLIME" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.SLIME);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Hearts")) {
-                e.setCancelled(true);
-               Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "HEART" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Hearts")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "HEART" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.HEART);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Portal")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "PORTAL" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Portal")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "PORTAL" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.PORTAL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Enchant")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "ENCHANT" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Enchant")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "ENCHANT" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.ENCHANT);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Happy Villager")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "HAPPY VILLAGER" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Happy Villager")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "HAPPY VILLAGER" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.HAPPYVILL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Angry Villager")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "ANGRY VILLAGER" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Angry Villager")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "ANGRY VILLAGER" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.ANGRYVILL);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Crit")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "CRIT" + ChatColor.GREEN + " particles.");
-                ParticleCore.addType(p.getName(), Type.CRIT);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Firework")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "FIREWORK SPARK" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Firework")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "FIREWORK SPARK" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.FIREWORK);
-                e.getWhoClicked().closeInventory();
-            } else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Colourful")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Enabled " + ChatColor.RED + "COLOURFUL EFFECTS" + ChatColor.GREEN + " particles.");
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Colourful")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "COLOURFUL EFFECTS" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.addType(p.getName(), Type.COLORFULEFFCTS);
-                e.getWhoClicked().closeInventory();
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Flame")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled " + ChatColor.RED + "FLAME" + ChatColor.GREEN + " particles.").send(Sound.ORB_PICKUP, p);
+                ParticleCore.addType(p.getName(), Type.FLAME);
             }
 
-            else if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
-                e.setCancelled(true);
-                Player p = (Player) e.getWhoClicked();
-                p.sendMessage(ChatColor.GREEN + "Turned off particles. I feel sad now.");
+            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Off")) {
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Disabled particles.").send(Sound.ORB_PICKUP, p);
                 ParticleCore.removePlayer(p.getName());
-                e.getWhoClicked().closeInventory();
+                if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
+                    ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                }
+            }
+
+            else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("⇐ Back")) {
+                ev.setCancelled(true);
+                ev.getWhoClicked().closeInventory();
+                MainMenu.show((Player) ev.getWhoClicked());
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Multi-Particle")) {
+                ev.setCancelled(true);
+                if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
+                    new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Disabled multi-particle selector.").send(Sound.ORB_PICKUP, (Player) ev.getWhoClicked());
+                    ParticleCore.removePlayer(ev.getWhoClicked().getName());
+                    if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()))
+                        ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                } else {
+                    new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled multi-particle selector.").send(Sound.ORB_PICKUP, (Player) ev.getWhoClicked());
+                    ParticleCore.multiParicle.add(ev.getWhoClicked().getUniqueId());
+                    ev.getInventory().setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+                }
             }
 
             else { //failsafe
-                e.setCancelled(true);
+                ev.setCancelled(true);
             }
+
         } catch(Exception ignore) {
             // Ignore the error
         }
