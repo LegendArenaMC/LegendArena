@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
+ * Particle core.
+ *
  * @author ThePixelDev
  */
 public class ParticleCore implements Runnable {

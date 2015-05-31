@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 
 /**
- * Created on 5/15/2015
+ * Explode ALL the things! MWHAAAHAHAHAHAA-- *cough* heh..
  *
  * @author ThePixelDev
  */

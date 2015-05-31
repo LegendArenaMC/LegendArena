@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * @author TheNameMan
+ * Fly command of stuff.
+ *
+ * @author ThePixelDev
  */
 public class Fly implements CommandExecutor {
 

@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 /**
- * Created by thepixeldev on 5/7/15.
+ * Backend kick punish system... thing.
  */
 public class Kick {
 

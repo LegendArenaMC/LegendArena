@@ -1,6 +1,5 @@
 package net.thenamedev.legendarena.commands.backends.punish;
 
-import net.thenamedev.legendapi.core.exceptions.PlayerAlreadyBannedException;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
@@ -11,6 +10,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
+ * Freeze command.
+ *
  * @author ThePixelDev
  */
 public class Freeze {

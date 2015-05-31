@@ -12,6 +12,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 /**
+ * Chat selector menu.
+ *
  * @author ThePixelDev
  */
 public class ChatMenu implements Listener {

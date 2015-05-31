@@ -15,6 +15,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 /**
+ * Staff menu.
+ *
  * @author ThePixelDev
  */
 public class StaffMenu implements Listener {

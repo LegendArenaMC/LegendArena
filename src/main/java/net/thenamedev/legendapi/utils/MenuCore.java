@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
+ * Menu core. Really only used for creating items.
+ *
  * @author ThePixelDev
  */
 public class MenuCore {

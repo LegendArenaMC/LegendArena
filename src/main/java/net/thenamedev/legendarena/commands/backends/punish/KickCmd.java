@@ -1,9 +1,12 @@
 package net.thenamedev.legendarena.commands.backends.punish;
 
+import net.thenamedev.legendapi.core.annotations.SoonTM;
+
 /**
- * Created on 5/29/2015
+ * Kick command.
  *
  * @author ThePixelDev
  */
+@SoonTM
 public class KickCmd {
 }

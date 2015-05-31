@@ -1,7 +1,7 @@
 package net.thenamedev.legendapi.core.exceptions;
 
 /**
- * Created on 4/6/2015
+ * Thrown when a function does no sanity checks in itself and calls a function which requires a certain player rank.
  *
  * @author ThePixelDev
  */

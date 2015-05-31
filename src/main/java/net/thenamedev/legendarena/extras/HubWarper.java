@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by thepixeldev on 3/24/15.
+ * Hub warper.
+ *
+ * @author ThePixelDev
  */
 public class HubWarper implements Listener {
 

@@ -4,7 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 
 /**
- * Created on 5/26/2015
+ * A player's emeralds instance.
  *
  * @author ThePixelDev
  */

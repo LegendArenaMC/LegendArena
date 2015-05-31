@@ -1,7 +1,7 @@
 package net.thenamedev.legendapi.message;
 
 /**
- * Created on 5/24/2015
+ * Message types for <code>new Message(MessageType)</code>.
  *
  * @author ThePixelDev
  */

@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
+ * Warn command.
+ *
  * @author TheNameMan
  */
 public class WarnCmd {

@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * @author TheNameMan
+ * Particle selector command... of magic. (this seems to be a recuring theme of me saying "[x] of [y]" in javadocs)
+ *
+ * @author ThePixelDev
  */
 public class Particle implements CommandExecutor {
 

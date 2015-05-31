@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created on 4/15/2015
+ * Online staff list command.
  *
  * @author ThePixelDev
  */

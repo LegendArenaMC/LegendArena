@@ -17,6 +17,8 @@ import org.bukkit.plugin.Plugin;
 import java.util.HashMap;
 
 /**
+ * Minigame selector menu.
+ *
  * @author ThePixelDev
  */
 public class MinigameMenu implements Listener {

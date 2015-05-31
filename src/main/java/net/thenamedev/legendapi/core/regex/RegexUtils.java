@@ -1,9 +1,7 @@
 package net.thenamedev.legendapi.core.regex;
 
-import java.text.MessageFormat;
-
 /**
- * Created on 5/30/2015
+ * Regex utilities.
  *
  * @author ThePixelDev
  */

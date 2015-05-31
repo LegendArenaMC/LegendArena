@@ -15,7 +15,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Created on 3/19/2015
+ * Various staff utilities.
  *
  * @author ThePixelDev
  */

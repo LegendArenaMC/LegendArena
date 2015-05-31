@@ -1,6 +1,8 @@
 package net.thenamedev.legendapi.core.exceptions;
 
 /**
+ * Thrown when a function is deprecated, and shouldn't be used at all anymore.
+ *
  * @author ThePixelDev
  */
 public class DeprecatedException extends RuntimeException {

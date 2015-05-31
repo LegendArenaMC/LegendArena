@@ -3,7 +3,9 @@ package net.thenamedev.legendarena.utils;
 import java.util.Random;
 
 /**
- * Created by thepixeldev on 4/30/15.
+ * Build My Thing word randomizer.
+ *
+ * @author ThePixelDev
  */
 public class BMTWordUtils {
 

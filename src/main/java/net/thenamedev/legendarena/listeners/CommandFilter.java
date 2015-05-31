@@ -9,7 +9,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 /**
- * Created by thepixeldev on 4/26/15.
+ * Command filter.
+ *
+ * @author ThePixelDev
  */
 public class CommandFilter implements Listener {
 

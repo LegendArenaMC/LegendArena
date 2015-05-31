@@ -1,14 +1,20 @@
 package net.thenamedev.legendapi.gamemanager;
 
 /**
- * Created on 5/16/2015
+ * Game timer.
  *
  * @author ThePixelDev
  */
 public interface GameTimer extends Runnable {
 
+    /**
+     * Main timer
+     */
     void run();
 
+    /**
+     * The delay, in ticks (to get the ticks for seconds, seconds * 20)
+     */
     int delay();
 
 }

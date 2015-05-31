@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.utils;
 
+import net.thenamedev.legendapi.core.annotations.SoonTM;
 import net.thenamedev.legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,10 +10,11 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 /**
- * Created on 3/30/15
+ * Scorebord utilities.
  *
  * @author ThePixelDev
  */
+@SoonTM
 @SuppressWarnings("AccessStaticViaInstance")
 public class ScoreboardUtils {
 

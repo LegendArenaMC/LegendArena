@@ -18,6 +18,8 @@ import java.util.List;
 import static net.thenamedev.legendapi.utils.ChatUtils.Messages.*;
 
 /**
+ * Initialization utilities.
+ *
  * @author ThePixelDev
  */
 public class InitUtils {

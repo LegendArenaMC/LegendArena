@@ -10,6 +10,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 /**
+ * MOTD Randomizer tools for staff.
+ *
  * @author TheNameMan
  */
 public class MOTDList {

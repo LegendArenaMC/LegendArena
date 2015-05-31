@@ -12,7 +12,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * @author TheNameMan
+ * Emeralds command.
+ *
+ * @author ThePixelDev
  */
 public class EmeraldCmd implements CommandExecutor {
 

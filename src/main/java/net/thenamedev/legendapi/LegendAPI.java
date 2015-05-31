@@ -1,7 +1,7 @@
 package net.thenamedev.legendapi;
 
 /**
- * Created on 3/4/2015
+ * Mainly does nothing, but has some things you may care about.
  *
  * @author ThePixelDev
  */

@@ -14,6 +14,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 /**
+ * Emeralds menu. Does nothing but show info.
+ *
  * @author ThePixelDev
  */
 public class EmeraldMenu implements Listener {

@@ -3,9 +3,9 @@ package net.thenamedev.legendarena.extras;
 import org.bukkit.Bukkit;
 
 /**
- * don't ask.
+ * don't ask. just don't.
  *
- * Created by thepixeldev on 5/19/15.
+ * @author ThePixelDev
  */
 public class YouGetACar {
 

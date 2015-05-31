@@ -10,6 +10,8 @@ import org.bukkit.event.server.ServerListPingEvent;
 import java.text.MessageFormat;
 
 /**
+ * Server MOTD ping listener.
+ *
  * @author ThePixelDev
  */
 public class ServerPingListener implements Listener {

@@ -3,7 +3,7 @@ package net.thenamedev.legendapi.gamemanager;
 import org.bukkit.event.Listener;
 
 /**
- * Created on 5/16/2015
+ * Game listener. Just a base template for you to use.
  *
  * @author ThePixelDev
  */

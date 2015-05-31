@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.minigame;
 
+import net.thenamedev.legendapi.core.annotations.SoonTM;
 import net.thenamedev.legendapi.gamemanager.Game;
 import net.thenamedev.legendapi.gamemanager.GameManager;
 
@@ -9,6 +10,7 @@ import net.thenamedev.legendapi.gamemanager.GameManager;
  * The player with the most blocks broken at the end wins.
  * @author ThePixelDev
  */
+@SoonTM
 public class ChickenMayhem {
 
     private static final Game game = GameManager.getInstance();

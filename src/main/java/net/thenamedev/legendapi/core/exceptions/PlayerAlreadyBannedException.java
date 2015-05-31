@@ -1,9 +1,9 @@
 package net.thenamedev.legendapi.core.exceptions;
 
 /**
- * Quite simply, called when a player is being banned, but is already banned.<br>
+ * The class name explains it all.
  *
- * Created by thepixeldev on 5/7/15.
+ * @author ThePixelDev
  */
 public class PlayerAlreadyBannedException extends RuntimeException {
 

@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created on 3/21/2015
+ * Rank utilities.
  *
  * @author ThePixelDev
  */
@@ -113,26 +113,13 @@ public enum Rank {
         }
     }
 
+    /**
+     * Get a pre-built no permissions message.
+     * @param r The rank to get the no permissions message of
+     * @return The built no permissions message
+     */
     public static String noPermissions(Rank r) {
-        switch(r) {
-            case FOUNDER:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "FOUNDER";
-            case ADMIN:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "ADMIN";
-            case SRMOD:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "SRMOD";
-            case MOD:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "MOD";
-            case HELPER:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "HELPER";
-            case YOUTUBE:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "YT";
-            case MEMBERPLUS:
-                return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.GOLD + "MEMBER+";
-
-            case MEMBER:
-                return ChatUtils.getCustomMsg("Sanity Check") + "A function seems to be drunk and calling Rank.noPermissions(Rank.MEMBER) - this really should not happen.";
-        }
-        return null;
+        return ChatUtils.Messages.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.RED + r;
     }
+
 }

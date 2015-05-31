@@ -1,6 +1,8 @@
 package net.thenamedev.legendarena.extras.menu;
 
 import net.thenamedev.legendapi.core.emeralds.EmeraldsCore;
+import net.thenamedev.legendapi.message.Message;
+import net.thenamedev.legendapi.message.MessageType;
 import net.thenamedev.legendapi.utils.*;
 import net.thenamedev.legendarena.extras.menu.staff.StaffMenu;
 import org.bukkit.Bukkit;
@@ -14,6 +16,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 /**
+ * Main menu.
+ *
  * @author ThePixelDev
  */
 public class MainMenu implements Listener {
@@ -55,7 +59,7 @@ public class MainMenu implements Listener {
                 if(Rank.isRanked(ev.getWhoClicked(), Rank.MEMBERPLUS)) {
                     if(!(EmeraldsCore.getEmeralds((Player) ev.getWhoClicked()) > 15)) {
                         ev.getWhoClicked().closeInventory();
-                        ActionBarAPI.sendActionBar((Player) ev.getWhoClicked(), ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!");
+                        new Message(MessageType.SUBTITLE).append(ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!").send((Player) ev.getWhoClicked());
                     }
                 }
                 ev.getWhoClicked().closeInventory();

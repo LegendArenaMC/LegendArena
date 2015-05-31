@@ -1,7 +1,7 @@
 package net.thenamedev.legendapi.core.exceptions;
 
 /**
- * Created on 3/3/2015
+ * Mistakes were made.
  *
  * @author ThePixelDev
  */

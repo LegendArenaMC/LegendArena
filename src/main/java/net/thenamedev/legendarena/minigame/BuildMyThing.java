@@ -1,5 +1,6 @@
 package net.thenamedev.legendarena.minigame;
 
+import net.thenamedev.legendapi.core.annotations.SoonTM;
 import net.thenamedev.legendapi.utils.ChatUtils;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendarena.extras.HubWarper;
@@ -14,8 +15,11 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * Created by thepixeldev on 4/29/15.
+ * Build My Thing - Soon[tm]
+ *
+ * @author ThePixelDev
  */
+@SoonTM
 public class BuildMyThing {
 
     private static boolean running = false;

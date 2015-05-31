@@ -3,7 +3,7 @@ package net.thenamedev.legendapi.utils;
 import java.util.Calendar;
 
 /**
- * Created on 4/5/2015
+ * Calendar utils.
  *
  * @author ThePixelDev
  */

@@ -8,7 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * @author TheNameMan
+ * Global mute staff command.
+ *
+ * @author ThePixelDev
  */
 public class GlobalMute {
 

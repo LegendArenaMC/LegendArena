@@ -5,7 +5,7 @@ import net.thenamedev.legendapi.core.exceptions.PlayerNotOnlineException;
 import org.bukkit.entity.Player;
 
 /**
- * Created on 5/23/2015
+ * Game player.
  *
  * @author ThePixelDev
  */
@@ -21,19 +21,37 @@ public class GamePlayer {
         this.state = state;
     }
 
+    /**
+     * Get the player instance
+     * @return The player instance
+     * @throws PlayerNotOnlineException If the player is not online
+     */
     public Player getPlayer() {
         if(p == null) throw new PlayerNotOnlineException();
         return p;
     }
 
+    /**
+     * Get the state of the player
+     * @return The player's state
+     * @see net.thenamedev.legendapi.gamemanager.GamePlayerState
+     */
     public GamePlayerState getState() {
         return state;
     }
 
+    /**
+     * Set the state of the player
+     * @param state The state to set to
+     */
     public void setState(GamePlayerState state) {
         this.state = state;
     }
 
+    /**
+     * Get's the player's emeralds instance.
+     * @return The player's Emeralds instance
+     */
     public EmeraldPlayer getEmeralds() {
         return ep;
     }

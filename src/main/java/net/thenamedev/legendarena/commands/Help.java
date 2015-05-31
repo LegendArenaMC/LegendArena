@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Created on 3/19/2015
+ * Help command of stuff.
  *
  * @author ThePixelDev
  */

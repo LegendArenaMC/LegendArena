@@ -7,6 +7,8 @@ import org.bukkit.ChatColor;
 import java.util.Random;
 
 /**
+ * MOTD randomizer.
+ *
  * @author ThePixelDev
  */
 public class MOTDRandomizer {

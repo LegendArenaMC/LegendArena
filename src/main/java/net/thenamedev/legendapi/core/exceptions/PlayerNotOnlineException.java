@@ -1,7 +1,7 @@
 package net.thenamedev.legendapi.core.exceptions;
 
 /**
- * Created on 5/23/2015
+ * Thrown when a player is not online.
  *
  * @author ThePixelDev
  */

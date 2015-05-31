@@ -3,7 +3,6 @@ package net.thenamedev.legendarena.commands.staff;
 import net.thenamedev.legendapi.utils.Rank;
 import net.thenamedev.legendapi.utils.RektUtils;
 import net.thenamedev.legendarena.commands.Help;
-import net.thenamedev.legendapi.utils.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created on 4/4/2015
+ * Troll command. Mwhahahaha!
  *
  * @author ThePixelDev
  */
@@ -46,7 +45,6 @@ public class Troll implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Player " + ChatColor.YELLOW + args[1] + ChatColor.RED + " was not found!");
                     return true;
                 }
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "PMC" + ChatColor.GREEN + ".");
                 p.chat("MY SPLEEEEEENN!");
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1000000, 10, true, false));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 10, true, false));
@@ -60,7 +58,6 @@ public class Troll implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Player " + ChatColor.YELLOW + args[1] + ChatColor.RED + " was not found!");
                     return true;
                 }
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "PENGUINS" + ChatColor.GREEN + ".");
                 p.chat("Penguins are superior to panes of glass.");
             }
         } else if(args[0].equalsIgnoreCase("rekt")) {
@@ -72,7 +69,6 @@ public class Troll implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Player " + ChatColor.YELLOW + args[1] + ChatColor.RED + " was not found!");
                     return true;
                 }
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "REKT" + ChatColor.GREEN + ".");
                 p.chat(RektUtils.getRandomRekt());
             }
         } else if(args[0].equalsIgnoreCase("sheeple")) {
@@ -85,7 +81,6 @@ public class Troll implements CommandExecutor {
                     return true;
                 }
                 sheepleTroll.add(p.getUniqueId());
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "SHEEPLE" + ChatColor.GREEN + ".");
                 p.chat("It's all a conspiracy!");
             }
         } else if(args[0].equalsIgnoreCase("fakeban")) {
@@ -98,7 +93,6 @@ public class Troll implements CommandExecutor {
                     return true;
                 }
                 sheepleTroll.add(p.getUniqueId());
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Trolling " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " with troll " + ChatColor.RED + "FAKEBAN" + ChatColor.GREEN + ".");
                 p.kickPlayer("You were banned!\nReason:\n \n" + ChatColor.RED + "The ban hammer has spoken!");
             }
         } else if(args[0].equalsIgnoreCase("end")) {
@@ -113,7 +107,6 @@ public class Troll implements CommandExecutor {
                 if(sheepleTroll.contains(p.getUniqueId())) sheepleTroll.remove(p.getUniqueId());
                 for(PotionEffect potion : p.getActivePotionEffects())
                     p.removePotionEffect(potion.getType());
-                ActionBarAPI.sendActionBar((Player) sender, ChatColor.GREEN + "Stopped all trolls on " + p.getName() + ".");
             }
         }
 

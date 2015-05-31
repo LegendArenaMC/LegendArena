@@ -6,7 +6,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
- * Created by thepixeldev on 5/7/15.
+ * Damage listener for instant respawns.
+ *
+ * @author ThePixelDev
  */
 public class PlayerDamageListener implements Listener {
 

@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 /**
+ * Player move listener.
+ *
  * @author ThePixelDev
  */
 public class PlayerMoveListener implements Listener {

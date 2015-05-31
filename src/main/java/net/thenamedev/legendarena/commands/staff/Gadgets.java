@@ -14,7 +14,9 @@ import org.bukkit.entity.Player;
 import java.util.UUID;
 
 /**
- * @author TheNameMan
+ * Gadgets toggle command.
+ *
+ * @author ThePixelDev
  */
 public class Gadgets implements CommandExecutor {
 

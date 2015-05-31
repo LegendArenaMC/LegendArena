@@ -55,12 +55,14 @@ public class EmeraldsCore {
         return econ;
     }
 
+    @Deprecated
     public static int getEmeralds(Player p) {
         if(econ == null || !econ.isEnabled())
             return 0;
         return (int) Math.round(econ.getBalance(p));
     }
 
+    @Deprecated
     public static void removeEmeralds(Player p, int amount, boolean showMsg) {
         if(amount < 1)
             throw new NullPointerException();
@@ -69,6 +71,7 @@ public class EmeraldsCore {
             p.sendMessage(ChatUtils.getCustomMsg("Emeralds") + "You lost " + ChatColor.DARK_PURPLE + amount + ChatColor.LIGHT_PURPLE + " token(s). You now have " + ChatColor.DARK_PURPLE + getEmeralds(p) + ChatColor.LIGHT_PURPLE + " emerald(s).");
     }
 
+    @Deprecated
     public static void addEmeralds(Player p, int amount, boolean showMsg) {
         if(amount < 1)
             throw new NullPointerException();
@@ -78,6 +81,7 @@ public class EmeraldsCore {
             p.sendMessage(ChatUtils.getCustomMsg("Emeralds") + "You gained " + ChatColor.DARK_PURPLE + amount + ChatColor.LIGHT_PURPLE + " token(s)! You now have " + ChatColor.DARK_PURPLE + getEmeralds(p) + ChatColor.LIGHT_PURPLE + " emerald(s)!");
     }
 
+    @Deprecated
     public static void resetEmeralds(Player p, boolean showMsg, String resetter) {
         if(resetter.equals(""))
             resetter = "*CONSOLE*";
