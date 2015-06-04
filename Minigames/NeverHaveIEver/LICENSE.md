@@ -18,14 +18,14 @@ You May
 ----
 
 1. Redistribute the plugin and it's source code
-2. Fork the code and make a custom version, as long as you give credit to the LA developers (this is the only exception to the first "You May Not")
+2. Fork the code and make a custom version (this is the only exception to the first "You May Not")
 
 You May Not
 ----
 
 1. Redistribute the plugin claiming it is your own, or making monetary gains without permission
 2. Replace all reference to us in a fork, and claim your fork is the official plugin
-3. Release the plugin on Bukkit Dev/Spigot Resources/etc (without permission from Legend Arena's developers)
+3. Release the plugin on Bukkit Dev/Spigot Resources/etc (without permission)
 
 You Can, But We'd Prefer You Not To
 ----

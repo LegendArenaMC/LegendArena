@@ -31,7 +31,7 @@ public class MOTDRandomizer {
             ChatColor.ITALIC + "askew", //try this in google. you'll get what this is then.
             "It's a me, Mario!", //if you don't know what this is from you're a failure
             "War. War never changes.", //reference to Fallout 3/2/1/NV
-            "//Made in Java", //reference to Minecraft being made in Java, and thus basically everything that uses Minecraft pretty much needs to be in Java, or re-invent the wheel. (also a reference to a code comment)
+            "Made in Java", //reference to Minecraft being made in Java, and thus basically everything that uses Minecraft pretty much needs to be in Java, or re-invent the wheel. (also a reference to a code comment)
             "Not compatible with Minicraft.", //reference to a Ludem Dare Notch did that he called "Minicraft"
             "I am Alpha and Omega, the beginning and end.", //reference to Fallout 3
             "igotthatreference.gif", //reference to "I Got That Reference" gifs
@@ -86,6 +86,9 @@ public class MOTDRandomizer {
             "Does not contain donkeys.",
             "Powered by magic.",
             "Has cookies.",
+            "EnderTek Miniman! OHGOD MY SPLEEN WHYY",
+            "#PleaseStandBy",
+            "WE'RE THE TUNNEL SNAKES", //THAT'S US, AND WE RULE
             "Not seen on TV.",
             "May contain peanuts.",
             "Fun for the whole family!",

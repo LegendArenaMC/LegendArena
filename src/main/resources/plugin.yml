@@ -45,5 +45,4 @@ commands:
   fly:
     description: Magic.
   punish:
-    description: Banned!
-    aliases: [warn, kick, ban, tempban]
+    description: The ban hammer has struck again! #<meanwhile, everything explodes in the background>

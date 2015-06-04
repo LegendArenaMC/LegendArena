@@ -125,21 +125,10 @@ public class ChatSystem {
      * Sends a chat message as a player.<br><br>
      *
      * Pro-tip: To send a message in a certain channel temporarily, set the player's channel to the needed channel, send the message, and set the channel back to what it was.
-     * @param p The player to send as
+     * @param p The player to send the message as
      * @param msg The message to send
      */
     public static void msg(Player p, String msg) {
-        if(getChannel(p) == null) {
-            if(isChatMuted())
-                if(!Rank.isRanked(p, Rank.YOUTUBE)) {
-                    p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
-                    return;
-                }
-            ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
-            return;
-        }
-
-        //noinspection ConstantConditions
         switch(getChannel(p)) {
             case ADMIN:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
@@ -158,6 +147,15 @@ public class ChatSystem {
                         continue;
                     p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
+                break;
+
+            case GLOBAL:
+                if(isChatMuted())
+                    if(!Rank.isRanked(p, Rank.YOUTUBE)) {
+                        p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
+                        return;
+                    }
+                ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
                 break;
         }
     }

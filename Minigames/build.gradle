@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+compileJava.options.encoding = 'UTF-8' //gradle, pls. just, pls. #gradlepls
+javadoc.options.encoding = 'UTF-8' //srsly gradle pls
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+    maven {
+        url "http://nexus.theyeticave.net/content/repositories/pub_releases"
+    }
+    maven {
+        url "http://ci.shadowvolt.com/plugin/repository/everything/"
+    }
+}
+
+dependencies {
+    compile group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+    compile group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '3.6.3-SNAPSHOT'
+    compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1'
+    testCompile 'junit:junit:4.8.2'
+}
+
+subprojects {
+    apply plugin: 'java'
+    compile fileTree(dir: '../build/libs/', include: 'LegendArena.jar')
+    include "NeverHaveIEver"
+}
+
+task minigames(type: Jar) {
+    dependsOn subprojects.build
+    dependsOn subprojects.jar
+}
+
+task build() {
+    dependsOn minigames
+}

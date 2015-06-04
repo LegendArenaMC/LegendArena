@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static net.thenamedev.legendapi.utils.ChatUtils.Messages.*;
@@ -29,7 +30,6 @@ public class InitUtils {
     private final static List<String> chat = new ArrayList<>();
     private final static List<String> particles = new ArrayList<>();
     private final static List<String> stafflist = new ArrayList<>();
-    private final static List<String> punish = new ArrayList<>();
 
     public static void pluginInit() {
         if(init)
@@ -40,6 +40,9 @@ public class InitUtils {
         conf.options().copyDefaults(true);
         Bukkit.getPluginManager().getPlugin("LegendArena").saveConfig();
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
+        if(LegendAPI.debug != conf.getBoolean("debug"))
+            ChatUtils.broadcast(String.format("%sConfig has the debug setting set to false, so all further debug messages will be thrown into /dev/null.", debugMsg));
+        LegendAPI.debug = conf.getBoolean("debug");
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", debugMsg, LegendAPI.apiVersion, LegendAPI.versionName));
         if(LegendAPI.debug)
@@ -74,7 +77,6 @@ public class InitUtils {
         Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Bukkit.getPluginManager().registerEvents(new PlayerDamageListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new CommandFilter(), Bukkit.getPluginManager().getPlugin("LegendArena"));
@@ -98,11 +100,13 @@ public class InitUtils {
         Bukkit.getPluginCommand("staff").setExecutor(new Staff()); //Freeze command [/freeze]
         Bukkit.getPluginCommand("emeralds").setExecutor(new EmeraldCmd()); //Emeralds command [/emeralds]
         Bukkit.getPluginCommand("chat").setExecutor(new Chat()); //Chat command [/chat, /c]
-        Bukkit.getPluginCommand("explodeallthethings").setExecutor(new ExplodeAllTheThings()); //Explodeallthethings command
+        //Bukkit.getPluginCommand("explodeallthethings").setExecutor(new ExplodeAllTheThings()); //Explodeallthethings command [/explodeallthethings]
+        Bukkit.getPluginCommand("punish").setExecutor(new Punish()); //Punish command [/punish, /p]
         // Aliases
         Bukkit.getPluginCommand("particles").setAliases(particles); //Particles aliases
         Bukkit.getPluginCommand("chat").setAliases(chat); //Chat aliases
         Bukkit.getPluginCommand("stafflist").setAliases(stafflist); //Stafflist aliases
+        Bukkit.getPluginCommand("punish").setAliases(Collections.singletonList("p")); //Punish alias
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sCommands loaded!", debugMsg));
     }

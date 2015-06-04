@@ -2,7 +2,7 @@ package net.thenamedev.legendarena.commands.backends.punish;
 
 import net.thenamedev.legendapi.punish.Warn;
 import net.thenamedev.legendapi.utils.ChatUtils;
-import net.thenamedev.legendapi.utils.PluginUtils;
+import net.thenamedev.legendarena.commands.Help;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

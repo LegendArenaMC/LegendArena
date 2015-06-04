@@ -1,5 +1,6 @@
 package net.thenamedev.legendapi.gamemanager;
 
+import net.thenamedev.legendapi.core.exceptions.DoYouEvenKnowWhatYourDoingException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
@@ -9,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Game instance. Use <code>GameManager.getNewInstance()</code> to get an instance.
@@ -18,6 +20,7 @@ import java.util.HashMap;
 public class Game {
 
     private boolean singleSpawn = true;
+    private boolean isRunning = false;
     private final Plugin p;
     private final PluginManager pm;
 
@@ -174,14 +177,34 @@ public class Game {
      * Starts the game.
      */
     public void start() {
-        //
+        if(isRunning)
+            throw new DoYouEvenKnowWhatYourDoingException();
+        isRunning = true;
+        for(GamePlayer p : getPlayers()) {
+            if(!p.getPlayer().isOnline()) {
+                removePlayers(p);
+                continue;
+            }
+            if(!singleSpawn) {
+                //multiple spawn points, so use a randomizer of sorts
+                Random r = new Random(); //ah randomizers... the only thing I hate more than iNub (if you don't get that reference don't worry about it)
+            }
+        }
     }
 
     /**
      * Ends the game.
      */
     public void stop() {
-        //
+        if(!isRunning)
+            throw new MinigameNotRunningException();
+        isRunning = false;
+        for(GamePlayer p : getPlayers()) {
+            if(!p.getPlayer().isOnline()) {
+                continue;
+            }
+            removePlayers(p);
+        }
     }
 
 }

@@ -22,7 +22,8 @@ public class ServerPingListener implements Listener {
         ChatColor randomColour = ChatUtils.getRandomColour();
         ChatColor randomColour2 = ChatUtils.getRandomColour();
         if(randomColour == randomColour2)
-            randomColour2 = ChatUtils.getRandomColour();
+            while(randomColour == randomColour2)
+                randomColour = ChatUtils.getRandomColour(); //thanks one if() pass for not doing it
         ev.setMotd(MessageFormat.format("{0}Legend Arena {1}'{'{2}'}'{3}\n{4}//{5}{6}", randomColour, ChatColor.YELLOW, MOTDRandomizer.getNotice().toUpperCase(), randomColour, ChatColor.DARK_GRAY, randomColour2, MOTDRandomizer.getRandomMOTD()));
     }
 

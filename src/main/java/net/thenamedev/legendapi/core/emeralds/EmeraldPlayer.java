@@ -18,8 +18,25 @@ public class EmeraldPlayer {
         this.econ = EmeraldsCore.getEcon();
     }
 
-    public double getEmeralds() {
+    public double amount() {
         return Math.ceil(econ.getBalance(p));
+    }
+
+    public void take(int amount) {
+        econ.withdrawPlayer(p, amount);
+    }
+
+    public void add(int amount) {
+        econ.depositPlayer(p, amount);
+    }
+
+    public void reset() {
+        econ.withdrawPlayer(p, amount());
+    }
+
+    public void set(int amount) {
+        reset();
+        add(amount);
     }
 
 }
