@@ -7,8 +7,8 @@ package net.thenamedev.legendapi;
  */
 public class LegendAPI {
 
-    public static final String apiVersion = "0.4";
-    public static final String versionName = "Protective Horse";
+    public static final String apiVersion = "0.5";
+    public static final String versionName = "NullPointerException Edition"; //With extra MistakesWereMadeExceptions!
 
     public static boolean debug = true;
 

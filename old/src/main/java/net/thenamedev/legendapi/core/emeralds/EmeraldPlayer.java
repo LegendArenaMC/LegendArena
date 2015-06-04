@@ -18,8 +18,8 @@ public class EmeraldPlayer {
         this.econ = EmeraldsCore.getEcon();
     }
 
-    public double amount() {
-        return Math.ceil(econ.getBalance(p));
+    public int amount() {
+        return (int) Math.ceil(econ.getBalance(p)); //casting to int from a double. why.gif
     }
 
     public void take(int amount) {

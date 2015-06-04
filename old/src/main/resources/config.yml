@@ -1,0 +1,4 @@
+# Probably a smart idea to not edit the MOTD notice directly in here. (protip: /staff motd notice <new notice>)
+
+motdNotice: "PUBLIC ALPHA"
+debug: true

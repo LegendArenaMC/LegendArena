@@ -41,6 +41,9 @@ public class EmeraldsCore {
         }
     }
 
+    /**
+     * Never ask how the fuck this works, or it will just randomly quit working. Because magic.
+     */
     private static boolean setupEconomy() {
         if(Bukkit.getPluginManager().getPlugin("Vault") == null)
             return false;
@@ -86,7 +89,8 @@ public class EmeraldsCore {
         if(resetter.equals(""))
             resetter = "*CONSOLE*";
         removeEmeralds(p, getEmeralds(p), false);
-        p.sendMessage(ChatUtils.getCustomMsg("Emeralds") + "Aww. You lost all your emeralds, due to a reset of your account by " + ChatColor.DARK_PURPLE + resetter + ChatColor.LIGHT_PURPLE + ".");
+        if(showMsg)
+            p.sendMessage(ChatUtils.getCustomMsg("Emeralds") + "Aww. You lost all your emeralds, due to a reset of your account by " + ChatColor.DARK_PURPLE + resetter + ChatColor.LIGHT_PURPLE + ".");
     }
 
 }
