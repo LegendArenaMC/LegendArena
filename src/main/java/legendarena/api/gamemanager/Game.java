@@ -1,6 +1,6 @@
 package legendarena.api.gamemanager;
 
-import net.thenamedev.legendapi.core.exceptions.DoYouEvenKnowWhatYourDoingException;
+import legendarena.api.exceptions.DoYouEvenKnowWhatYourDoingException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;

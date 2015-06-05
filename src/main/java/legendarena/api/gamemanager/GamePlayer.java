@@ -1,7 +1,7 @@
 package legendarena.api.gamemanager;
 
-import net.thenamedev.legendapi.core.emeralds.EmeraldPlayer;
-import net.thenamedev.legendapi.core.exceptions.PlayerNotOnlineException;
+import legendarena.emeralds.EmeraldPlayer;
+import legendarena.api.exceptions.PlayerNotOnlineException;
 import org.bukkit.entity.Player;
 
 /**
@@ -34,7 +34,7 @@ public class GamePlayer {
     /**
      * Get the state of the player
      * @return The player's state
-     * @see net.thenamedev.legendapi.gamemanager.GamePlayerState
+     * @see legendarena.api.gamemanager.GamePlayerState
      */
     public GamePlayerState getState() {
         return state;
