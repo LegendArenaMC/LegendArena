@@ -29,7 +29,7 @@ public class StaffList implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "There's no staff online :(");
         else
             for(Player p : staffOnline)
-                sender.sendMessage(ChatColor.RED + ChatUtils.getFormattedName(p) + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + Rank.getRank(p));
+                sender.sendMessage(ChatColor.RED + p.getName() + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + Rank.getRank(p));
         return true;
     }
 

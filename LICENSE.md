@@ -3,7 +3,7 @@ TheNameDev Plugin License
 
 Copyright 2014-present, Legend Arena Developers.
 
-Generic Rights Rambling
+Generic License Rambling
 ----
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -18,12 +18,12 @@ You May
 ----
 
 1. Redistribute the plugin and it's source code
-2. Fork the code and make a custom version, as long as you give credit to the LA developers (this is the only exception to the first "You May Not")
+2. Fork the code and make a custom version
 
 You May Not
 ----
 
-1. Redistribute the plugin claiming it is your own, or making monetary gains without permission
+1. Redistribute the (unmodified) plugin claiming it is your own, or making monetary gains without permission
 2. Replace all reference to us in a fork, and claim your fork is the official plugin
 3. Release the plugin on Bukkit Dev/Spigot Resources/etc (without permission from Legend Arena's developers)
 

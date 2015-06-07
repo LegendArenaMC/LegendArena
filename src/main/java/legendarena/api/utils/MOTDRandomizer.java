@@ -19,9 +19,7 @@ public class MOTDRandomizer {
             "Can resolve hostname.", //joke of "Can't resolve hostname" when MC is given an invalid hostname, e.g. "mc.hypixel.nt"
             "Server is Optifine-compatible.", //just about every server is optifine compatible basically, yet some idiots decide to ask anyways
             "Does not support the Adventure Update.", //the Adventure Update is /Beta/ 1.8 - this is release 1.8 we're on
-            "May contain Javert.", //reference to an Imgur joke
-            "Has random MOTDs.", //reference to... well, this system.. I guess
-            "All your base are belong to us.", //You know what this is a reference to.
+            "All your base are belong to us.", //You know what this is a reference to. If you don't know, you fail at the internet.
             "What are 'ya buyin, stranger?", //reference to Resident Evil 4
             ChatColor.ITALIC + "askew", //try this in google. you'll get what this is then.
             "Hype. Hype never changes.", //reference to Fallout 4(?)/3/2/1/NV (temporarily "Hype" instead of "War" for Fallout 4)
@@ -43,6 +41,7 @@ public class MOTDRandomizer {
             "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
             "Arch Linux!", //reference to Arch Linux, a... well.. Linux distro.. the name kind of gave that away.
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
+            "Jason? JAAASONN?", //heavy rain reference
             "The catch? Catch-22.", //reference to Catch-22, in which fighting a situation would be accepting it (wikipedia has a slightly better explanation, but obviously take it with a grain of salt)
 
             // BEGIN SONG REFERENCES THAT HAVE NO REASON TO BE HERE BUT FUCK IT WHO WOULD CARE ANYWAYS, IT'S RANDOM MOTDS, AAAAND NOW I'M RAMBLING IN ALL CAPS, FACK
@@ -67,12 +66,12 @@ public class MOTDRandomizer {
 
             "HYPE TRAIN INBOUND", //THE HYPE TRAIN HAS NO BRAKES, CHOO CHOOO
             "Kurz Gesagt!", //reference to the YouTube channel with that name
-            "Is not a Zone UHC server.", //pardon me, poking fun at the Zone UHC server
+            "Is not a Zone UHC server.", //pardon me, just poking fun at the Zone UHC server
             "Why circle pizzas? Why not square pizzas?", //#BlameJaden
             "こんにちは日本！", //translated is "Hello Japan!" (yes, I used google translate, too lazy to bother actually trying to translate it (plus because japaneese, pls))
             "Pika-pika!",
             "Hey, look! That guy's blac- aand I'm banned.", //shhhhhhhh..... we must never speak of this
-            "Hey, go kick yours- oh and i'm banned kbye",
+            "Go jump off a bri- oh and i'm banned kbye",
             "DU DU DU DUDUDUDUDU DU DU DU",
             "Aaand it's gone.",
             "Rekt-22", //shhh...
@@ -106,6 +105,7 @@ public class MOTDRandomizer {
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?", //don't mind me, just poking fun at the butthurt fanboys
 
             //BEGIN ANIME REFERENCES (#BlameJapan)
+
             "Are you a red or blue Kämpfer?", //reference to Kampfer
     };
 

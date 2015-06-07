@@ -73,13 +73,26 @@ public class ParticleCore implements Runnable {
                 continue;
             ParticleEffect.FIREWORKS_SPARK.display(1, 1, 1, 1, 10, p.getLocation(), 30);
         }
+        for(final UUID s : colorfulEffects) {
+            Player p = Bukkit.getPlayer(s);
+            if(p == null)
+                continue;
+            Random r = new Random();
+            Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 2.1, p.getLocation().getZ());
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+        }
     }
 
     @SuppressWarnings("deprecation")
     public static void addType(String player, Type type) {
         Player p = Bukkit.getPlayer(player);
         if(!multiParicle.contains(p.getUniqueId()))
-            removePlayer(player);
+            removePlayer(p);
         switch(type) {
             case HEART:
                 if(heartEffects.contains(p.getUniqueId()))
@@ -152,12 +165,6 @@ public class ParticleCore implements Runnable {
         return ids;
     }
 
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    public static void removePlayer(String player) {
-        removePlayer(Bukkit.getPlayer(player));
-    }
-
     public static void removePlayer(Player p) {
         if(p == null)
             return; //sanity check
@@ -184,26 +191,6 @@ public class ParticleCore implements Runnable {
         FIREWORK,
         COLORFULEFFCTS,
         FLAME
-    }
-
-    public static class ColorfulEffects implements Runnable {
-
-        public void run() {
-            for(final UUID s : colorfulEffects) {
-                @SuppressWarnings("deprecation") Player p = Bukkit.getPlayer(s);
-                if(p == null)
-                    continue;
-                Random r = new Random();
-                Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 2.1, p.getLocation().getZ());
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-                ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-            }
-        }
-
     }
 
 }

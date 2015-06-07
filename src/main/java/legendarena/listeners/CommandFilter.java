@@ -4,6 +4,9 @@ import legendarena.message.Message;
 import legendarena.message.MessageType;
 import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.Rank;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -16,7 +19,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 public class CommandFilter implements Listener {
 
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent ev) {
+    public void onCommand(final PlayerCommandPreprocessEvent ev) {
         if(Rank.isRanked(ev.getPlayer(), Rank.ADMIN))
             return;
         String cmd = ev.getMessage().toLowerCase();
@@ -29,6 +32,19 @@ public class CommandFilter implements Listener {
         } else if(isCmd(ev.getMessage().toLowerCase(), "/?", "/bukkit:?", "/bukkit:help")) {
             ev.setCancelled(true);
             new Message(MessageType.SUBTITLE).append(ChatUtils.getCustomMsg("Command Filter") + "Nice try...").send(ev.getPlayer());
+        } else if(isCmd(ev.getMessage().toLowerCase(), "/op", "/bukkit:op", "/deop", "/bukkit:deop")) {
+            if(Rank.isRanked(ev.getPlayer(), Rank.FOUNDER))
+                return;
+            ev.setCancelled(true); //cancel the event
+            new Message(MessageType.TITLE).append("Nice try. It won't work here, bud.").send(Sound.BLAZE_DEATH, 3, ev.getPlayer()); //tell the player it isn't gonna work here
+            ChatUtils.broadcast(ChatUtils.getCustomMsg("Command Filter") + "The player " + ChatColor.RED + ev.getPlayer().getName() + ChatColor.BLUE + " tried to use /op or /deop!"); //shame the player publicly
+            ev.getPlayer().chat("I am a nubcake. Please ban me.");
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
+                @Override
+                public void run() {
+                    ev.getPlayer().kickPlayer("Bye!");
+                }
+            }, 80l);
         }
     }
 

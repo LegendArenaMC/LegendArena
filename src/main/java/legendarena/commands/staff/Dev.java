@@ -34,19 +34,6 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
             return true;
         }
-
-        if(args[0].equalsIgnoreCase("testranks")) {
-            if(!Rank.isRanked(sender, Rank.FOUNDER))
-                return false;
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "FOUNDER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.FOUNDER));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "ADMIN: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.ADMIN));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "SRMOD: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.SRMOD));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "MOD: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MOD));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "HELPER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.HELPER));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "YOUTUBE: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.YOUTUBE));
-            sender.sendMessage(ChatUtils.Messages.debugMsg + "MEMBER: " + ChatColor.RESET + ChatUtils.getFormattedChat("Testing, 123", "Tester", Rank.MEMBER));
-            return true;
-        }
         return false;
     }
 }

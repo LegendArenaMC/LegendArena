@@ -2,9 +2,12 @@ package legendarena.chat;
 
 import legendarena.api.exceptions.NotEnoughPermissionsException;
 import legendarena.api.exceptions.PlayerNotOnlineException;
+import legendarena.api.regex.RegexUtils;
 import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.PluginUtils;
 import legendarena.api.utils.Rank;
+import legendarena.commands.staff.Troll;
+import legendarena.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -38,6 +41,36 @@ public class ChatSystem {
      */
     public static void setChatMuted(boolean set) {
         mute = set;
+    }
+
+    private static String getParsedChatMessage(String m, Player p) {
+        String msg = m;
+        if(Troll.sheepleTroll.contains(p.getUniqueId())) {
+            if(RegexUtils.endsWith(m, "[?!.]"))
+                msg = msg + " Wake up, sheeple!";
+            else
+                msg = msg + "! Wake up, sheeple!";
+        }
+
+        if(RegexUtils.contains(m, "[Jj]ustin [Bb]eiber") || RegexUtils.contains(m, "[Jj]ustin [Bb]ieber"))
+            //shh.. let me have my fun
+            new Message().append(ChatUtils.getCustomMsg("Spell Checker") + "Did you mean " + ChatColor.RED + "Justin Beaver" + ChatColor.BLUE + "?").send(p);
+        if(msg.contains("justin beaver"))
+            //no seriously please let me have my fun kthnx
+            msg = RegexUtils.replace(m, "[Jj]ustin [Bb]eaver", "Justin Bieber");
+
+        if(Rank.isRanked(p, Rank.YOUTUBE))
+            return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™"));
+        else
+            return ChatColor.GRAY + msg;
+    }
+
+    public static String getFormattedName(Player p) {
+        return Rank.getRankPrefix(Rank.getRank(p)) + ChatColor.RESET + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + p.getName();
+    }
+
+    public static String getChatMessage(String msg, Player p) {
+        return getFormattedName(p) + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + ChatColor.GRAY + PluginUtils.chars[1] + " " + getParsedChatMessage(msg, p);
     }
 
     /**
@@ -91,8 +124,6 @@ public class ChatSystem {
     public static void add(Player p, Channel channel) {
         if(p == null || !p.isOnline())
             throw new PlayerNotOnlineException();
-        if(Rank.isRanked(p, channel.getRank()))
-            throw new NotEnoughPermissionsException();
         UUID pUUID = p.getUniqueId();
         if(channels.containsKey(pUUID))
             channels.remove(pUUID);
@@ -134,18 +165,18 @@ public class ChatSystem {
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
                     if(!Rank.isRanked(p1, Rank.ADMIN))
                         continue;
-                    p1.sendMessage(Channel.ADMIN.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.ADMIN.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
                 break;
             case ALERT:
                 for(Player p1 : Bukkit.getOnlinePlayers())
-                    p1.sendMessage(Channel.ALERT.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.ALERT.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg));
                 break;
             case STAFF:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
                     if(!Rank.isRanked(p1, Rank.HELPER))
                         continue;
-                    p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", ChatUtils.getFormattedName(p)).replace("{MESSAGE}", msg));
+                    p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
                 break;
 
@@ -155,7 +186,7 @@ public class ChatSystem {
                         p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
                         return;
                     }
-                ChatUtils.broadcast(ChatUtils.getFormattedChat(msg, p));
+                ChatUtils.broadcast(getChatMessage(msg, p));
                 break;
         }
     }

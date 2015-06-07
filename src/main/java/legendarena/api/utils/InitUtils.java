@@ -11,13 +11,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static legendarena.api.utils.ChatUtils.Messages.*;
 
 /**
- * Initialization utilities.
+ * Initialization utilities.<br><br>
+ *
+ * Yes, I'm aware this is in need of a GIANT overhaul. -Pixel
  *
  * @author ThePixelDev
  */
@@ -33,16 +34,16 @@ public class InitUtils {
         if(init)
             return;
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading CONFIG", debugMsg));
+            ChatUtils.broadcast(String.format("%sLoading configuration...", debugMsg));
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         conf.options().copyDefaults(true);
         Bukkit.getPluginManager().getPlugin("LegendArena").saveConfig();
         MOTDRandomizer.setNotice(conf.getString("motdNotice"));
         if(LegendAPI.debug != conf.getBoolean("debug"))
-            ChatUtils.broadcast(String.format("%sConfig has the debug setting set to false, so all further debug messages will be thrown into /dev/null.", debugMsg));
+            ChatUtils.broadcast(String.format("%sConfig has the debug setting set to false, so all further debug messages will be thrown into /dev/null, after being incenerated.", debugMsg));
         LegendAPI.debug = conf.getBoolean("debug");
         if(LegendAPI.debug)
-            ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", debugMsg, LegendAPI.apiVersion, LegendAPI.versionName));
+            ChatUtils.broadcast(String.format("%sLoading LegendArena plugin using API version v%s, codenamed \"%s\".", debugMsg, LegendAPI.apiVersion, LegendAPI.versionCodename));
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sLoading COMMANDS", debugMsg));
         registerCommands();
@@ -61,8 +62,7 @@ public class InitUtils {
     }
 
     private static void registerSchedulers() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 10l, 10l);
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore.ColorfulEffects(), 3l, 3l);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new ParticleCore(), 5l, 5l);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new HubWarper.InitPlayers(), 20l, 20l);
         if(LegendAPI.debug)
             ChatUtils.broadcast(String.format("%sSchedulers loaded!", debugMsg));
@@ -72,7 +72,7 @@ public class InitUtils {
         Bukkit.getPluginManager().registerEvents(new ServerPingListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new HubWarper(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new ChatListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
+        //Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         Bukkit.getPluginManager().registerEvents(new CommandFilter(), Bukkit.getPluginManager().getPlugin("LegendArena"));
         if(LegendAPI.debug)

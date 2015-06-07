@@ -26,10 +26,10 @@ public class Message {
 
     /**
      * Initalize a new message.
-     * @param type The type to send
+     * @param type The type to send (if null, defaults to a chat message)
      */
     public Message(MessageType type) {
-        this.type = type;
+        this.type = (type != null ? type : MessageType.CHAT);
         builder = new StringBuilder();
     }
 
@@ -67,7 +67,7 @@ public class Message {
     }
 
     /**
-     * Send the built message to the players specified
+     * Send the built message to the players specified, with a specified sound
      * @param sound The sound to play while sending it
      * @param players The players to send the message to
      */

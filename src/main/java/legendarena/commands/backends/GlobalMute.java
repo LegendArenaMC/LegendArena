@@ -25,12 +25,12 @@ public class GlobalMute {
         }
         if(ChatSystem.isChatMuted()) {
             ChatUtils.broadcast(" ");
-            ChatUtils.broadcast(ChatColor.BLUE + "Staff member " + ChatUtils.getFormattedName((Player) sender) + ChatColor.BLUE + " has lifted the global mute.");
+            ChatUtils.broadcast(ChatUtils.getCustomMsg("Chat Management") + "Staff member " + ChatColor.YELLOW + sender.getName() + ChatColor.BLUE + " has lifted the global mute.");
             ChatUtils.broadcast(" ");
             ChatSystem.setChatMuted(false);
         } else {
             ChatUtils.broadcast(" ");
-            ChatUtils.broadcast(ChatColor.BLUE + "Staff member " + ChatUtils.getFormattedName((Player) sender) + ChatColor.BLUE + " has globally muted the chat.");
+            ChatUtils.broadcast(ChatUtils.getCustomMsg("Chat Management") + "Staff member " + ChatColor.YELLOW + sender.getName() + ChatColor.BLUE + " has globally muted the chat.");
             ChatUtils.broadcast(" ");
             ChatSystem.setChatMuted(true);
         }

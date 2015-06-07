@@ -134,7 +134,7 @@ public class ParticleMenu implements Listener {
                 ev.setCancelled(true);
                 Player p = (Player) ev.getWhoClicked();
                 new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Disabled particles.").send(Sound.ORB_PICKUP, p);
-                ParticleCore.removePlayer(p.getName());
+                ParticleCore.removePlayer(p);
                 if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
                     ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
                     ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
@@ -149,7 +149,7 @@ public class ParticleMenu implements Listener {
                 ev.setCancelled(true);
                 if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
                     new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Disabled multi-particle selector.").send(Sound.ORB_PICKUP, (Player) ev.getWhoClicked());
-                    ParticleCore.removePlayer(ev.getWhoClicked().getName());
+                    ParticleCore.removePlayer((Player) ev.getWhoClicked());
                     if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()))
                         ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
                     ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));

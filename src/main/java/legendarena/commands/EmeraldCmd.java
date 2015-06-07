@@ -107,7 +107,7 @@ public class EmeraldCmd implements CommandExecutor {
                         return true;
                     }
                     sender.sendMessage(ChatColor.GREEN + "Setting player's emerald count to zero...");
-                    EmeraldsCore.resetEmeralds(p, true, ChatUtils.getFormattedName((Player) sender));
+                    EmeraldsCore.resetEmeralds(p, true, sender.getName());
                 }
             }
 

@@ -1,53 +1,51 @@
 package legendarena.api.utils;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
- * Menu core. Really only used for creating items.
+ * Menu core. Really only used for creating items.<br><br>
+ *
+ * Also, I swear I was drunk while originally making this class. I swear.
  *
  * @author ThePixelDev
  */
 public class MenuCore {
 
-    public static ItemStack createItem(Material m, String n) {
-        ItemStack i = new ItemStack(m);
+    public static ItemStack createItem(Material material, String name) {
+        ItemStack i = new ItemStack(material);
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(n);
-        im.setLore(Collections.singletonList(ChatColor.BLUE + "Warp to " + n));
+        im.setDisplayName(name);
         i.setItemMeta(im);
         return i;
     }
 
-    public static ItemStack createItem(Material m, String n, String... l) {
-        ItemStack i = new ItemStack(m);
+    public static ItemStack createItem(Material material, String name, String... lores) {
+        ItemStack i = new ItemStack(material);
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(n);
-        im.setLore(Arrays.asList(l));
+        im.setDisplayName(name);
+        im.setLore(Arrays.asList(lores));
         i.setItemMeta(im);
         return i;
     }
 
-    public static ItemStack createItem(Material m, String n, int amount, String... l) {
-        ItemStack i = new ItemStack(m);
+    public static ItemStack createItem(Material material, String name, int amount) {
+        ItemStack i = new ItemStack(material);
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(n);
-        im.setLore(Arrays.asList(l));
+        im.setDisplayName(name);
         i.setAmount(amount);
         i.setItemMeta(im);
         return i;
     }
 
-    public static ItemStack createItem(Material m, String n, int amount) {
-        ItemStack i = new ItemStack(m);
+    public static ItemStack createItem(Material material, String name, int amount, String... lores) {
+        ItemStack i = new ItemStack(material);
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(n);
-        im.setLore(Collections.singletonList(ChatColor.BLUE + "Warp to " + n));
+        im.setDisplayName(name);
+        im.setLore(Arrays.asList(lores));
         i.setAmount(amount);
         i.setItemMeta(im);
         return i;
