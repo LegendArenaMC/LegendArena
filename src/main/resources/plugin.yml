@@ -1,4 +1,4 @@
-main: net.thenamedev.legendarena.LegendArena
+main: legendarena.LegendArena
 name: LegendArena
 version: 1.0A
 website: http://reddit.com/r/LegendArena
@@ -44,6 +44,3 @@ commands:
     description: EXPLODE ALL THE THINGS! MWHAHAHAHAHA- *cough*
   fly:
     description: Magic.
-  punish:
-    description: Banned!
-    aliases: [warn, kick, ban, tempban]
