@@ -1,7 +1,7 @@
 package legendarena.listeners;
 
-import legendarena.message.Message;
-import legendarena.message.MessageType;
+import legendarena.api.message.Message;
+import legendarena.api.message.MessageType;
 import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.Rank;
 import org.bukkit.Bukkit;
@@ -28,7 +28,6 @@ public class CommandFilter implements Listener {
             ev.getPlayer().kickPlayer("I am an idiot for trying to view the plugins!"); //and kick them for being a giant douchebag and trying to use /pl, /plugins, et cetera
         } else if(isCmd(ev.getMessage().toLowerCase(), "/me", "/bukkit:me")) {
             ev.setCancelled(true); //cancel the event
-            ev.getPlayer().chat("I am a nubcake for trying to do /me!");
         } else if(isCmd(ev.getMessage().toLowerCase(), "/?", "/bukkit:?", "/bukkit:help")) {
             ev.setCancelled(true);
             new Message(MessageType.SUBTITLE).append(ChatUtils.getCustomMsg("Command Filter") + "Nice try...").send(ev.getPlayer());
@@ -37,12 +36,13 @@ public class CommandFilter implements Listener {
                 return;
             ev.setCancelled(true); //cancel the event
             new Message(MessageType.TITLE).append("Nice try. It won't work here, bud.").send(Sound.BLAZE_DEATH, 3, ev.getPlayer()); //tell the player it isn't gonna work here
-            ChatUtils.broadcast(ChatUtils.getCustomMsg("Command Filter") + "The player " + ChatColor.RED + ev.getPlayer().getName() + ChatColor.BLUE + " tried to use /op or /deop!"); //shame the player publicly
+            new Message().append(ChatUtils.getCustomMsg("Command Filter") + "The player " + ChatColor.RED + ev.getPlayer().getName() + ChatColor.BLUE + " tried to use /op or /deop!").broadcast();
             ev.getPlayer().chat("I am a nubcake. Please ban me.");
             Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
                 @Override
                 public void run() {
                     ev.getPlayer().kickPlayer("Bye!");
+                    //TODO: Add ban code
                 }
             }, 80l);
         }

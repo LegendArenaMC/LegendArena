@@ -1,4 +1,4 @@
-package legendarena.message;
+package legendarena.api.message;
 
 import legendarena.api.utils.Rank;
 import org.bukkit.Bukkit;

@@ -19,4 +19,4 @@ git clone https://github.com/LegendArenaMC/LegendArena.git
 ./gradlew build
 ```
 
-Or, if you're that lazy, you can get a pre-built jar from the [Jenkins setup](https://jenkins-thenamedev.rhcloud.com/job/Legend%20Arena/).
+Or, if you're that lazy, you can get a pre-built jar from [SnapCI](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master).

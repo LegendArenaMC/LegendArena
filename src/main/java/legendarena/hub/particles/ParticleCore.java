@@ -35,19 +35,19 @@ public class ParticleCore implements Runnable {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.HEART.display(1, 1, 1, 1, 5, p.getLocation(), 30);
+            ParticleEffect.HEART.display(1, 1, 1, 1, 2, p.getLocation(), 30);
         }
         for(final UUID s : slimeEffects) {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.SLIME.display(0, 0, 0, 1, 10, p.getLocation(), 30);
+            ParticleEffect.SLIME.display(0, 0, 0, 1, 5, p.getLocation(), 30);
         }
         for(final UUID s : portalEffects) {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.PORTAL.display(0, 0, 0, 1, 35, p.getLocation(), 30);
+            ParticleEffect.PORTAL.display(0, 0, 0, 1, 20, p.getLocation(), 30);
         }
         for(final UUID s : enchantEffects) {
             Player p = Bukkit.getPlayer(s);
@@ -59,28 +59,26 @@ public class ParticleCore implements Runnable {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.VILLAGER_HAPPY.display(1, 1, 1, 1, 10, p.getLocation(), 30);
+            ParticleEffect.VILLAGER_HAPPY.display(1, 1, 1, 1, 5, p.getLocation(), 30);
         }
         for(final UUID s : villager2Effects) {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.VILLAGER_ANGRY.display(1, 1, 1, 1, 10, p.getLocation(), 30);
+            ParticleEffect.VILLAGER_ANGRY.display(1, 1, 1, 1, 5, p.getLocation(), 30);
         }
         for(final UUID s : fireworkEffects) {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
-            ParticleEffect.FIREWORKS_SPARK.display(1, 1, 1, 1, 10, p.getLocation(), 30);
+            ParticleEffect.FIREWORKS_SPARK.display(1, 1, 1, 1, 3, p.getLocation(), 30);
         }
         for(final UUID s : colorfulEffects) {
             Player p = Bukkit.getPlayer(s);
             if(p == null)
                 continue;
             Random r = new Random();
-            Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 2.1, p.getLocation().getZ());
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
-            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
+            Location l = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() + 1.2, p.getLocation().getZ());
             ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
             ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
             ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(r.nextInt(255), r.nextInt(255), r.nextInt(255)), l, 1);
@@ -95,50 +93,34 @@ public class ParticleCore implements Runnable {
             removePlayer(p);
         switch(type) {
             case HEART:
-                if(heartEffects.contains(p.getUniqueId()))
-                    break;
                 heartEffects.add(p.getUniqueId());
                 break;
             case SLIME:
-                if(slimeEffects.contains(p.getUniqueId()))
-                    break;
                 slimeEffects.add(p.getUniqueId());
                 break;
             case PORTAL:
-                if(portalEffects.contains(p.getUniqueId()))
-                    break;
                 portalEffects.add(p.getUniqueId());
                 break;
             case ENCHANT:
-                if(enchantEffects.contains(p.getUniqueId()))
-                    break;
                 enchantEffects.add(p.getUniqueId());
                 break;
             case HAPPYVILL:
-                if(villagerEffects.contains(p.getUniqueId()))
-                    break;
                 villagerEffects.add(p.getUniqueId());
                 break;
             case ANGRYVILL:
-                if(villager2Effects.contains(p.getUniqueId()))
-                    break;
                 villager2Effects.add(p.getUniqueId());
                 break;
             case FIREWORK:
-                if(fireworkEffects.contains(p.getUniqueId()))
-                    break;
                 fireworkEffects.add(p.getUniqueId());
                 break;
             case COLORFULEFFCTS:
-                if(colorfulEffects.contains(p.getUniqueId()))
-                    break;
                 colorfulEffects.add(p.getUniqueId());
                 break;
             case FLAME:
-                if(flameEffects.contains(p.getUniqueId()))
-                    break;
                 flameEffects.add(p.getUniqueId());
                 break;
+            default:
+                throw new RuntimeException("That isn't a known particle effect!");
         }
     }
 

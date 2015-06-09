@@ -6,9 +6,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * Called when a player is banned. That's it. It's that simple.<br>
+ * Called when a player is banned. That's it. It's that simple.
  *
- * Created by thepixeldev on 5/3/15.
+ * @author ThePixelDev
  */
 public class BanEvent extends Event implements Cancellable {
 

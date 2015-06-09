@@ -76,5 +76,4 @@ gradle-app.setting
 ### Visual Studio Code
 
 .settings/
-jdoc.sh
-buildplugin
+upload

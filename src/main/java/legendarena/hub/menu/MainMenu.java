@@ -1,8 +1,8 @@
 package legendarena.hub.menu;
 
 import legendarena.emeralds.EmeraldsCore;
-import legendarena.message.Message;
-import legendarena.message.MessageType;
+import legendarena.api.message.Message;
+import legendarena.api.message.MessageType;
 import legendarena.api.utils.*;
 import legendarena.hub.menu.staff.StaffMenu;
 import org.bukkit.Bukkit;

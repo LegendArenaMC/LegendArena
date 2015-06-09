@@ -1,4 +1,4 @@
-package legendarena.message;
+package legendarena.api.message;
 
 /**
  * Message types for <code>new Message(MessageType)</code>.

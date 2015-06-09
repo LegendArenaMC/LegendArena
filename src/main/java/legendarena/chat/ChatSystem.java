@@ -7,7 +7,7 @@ import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.PluginUtils;
 import legendarena.api.utils.Rank;
 import legendarena.commands.staff.Troll;
-import legendarena.message.Message;
+import legendarena.api.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

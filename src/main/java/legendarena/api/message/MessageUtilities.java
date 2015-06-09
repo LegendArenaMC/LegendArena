@@ -1,4 +1,4 @@
-package legendarena.message;
+package legendarena.api.message;
 
 import org.bukkit.entity.Player;
 

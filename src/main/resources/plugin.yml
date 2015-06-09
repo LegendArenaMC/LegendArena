@@ -40,7 +40,5 @@ commands:
     aliases: [sl, liststaff]
   troll:
     description: Trololololololololol, lololo!
-  explodeallthethings:
-    description: EXPLODE ALL THE THINGS! MWHAHAHAHAHA- *cough*
   fly:
     description: Magic.

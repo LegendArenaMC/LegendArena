@@ -1,6 +1,7 @@
 package legendarena.api.gamemanager;
 
 import legendarena.api.exceptions.DoYouEvenKnowWhatYourDoingException;
+import legendarena.api.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
@@ -29,6 +30,9 @@ public class Game {
     private ArrayList<GamePlayer> players;
     private HashMap<GameTimer, BukkitTask> tasks = new HashMap<>();
     private ArrayList<Location> spawnLocations = new ArrayList<>();
+    private int autostart = 10;
+    private int maxPlayers = 20;
+    private GameTimer autoStartTimer;
 
     public Game(PluginManager pm) {
         this.pm = pm;
@@ -36,33 +40,23 @@ public class Game {
     }
 
     /**
-     * Register an ArrayList<> of listeners.
-     * @param listeners The ArrayList to register
+     * Register listeners in bulk.
+     * @param listeners The listeners to register
      */
-    public void registerListeners(ArrayList<GameListener> listeners) {
+    public void registerListeners(GameListener... listeners) {
         for(GameListener l : listeners)
-            pm.registerEvents(l, p);
-        this.listeners = listeners;
+            registerListener(l);
     }
 
     /**
-     * Register an ArrayList<> of timers.
-     * @param timers The ArrayList to register
+     * Register a single listener.
+     * @param listener The listener to register
      */
-    public void registerTimers(ArrayList<GameTimer> timers) {
-        for(GameTimer t : timers)
-            tasks.put(t, Bukkit.getScheduler().runTaskTimer(p, t, t.delay(), t.delay()));
-        this.timers = timers;
-    }
-
-    /**
-     * Register an ArrayList<> of listeners.
-     * @param listeners The ArrayList to register
-     */
-    public void registerListener(ArrayList<GameListener> listeners) {
-        for(GameListener l : listeners)
-            pm.registerEvents(l, p);
-        this.listeners = listeners;
+    public void registerListener(GameListener listener) {
+        pm.registerEvents(listener, p);
+        if(this.listeners == null)
+            this.listeners = new ArrayList<>();
+        this.listeners.add(listener);
     }
 
     /**
@@ -74,6 +68,16 @@ public class Game {
         if(timers == null)
             timers = new ArrayList<>();
         timers.add(t);
+    }
+
+    /**
+     * Bulk register timers.
+     * @param t The timers to register
+     */
+    public void registerTimers(GameTimer... t) {
+        for(GameTimer t1 : t) {
+            registerTimer(t1);
+        }
     }
 
     /**
@@ -92,11 +96,11 @@ public class Game {
     }
 
     /**
-     * Get the ArrayList<> of players
-     * @param p The players to add
+     * Get the ArrayList<> of spawn locations
+     * @return The spawn locations
      */
-    public void setPlayers(ArrayList<GamePlayer> p) {
-        this.players = p;
+    public ArrayList<Location> getSpawnLocations() {
+        return spawnLocations;
     }
 
     /**
@@ -151,7 +155,7 @@ public class Game {
     /**
      * Set the spawn location(s)<br><br>
      *
-     * Each use of this clears the spawn location, and you can add more than one location in the single call. Just FYI.
+     * Each use of this clears the spawn locations already set, and you can add more than one location in the single call. Just FYI.
      * @param l The locations to set
      */
     public void setSpawn(Location... l) {
@@ -167,6 +171,46 @@ public class Game {
         Collections.addAll(spawnLocations, l); //add the spawn locations
     }
 
+    /**
+     * Set the player count to autostart the game at.<br><br>
+     *
+     * If not set, this function isn't used.
+     * @param players Amount of players to auto-start at
+     */
+    public void setAutoStartCount(final int players) {
+        if(players <= 1)
+            throw new DoYouEvenKnowWhatYourDoingException("You must be drunk. (you can't have the game autostart at /one/ player or lower)");
+        if(autoStartTimer != null) unregisterTimer(autoStartTimer);
+        autoStartTimer = new GameTimer() {
+            @Override
+            public void run() {
+                if(getPlayers().size() >= players) {
+                    start();
+                    unregisterTimer(this);
+                }
+            }
+
+            @Override
+            public int delay() {
+                return 10;
+            }
+        };
+        registerTimer(autoStartTimer);
+    }
+
+    public void setMaxPlayerCount(int max) {
+        maxPlayers = max;
+        if(getPlayers().size() > max) {
+            //start removing players from the game due to new max size
+            for(GamePlayer p : getPlayers()) {
+                p.getPlayer().sendMessage(ChatUtils.Messages.errorMsg + "Due to a new size limit on the minigame, you have been removed from the minigame.");
+                removePlayers(p);
+                if(getPlayers().size() <= max)
+                    break; //we've either (somehow) gotten below our max or to the max, so stop kicking players
+            }
+        }
+    }
+
     ///////////////////////////////////////////
     //                                       //
     //       INTERNAL START/STOP STUFF       //
@@ -177,8 +221,29 @@ public class Game {
      * Starts the game.
      */
     public void start() {
-        if(isRunning)
+        if(!sanity())
             throw new DoYouEvenKnowWhatYourDoingException();
+        isRunning = true;
+        for(GamePlayer p : getPlayers()) {
+            if(!p.getPlayer().isOnline()) {
+                removePlayers(p);
+                continue;
+            }
+            if(!singleSpawn) {
+                //multiple spawn points, so use a randomizer of sorts
+                Random r = new Random(); //ah randomizers... the only thing I hate more than iNub (if you don't get that reference don't worry about it)
+            }
+        }
+    }
+
+    /**
+     * Starts the game, overriding sanity checks.
+     * @param overrideSanity Whether we should check sanity or not (use with caution, please!)
+     */
+    public void start(boolean overrideSanity) {
+        if(!overrideSanity)
+            if(!sanity())
+                throw new DoYouEvenKnowWhatYourDoingException();
         isRunning = true;
         for(GamePlayer p : getPlayers()) {
             if(!p.getPlayer().isOnline()) {
@@ -205,6 +270,24 @@ public class Game {
             }
             removePlayers(p);
         }
+    }
+
+    ///////////////////////////////////////////
+    //                                       //
+    //        SANITY CHECK (..THINGS)        //
+    //                                       //
+    ///////////////////////////////////////////
+
+    /**
+     * Does the current setup for the game fail sanity checks? (false if fails, true if passed)
+     */
+    private boolean sanity() {
+        if(isRunning) return false;
+        if(listeners == null) return false;
+        if(timers == null) return false;
+        if(players == null) return false; //if this is ever hit, this is a mega "are you fucking drunk" error
+        if(getPlayers().size() > maxPlayers) return false; //this is probably due to the game manager being drunk if it hits this
+        return true;
     }
 
 }

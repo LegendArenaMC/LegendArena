@@ -1,7 +1,7 @@
 package legendarena.hub.menu;
 
-import legendarena.message.Message;
-import legendarena.message.MessageType;
+import legendarena.api.message.Message;
+import legendarena.api.message.MessageType;
 import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.MenuCore;
 import legendarena.hub.particles.ParticleCore;

@@ -1,4 +1,4 @@
-package legendarena.message;
+package legendarena.api.message;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
