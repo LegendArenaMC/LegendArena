@@ -26,8 +26,8 @@ public class Troll implements CommandExecutor {
 
     @SuppressWarnings("deprecation") //shut up, Bukkit.getPlayer(String) warnings. please. SHUT UP FOR FUCKS SAKES, SHUT UP SHUT UP SHUT THE FUCK UP </rant>
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!Rank.isRanked(sender, Rank.SRMOD)) {
-            sender.sendMessage(Rank.noPermissions(Rank.SRMOD));
+        if(!Rank.isRanked(sender, Rank.MOD)) {
+            sender.sendMessage(Rank.noPermissions(Rank.MOD));
             return true;
         }
         if(args.length == 0) {

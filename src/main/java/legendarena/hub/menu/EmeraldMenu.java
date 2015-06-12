@@ -2,7 +2,7 @@ package legendarena.hub.menu;
 
 import legendarena.emeralds.EmeraldsCore;
 import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuCore;
+import legendarena.api.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,8 +27,8 @@ public class EmeraldMenu implements Listener {
         if(init) return; //if we've already initialized the emeralds menu, don't do anything
         inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu");
 
-        inv.setItem(13, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
-        inv.setItem(32, MenuCore.createItem(Material.NETHER_BRICK_ITEM, ChatColor.GREEN + "Booster", ChatColor.RED + "Soon™"));
+        inv.setItem(13, MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
+        inv.setItem(32, MenuUtils.createItem(Material.NETHER_BRICK_ITEM, ChatColor.GREEN + "Booster", ChatColor.RED + "Soon™"));
 
         Bukkit.getPluginManager().registerEvents(new EmeraldMenu(), p);
         init = true;
@@ -38,7 +38,7 @@ public class EmeraldMenu implements Listener {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu");
         pInv.setContents(inv.getContents());
-        pInv.setItem(30, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
+        pInv.setItem(30, MenuUtils.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         p.openInventory(pInv);
     }
 

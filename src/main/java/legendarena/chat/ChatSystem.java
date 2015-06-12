@@ -4,13 +4,16 @@ import legendarena.api.exceptions.NotEnoughPermissionsException;
 import legendarena.api.exceptions.PlayerNotOnlineException;
 import legendarena.api.regex.RegexUtils;
 import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.PluginUtils;
 import legendarena.api.utils.Rank;
 import legendarena.commands.staff.Troll;
 import legendarena.api.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,16 +73,16 @@ public class ChatSystem {
     }
 
     public static String getChatMessage(String msg, Player p) {
-        return getFormattedName(p) + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + ChatColor.GRAY + PluginUtils.chars[1] + " " + getParsedChatMessage(msg, p);
+        return getFormattedName(p) + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p);
     }
 
     /**
      * Channel list.
      */
     public enum Channel {
-        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.RED + " {MESSAGE}"),
+        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.RED + " {MESSAGE}"),
         ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GOLD + "{MESSAGE}"),
-        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + PluginUtils.chars[1] + ChatColor.DARK_GREEN + " {MESSAGE}"),
+        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.DARK_GREEN + " {MESSAGE}"),
         GLOBAL;
 
         private Rank rank;
@@ -191,4 +194,23 @@ public class ChatSystem {
         }
     }
 
+    /**
+     * Chat listener. Sends all chat messages to the chat system.
+     *
+     * @author ThePixelDev
+     */
+    public static class ChatListener implements Listener {
+
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+        public void onChat(AsyncPlayerChatEvent ev) {
+            if(ev.getMessage().equalsIgnoreCase("thank mr sketal")) {
+                ev.getPlayer().sendMessage(ChatColor.BLUE + "You're actually going to thank an internet meme here? You must need some friends.");
+                ev.setCancelled(true);
+                return;
+            }
+            msg(ev.getPlayer(), ev.getMessage());
+            ev.setCancelled(true); //fuck it, what's the worst that could happen[tm]
+        }
+
+    }
 }

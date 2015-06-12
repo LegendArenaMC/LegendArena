@@ -1,7 +1,8 @@
 package legendarena.hub;
 
 import legendarena.api.utils.Cooldown;
-import legendarena.api.utils.MenuCore;
+import legendarena.api.utils.MenuUtils;
+import legendarena.api.utils.Rank;
 import legendarena.hub.menu.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -43,7 +44,7 @@ public class HubWarper implements Listener {
     }
 
     private static ItemStack getCustomization() {
-        return MenuCore.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", "");
+        return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", "");
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -82,7 +83,7 @@ public class HubWarper implements Listener {
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
-                p.getInventory().clear(); //TODO: Give this inventory clear call a way to have mercy on mods+
+                if(!Rank.isRanked(p, Rank.ADMIN)) p.getInventory().clear();
                 p.getInventory().setItem(4, getCustomization());
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1, true));
             }

@@ -13,7 +13,7 @@ import java.util.Arrays;
  *
  * @author ThePixelDev
  */
-public class MenuCore {
+public class MenuUtils {
 
     public static ItemStack createItem(Material material, String name) {
         ItemStack i = new ItemStack(material);

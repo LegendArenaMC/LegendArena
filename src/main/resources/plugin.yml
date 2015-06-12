@@ -9,6 +9,7 @@ commands:
   firework:
     description: Fireworks! Yaaay!
     usage: /firework
+    aliases: [fw]
   warp:
     description: Warps you to different areas. Whee!
     usage: /warp

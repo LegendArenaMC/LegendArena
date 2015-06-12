@@ -1,14 +1,11 @@
 package legendarena.commands.staff;
 
-import legendarena.api.utils.ChatUtils;
 import legendarena.api.utils.Day;
 import legendarena.api.utils.Rank;
-import legendarena.hub.particles.ParticleCore;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 /**
  * Developer utilities command.
@@ -28,10 +25,10 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(ChatColor.BLUE + "Day: " + Day.getDate().getDay());
             sender.sendMessage(ChatColor.BLUE + "Month: " + Day.getDate().getMonth() + " (" + Day.parseMonth() + ")");
             sender.sendMessage(ChatColor.YELLOW + "--.{ Server Info }.--");
-            sender.sendMessage(" ");
-            sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
-            sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
-            sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+            //sender.sendMessage(" ");
+            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+            //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
+            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
             return true;
         }
         return false;

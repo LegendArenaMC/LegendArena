@@ -3,9 +3,8 @@ package legendarena.hub.menu;
 import legendarena.api.message.Message;
 import legendarena.api.message.MessageType;
 import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuCore;
+import legendarena.api.utils.MenuUtils;
 import legendarena.hub.particles.ParticleCore;
-import legendarena.hub.particles.ParticleCore.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -33,19 +32,19 @@ public class ParticleMenu implements Listener {
 
         inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
 
-        ItemStack back = MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
+        ItemStack back = MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
 
-        ItemStack hearts = MenuCore.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!");
-        ItemStack slime = MenuCore.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!");
-        ItemStack portal = MenuCore.createItem(Material.ENDER_PORTAL_FRAME, ChatColor.GREEN + "Portal", ChatColor.BLUE + "Portal particles. Yay!");
-        ItemStack enchant = MenuCore.createItem(Material.ENCHANTED_BOOK, ChatColor.GREEN + "Enchant", ChatColor.BLUE + "Enchant particles. Yay!");
-        ItemStack villager = MenuCore.createItem(Material.DIAMOND_BLOCK, ChatColor.GREEN + "Happy Villager", ChatColor.BLUE + "Happy villager particles. Yay!");
-        ItemStack villager2 = MenuCore.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!");
-        ItemStack fw = MenuCore.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!");
-        ItemStack coloEff = MenuCore.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!");
-        ItemStack flames = MenuCore.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!");
+        ItemStack hearts = MenuUtils.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!");
+        ItemStack slime = MenuUtils.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!");
+        ItemStack portal = MenuUtils.createItem(Material.ENDER_PORTAL_FRAME, ChatColor.GREEN + "Portal", ChatColor.BLUE + "Portal particles. Yay!");
+        ItemStack enchant = MenuUtils.createItem(Material.ENCHANTED_BOOK, ChatColor.GREEN + "Enchant", ChatColor.BLUE + "Enchant particles. Yay!");
+        ItemStack villager = MenuUtils.createItem(Material.DIAMOND_BLOCK, ChatColor.GREEN + "Happy Villager", ChatColor.BLUE + "Happy villager particles. Yay!");
+        ItemStack villager2 = MenuUtils.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!");
+        ItemStack fw = MenuUtils.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!");
+        ItemStack coloEff = MenuUtils.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!");
+        ItemStack flames = MenuUtils.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!");
 
-        ItemStack off = MenuCore.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.");
+        ItemStack off = MenuUtils.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.");
 
         inv.setItem(8, off);
         inv.setItem(4, back);
@@ -66,21 +65,21 @@ public class ParticleMenu implements Listener {
     }
 
     public static void show(Player p) {
-        init(Bukkit.getPluginManager().getPlugin("LegendArena"));
+        /*init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
         pInv.setContents(inv.getContents());
         if(ParticleCore.multiParicle.contains(p.getUniqueId()))
-            pInv.setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+            pInv.setItem(0, MenuUtils.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
         else
-            pInv.setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
-        p.openInventory(pInv);
+            pInv.setItem(0, MenuUtils.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));*/
+        //p.openInventory(pInv);
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent ev) {
         if(!ev.getInventory().getName().equalsIgnoreCase(inv.getName())) return;
         try {
-            if(ev.getCurrentItem().getItemMeta() == null) return;
+            /*if(ev.getCurrentItem().getItemMeta() == null) return;
             if(!ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()) && !ev.getCurrentItem().getItemMeta().getDisplayName().contains("Multi-Particle"))
                 ev.getWhoClicked().closeInventory();
             if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Slime")) {
@@ -137,7 +136,7 @@ public class ParticleMenu implements Listener {
                 ParticleCore.removePlayer(p);
                 if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId())) {
                     ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
-                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                    ev.getInventory().setItem(0, MenuUtils.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
                 }
             }
 
@@ -152,17 +151,17 @@ public class ParticleMenu implements Listener {
                     ParticleCore.removePlayer((Player) ev.getWhoClicked());
                     if(ParticleCore.multiParicle.contains(ev.getWhoClicked().getUniqueId()))
                         ParticleCore.multiParicle.remove(ev.getWhoClicked().getUniqueId());
-                    ev.getInventory().setItem(0, MenuCore.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
+                    ev.getInventory().setItem(0, MenuUtils.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));
                 } else {
                     new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Enabled multi-particle selector.").send(Sound.ORB_PICKUP, (Player) ev.getWhoClicked());
                     ParticleCore.multiParicle.add(ev.getWhoClicked().getUniqueId());
-                    ev.getInventory().setItem(0, MenuCore.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
+                    ev.getInventory().setItem(0, MenuUtils.createItem(Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Multi-Particle", ChatColor.GREEN + "ON" + ChatColor.GRAY + " (click to toggle)"));
                 }
             }
 
             else { //failsafe
                 ev.setCancelled(true);
-            }
+            }*/
 
         } catch(Exception ignore) {
             // Ignore the error

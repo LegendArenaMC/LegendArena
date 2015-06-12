@@ -21,12 +21,12 @@ public class Day {
         this.dayOfYear = dayOfYear;
     }
 
-    public boolean isAprilFools() {
-        return getDay() == 1 && getMonth() == APRIL;
+    public String getDateString() {
+        return getDay() + "/" + getMonth() + "/" + getYear();
     }
 
-    public String getDateString() {
-        return getDay() + "-" + getMonth() + "-" + getYear();
+    public String getDateFormat(DateLocale locale) {
+        return (locale == DateLocale.UK ? getDay() + "/" + getMonth() : getMonth() + "/" + getDay()) + "/" + getYear();
     }
 
     public int getDay() {
@@ -124,6 +124,11 @@ public class Day {
             default:
                 return "Unknown month ID " + month;
         }
+    }
+
+    public enum DateLocale {
+        US,
+        UK
     }
 
 }

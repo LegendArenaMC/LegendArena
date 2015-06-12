@@ -20,9 +20,9 @@ public class EmeraldCmd implements CommandExecutor {
 
     private void help(CommandSender sender) {
         sender.sendMessage(Help.getFormattedHeader("Staff Commands"));
-        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds emeralds to a player's account."));
-        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds remove <player> <amount>", "Takes emeralds from a player's account."));
-        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds reset <player>", "Resets a player's emeralds to 0."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."));
+        sender.sendMessage(Help.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."));
         sender.sendMessage(Help.getFormattedHeader("User Commands"));
         sender.sendMessage(Help.getFormattedHelpMsg("/emeralds info", "Shows your emeralds info."));
     }
@@ -31,21 +31,21 @@ public class EmeraldCmd implements CommandExecutor {
         try {
             EmeraldsCore.init(); //make sure the emerald core is indeed initalized
         } catch(Exception ex) {
-            sender.sendMessage(ChatColor.RED + "Cannot initialize Emerald Core. Report this error on the bug tracker: " + ex.getMessage() + " ( https://github.com/LegendArenaMC/LegendArena/issues )");
+            sender.sendMessage(ChatColor.RED + "Cannot initialize Emerald Core. Reason: " + ex.getMessage() + " ( report this issue here: https://github.com/LegendArenaMC/LegendArena/issues )");
         }
         if(args.length == 0)
             help(sender);
         else {
             if(args[0].equalsIgnoreCase("info")) {
                 sender.sendMessage(Help.getFormattedHeader("Your Emerald Info"));
-                sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + PluginUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds((Player) sender));
+                sender.sendMessage(ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + ChatUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds((Player) sender));
             } else if(args[0].equalsIgnoreCase("add")) {
                 if(!Rank.isRanked(sender, Rank.ADMIN)) {
                     sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return true;
                 }
                 if(args.length <= 2)
-                    sender.sendMessage(ChatColor.YELLOW + "/emeralds add <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Adds emeralds to a player's account.");
+                    sender.sendMessage(Help.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."));
                 else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(p == null) {
@@ -68,7 +68,7 @@ public class EmeraldCmd implements CommandExecutor {
                     return true;
                 }
                 if(args.length <= 2) {
-                    sender.sendMessage(ChatColor.YELLOW + "/emeralds remove <player> <amount> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes emeralds from a player's account.");
+                    sender.sendMessage(Help.getFormattedHelpMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."));
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
                     if(p == null) {
@@ -95,10 +95,10 @@ public class EmeraldCmd implements CommandExecutor {
                     return true;
                 }
                 if(args.length < 2) {
-                    sender.sendMessage(ChatColor.YELLOW + "/emeralds reset <player> "+ ChatColor.GRAY + PluginUtils.chars[1] + ChatColor.GREEN + " Takes all emeralds from a player's account.");
+                    sender.sendMessage(Help.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."));
                 } else {
                     Player p = Bukkit.getPlayer(args[1]);
-                    if(Rank.isRanked(p, Rank.SRMOD)) {
+                    if(Rank.isRanked(p, Rank.MOD)) {
                         sender.sendMessage(ChatUtils.getCustomMsg("Staff") + "You must be really fun at parties.");
                         return true;
                     }

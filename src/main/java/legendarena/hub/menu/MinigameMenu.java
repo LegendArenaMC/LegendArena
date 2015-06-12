@@ -1,7 +1,7 @@
 package legendarena.hub.menu;
 
 import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuCore;
+import legendarena.api.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -29,9 +29,9 @@ public class MinigameMenu implements Listener {
         if(init) return;
 
         HashMap<Integer, ItemStack> items = new HashMap<>();
-        items.put(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
-        items.put(21, MenuCore.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
-        items.put(23, MenuCore.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"));
+        items.put(4, MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
+        items.put(21, MenuUtils.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"));
+        items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"));
 
         inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper");
         for(int a : items.keySet())

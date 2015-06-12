@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  *
  * @author ThePixelDev
  */
-public class CommandFilter implements Listener {
+public class CommandFilterListener implements Listener {
 
     @EventHandler
     public void onCommand(final PlayerCommandPreprocessEvent ev) {

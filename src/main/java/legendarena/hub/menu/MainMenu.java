@@ -29,9 +29,9 @@ public class MainMenu implements Listener {
         if(init) return; //if we've already initialized the main menu, don't do anything
         inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu");
 
-        inv.setItem(4, MenuCore.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ""));
-        inv.setItem(40, MenuCore.createItem(Material.JUKEBOX, ChatColor.GREEN + "Music", ""));
-        inv.setItem(25, MenuCore.createItem(Material.YELLOW_FLOWER, ChatColor.GREEN + "Particles", ""));
+        inv.setItem(4, MenuUtils.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ""));
+        inv.setItem(40, MenuUtils.createItem(Material.JUKEBOX, ChatColor.GREEN + "Music", ""));
+        inv.setItem(25, MenuUtils.createItem(Material.YELLOW_FLOWER, ChatColor.GREEN + "Particles", ""));
 
         Bukkit.getPluginManager().registerEvents(new MainMenu(), p);
         init = true;
@@ -41,9 +41,9 @@ public class MainMenu implements Listener {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu");
         pInv.setContents(inv.getContents());
-        pInv.setItem(19, MenuCore.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
+        pInv.setItem(19, MenuUtils.createItem(Material.EMERALD, ChatColor.GREEN + "Emeralds", ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"));
         if(Rank.isRanked(p, Rank.HELPER)) {
-            pInv.setItem(22, MenuCore.createItem(Material.PAPER, ChatColor.GREEN + "Staff Tools", ""));
+            pInv.setItem(22, MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Tools", ""));
         }
         p.openInventory(pInv);
     }

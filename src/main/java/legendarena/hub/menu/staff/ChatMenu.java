@@ -1,6 +1,6 @@
 package legendarena.hub.menu.staff;
 
-import legendarena.api.utils.MenuCore;
+import legendarena.api.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,12 +25,12 @@ public class ChatMenu implements Listener {
         if(init) return; //if we've already initialized the chat menu, don't do anything
         inv = Bukkit.createInventory(null, 27, ChatColor.BLUE + "Chat Selector");
 
-        inv.setItem(4, MenuCore.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
+        inv.setItem(4, MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""));
 
-        inv.setItem(19, MenuCore.createItem(Material.BEDROCK, ChatColor.GREEN + "Global", ""));
-        inv.setItem(23, MenuCore.createItem(Material.APPLE, ChatColor.GREEN + "Alert", ""));
-        inv.setItem(24, MenuCore.createItem(Material.APPLE, ChatColor.GREEN + "Admin", ""));
-        inv.setItem(25, MenuCore.createItem(Material.APPLE, ChatColor.GREEN + "Staff", ""));
+        inv.setItem(19, MenuUtils.createItem(Material.BEDROCK, ChatColor.GREEN + "Global", ""));
+        inv.setItem(23, MenuUtils.createItem(Material.APPLE, ChatColor.GREEN + "Alert", ""));
+        inv.setItem(24, MenuUtils.createItem(Material.APPLE, ChatColor.GREEN + "Admin", ""));
+        inv.setItem(25, MenuUtils.createItem(Material.APPLE, ChatColor.GREEN + "Staff", ""));
 
         Bukkit.getPluginManager().registerEvents(new ChatMenu(), p);
         init = true;

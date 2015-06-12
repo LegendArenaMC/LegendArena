@@ -20,10 +20,6 @@ public enum Rank {
      */
     ADMIN,
     /**
-     * Senior Mod staff rank. Requires a staff member to be a moderator for at minimum three months (or so).
-     */
-    SRMOD,
-    /**
      * Moderator staff rank.
      */
     MOD,
@@ -55,8 +51,6 @@ public enum Rank {
                 return (p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms"));
             case ADMIN:
                 return p.hasPermission("legendarena.rank.admin");
-            case SRMOD:
-                return p.hasPermission("legendarena.rank.srmod");
             case MOD:
                 return p.hasPermission("legendarena.rank.mod");
             case HELPER:
@@ -78,7 +72,6 @@ public enum Rank {
     public static Rank getRank(Player p) {
         if(p.getName().equals("ThePixelDev") || p.getName().equals("JadenJFilms")) return FOUNDER;
         else if(p.hasPermission("legendarena.rank.admin")) return ADMIN;
-        else if(p.hasPermission("legendarena.rank.srmod")) return SRMOD;
         else if(p.hasPermission("legendarena.rank.mod")) return MOD;
         else if(p.hasPermission("legendarena.rank.helper")) return HELPER;
         else if(p.hasPermission("legendarena.rank.yt")) return YOUTUBE;
@@ -97,8 +90,6 @@ public enum Rank {
                 return ChatColor.DARK_RED + "" + ChatColor.BOLD + "FOUNDER";
             case ADMIN:
                 return ChatColor.DARK_RED + "ADMIN";
-            case SRMOD:
-                return ChatColor.DARK_RED + "SRMOD";
             case MOD:
                 return ChatColor.RED + "MOD";
             case HELPER:

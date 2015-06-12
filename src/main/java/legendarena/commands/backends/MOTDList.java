@@ -40,8 +40,8 @@ public class MOTDList {
             if(args.length == 2) {
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDRandomizer.getNotice());
             } else {
-                if(!Rank.isRanked(sender, Rank.SRMOD)) {
-                    sender.sendMessage(Rank.noPermissions(Rank.SRMOD));
+                if(!Rank.isRanked(sender, Rank.ADMIN)) {
+                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return;
                 }
                 ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"");
