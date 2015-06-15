@@ -1,7 +1,7 @@
 package legendarena.commands;
 
-import legendarena.api.utils.Cooldown;
-import legendarena.api.utils.Rank;
+import legendapi.utils.Cooldown;
+import legendapi.utils.Rank;
 import legendarena.hub.menu.ParticleMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

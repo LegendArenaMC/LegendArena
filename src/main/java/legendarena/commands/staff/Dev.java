@@ -1,7 +1,7 @@
 package legendarena.commands.staff;
 
-import legendarena.api.utils.Day;
-import legendarena.api.utils.Rank;
+import legendapi.utils.Day;
+import legendapi.utils.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

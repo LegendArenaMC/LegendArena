@@ -1,10 +1,10 @@
 package legendarena.commands.backends;
 
 import legendarena.chat.ChatSystem;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Rank;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import legendarena.commands.Help;
-import legendarena.api.utils.MOTDRandomizer;
+import legendapi.utils.MOTDRandomizer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -22,7 +22,7 @@ public class MOTDList {
         }
         if(args.length == 1) {
             sender.sendMessage(Help.getFormattedHeader("MOTD Randomizer"));
-            sender.sendMessage(Help.getFormattedHelpMsg("Amount of MOTDs", MOTDRandomizer.getList().length + " (DO YOU SEE WHAT I MEAN BY \"SO LARGE\" NOW?)"));
+            sender.sendMessage(Help.getFormattedHelpMsg("Amount of MOTDs", String.valueOf(MOTDRandomizer.getList().length)));
             sender.sendMessage(Help.getFormattedHelpMsg("Current notice", "\"" + MOTDRandomizer.getNotice() + "\""));
             sender.sendMessage(Help.getFormattedHelpMsg("/staff motd notice [notice]", "Sets the MOTD notice"));
         } else if(args[1].equalsIgnoreCase("list")) {
@@ -44,7 +44,7 @@ public class MOTDList {
                     sender.sendMessage(Rank.noPermissions(Rank.ADMIN));
                     return;
                 }
-                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"");
+                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDRandomizer.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1).toUpperCase() + "\"");
                 MOTDRandomizer.setNotice(ChatUtils.formatCast(args, 0, 1));
             }
         }

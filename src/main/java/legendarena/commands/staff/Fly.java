@@ -1,8 +1,8 @@
 package legendarena.commands.staff;
 
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Cooldown;
-import legendarena.api.utils.Rank;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Cooldown;
+import legendapi.utils.Rank;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

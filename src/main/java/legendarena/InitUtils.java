@@ -1,14 +1,16 @@
-package legendarena.api.utils;
+package legendarena;
 
-
-import legendarena.api.LegendAPI;
-import legendarena.api.message.Message;
+import legendapi.LegendAPI;
+import legendapi.message.Message;
+import legendapi.utils.ChatUtils;
 import legendarena.chat.ChatSystem;
 import legendarena.commands.*;
 import legendarena.commands.staff.*;
 import legendarena.hub.HubWarper;
 import legendarena.hub.particles.ParticleCore;
-import legendarena.listeners.*;
+import legendarena.listeners.CommandFilterListener;
+import legendarena.listeners.PlayerJoinListener;
+import legendarena.listeners.ServerPingListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,21 +26,6 @@ import java.util.List;
  * @author ThePixelDev
  */
 public class InitUtils {
-
-    /*
-     * TODO list:
-     * - Commands:
-     * -- Done!
-     *
-     * - Aliases:
-     * -- Done!
-     *
-     * - Listeners:
-     * -- Done!
-     *
-     * - Timers:
-     * -- ParticleCore
-     */
 
     private static boolean init = false;
 
@@ -93,7 +80,12 @@ public class InitUtils {
         registerTimer(new ParticleCore(), 5l);
         registerTimer(new HubWarper.InitPlayers(), 10l);
 
-        announceStatus("Loaded timers!");
+        announceStatus("Loaded timers.");
+        announceStatus("Loading one-off things...");
+
+        //
+
+        announceStatus("Loaded one-off things.");
         announceStatus("Done loading!");
 
         init = true;

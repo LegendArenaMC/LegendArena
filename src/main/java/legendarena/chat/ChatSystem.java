@@ -1,12 +1,11 @@
 package legendarena.chat;
 
-import legendarena.api.exceptions.NotEnoughPermissionsException;
-import legendarena.api.exceptions.PlayerNotOnlineException;
-import legendarena.api.regex.RegexUtils;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Rank;
+import legendapi.exceptions.NotEnoughPermissionsException;
+import legendapi.exceptions.PlayerNotOnlineException;
+import legendapi.regex.RegexUtils;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import legendarena.commands.staff.Troll;
-import legendarena.api.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -46,6 +45,12 @@ public class ChatSystem {
         mute = set;
     }
 
+    /**
+     * Get a parsed chat message.
+     * @param m The message
+     * @param p The player
+     * @return The parsed message
+     */
     private static String getParsedChatMessage(String m, Player p) {
         String msg = m;
         if(Troll.sheepleTroll.contains(p.getUniqueId())) {
@@ -55,23 +60,27 @@ public class ChatSystem {
                 msg = msg + "! Wake up, sheeple!";
         }
 
-        if(RegexUtils.contains(m, "[Jj]ustin [Bb]eiber") || RegexUtils.contains(m, "[Jj]ustin [Bb]ieber"))
-            //shh.. let me have my fun
-            new Message().append(ChatUtils.getCustomMsg("Spell Checker") + "Did you mean " + ChatColor.RED + "Justin Beaver" + ChatColor.BLUE + "?").send(p);
-        if(msg.contains("justin beaver"))
-            //no seriously please let me have my fun kthnx
-            msg = RegexUtils.replace(m, "[Jj]ustin [Bb]eaver", "Justin Bieber");
-
         if(Rank.isRanked(p, Rank.YOUTUBE))
             return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™"));
         else
             return ChatColor.GRAY + msg;
     }
 
+    /**
+     * Get a formatted name
+     * @param p The player
+     * @return The formatted name
+     */
     public static String getFormattedName(Player p) {
         return Rank.getRankPrefix(Rank.getRank(p)) + ChatColor.RESET + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + p.getName();
     }
 
+    /**
+     * Get a chat message
+     * @param msg The message
+     * @param p The player
+     * @return The chat message
+     */
     public static String getChatMessage(String msg, Player p) {
         return getFormattedName(p) + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p);
     }
@@ -203,7 +212,7 @@ public class ChatSystem {
 
         @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
         public void onChat(AsyncPlayerChatEvent ev) {
-            if(ev.getMessage().equalsIgnoreCase("thank mr sketal")) {
+            if(RegexUtils.contains(ev.getMessage(), "[Tt]hank [Mm]r [Ss]ketal")) {
                 ev.getPlayer().sendMessage(ChatColor.BLUE + "You're actually going to thank an internet meme here? You must need some friends.");
                 ev.setCancelled(true);
                 return;

@@ -1,14 +1,10 @@
 package legendarena.hub.menu;
 
-import legendarena.api.message.Message;
-import legendarena.api.message.MessageType;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuUtils;
-import legendarena.hub.particles.ParticleCore;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,6 +27,8 @@ public class ParticleMenu implements Listener {
         if(init) return;
 
         inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
+
+        //TODO: Make this a lot more cleaner
 
         ItemStack back = MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "");
 

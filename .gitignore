@@ -77,3 +77,4 @@ gradle-app.setting
 
 .settings/
 upload
+/.nb-gradle/

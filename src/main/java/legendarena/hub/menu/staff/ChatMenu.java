@@ -1,6 +1,6 @@
 package legendarena.hub.menu.staff;
 
-import legendarena.api.utils.MenuUtils;
+import legendapi.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

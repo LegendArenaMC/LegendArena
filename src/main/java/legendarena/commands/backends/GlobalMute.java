@@ -1,11 +1,15 @@
 package legendarena.commands.backends;
 
+import legendapi.message.Message;
+import legendapi.utils.Cooldown;
 import legendarena.chat.ChatSystem;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Rank;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.text.MessageFormat;
 
 /**
  * Global mute staff command.
@@ -14,6 +18,8 @@ import org.bukkit.entity.Player;
  */
 public class GlobalMute {
 
+    private static Cooldown c = null;
+
     public static void run(CommandSender sender) {
         if(!(sender instanceof Player)) {
             sender.sendMessage("Sorry - you can only do this as a player :(");
@@ -21,6 +27,10 @@ public class GlobalMute {
         }
         if(!Rank.isRanked(sender, Rank.MOD)) {
             sender.sendMessage(Rank.noPermissions(Rank.MOD));
+            return;
+        }
+        if(c != null && !c.done()) {
+            new Message().append(MessageFormat.format("{0} (this is a GLOBAL cooldown!)", c.getTimeRemaining()));
             return;
         }
         if(ChatSystem.isChatMuted()) {
@@ -34,6 +44,7 @@ public class GlobalMute {
             ChatUtils.broadcast(" ");
             ChatSystem.setChatMuted(true);
         }
+        c = new Cooldown(5);
     }
 
 }

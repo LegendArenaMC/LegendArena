@@ -1,9 +1,8 @@
 package legendarena.commands;
 
-import legendarena.emeralds.EmeraldsCore;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.PluginUtils;
-import legendarena.api.utils.Rank;
+import legendapi.emeralds.EmeraldsCore;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

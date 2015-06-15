@@ -1,7 +1,7 @@
 package legendarena.commands.staff;
 
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Rank;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import legendarena.commands.Help;
 import legendarena.commands.backends.ClearChat;
 import legendarena.commands.backends.GlobalMute;

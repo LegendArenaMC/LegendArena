@@ -1,7 +1,7 @@
 package legendarena.listeners;
 
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MOTDRandomizer;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.MOTDRandomizer;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

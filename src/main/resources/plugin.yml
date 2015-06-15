@@ -1,7 +1,7 @@
 main: legendarena.LegendArena
 name: LegendArena
-version: 1.0A
-website: http://reddit.com/r/LegendArena
+version: 1.0-SNAPSHOT
+website: http://thenamedev.net/legendarena/
 author: ThePixelDev
 authors: [FOSS Contributors]
 description: "§cLegend Arena custom plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"

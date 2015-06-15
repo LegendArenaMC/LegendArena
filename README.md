@@ -3,6 +3,8 @@
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
 
+[You may also be looking for the API.](https://github.com/LegendArenaMC/LegendAPI)
+
 License
 ====
 

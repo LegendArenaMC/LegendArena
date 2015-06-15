@@ -1,13 +1,14 @@
 package legendarena.hub.menu;
 
-import legendarena.emeralds.EmeraldsCore;
-import legendarena.api.message.Message;
-import legendarena.api.message.MessageType;
-import legendarena.api.utils.*;
+import legendapi.emeralds.EmeraldsCore;
+import legendapi.message.Message;
+import legendapi.message.MessageType;
+import legendapi.utils.*;
 import legendarena.hub.menu.staff.StaffMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -56,14 +57,15 @@ public class MainMenu implements Listener {
                 ev.getWhoClicked().closeInventory();
                 MinigameMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Particles")) {
-                if(Rank.isRanked(ev.getWhoClicked(), Rank.MEMBERPLUS)) {
+                /*if(Rank.isRanked(ev.getWhoClicked(), Rank.MEMBERPLUS)) {
                     if(!(EmeraldsCore.getEmeralds((Player) ev.getWhoClicked()) > 15)) {
                         ev.getWhoClicked().closeInventory();
                         new Message(MessageType.SUBTITLE).append(ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!").send((Player) ev.getWhoClicked());
                     }
-                }
+                }*/
+                new Message(MessageType.TITLE).append(ChatColor.GREEN + "Particles will be fixed soon[tm] - sorry :<").send(Sound.ANVIL_BREAK, (Player) ev.getWhoClicked());
                 ev.getWhoClicked().closeInventory();
-                ParticleMenu.show((Player) ev.getWhoClicked());
+                //ParticleMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Staff Tools")) {
                 ev.getWhoClicked().closeInventory();
                 StaffMenu.show((Player) ev.getWhoClicked());

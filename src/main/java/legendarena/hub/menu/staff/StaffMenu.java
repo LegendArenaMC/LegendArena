@@ -1,8 +1,8 @@
 package legendarena.hub.menu.staff;
 
 import legendarena.chat.ChatSystem;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuUtils;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.MenuUtils;
 import legendarena.hub.menu.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

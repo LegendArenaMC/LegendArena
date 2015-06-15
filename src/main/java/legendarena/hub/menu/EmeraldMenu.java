@@ -1,8 +1,8 @@
 package legendarena.hub.menu;
 
-import legendarena.emeralds.EmeraldsCore;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.MenuUtils;
+import legendapi.emeralds.EmeraldsCore;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

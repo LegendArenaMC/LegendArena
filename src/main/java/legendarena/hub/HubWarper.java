@@ -1,8 +1,8 @@
 package legendarena.hub;
 
-import legendarena.api.utils.Cooldown;
-import legendarena.api.utils.MenuUtils;
-import legendarena.api.utils.Rank;
+import legendapi.utils.Cooldown;
+import legendapi.utils.MenuUtils;
+import legendapi.utils.Rank;
 import legendarena.hub.menu.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

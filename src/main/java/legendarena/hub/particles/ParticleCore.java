@@ -17,6 +17,8 @@ import java.util.UUID;*/
  */
 public class ParticleCore implements Runnable {
 
+    //TODO: FIX EVERYTHING ;-;
+
     public void run() {
         //do nothing
     }

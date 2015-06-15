@@ -1,6 +1,6 @@
 package legendarena.commands.staff;
 
-import legendarena.api.utils.Rank;
+import legendapi.utils.Rank;
 import legendarena.commands.Help;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

@@ -1,9 +1,9 @@
 package legendarena.listeners;
 
-import legendarena.api.message.Message;
-import legendarena.api.message.MessageType;
-import legendarena.api.utils.ChatUtils;
-import legendarena.api.utils.Rank;
+import legendapi.message.Message;
+import legendapi.message.MessageType;
+import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
