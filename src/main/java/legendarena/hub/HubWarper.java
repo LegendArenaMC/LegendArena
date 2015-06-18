@@ -1,6 +1,9 @@
 package legendarena.hub;
 
+import legendapi.message.Message;
+import legendapi.message.MessageType;
 import legendapi.utils.Cooldown;
+import legendapi.utils.CooldownUtils;
 import legendapi.utils.MenuUtils;
 import legendapi.utils.Rank;
 import legendarena.hub.menu.MainMenu;
@@ -64,14 +67,14 @@ public class HubWarper implements Listener {
                 if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
                     Cooldown c = cooldown.get(ev.getPlayer().getUniqueId());
                     if(!c.done()) {
-                        ev.getPlayer().sendMessage(ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )");
+                        new Message(MessageType.ACTIONBAR).append(ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.getPlayer());
                         return;
                     }
                 }
                 MainMenu.show(ev.getPlayer());
                 if(!ev.isCancelled())
                     ev.setCancelled(true);
-                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(2));
+                cooldown.put(ev.getPlayer().getUniqueId(), CooldownUtils.getCooldown(2));
             }
         } catch(Exception ex) {
             //ignore
@@ -81,11 +84,15 @@ public class HubWarper implements Listener {
     public static class InitPlayers implements Runnable {
 
         public void run() {
-            for(Player p : Bukkit.getOnlinePlayers()) {
+            for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
                 if(!Rank.isRanked(p, Rank.ADMIN)) p.getInventory().clear();
                 p.getInventory().setItem(4, getCustomization());
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1, true));
+                //TODO: Obligatory "Fucking fix me you moron Pixel"
+                //fuck you too async (this is just a memory leak waiting to happen, by the way)
+                Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
+                    public void run() { p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1, true)); }
+                });
             }
         }
 

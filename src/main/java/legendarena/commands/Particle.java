@@ -1,6 +1,7 @@
 package legendarena.commands;
 
 import legendapi.utils.Cooldown;
+import legendapi.utils.CooldownUtils;
 import legendapi.utils.Rank;
 import legendarena.hub.menu.ParticleMenu;
 import org.bukkit.command.Command;
@@ -31,7 +32,7 @@ public class Particle implements CommandExecutor {
         }
         ParticleMenu.show((Player) sender);
         //2 second cooldown
-        cooldown.put(((Player) sender).getUniqueId(), new Cooldown(2));
+        cooldown.put(((Player) sender).getUniqueId(), CooldownUtils.getCooldown(2));
         return true;
     }
 

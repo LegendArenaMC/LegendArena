@@ -2,6 +2,7 @@ package legendarena.commands.backends;
 
 import legendapi.message.Message;
 import legendapi.utils.Cooldown;
+import legendapi.utils.CooldownUtils;
 import legendarena.chat.ChatSystem;
 import legendapi.utils.ChatUtils;
 import legendapi.utils.Rank;
@@ -44,7 +45,7 @@ public class GlobalMute {
             ChatUtils.broadcast(" ");
             ChatSystem.setChatMuted(true);
         }
-        c = new Cooldown(5);
+        c = CooldownUtils.getCooldown(5);
     }
 
 }

@@ -63,7 +63,7 @@ public class MainMenu implements Listener {
                         new Message(MessageType.SUBTITLE).append(ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!").send((Player) ev.getWhoClicked());
                     }
                 }*/
-                new Message(MessageType.TITLE).append(ChatColor.GREEN + "Particles will be fixed soon[tm] - sorry :<").send(Sound.ANVIL_BREAK, (Player) ev.getWhoClicked());
+                new Message(MessageType.SUBTITLE).append(ChatColor.GREEN + "Particles will be fixed soon[tm] - sorry :<").send(Sound.ANVIL_BREAK, (Player) ev.getWhoClicked());
                 ev.getWhoClicked().closeInventory();
                 //ParticleMenu.show((Player) ev.getWhoClicked());
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().contains("Staff Tools")) {

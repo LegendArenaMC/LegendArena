@@ -1,6 +1,6 @@
 package legendarena.commands.staff;
 
-import legendapi.utils.Day;
+import legendapi.utils.CalendarUtils;
 import legendapi.utils.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,8 +22,8 @@ public class Dev implements CommandExecutor {
             sender.sendMessage(ChatColor.BLUE + "Free memory: " + Runtime.getRuntime().freeMemory() + " bits");
             sender.sendMessage(ChatColor.BLUE + "Used memory: " + Runtime.getRuntime().totalMemory() + " bits");
             sender.sendMessage(ChatColor.BLUE + "Max memory: " + Runtime.getRuntime().maxMemory() + " bits");
-            sender.sendMessage(ChatColor.BLUE + "Day: " + Day.getDate().getDay());
-            sender.sendMessage(ChatColor.BLUE + "Month: " + Day.getDate().getMonth() + " (" + Day.parseMonth() + ")");
+            sender.sendMessage(ChatColor.BLUE + "Day: " + CalendarUtils.getDate().getDay());
+            sender.sendMessage(ChatColor.BLUE + "Month: " + CalendarUtils.getDate().getMonth() + " (" + CalendarUtils.parseMonth() + ")");
             sender.sendMessage(ChatColor.YELLOW + "--.{ Server Info }.--");
             //sender.sendMessage(" ");
             //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");

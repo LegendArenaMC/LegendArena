@@ -36,7 +36,7 @@ public class CommandFilterListener implements Listener {
                 return;
             ev.setCancelled(true); //cancel the event
             new Message(MessageType.TITLE).append("Nice try. It won't work here, bud.").send(Sound.BLAZE_DEATH, 3, ev.getPlayer()); //tell the player it isn't gonna work here
-            new Message().append(ChatUtils.getCustomMsg("Command Filter") + "The player " + ChatColor.RED + ev.getPlayer().getName() + ChatColor.BLUE + " tried to use /op or /deop!").broadcast();
+            new Message().append(ChatUtils.getCustomMsg("Command Filter") + "The player " + ChatColor.RED + ev.getPlayer().getName() + ChatColor.BLUE + " tried to use /op or /deop!").broadcast(Rank.HELPER);
             ev.getPlayer().chat("I am a nubcake. Please ban me.");
             Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
                 @Override

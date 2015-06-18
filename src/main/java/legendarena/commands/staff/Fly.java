@@ -2,6 +2,7 @@ package legendarena.commands.staff;
 
 import legendapi.utils.ChatUtils;
 import legendapi.utils.Cooldown;
+import legendapi.utils.CooldownUtils;
 import legendapi.utils.Rank;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,15 +35,15 @@ public class Fly implements CommandExecutor {
             return;
         }
         if(((Player) sender).getAllowFlight()) {
-            sender.sendMessage(ChatUtils.Messages.getCustomMsg("Flight") + "Disabled flight!");
+            sender.sendMessage(ChatUtils.getCustomMsg("Flight") + "Disabled flight!");
             ((Player) sender).setAllowFlight(false);
             ((Player) sender).setFlying(false);
         } else {
-            sender.sendMessage(ChatUtils.Messages.getCustomMsg("Flight") + "Enabled flight!");
+            sender.sendMessage(ChatUtils.getCustomMsg("Flight") + "Enabled flight!");
             ((Player) sender).setAllowFlight(true);
         }
         //3 second cooldown
-        cooldown.put(((Player) sender).getUniqueId(), new Cooldown(3));
+        cooldown.put(((Player) sender).getUniqueId(), CooldownUtils.getCooldown(3));
     }
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

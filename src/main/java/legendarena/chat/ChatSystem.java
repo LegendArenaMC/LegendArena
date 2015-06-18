@@ -160,7 +160,7 @@ public class ChatSystem {
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(!Rank.isRanked(p, Rank.MOD))
                 continue;
-            p.sendMessage(ChatUtils.Messages.getCustomMsg("Notice") + ChatColor.RED + msg);
+            p.sendMessage(ChatUtils.getCustomMsg("Notice") + ChatColor.RED + msg);
         }
     }
 

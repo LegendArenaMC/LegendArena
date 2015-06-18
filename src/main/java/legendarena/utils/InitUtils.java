@@ -1,8 +1,9 @@
-package legendarena;
+package legendarena.utils;
 
 import legendapi.LegendAPI;
 import legendapi.message.Message;
 import legendapi.utils.ChatUtils;
+import legendapi.utils.Rank;
 import legendarena.chat.ChatSystem;
 import legendarena.commands.*;
 import legendarena.commands.staff.*;
@@ -35,7 +36,7 @@ public class InitUtils {
     public static void init() {
         if(init) return;
 
-        announceStatus("Starting Legend Arena plugin v" + Bukkit.getPluginManager().getPlugin("LegendArena").getDescription().getVersion() + ", with API version " + LegendAPI.apiVersion + " \"" + LegendAPI.versionCodename + "\".");
+        announceStatus("Starting Legend Arena plugin v1.0-SNAPSHOT with API version " + LegendAPI.apiVersion + " \"" + LegendAPI.versionCodename + "\".");
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         if(!conf.getBoolean("debug")) {
             announceStatus("Debug mode is turned off in the config, thus all further debug messages will be disabled.");
@@ -50,6 +51,7 @@ public class InitUtils {
         registerCommand(new EmeraldCmd(), "emeralds");
         registerCommand(new Firework(), "firework");
         registerCommand(new Dev(), "dev");
+        registerCommand(new Gadgets(), "gadgets");
         registerCommand(new Particle(), "particles");
         registerCommand(new Fly(), "fly");
         registerCommand(new Warp(), "warp");
@@ -80,12 +82,12 @@ public class InitUtils {
         registerTimer(new ParticleCore(), 5l);
         registerTimer(new HubWarper.InitPlayers(), 10l);
 
-        announceStatus("Loaded timers.");
-        announceStatus("Loading one-off things...");
+        announceStatus("Loaded timers sucessfully.");
+        //announceStatus("Loading one-off things...");
 
         //
 
-        announceStatus("Loaded one-off things.");
+        //announceStatus("Loaded one-off things sucessfully.");
         announceStatus("Done loading!");
 
         init = true;
@@ -93,7 +95,7 @@ public class InitUtils {
 
     private static void announceStatus(String m) {
         if(!LegendAPI.debug) return;
-        new Message().append(ChatUtils.getCustomMsg("Startup Debug") + m).broadcast();
+        new Message().append(ChatUtils.getCustomMsg("Startup Debug") + m).broadcast(Rank.ADMIN);
     }
 
     private static void registerListener(Listener l) {

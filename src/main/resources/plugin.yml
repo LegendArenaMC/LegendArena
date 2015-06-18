@@ -1,5 +1,6 @@
 main: legendarena.LegendArena
 name: LegendArena
+depend: [LegendAPI]
 version: 1.0-SNAPSHOT
 website: http://thenamedev.net/legendarena/
 author: ThePixelDev
