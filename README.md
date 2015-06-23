@@ -8,7 +8,7 @@ We have decided to open source the plugin in order to allow people to help us ou
 License
 ====
 
-The entire Legend Arena plugin source code is licensed under the `MIT` license. Any and all usage of this plugin
+The entire Legend Arena plugin source code is licensed under the TheNameDev Plugin License. Any and all usage of this plugin
 must comply with said license.
 
 A copy of said license can be found in the [LICENSE.md](https://github.com/LegendArenaMC/LegendArena/blob/dev/LICENSE.md) file.
