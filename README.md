@@ -5,16 +5,14 @@ We have decided to open source the plugin in order to allow people to help us ou
 
 [You may also be looking for the API.](https://github.com/LegendArenaMC/LegendAPI)
 
-License
-====
+## License
 
 The entire Legend Arena plugin source code is licensed under the TheNameDev Plugin License. Any and all usage of this plugin
 must comply with said license.
 
 A copy of said license can be found in the [LICENSE.md](https://github.com/LegendArenaMC/LegendArena/blob/dev/LICENSE.md) file.
 
-Building
-====
+## Building
 
 ```
 git clone https://github.com/LegendArenaMC/LegendArena.git

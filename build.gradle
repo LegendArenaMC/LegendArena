@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'maven'
 
 compileJava.options.encoding = 'UTF-8' //gradle, pls. just, pls. #gradlepls
 javadoc.options.encoding = 'UTF-8' //srsly gradle pls
@@ -22,17 +21,4 @@ dependencies {
     compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1'
     compile group: 'net.thenamedev', name: 'legendapi', version: '1.0-SNAPSHOT'
     testCompile 'junit:junit:4.8.2'
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://mvn-thenamedev.rhcloud.com/content/repositories/snapshot") {
-                authentication(userName: "$System.env.NEXUS_USER", password: "$System.env.NEXUS_PASS")
-            }
-            pom.version = "1.0-SNAPSHOT"
-            pom.artifactId = "legendarena"
-            pom.groupId = "net.thenamedev"
-        }
-    }
 }

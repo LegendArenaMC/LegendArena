@@ -33,10 +33,9 @@ public class MOTDUtils {
             "The cake is a lie.", //portal...
             "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you probably get the idea by now
-            "Have you tried turning it off and on again?", //reference to IT Crowd
+            "Have you tried turning it off and on again?", //reference to IT Crowd (and half of IT)
             "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
-            "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor
-            "(dance break) I quit.", //reference to "An Interpretive Dance For My Boss Set To Kanye West's Gone"
+            "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor (seriously, fucking learn the difference, PLEASE)
             "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
             "11-10-15", //obligatory reference to Fallout 4's release date
             "Arch Linux!", //reference to Arch Linux, a... well.. Linux distro.. the name kind of gave that away.
@@ -72,10 +71,13 @@ public class MOTDUtils {
             "Why circle pizzas? Why not square pizzas?", //#BlameJaden
             "こんにちは日本！", //translated is "Hello Japan!" (yes, I used google translate, too lazy to bother actually trying to translate it (plus because japaneese, pls))
             "Pika-pika!",
+            "Allan please add MOTD", //allan please add comment describing MOTD
             "DU DU DU DUDUDUDUDU DU DU DU",
             "Aaand it's gone.",
             "Rekt-22", //shhh...
-            "\"When is HL3 released?\" In 2198-- wait, I mean 2431.",
+			"Pay the court a fine or serve your sentence.", //blame Oblivion
+            "\"When is HL3 released?\" In 2198-- no, 2431.",
+			"M'lady", //reddit pls. just, pls.
             "WELCOME, TO THE MONSTERCAT PODCAST.",
             "Hello, world!",
             "15 Reddit clones on the wall., 15 Reddit clones...",
@@ -83,7 +85,6 @@ public class MOTDUtils {
             "s/admins/badmins", //reference to Jaden's tweet about reddit admins
             "You guys got any more of them servers?", //reference to voat having mass server problems (#RedditRevolt)
             "I'm a server, not a magician.",
-            "No officer, I wasn't texting while driving.. I was tweeting..", //blame jaden 2k15 (also slightly edited because fuck charact
             "No, Intel is not a person.",
             "Not powered by Enjin.",
             "Does not contain donkeys.",
@@ -115,13 +116,21 @@ public class MOTDUtils {
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?", //don't mind me, just poking fun at the butthurt fanboys
     };
 
+	/**
+	  * Get a random MOTD from either of the following MOTD lists:
+	  * <ul>
+	  * 	<li>Random (generic MOTDs)</li>
+	  * 	<li>References (such as game references etc)</li>
+	  * 	<li>Song references</li>
+	  * </ul>
+	  */
     public static String getRandomMOTD() {
         if(CalendarUtils.getDate().getDay() == 3 && CalendarUtils.getDate().getMonth() == CalendarUtils.MAY)
             return "Happy birthday, Pixel! <3";
         else if(CalendarUtils.getDate().getDay() == 16 && CalendarUtils.getDate().getMonth() == CalendarUtils.NOVEMBER)
             return "Happy birthday, Jaden! <3";
         Random r = new Random();
-        int rL = r.nextInt(3); //ALL TEH RANDOMZ
+        int rL = r.nextInt(3);
         String return1;
         switch(rL) {
             case 1:
@@ -158,6 +167,9 @@ public class MOTDUtils {
         return return1;
     }
 
+	/**
+	  * Get a HashMap<> of the MOTD lists.
+	  */
     public static HashMap<ListType, String[]> getList() {
         HashMap<ListType, String[]> list = new HashMap<>();
         list.put(ListType.RANDOM, randomList);
@@ -165,15 +177,38 @@ public class MOTDUtils {
         list.put(ListType.SONG, songList);
         return list;
     }
+	
+	public static String[] getList(ListType type) {
+		switch(type) {
+			case RANDOM:
+				return randomList;
+			case REFERENCE:
+				return referenceList;
+			case SONG:
+				return songList;
+			
+			default:
+				return null;
+		}
+	}
 
+	/**
+	  * Get the current notice.
+	  */
     public static String getNotice() {
         return notice;
     }
 
+	/**
+	  * Get the last given MOTD message.
+	  */
     public static String getLastMOTDGiven() {
         return lastMOTDGiven;
     }
 
+	/**
+	  * Set the MOTD notice.
+	  */
     public static void setNotice(String newNotice) {
         notice = newNotice.toUpperCase();
         Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set("motdNotice", newNotice.toUpperCase());

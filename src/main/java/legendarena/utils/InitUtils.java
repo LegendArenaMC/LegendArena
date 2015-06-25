@@ -1,9 +1,7 @@
 package legendarena.utils;
 
 import legendapi.LegendAPI;
-import legendapi.message.Message;
-import legendapi.utils.ChatUtils;
-import legendapi.utils.Rank;
+import legendapi.utils.setup.SetupUtils;
 import legendarena.chat.ChatSystem;
 import legendarena.commands.*;
 import legendarena.commands.staff.*;
@@ -13,13 +11,7 @@ import legendarena.listeners.CommandFilterListener;
 import legendarena.listeners.PlayerJoinListener;
 import legendarena.listeners.ServerPingListener;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.Listener;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Initialization utilities.
@@ -29,6 +21,7 @@ import java.util.List;
 public class InitUtils {
 
     private static boolean init = false;
+    private static SetupUtils setup = new SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"));
 
     /**
      * Initalize the entire plugin.
@@ -36,84 +29,61 @@ public class InitUtils {
     public static void init() {
         if(init) return;
 
-        announceStatus("Starting Legend Arena plugin v1.0-SNAPSHOT with API version " + LegendAPI.apiVersion + " \"" + LegendAPI.versionCodename + "\".");
+        setup.announceStatus("Starting Legend Arena plugin v1.0-SNAPSHOT with API version " + LegendAPI.apiVersion + " \"" + LegendAPI.versionCodename + "\".");
         FileConfiguration conf = Bukkit.getPluginManager().getPlugin("LegendArena").getConfig();
         if(!conf.getBoolean("debug")) {
-            announceStatus("Debug mode is turned off in the config, thus all further debug messages will be disabled.");
+            setup.announceStatus("Debug mode is turned off in the config, thus all further debug messages will be disabled.");
             LegendAPI.debug = false;
         } else
             LegendAPI.debug = true;
 
-        announceStatus("Loading commands...");
+        setup.announceStatus("Loading commands...");
 
-        registerCommand(new Staff(), "staff");
-        registerCommand(new Help(), "help");
-        registerCommand(new EmeraldCmd(), "emeralds");
-        registerCommand(new Firework(), "firework");
-        registerCommand(new Dev(), "dev");
-        registerCommand(new Gadgets(), "gadgets");
-        registerCommand(new Particle(), "particles");
-        registerCommand(new Fly(), "fly");
-        registerCommand(new Warp(), "warp");
-        registerCommand(new StaffList(), "stafflist");
-        registerCommand(new Chat(), "chat");
-        registerCommand(new Troll(), "troll");
+        setup.registerCommand(new Staff(), "staff");
+        setup.registerCommand(new Help(), "help");
+        setup.registerCommand(new EmeraldCmd(), "emeralds");
+        setup.registerCommand(new Firework(), "firework");
+        setup.registerCommand(new Dev(), "dev");
+        setup.registerCommand(new Gadgets(), "gadgets");
+        setup.registerCommand(new Particle(), "particles");
+        setup.registerCommand(new Fly(), "fly");
+        setup.registerCommand(new Warp(), "warp");
+        setup.registerCommand(new StaffList(), "stafflist");
+        setup.registerCommand(new Chat(), "chat");
+        setup.registerCommand(new Troll(), "troll");
 
-        announceStatus("Loaded commands successfully.");
-        announceStatus("Loading aliases...");
+        setup.announceStatus("Loaded commands successfully.");
+        setup.announceStatus("Loading aliases...");
 
-        setAliases("chat", "c", "sc", "say");
-        setAliases("particles", "ps", "particle");
-        setAliases("stafflist", "sl", "liststaff");
-        setAliases("firework", "fw");
+        setup.setAliases("chat", "c", "sc", "say");
+        setup.setAliases("particles", "ps", "particle");
+        setup.setAliases("stafflist", "sl", "liststaff");
+        setup.setAliases("firework", "fw");
 
-        announceStatus("Loaded aliases successfully.");
-        announceStatus("Loading listeners...");
+        setup.announceStatus("Loaded aliases successfully.");
+        setup.announceStatus("Loading listeners...");
 
-        registerListener(new ServerPingListener());
-        registerListener(new PlayerJoinListener());
-        registerListener(new ChatSystem.ChatListener());
-        registerListener(new CommandFilterListener());
-        registerListener(new HubWarper());
+        setup.registerListener(new ServerPingListener());
+        setup.registerListener(new PlayerJoinListener());
+        setup.registerListener(new ChatSystem.ChatListener());
+        setup.registerListener(new CommandFilterListener());
+        setup.registerListener(new HubWarper());
 
-        announceStatus("Loaded listeners successfully.");
-        announceStatus("Loading timers...");
+        setup.announceStatus("Loaded listeners successfully.");
+        setup.announceStatus("Loading timers...");
 
-        registerTimer(new ParticleCore(), 5l);
-        registerTimer(new HubWarper.InitPlayers(), 10l);
+        setup.registerTimer(new ParticleCore(), 5l);
+        setup.registerTimer(new HubWarper.InitPlayers(), 10l);
 
-        announceStatus("Loaded timers sucessfully.");
+        setup.announceStatus("Loaded timers sucessfully.");
         //announceStatus("Loading one-off things...");
 
         //
 
         //announceStatus("Loaded one-off things sucessfully.");
-        announceStatus("Done loading!");
+        setup.announceStatus("Done loading!");
 
         init = true;
-    }
-
-    private static void announceStatus(String m) {
-        if(!LegendAPI.debug) return;
-        new Message().append(ChatUtils.getCustomMsg("Startup Debug") + m).broadcast(Rank.ADMIN);
-    }
-
-    private static void registerListener(Listener l) {
-        Bukkit.getPluginManager().registerEvents(l, Bukkit.getPluginManager().getPlugin("LegendArena"));
-    }
-
-    private static void registerCommand(CommandExecutor c, String n) {
-        Bukkit.getPluginCommand(n).setExecutor(c);
-    }
-
-    private static void registerTimer(Runnable r, long t) {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(Bukkit.getPluginManager().getPlugin("LegendArena"), r, t, t);
-    }
-
-    private static void setAliases(String t, String... l) {
-        List<String> a = new ArrayList<>();
-        Collections.addAll(a, l);
-        Bukkit.getPluginCommand(t).setAliases(a);
     }
 
 }

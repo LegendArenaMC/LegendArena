@@ -17,6 +17,7 @@ public enum OperatingSystems {
     WINDOWS(OSSuperGroup.WINDOWS), //ew windows
     OSX(OSSuperGroup.MAC),
     ARCH(OSSuperGroup.LINUX),
+    CRUNCHBANG(OSSuperGroup.LINUX),
     ELEMENTARY(OSSuperGroup.LINUX);
 
     private OSSuperGroup upper;

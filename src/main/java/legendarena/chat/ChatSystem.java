@@ -203,6 +203,16 @@ public class ChatSystem {
         }
     }
 
+    public static void msg(Player p, String msg, Channel c) {
+        Channel tmp = getChannel(p);
+        add(p, c);
+        msg(p, msg);
+        if(tmp == null || tmp == Channel.GLOBAL)
+            remove(p);
+        else
+            add(p, tmp);
+    }
+
     /**
      * Chat listener. Sends all chat messages to the chat system.
      *
