@@ -1,4 +1,16 @@
-apply plugin: 'java'
+//GOD DAMNIT THIS TOOK WAY TOO LONG TO SETUP
+
+apply plugin: 'kotlin'
+
+buildscript {
+    ext.kotlin_version = '0.10.195'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
 
 compileJava.options.encoding = 'UTF-8' //gradle, pls. just, pls. #gradlepls
 javadoc.options.encoding = 'UTF-8' //srsly gradle pls
@@ -14,6 +26,9 @@ repositories {
     maven {
         url "http://mvn-thenamedev.rhcloud.com/content/repositories/snapshot"
     }
+    maven {
+        url "http://oss.sonatype.org/content/repositories/snapshots"
+    }
 }
 
 dependencies {
@@ -21,4 +36,9 @@ dependencies {
     compile group: 'net.milkbowl.vault', name: 'Vault', version: '1.4.1'
     compile group: 'net.thenamedev', name: 'legendapi', version: '1.0-SNAPSHOT'
     testCompile 'junit:junit:4.8.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/java'
 }

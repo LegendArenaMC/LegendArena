@@ -3,7 +3,7 @@
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help us out.
 
-[You may also be looking for the API.](https://github.com/LegendArenaMC/LegendAPI)
+[You may also be looking for the API.](https://github.com/LegendArenaMC/LegendAPI) (psst: the API can be used without this main plugin, if you so wish to)
 
 ## License
 
@@ -19,4 +19,4 @@ git clone https://github.com/LegendArenaMC/LegendArena.git
 ./gradlew build
 ```
 
-Or, if you're that lazy, you can get a pre-built jar from [SnapCI](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master).
+Or, if you're lazy (I don't blame you), you can get a pre-built jar from [SnapCI](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master).

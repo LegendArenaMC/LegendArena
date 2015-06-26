@@ -77,3 +77,6 @@ gradle-app.setting
 
 .settings/
 /.nb-gradle/
+
+### Legacy code
+/java

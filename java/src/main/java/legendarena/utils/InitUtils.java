@@ -1,7 +1,7 @@
 package legendarena.utils;
 
 import legendapi.LegendAPI;
-import legendapi.utils.setup.SetupUtils;
+import legendapi.utils.SetupUtils;
 import legendarena.chat.ChatSystem;
 import legendarena.commands.*;
 import legendarena.commands.staff.*;

@@ -82,7 +82,7 @@ public class ChatSystem {
      * @return The chat message
      */
     public static String getChatMessage(String msg, Player p) {
-        return getFormattedName(p) + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p);
+        return getFormattedName(p) + " " + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p);
     }
 
     /**
