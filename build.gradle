@@ -1,6 +1,7 @@
 //GOD DAMNIT THIS TOOK WAY TOO LONG TO SETUP
 
 apply plugin: 'kotlin'
+apply plugin: 'java'
 
 buildscript {
     ext.kotlin_version = '0.10.195'
@@ -41,4 +42,5 @@ dependencies {
 
 sourceSets {
     main.kotlin.srcDirs += 'src/main/java'
+    main.java.srcDirs += 'src/main/rawjava'
 }

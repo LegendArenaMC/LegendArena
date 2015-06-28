@@ -2,10 +2,9 @@ package legendarena.chat;
 
 import legendapi.exceptions.NotEnoughPermissionsException;
 import legendapi.exceptions.PlayerNotOnlineException;
-import legendapi.regex.RegexUtils;
+import legendapi.utils.RegexUtils;
 import legendapi.utils.ChatUtils;
 import legendapi.utils.Rank;
-import legendarena.commands.staff.Troll;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,11 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-/**
- * Created on 4/17/15
- *
- * @author ThePixelDev
- */
 public class ChatSystem {
 
     private static HashMap<UUID, Channel> channels = new HashMap<>();
@@ -47,21 +41,13 @@ public class ChatSystem {
 
     /**
      * Get a parsed chat message.
-     * @param m The message
+     * @param msg The message
      * @param p The player
      * @return The parsed message
      */
-    private static String getParsedChatMessage(String m, Player p) {
-        String msg = m;
-        if(Troll.sheepleTroll.contains(p.getUniqueId())) {
-            if(RegexUtils.endsWith(m, "[?!.]"))
-                msg = msg + " Wake up, sheeple!";
-            else
-                msg = msg + "! Wake up, sheeple!";
-        }
-
+    private static String getParsedChatMessage(String msg, Player p) {
         if(Rank.isRanked(p, Rank.YOUTUBE))
-            return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™"));
+            return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™").replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
         else
             return ChatColor.GRAY + msg;
     }
