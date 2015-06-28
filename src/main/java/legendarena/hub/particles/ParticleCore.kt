@@ -1,25 +1,10 @@
-package legendarena.hub.particles;
+package legendarena.hub.particles
 
-/*import legendarena.hub.particles.lib.ParticleEffect;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;*/
-
-/**
- * Particle core.
- *
- * @author ThePixelDev
- */
-public class ParticleCore implements Runnable {
+class ParticleCore : Runnable {
 
     //TODO: FIX EVERYTHING ;-;
 
-    public void run() {
+    override fun run() {
         //do nothing
     }
 
