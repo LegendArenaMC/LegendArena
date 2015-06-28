@@ -1,6 +1,6 @@
 main: legendarena.LegendArena
 name: LegendArena
-depend: [LegendAPI, KotlinLoader]
+depend: [KotlinLoader, LegendAPI]
 version: 1.0-SNAPSHOT
 website: http://thenamedev.net/legendarena/
 author: ThePixelDev
@@ -21,6 +21,7 @@ commands:
   gadgets:
     description: Gadgets control command.
     usage: /gadgets [player]
+    aliases: [gs]
   emeralds:
     description: Front-end command for the Emeralds system.
     usage: /emeralds <suboption> [args]
@@ -40,7 +41,5 @@ commands:
   stafflist:
     description: Shows currently online staff, and their ranks.
     aliases: [sl, liststaff]
-  troll:
-    description: Trololololololololol, lololo!
-  fly:
-    description: Magic.
+  motd:
+    description: MOTD utilities.

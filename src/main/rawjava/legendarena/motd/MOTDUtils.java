@@ -1,7 +1,9 @@
 package legendarena.motd;
 
 import legendapi.utils.CalendarUtils;
+import legendapi.utils.ChatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,8 @@ public class MOTDUtils {
 
     private static String notice = "PUBLIC ALPHA";
     private static volatile String lastMOTDGiven = "";
+    private static String override = "";
+    private static boolean noDecor = false;
 
     private static final String[] referenceList = {
             "Can connect to server.", //joke of "Can't connect to server" when MC cannot ping a server.
@@ -70,6 +74,7 @@ public class MOTDUtils {
             "MadeIn(Kotlin)",
             "Achievement get!",
             "Pay the court a fine or serve your sentence.", //blame Oblivion
+            "Your stolen goods are now forfeit.", //again, blame Oblivion
             "\"When is HL3 released?\" In 2198-- no, 2431.",
             "M'lady", //reddit pls. just, pls.
             "WELCOME, TO THE MONSTERCAT PODCAST.",
@@ -104,7 +109,15 @@ public class MOTDUtils {
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?", //don't mind me, just poking fun at the butthurt fanboys
     };
 
+    public static void override(boolean noDecor, String override) {
+        MOTDUtils.override = override;
+        MOTDUtils.noDecor = noDecor;
+    }
+
     public static String getRandomMOTD() {
+        if(!override.equals(""))
+            return override;
+
         if(CalendarUtils.getDate().getDay() == 3 && CalendarUtils.getDate().getMonth() == CalendarUtils.MAY)
             return "Happy birthday, Pixel! <3";
         else if(CalendarUtils.getDate().getDay() == 16 && CalendarUtils.getDate().getMonth() == CalendarUtils.NOVEMBER)
@@ -145,6 +158,15 @@ public class MOTDUtils {
         }
         lastMOTDGiven = return1;
         return return1;
+    }
+
+    public static String getBuiltMOTD() {
+        String random = getRandomMOTD();
+        ChatColor randomC1 = ChatUtils.getRandomColour();
+        ChatColor randomC2 = ChatUtils.getRandomColour();
+
+        if(!noDecor) return "" + randomC1 + "Legend Arena" + ChatColor.YELLOW + " {" + MOTDUtils.getNotice() + "}\n" + ChatColor.GRAY + "#" + randomC2 + random;
+        else return override;
     }
 
     public static HashMap<ListType, String[]> getList() {

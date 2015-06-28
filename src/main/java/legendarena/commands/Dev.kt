@@ -16,7 +16,7 @@ class Dev : CommandExecutor {
             if(!Rank.isRanked(sender, Rank.FOUNDER))
                 return false
             //thanks kotlin for not liking [color] + [string]
-            val blue = Message().append(ChatColor.BLUE).toString()
+            val blue = "" + ChatColor.BLUE
             sender.sendMessage(ChatUtils.getFormattedHeader("Server Info"))
             sender.sendMessage(blue + "Free memory: " + Runtime.getRuntime().freeMemory() + " bits")
             sender.sendMessage(blue + "Used memory: " + Runtime.getRuntime().totalMemory() + " bits")

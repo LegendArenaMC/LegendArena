@@ -29,7 +29,7 @@ class MinigameMenu : Listener {
             } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("Build My Thing")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
-                ev.getWhoClicked().sendMessage(ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
+                ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
             } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("⇐ Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
@@ -56,9 +56,9 @@ class MinigameMenu : Listener {
 
             //TODO: Clean this damn thing up
 
-            items.put(4, MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", ""))
-            items.put(21, MenuUtils.createItem(Material.DISPENSER, ChatColor.GREEN + "Hub"))
-            items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, ChatColor.GREEN + "Build My Thing"))
+            items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+            items.put(21, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
+            items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Build My Thing"))
 
             inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper")
 

@@ -1,7 +1,6 @@
 package legendarena.chat;
 
-import legendapi.exceptions.NotEnoughPermissionsException;
-import legendapi.exceptions.PlayerNotOnlineException;
+import legendapi.message.Message;
 import legendapi.utils.RegexUtils;
 import legendapi.utils.ChatUtils;
 import legendapi.utils.Rank;
@@ -116,12 +115,10 @@ public class ChatSystem {
      * Adds a player to a certain channel.
      * @param p The player to target
      * @param channel The channel to add the player to
-     * @throws NotEnoughPermissionsException If the player is not ranked to the required rank
-     * @throws PlayerNotOnlineException If the player is null/is not online
      */
     public static void add(Player p, Channel channel) {
         if(p == null || !p.isOnline())
-            throw new PlayerNotOnlineException();
+            throw new NullPointerException();
         UUID pUUID = p.getUniqueId();
         if(channels.containsKey(pUUID))
             channels.remove(pUUID);
@@ -184,7 +181,7 @@ public class ChatSystem {
                         p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
                         return;
                     }
-                ChatUtils.broadcast(getChatMessage(msg, p));
+                new Message().append(getChatMessage(msg, p)).broadcast();
                 break;
         }
     }

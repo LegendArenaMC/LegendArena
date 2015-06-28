@@ -152,6 +152,7 @@ class ParticleMenu : Listener {
             init = true
         }
 
+        @suppress("UNUSED_PARAMETER")
         public fun show(p: Player) {
             /*init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
