@@ -29,6 +29,7 @@ class MOTDTools : CommandExecutor {
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff motd notice [notice]", "Sets the MOTD notice"))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd getmotd", "Get the currently showing MOTD."))
         } else if(args[0].equals("list")) {
             val rawList = MOTDUtils.getList()
             val rawSongs = rawList.get(ListType.SONG)
@@ -60,21 +61,27 @@ class MOTDTools : CommandExecutor {
             }
             if(args.size() == 2) {
                 if(args[1].equals("--nodecor")) {
-                    sender.sendMessage("" + ChatColor.RED + "You can't set the MOTD blank...")
+                    sender.sendMessage("" + ChatColor.RED + "You can't make the MOTD blank...")
                 } else if(args[1].equals("--clear")) {
                     MOTDUtils.override(false, "")
+                    sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + "Cleared custom MOTD override.")
                 } else {
                     MOTDUtils.override(false, args[1])
+                    sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + "MOTD changed succssfully.")
                 }
             } else {
                 if(args[1].equals("--nodecor")) {
                     var cast = ChatUtils.formatCast(args, 0, 1)
                     MOTDUtils.override(true, cast)
+                    sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + "MOTD changed succssfully.")
                 } else {
                     var cast = ChatUtils.formatCast(args, 0)
                     MOTDUtils.override(true, cast)
+                    sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + "MOTD changed succssfully.")
                 }
             }
+        } else if(args[0].equals("getmotd")) {
+            sender.sendMessage(MOTDUtils.getBuiltMOTD())
         }
     }
 

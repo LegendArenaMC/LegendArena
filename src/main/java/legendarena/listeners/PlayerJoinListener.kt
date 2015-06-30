@@ -9,6 +9,7 @@ class PlayerJoinListener : Listener {
 
     EventHandler fun listenForJoin(ev: PlayerJoinEvent) {
         ev.setJoinMessage("")
+
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {

@@ -1,4 +1,4 @@
-main: legendarena.LegendArena
+main: legendarena.LegendArenaLoader
 name: LegendArena
 depend: [KotlinLoader, LegendAPI]
 version: 1.0-SNAPSHOT

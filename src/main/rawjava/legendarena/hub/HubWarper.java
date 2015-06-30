@@ -19,50 +19,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import java.util.*;
 
-public class HubWarper implements Listener {
+public class HubWarper {
 
     private static ArrayList<UUID> exempt = new ArrayList<>();
     private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
-    /**
-     * WUBBBBBB<br><br>
-     *
-     * ...sorry, I couldn't resist.
-     */
-    @EventHandler(ignoreCancelled = true)
-    public void listenForDrop(PlayerDropItemEvent ev) {
-        if(isExempt(ev.getPlayer().getUniqueId())) return;
-            ev.setCancelled(true);
-    }
-
-    @EventHandler
-    public void listenForInteract(PlayerInteractEvent ev) {
-        try {
-            if(!isExempt(ev.getPlayer().getUniqueId()))
-                ev.setCancelled(true);
-            if(ev.getAction() != Action.RIGHT_CLICK_AIR && ev.getAction() != Action.RIGHT_CLICK_BLOCK)
-                return;
-            if(ev.getItem() == getCustomization()) {
-                if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
-                    Cooldown c = cooldown.get(ev.getPlayer().getUniqueId());
-                    if(!c.done()) {
-                        new Message(MessageType.ACTIONBAR).append("" + ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.getPlayer());
-                        return;
-                    }
-                }
-                //TODO: Fucking fix me you doonkov Pixel
-                //new MainMenu().show(ev.getPlayer());
-                if(!ev.isCancelled())
-                    ev.setCancelled(true);
-                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(2.0));
-            }
-        } catch(Exception ex) {
-            //ignore
-        }
-
-    }
-
-    public class InitPlayers implements Runnable {
+    public static class InitPlayers implements Runnable {
 
         public void run() {
             for(final Player p : Bukkit.getOnlinePlayers()) {
@@ -81,6 +43,48 @@ public class HubWarper implements Listener {
 
     }
 
+    public static class Listeners implements Listener {
+
+        /**
+         * WUBBBBBB<br><br>
+         *
+         * ...sorry, I couldn't resist.
+         */
+        @EventHandler(ignoreCancelled = true)
+        public void listenForDrop(PlayerDropItemEvent ev) {
+            if(isExempt(ev.getPlayer().getUniqueId())) return;
+            ev.setCancelled(true);
+        }
+
+        @EventHandler
+        public void listenForInteract(PlayerInteractEvent ev) {
+            try {
+                if(!isExempt(ev.getPlayer().getUniqueId()))
+                    ev.setCancelled(true);
+                if(ev.getAction() != Action.RIGHT_CLICK_AIR && ev.getAction() != Action.RIGHT_CLICK_BLOCK)
+                    return;
+                if(ev.getItem() == getCustomization()) {
+                    if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
+                        Cooldown c = cooldown.get(ev.getPlayer().getUniqueId());
+                        if(!c.done()) {
+                            new Message(MessageType.ACTIONBAR).append("" + ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.getPlayer());
+                            return;
+                        }
+                    }
+                    //TODO: Fucking fix me you doonkov Pixel
+                    //new MainMenu().show(ev.getPlayer());
+                    if(!ev.isCancelled())
+                        ev.setCancelled(true);
+                    cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(2.0));
+                }
+            } catch(Exception ex) {
+                //ignore
+            }
+
+        }
+
+    }
+
     public static void toggleExemption(UUID p) {
         if(isExempt(p))
             exempt.remove(p);
@@ -92,7 +96,7 @@ public class HubWarper implements Listener {
         return exempt.contains(p);
     }
 
-    private ItemStack getCustomization() {
+    private static ItemStack getCustomization() {
         return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", "");
     }
 

@@ -2,6 +2,7 @@ package legendarena
 
 import legendapi.utils.SetupUtils
 import legendarena.commands.*
+import legendarena.hub.HubWarper
 import legendarena.listeners.ChatListener
 import legendarena.listeners.PlayerJoinListener
 import legendarena.listeners.ServerPingListener
@@ -13,7 +14,7 @@ class LegendArena {
     protected fun onEnable() {
         var setup = SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
 
-        // ACTUAL FUCKING SETUP STUFF
+        // ACTUAL SETUP STUFF
 
         setup.announceStatus("Setting up commands...")
 
@@ -33,9 +34,12 @@ class LegendArena {
 
         setup.registerListener(ChatListener())
         setup.registerListener(ServerPingListener())
+        setup.registerListener(HubWarper.Listeners())
         setup.registerListener(PlayerJoinListener())
 
         setup.announceStatus("Setting up timers...")
+
+        setup.registerTimer(HubWarper.InitPlayers(), 10)
 
         setup.announceStatus("Setting up aliases...")
 
