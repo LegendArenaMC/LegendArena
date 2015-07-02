@@ -108,53 +108,55 @@ class ParticleMenu : Listener {
 
     }
 
-    companion object {
+    public constructor() {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+    }
 
-        private var inv: Inventory? = null
-        private var init = false
+    private var inv: Inventory? = null
+    private var init = false
 
-        private fun init(p: Plugin) {
-            if (init) return
+    private fun init(p: Plugin) {
+        if (init) return
 
-            inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector")
+        inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector")
 
-            //TODO: Make this a lot more cleaner
+        //TODO: Make this a lot more cleaner
 
-            /*val back = MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "")
+        /*val back = MenuUtils.createItem(Material.BED, ChatColor.GRAY + "⇐ Back", "")
 
-            val hearts = MenuUtils.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!")
-            val slime = MenuUtils.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!")
-            val portal = MenuUtils.createItem(Material.ENDER_PORTAL_FRAME, ChatColor.GREEN + "Portal", ChatColor.BLUE + "Portal particles. Yay!")
-            val enchant = MenuUtils.createItem(Material.ENCHANTED_BOOK, ChatColor.GREEN + "Enchant", ChatColor.BLUE + "Enchant particles. Yay!")
-            val villager = MenuUtils.createItem(Material.DIAMOND_BLOCK, ChatColor.GREEN + "Happy Villager", ChatColor.BLUE + "Happy villager particles. Yay!")
-            val villager2 = MenuUtils.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!")
-            val fw = MenuUtils.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!")
-            val coloEff = MenuUtils.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!")
-            val flames = MenuUtils.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!")
+        val hearts = MenuUtils.createItem(Material.WOOL, ChatColor.GREEN + "Hearts", ChatColor.BLUE + "Heart particles. Yay!")
+        val slime = MenuUtils.createItem(Material.SLIME_BALL, ChatColor.GREEN + "Slime", ChatColor.BLUE + "Slime particles. Yay!")
+        val portal = MenuUtils.createItem(Material.ENDER_PORTAL_FRAME, ChatColor.GREEN + "Portal", ChatColor.BLUE + "Portal particles. Yay!")
+        val enchant = MenuUtils.createItem(Material.ENCHANTED_BOOK, ChatColor.GREEN + "Enchant", ChatColor.BLUE + "Enchant particles. Yay!")
+        val villager = MenuUtils.createItem(Material.DIAMOND_BLOCK, ChatColor.GREEN + "Happy Villager", ChatColor.BLUE + "Happy villager particles. Yay!")
+        val villager2 = MenuUtils.createItem(Material.DIRT, ChatColor.GREEN + "Angry Villager", ChatColor.BLUE + "Angry villager particles. Yay!")
+        val fw = MenuUtils.createItem(Material.FIREWORK, ChatColor.GREEN + "Firework Spark", ChatColor.BLUE + "Firework Spark particles. Yay!")
+        val coloEff = MenuUtils.createItem(Material.POTION, ChatColor.GREEN + "Colourful Effect", ChatColor.BLUE + "Colourful Effect particles. Yay!")
+        val flames = MenuUtils.createItem(Material.BLAZE_POWDER, ChatColor.GREEN + "Flame", ChatColor.BLUE + "Flame particles. Yay!")
 
-            val off = MenuUtils.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.")
+        val off = MenuUtils.createItem(Material.REDSTONE_LAMP_OFF, ChatColor.RED + "Off", ChatColor.BLUE + "Turns off your currently displaying particles. Aww.")
 
-            inv!!.setItem(8, off)
-            inv!!.setItem(4, back)
+        inv!!.setItem(8, off)
+        inv!!.setItem(4, back)
 
-            inv!!.setItem(27, hearts)
-            inv!!.setItem(28, slime)
-            inv!!.setItem(29, portal)
-            inv!!.setItem(30, enchant)
-            inv!!.setItem(31, villager)
-            inv!!.setItem(32, villager2)
-            inv!!.setItem(33, fw)
-            inv!!.setItem(34, coloEff)
-            inv!!.setItem(35, flames)*/
+        inv!!.setItem(27, hearts)
+        inv!!.setItem(28, slime)
+        inv!!.setItem(29, portal)
+        inv!!.setItem(30, enchant)
+        inv!!.setItem(31, villager)
+        inv!!.setItem(32, villager2)
+        inv!!.setItem(33, fw)
+        inv!!.setItem(34, coloEff)
+        inv!!.setItem(35, flames)*/
 
-            Bukkit.getPluginManager().registerEvents(ParticleMenu(), p)
+        Bukkit.getPluginManager().registerEvents(ParticleMenu(), p)
 
-            init = true
-        }
+        init = true
+    }
 
-        @suppress("UNUSED_PARAMETER")
-        public fun show(p: Player) {
-            /*init(Bukkit.getPluginManager().getPlugin("LegendArena"));
+    @suppress("UNUSED_PARAMETER")
+    public fun show(p: Player) {
+        /*init(Bukkit.getPluginManager().getPlugin("LegendArena"));
         Inventory pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Particle Selector");
         pInv.setContents(inv.getContents());
         if(ParticleCore.multiParicle.contains(p.getUniqueId()))
@@ -162,6 +164,5 @@ class ParticleMenu : Listener {
         else
             pInv.setItem(0, MenuUtils.createItem(Material.LEVER, ChatColor.GREEN + "Multi-Particle", ChatColor.RED + "OFF" + ChatColor.GRAY + " (click to toggle)"));*/
             //p.openInventory(pInv);
-        }
     }
 }

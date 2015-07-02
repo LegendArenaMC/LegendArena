@@ -40,7 +40,7 @@ class Staff: CommandExecutor {
                     sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."))
                 else {
                     if (Bukkit.getPlayer(args[1]) != null) {
-                        @SuppressWarnings("deprecation") val p = Bukkit.getPlayer(args[1])
+                        @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
                         sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + Rank.getRank(p))
                         sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))

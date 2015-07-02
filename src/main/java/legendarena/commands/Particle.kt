@@ -22,7 +22,7 @@ class Particle : CommandExecutor {
             sender.sendMessage(cooldown.get(sender.getUniqueId()).getTimeRemaining())
             return true
         }
-        ParticleMenu.show(sender)
+        ParticleMenu().show(sender)
         //2 second cooldown
         cooldown.put(sender.getUniqueId(), Cooldown(2.0))
         return true

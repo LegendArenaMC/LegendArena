@@ -4,10 +4,10 @@ import legendapi.utils.SetupUtils
 import legendarena.commands.*
 import legendarena.hub.HubWarper
 import legendarena.listeners.ChatListener
+import legendarena.listeners.HubListeners
 import legendarena.listeners.PlayerJoinListener
 import legendarena.listeners.ServerPingListener
 import org.bukkit.Bukkit
-import org.bukkit.plugin.java.JavaPlugin
 
 class LegendArena {
 
@@ -34,7 +34,7 @@ class LegendArena {
 
         setup.registerListener(ChatListener())
         setup.registerListener(ServerPingListener())
-        setup.registerListener(HubWarper.Listeners())
+        setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
 
         setup.announceStatus("Setting up timers...")

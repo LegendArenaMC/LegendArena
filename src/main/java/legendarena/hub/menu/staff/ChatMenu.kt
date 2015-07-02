@@ -31,7 +31,7 @@ class ChatMenu : Listener {
                 (ev.getWhoClicked() as Player).performCommand("chat staff")
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global")) {
                 ev.getWhoClicked().closeInventory()
-                StaffMenu.show(ev.getWhoClicked() as Player)
+                StaffMenu().show(ev.getWhoClicked() as Player)
             }
             ev.setCancelled(true)
         } catch(ignore: Exception) {

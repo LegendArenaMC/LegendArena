@@ -4,6 +4,7 @@ import legendapi.message.Message;
 import legendapi.utils.RegexUtils;
 import legendapi.utils.ChatUtils;
 import legendapi.utils.Rank;
+import legendapi.utils.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,7 +20,6 @@ import java.util.UUID;
 public class ChatSystem {
 
     private static HashMap<UUID, Channel> channels = new HashMap<>();
-    private static ArrayList<UUID> mutedPlayers = new ArrayList<>();
     private static boolean mute = false;
 
     /**
@@ -39,12 +39,25 @@ public class ChatSystem {
     }
 
     /**
+     * yip yip yip com-put-or yip yip yip<br><br>
+     *
+     * Little easter egg. Because why the fuck not.<br>
+     * ( this is a reference to: https://www.youtube.com/watch?v=-2ZkJd4u0Us )
+     */
+    private static boolean isYipYip(String m) {
+        return StringUtils.toLower(m).contains("yip") && StringUtils.toLower(m).contains("computer");
+    }
+
+    /**
      * Get a parsed chat message.
      * @param msg The message
      * @param p The player
      * @return The parsed message
      */
     private static String getParsedChatMessage(String msg, Player p) {
+        if(isYipYip(msg))
+            return (Rank.isRanked(p, Rank.YOUTUBE) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip com-put-or yip yip yip";
+
         if(Rank.isRanked(p, Rank.YOUTUBE))
             return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™").replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
         else

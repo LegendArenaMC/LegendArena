@@ -21,7 +21,7 @@ class Warp : CommandExecutor {
             sender.sendMessage(cooldown.get(sender.getUniqueId()).getTimeRemaining())
             return true
         }
-        MainMenu.show(sender)
+        MainMenu().show(sender)
         //2 second cooldown [mainly implemented to prevent people from spamming this - it shouldn't really have that much of an impact on people who aren't trying to spam it]
         cooldown.put(sender.getUniqueId(), Cooldown(2.0))
         return true

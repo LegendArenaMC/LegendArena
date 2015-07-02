@@ -24,7 +24,7 @@ class EmeraldMenu : Listener {
                 ev.getWhoClicked().sendMessage("...you really expected that would do something. wow. I'm amazed. no, really, I'm amazed.")
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
                 ev.getWhoClicked().closeInventory()
-                MainMenu.show(ev.getWhoClicked() as Player)
+                MainMenu().show(ev.getWhoClicked() as Player)
             }
             ev.setCancelled(true)
         } catch(ignore: Exception) {
@@ -33,29 +33,25 @@ class EmeraldMenu : Listener {
 
     }
 
-    companion object {
+    private var inv: Inventory? = null
+    private var init = false
 
-        private var inv: Inventory? = null
-        private var init = false
+    private fun init(p: Plugin) {
+        if (init) return  //if we've already initialized the emeralds menu, don't do anything
+        inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")
 
-        private fun init(p: Plugin) {
-            if (init) return  //if we've already initialized the emeralds menu, don't do anything
-            inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")
-
-            inv!!.setItem(13, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
-            inv!!.setItem(32, MenuUtils.createItem(Material.NETHER_BRICK_ITEM, "" + ChatColor.GREEN + "Booster", "" + ChatColor.RED + "Soon™"))
+        inv!!.setItem(13, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+        inv!!.setItem(32, MenuUtils.createItem(Material.NETHER_BRICK_ITEM, "" + ChatColor.GREEN + "Booster", "" + ChatColor.RED + "Soon™"))
 
 
-            Bukkit.getPluginManager().registerEvents(EmeraldMenu(), p)
-            init = true
-        }
+        Bukkit.getPluginManager().registerEvents(EmeraldMenu(), p)
+        init = true
+    }
 
-        public fun show(p: Player) {
-            init(Bukkit.getPluginManager().getPlugin("LegendArena"))
-            val pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")
-            pInv.setContents(inv!!.getContents())
-            pInv.setItem(30, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Emeralds", "" + ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"))
-            p.openInventory(pInv)
-        }
+    public fun show(p: Player) {
+        val pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")
+        pInv.setContents(inv!!.getContents())
+        pInv.setItem(30, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Emeralds", "" + ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"))
+        p.openInventory(pInv)
     }
 }

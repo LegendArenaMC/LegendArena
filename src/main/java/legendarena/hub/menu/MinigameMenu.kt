@@ -20,20 +20,20 @@ class MinigameMenu : Listener {
     public fun onInventoryClick(ev: InventoryClickEvent) {
         if (!ev.getInventory().getName().equals(inv!!.getName())) return
         try {
-            if (ev.getCurrentItem().getItemMeta() == null) return
-            if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("Hub")) {
+            if(ev.getCurrentItem().getItemMeta() == null) return
+            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Hub")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 val p = ev.getWhoClicked() as Player
                 p.teleport(Bukkit.getWorld("world").getSpawnLocation())
-            } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("Build My Thing")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Never Have I Ever")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("⇐ Back")) {
+            } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
-                MainMenu.show(ev.getWhoClicked() as Player)
+                MainMenu().show(ev.getWhoClicked() as Player)
             } else {
                 //failsafe
                 ev.setCancelled(true)
@@ -44,37 +44,38 @@ class MinigameMenu : Listener {
 
     }
 
-    companion object {
 
-        private var inv: Inventory? = null
-        private var init = false
+    private var inv: Inventory? = null
+    private var init = false
 
-        private fun init(p: Plugin) {
-            if(init) return
+    public constructor() {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+    }
 
-            val items = HashMap<Int, ItemStack>()
+    private fun init(p: Plugin) {
+        if(init) return
 
-            //TODO: Clean this damn thing up
+        val items = HashMap<Int, ItemStack>()
 
-            items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
-            items.put(21, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
-            items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Build My Thing"))
+        //TODO: Clean this damn thing up
 
-            inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper")
+        items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+        items.put(21, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
+        items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 
-            for(a in items.keySet())
-                inv!!.setItem(a, items.get(a))
+        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper")
 
-            Bukkit.getPluginManager().registerEvents(MinigameMenu(), p)
+        for(a in items.keySet())
+            inv!!.setItem(a, items.get(a))
 
-            init = true
-        }
+        Bukkit.getPluginManager().registerEvents(this, p)
 
-        public fun show(p: Player) {
-            init(Bukkit.getPluginManager().getPlugin("LegendArena"))
-            p.closeInventory()
-            p.openInventory(inv)
-        }
+        init = true
+    }
+
+    public fun show(p: Player) {
+        p.closeInventory()
+        p.openInventory(inv)
     }
 
 }

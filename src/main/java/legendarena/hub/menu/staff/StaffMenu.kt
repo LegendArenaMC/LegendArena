@@ -25,7 +25,7 @@ class StaffMenu : Listener {
                 (ev.getWhoClicked() as Player).performCommand("chat menu")
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
                 ev.getWhoClicked().closeInventory()
-                MainMenu.show(ev.getWhoClicked() as Player)
+                MainMenu().show(ev.getWhoClicked() as Player)
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global Mute")) {
                 (ev.getWhoClicked() as Player).performCommand("staff chat globalmute")
                 ev.getInventory().setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
@@ -36,28 +36,28 @@ class StaffMenu : Listener {
         }
     }
 
-    companion object {
+    public constructor() {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+    }
 
-        private var inv: Inventory? = null
-        private var init = false
+    private var inv: Inventory? = null
+    private var init = false
 
-        private fun init(p: Plugin) {
-            if(init) return  //if we've already initialized the staff menu, don't do anything
-            inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Staff Menu")
+    private fun init(p: Plugin) {
+        if(init) return  //if we've already initialized the staff menu, don't do anything
+        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Staff Menu")
 
-            inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+        inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
 
-            Bukkit.getPluginManager().registerEvents(StaffMenu(), p)
-            init = true
-        }
+        Bukkit.getPluginManager().registerEvents(StaffMenu(), p)
+        init = true
+    }
 
-        public fun show(p: Player) {
-            init(Bukkit.getPluginManager().getPlugin("LegendArena"))
-            val pInv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Staff Menu")
-            pInv.setContents(inv!!.getContents())
-            pInv.setItem(19, MenuUtils.createItem(Material.GLASS, "" + ChatColor.GREEN + "Chat Selector", "" + ChatColor.BLUE + "Current channel: " + ChatColor.RED + (if (ChatSystem.getChannel(p) == null) "PUBLIC" else ChatSystem.getChannel(p))))
-            pInv.setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
-            p.openInventory(pInv)
-        }
+    public fun show(p: Player) {
+        val pInv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Staff Menu")
+        pInv.setContents(inv!!.getContents())
+        pInv.setItem(19, MenuUtils.createItem(Material.GLASS, "" + ChatColor.GREEN + "Chat Selector", "" + ChatColor.BLUE + "Current channel: " + ChatColor.RED + (if (ChatSystem.getChannel(p) == null) "PUBLIC" else ChatSystem.getChannel(p))))
+        pInv.setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
+        p.openInventory(pInv)
     }
 }

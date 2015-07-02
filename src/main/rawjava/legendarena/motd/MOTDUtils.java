@@ -165,7 +165,7 @@ public class MOTDUtils {
         ChatColor randomC1 = ChatUtils.getRandomColour();
         ChatColor randomC2 = ChatUtils.getRandomColour();
 
-        if(!noDecor) return "" + randomC1 + "Legend Arena" + ChatColor.YELLOW + " {" + MOTDUtils.getNotice() + "}\n" + ChatColor.GRAY + "#" + randomC2 + random;
+        if(!noDecor) return "" + randomC1 + "Legend Arena" + ChatColor.YELLOW + " {" + MOTDUtils.getNotice() + "}\n" + ChatColor.DARK_GRAY + "//" + randomC2 + random;
         else return override;
     }
 
