@@ -54,6 +54,11 @@ public class HubWarper {
         return exempt.contains(p);
     }
 
+    /*
+    Ignore the name.
+    It's a leftover thing from a small idea I got once.
+    Just move along. Pretend this is getMainMenu().
+    */
     public static ItemStack getCustomization() {
         return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", "");
     }

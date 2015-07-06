@@ -1,10 +1,7 @@
 package legendarena.chat;
 
 import legendapi.message.Message;
-import legendapi.utils.RegexUtils;
-import legendapi.utils.ChatUtils;
-import legendapi.utils.Rank;
-import legendapi.utils.StringUtils;
+import legendapi.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -56,9 +53,9 @@ public class ChatSystem {
      */
     private static String getParsedChatMessage(String msg, Player p) {
         if(isYipYip(msg))
-            return (Rank.isRanked(p, Rank.YOUTUBE) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip com-put-or yip yip yip";
+            return (Rank.YOUTUBE.isRanked(p) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip com-put-or yip yip yip";
 
-        if(Rank.isRanked(p, Rank.YOUTUBE))
+        if(Rank.YOUTUBE.isRanked(p))
             return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™").replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
         else
             return ChatColor.GRAY + msg;
@@ -70,7 +67,7 @@ public class ChatSystem {
      * @return The formatted name
      */
     public static String getFormattedName(Player p) {
-        return Rank.getRankPrefix(Rank.getRank(p)) + ChatColor.RESET + (Rank.getRank(p) != Rank.MEMBER ? " " : "") + p.getName();
+        return RankUtils.getRankPrefix(RankUtils.getRank(p)) + ChatColor.RESET + (RankUtils.getRank(p) != Rank.MEMBER ? " " : "") + p.getName();
     }
 
     /**
@@ -81,36 +78,6 @@ public class ChatSystem {
      */
     public static String getChatMessage(String msg, Player p) {
         return getFormattedName(p) + " " + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p);
-    }
-
-    /**
-     * Channel list.
-     */
-    public enum Channel {
-        ADMIN(Rank.ADMIN, ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.RED + " {MESSAGE}"),
-        ALERT(Rank.HELPER, ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GOLD + "{MESSAGE}"),
-        STAFF(Rank.HELPER, ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.DARK_GREEN + " {MESSAGE}"),
-        GLOBAL;
-
-        private Rank rank;
-        private String format;
-
-        Channel(Rank rank, String format) {
-            this.rank = rank;
-            this.format = format;
-        }
-
-        Channel() {
-            rank = Rank.MEMBER;
-        }
-
-        public Rank getRank() {
-            return rank;
-        }
-
-        public String getFormat() {
-            return format;
-        }
     }
 
     /**
@@ -154,7 +121,7 @@ public class ChatSystem {
      */
     public static void notice(String msg) {
         for(Player p : Bukkit.getOnlinePlayers()) {
-            if(!Rank.isRanked(p, Rank.MOD))
+            if(!Rank.MOD.isRanked(p))
                 continue;
             p.sendMessage(ChatUtils.getCustomMsg("Notice") + ChatColor.RED + msg);
         }
@@ -171,7 +138,7 @@ public class ChatSystem {
         switch(getChannel(p)) {
             case ADMIN:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
-                    if(!Rank.isRanked(p1, Rank.ADMIN))
+                    if(!Rank.ADMIN.isRanked(p1))
                         continue;
                     p1.sendMessage(Channel.ADMIN.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
@@ -182,7 +149,7 @@ public class ChatSystem {
                 break;
             case STAFF:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
-                    if(!Rank.isRanked(p1, Rank.HELPER))
+                    if(!Rank.HELPER.isRanked(p1))
                         continue;
                     p1.sendMessage(Channel.STAFF.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg));
                 }
@@ -190,7 +157,7 @@ public class ChatSystem {
 
             case GLOBAL:
                 if(isChatMuted())
-                    if(!Rank.isRanked(p, Rank.YOUTUBE)) {
+                    if(!Rank.YOUTUBE.isRanked(p)) {
                         p.sendMessage(ChatUtils.Messages.errorMsg + "Chat is currently muted!");
                         return;
                     }

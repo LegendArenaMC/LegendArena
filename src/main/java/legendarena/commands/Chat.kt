@@ -4,6 +4,7 @@ import legendarena.chat.ChatSystem
 import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.ChatUtils
+import legendarena.chat.Channel
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -28,14 +29,14 @@ class Chat : CommandExecutor {
         } else if(args[0].equals("alert")) {
             if(args.size() == 1) {
                 Message(MessageType.ACTIONBAR).append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ALERT" + ChatColor.LIGHT_PURPLE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, ChatSystem.Channel.ALERT)
+                ChatSystem.add(sender as Player, Channel.ALERT)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
                 val p = sender as Player
                 val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, ChatSystem.Channel.ALERT)
+                ChatSystem.add(p, Channel.ALERT)
                 ChatSystem.msg(p, cast)
-                if(oldChannel === ChatSystem.Channel.GLOBAL)
+                if(oldChannel === Channel.GLOBAL)
                     ChatSystem.remove(p)
                 else
                     ChatSystem.add(p, oldChannel)
@@ -43,14 +44,14 @@ class Chat : CommandExecutor {
         } else if(args[0].equals("admin")) {
             if(args.size() == 1) {
                 Message(MessageType.ACTIONBAR).append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ADMIN" + ChatColor.LIGHT_PURPLE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, ChatSystem.Channel.ADMIN)
+                ChatSystem.add(sender as Player, Channel.ADMIN)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
                 val p = sender as Player
                 val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, ChatSystem.Channel.ADMIN)
+                ChatSystem.add(p, Channel.ADMIN)
                 ChatSystem.msg(p, cast)
-                if(oldChannel === ChatSystem.Channel.GLOBAL)
+                if(oldChannel === Channel.GLOBAL)
                     ChatSystem.remove(p)
                 else
                     ChatSystem.add(p, oldChannel)
@@ -58,14 +59,14 @@ class Chat : CommandExecutor {
         } else if(args[0].equals("staff")) {
             if(args.size() == 1) {
                 Message(MessageType.ACTIONBAR).append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "STAFF" + ChatColor.LIGHT_PURPLE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, ChatSystem.Channel.STAFF)
+                ChatSystem.add(sender as Player, Channel.STAFF)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
                 val p = sender as Player
                 val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, ChatSystem.Channel.STAFF)
+                ChatSystem.add(p, Channel.STAFF)
                 ChatSystem.msg(p, cast)
-                if(oldChannel === ChatSystem.Channel.GLOBAL)
+                if(oldChannel === Channel.GLOBAL)
                     ChatSystem.remove(p)
                 else
                     ChatSystem.add(p, oldChannel)

@@ -4,6 +4,7 @@ import legendapi.message.Message
 import legendapi.utils.CalendarUtils
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
+import legendapi.utils.VersionUtils
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -22,7 +23,9 @@ class Dev : CommandExecutor {
         sender.sendMessage(blue + "Max memory: " + Runtime.getRuntime().maxMemory() + " bits")
         sender.sendMessage(blue + "Day: " + CalendarUtils.getDate().getDay())
         sender.sendMessage(blue + "Month: " + CalendarUtils.getDate().getMonth() + " (" + CalendarUtils.parseMonth() + ")")
-        sender.sendMessage(ChatUtils.getFormattedHeader("Server Info"))
+        sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
+        sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("Kotlin"))
+        sender.sendMessage(blue + "API version: " + VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"")
         //sender.sendMessage(" ");
         //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
         //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));

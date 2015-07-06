@@ -1,6 +1,7 @@
 package legendarena
 
 import legendapi.utils.SetupUtils
+import legendapi.utils.VersionUtils
 import legendarena.commands.*
 import legendarena.hub.HubWarper
 import legendarena.listeners.ChatListener
@@ -48,6 +49,12 @@ class LegendArena {
         setup.setAliases("particles", "ps", "particle")
         setup.setAliases("firework", "fw")
         setup.setAliases("gadgets", "gs")
+
+        setup.announceStatus("Running extra setup stuff...")
+
+        VersionUtils.setVersion("LegendArena", "1.0-SNAPSHOT")
+        VersionUtils.setVersion("Kotlin", "0.12.613")
+        VersionUtils.setVersion("KotlinLoader", VersionUtils.getVersion("Kotlin")) //compatibility stuff if other plugins want to use KotlinLoader instead of Kotlin
     }
 
     protected fun onDisable() {

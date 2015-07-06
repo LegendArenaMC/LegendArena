@@ -2,6 +2,7 @@ package legendarena.motd;
 
 import legendapi.utils.CalendarUtils;
 import legendapi.utils.ChatUtils;
+import legendapi.utils.Months;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -118,9 +119,9 @@ public class MOTDUtils {
         if(!override.equals(""))
             return override;
 
-        if(CalendarUtils.getDate().getDay() == 3 && CalendarUtils.getDate().getMonth() == CalendarUtils.MAY)
+        if(new CalendarUtils().getDay() == 3 && new CalendarUtils().getMonth() == Months.MAY)
             return "Happy birthday, Pixel! <3";
-        else if(CalendarUtils.getDate().getDay() == 16 && CalendarUtils.getDate().getMonth() == CalendarUtils.NOVEMBER)
+        else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().getMonth() == Months.NOVEMBER)
             return "Happy birthday, Jaden! <3";
         Random r = new Random();
         int rL = r.nextInt(3);
