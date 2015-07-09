@@ -2,6 +2,7 @@ package legendarena.commands
 
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
+import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
 import legendarena.motd.ListType
 import legendarena.motd.MOTDUtils
@@ -18,14 +19,13 @@ class MOTDTools : CommandExecutor {
     }
 
     fun run(sender: CommandSender, args: Array<String>) {
-        if (!Rank.isRanked(sender, Rank.MOD)) {
-            sender.sendMessage(Rank.noPermissions(Rank.MOD))
+        if (!Rank.MOD.isRanked(sender)) {
+            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
             return
         }
-        val length = MOTDUtils.getList().get(ListType.RANDOM).size() + MOTDUtils.getList().get(ListType.SONG).size() + MOTDUtils.getList().get(ListType.REFERENCE).size()
         if(args.size() == 0) {
             sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", java.lang.String.valueOf(length)))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", java.lang.String.valueOf(MOTDUtils.getAmountOfMOTDs())))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff motd notice [notice]", "Sets the MOTD notice"))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
@@ -44,17 +44,21 @@ class MOTDTools : CommandExecutor {
                 finishedList += (if (finishedList == ChatUtils.getCustomMsg("MOTD")) "\"" + add + "\"" else ", \"" + add + "\"")
             sender.sendMessage(finishedList)
         } else if(args[0].equals("notice")) {
+            if(!Rank.ADMIN.isRanked(sender)) {
+                sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                return
+            }
             if(args.size() == 1) {
                 sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDUtils.getNotice())
             } else {
-                if(!Rank.isRanked(sender, Rank.ADMIN)) {
-                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN))
-                    return
-                }
                 ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"")
                 MOTDUtils.setNotice(ChatUtils.formatCast(args, 0))
             }
         } else if(args[0].equals("setmotd")) {
+            if(!Rank.ADMIN.isRanked(sender)) {
+                sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                return
+            }
             if(args.size() == 1) {
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
                 return

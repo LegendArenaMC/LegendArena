@@ -1,10 +1,7 @@
 package legendarena.commands
 
 import legendapi.emeralds.EmeraldsCore
-import legendapi.utils.ChatUtils
-import legendapi.utils.Cooldown
-import legendapi.utils.PluginUtils
-import legendapi.utils.Rank
+import legendapi.utils.*
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -20,12 +17,9 @@ class Firework : CommandExecutor {
             sender.sendMessage("Sorry - you can only do this as a player :(")
             return true
         }
-        if(!Rank.isRanked(sender, Rank.MEMBERPLUS)) {
-            if(EmeraldsCore.getEmeralds(sender) < 15) {
-                sender.sendMessage(ChatUtils.Messages.errorMsg + "You don't have enough emeralds to use this! (you require 15 emeralds to use this as a member)")
-                return true
-            }
-            EmeraldsCore.removeEmeralds(sender, 15, false)
+        if(!Rank.MEMBERPLUS.isRanked(sender)) {
+            sender.sendMessage(RankUtils.noPermissions(Rank.MEMBERPLUS))
+            return true
         }
         if(cooldown.containsKey(sender.getUniqueId()) && !cooldown.get(sender.getUniqueId()).done()) {
             sender.sendMessage(cooldown.get(sender.getUniqueId()).getTimeRemaining())

@@ -13,23 +13,38 @@ import org.bukkit.command.CommandSender
 class Dev : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        if(!Rank.isRanked(sender, Rank.FOUNDER))
+        if(!Rank.FOUNDER.isRanked(sender))
             return false
-        //thanks kotlin for not liking function([color] + [string])
-        val blue = "" + ChatColor.BLUE
-        sender.sendMessage(ChatUtils.getFormattedHeader("Server Info"))
-        sender.sendMessage(blue + "Free memory: " + Runtime.getRuntime().freeMemory() + " bits")
-        sender.sendMessage(blue + "Used memory: " + Runtime.getRuntime().totalMemory() + " bits")
-        sender.sendMessage(blue + "Max memory: " + Runtime.getRuntime().maxMemory() + " bits")
-        sender.sendMessage(blue + "Day: " + CalendarUtils.getDate().getDay())
-        sender.sendMessage(blue + "Month: " + CalendarUtils.getDate().getMonth() + " (" + CalendarUtils.parseMonth() + ")")
-        sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
-        sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("Kotlin"))
-        sender.sendMessage(blue + "API version: " + VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"")
-        //sender.sendMessage(" ");
-        //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
-        //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
-        //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+        if(args.size() == 0) {
+            //thanks kotlin for not liking sender.sendMessage([color] + [string])
+            val blue = "" + ChatColor.BLUE
+            sender.sendMessage(ChatUtils.getFormattedHeader("Server Info"))
+            sender.sendMessage(blue + "Free memory: " + humanReadableByteCount((Runtime.getRuntime().freeMemory() / 8), true))
+            sender.sendMessage(blue + "Used memory: " + humanReadableByteCount((Runtime.getRuntime().totalMemory() / 8), true))
+            sender.sendMessage(blue + "Max memory: " + humanReadableByteCount((Runtime.getRuntime().maxMemory() / 8), true))
+            sender.sendMessage(blue + "Date: " + CalendarUtils().getDateString())
+            sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
+            sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("Kotlin"))
+            sender.sendMessage(blue + "API version: " + VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"")
+            //sender.sendMessage(" ");
+            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+            //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
+            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+        } else if(args[0].equals("gc")) {
+            sender.sendMessage("Running garbage collector....")
+            System.gc()
+            sender.sendMessage("Successfully ran garbage collector.")
+        }
         return true
     }
+
+    public fun humanReadableByteCount(bytes: Long, si: Boolean): String {
+        val unit = if (si) 1000 else 1024
+        if (bytes < unit) return "" + bytes + " B"
+        val exp = (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
+        //if IntelliJ complains on the + symbol, it's fine - ignore it
+        val pre = (if(si) "kMGTPE" else "KMGTPE").charAt(exp - 1) + (if(si) "" else "i")
+        return java.lang.String.format("%.1f %sB", bytes / Math.pow(unit.toDouble(), exp.toDouble()), pre)
+    }
+
 }

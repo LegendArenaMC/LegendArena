@@ -3,6 +3,7 @@ package legendarena.commands
 import legendapi.emeralds.EmeraldsCore
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
+import legendapi.utils.RankUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -35,8 +36,8 @@ class EmeraldCmd : CommandExecutor {
                 sender.sendMessage(ChatUtils.getFormattedHeader("Your Emerald Info"))
                 sender.sendMessage("" + ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + ChatUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds(sender as Player))
             } else if(args[0].equals("add")) {
-                if(!Rank.isRanked(sender, Rank.ADMIN)) {
-                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN))
+                if(!Rank.ADMIN.isRanked(sender)) {
+                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                     return true
                 }
                 if(args.size() <= 2)
@@ -58,8 +59,8 @@ class EmeraldCmd : CommandExecutor {
                     EmeraldsCore.addEmeralds(p, add, true)
                 }
             } else if(args[0].equals("remove") || args[0].equals("take")) {
-                if(!Rank.isRanked(sender, Rank.ADMIN)) {
-                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN))
+                if(!Rank.ADMIN.isRanked(sender)) {
+                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                     return true
                 }
                 if(args.size() <= 2) {
@@ -86,15 +87,15 @@ class EmeraldCmd : CommandExecutor {
                     EmeraldsCore.removeEmeralds(p, remove, true)
                 }
             } else if(args[0].equals("reset")) {
-                if(!Rank.isRanked(sender, Rank.ADMIN)) {
-                    sender.sendMessage(Rank.noPermissions(Rank.ADMIN))
+                if(!Rank.ADMIN.isRanked(sender)) {
+                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                     return true
                 }
                 if(args.size() < 2) {
                     sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
                 } else {
                     val p = Bukkit.getPlayer(args[1])
-                    if(Rank.isRanked(p, Rank.MOD)) {
+                    if(Rank.MOD.isRanked(p)) {
                         sender.sendMessage(ChatUtils.getCustomMsg("Staff") + "You must be really fun at parties.")
                         return true
                     }

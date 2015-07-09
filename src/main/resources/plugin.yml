@@ -1,45 +1,45 @@
 main: legendarena.LegendArenaLoader
 name: LegendArena
-depend: [KotlinLoader, LegendAPI]
+depend: ["KotlinLoader", "LegendAPI"]
 version: 1.0-SNAPSHOT
-website: http://thenamedev.net/legendarena/
+website: "http://thenamedev.net/legendarena/"
 author: ThePixelDev
-authors: [FOSS Contributors]
+authors: ["FOSS Contributors"]
 description: "§cLegend Arena custom plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"
 commands:
   firework:
     description: Fireworks! Yaaay!
-    usage: /firework
-    aliases: [fw]
+    usage: "/firework"
+    aliases: ["fw"]
   warp:
     description: Warps you to different areas. Whee!
-    usage: /warp
+    usage: "/warp"
   particles:
     description: Particles. Yay!
-    usage: /particles
-    aliases: [particle, ps]
+    usage: "/particles"
+    aliases: ["particle", "ps"]
   gadgets:
     description: Gadgets control command.
-    usage: /gadgets [player]
+    usage: "/gadgets [player]"
     aliases: [gs]
   emeralds:
     description: Front-end command for the Emeralds system.
-    usage: /emeralds <suboption> [args]
+    usage: "/emeralds <suboption> [args]"
   staff:
     description: Various staff commands.
-    usage: /staff <suboption> [args]
+    usage: "/staff <suboption> [args]"
   help:
     description: It looks like you want help. Do you want help with that? #yeah that was bad I'll show myself out
-    usage: /help
+    usage: "/help"
   dev:
     description: Developer utility command.
-    usage: /dev [suboption] [args]
+    usage: "/dev [suboption] [args]"
   chat:
     description: Change your chat channel.
-    usage: /chat <channel> [msg]
-    aliases: [c, sc, say]
+    usage: "/chat <channel> [msg]"
+    aliases: ["c", "sc", "say"]
   stafflist:
     description: Shows currently online staff, and their ranks.
-    aliases: [sl, liststaff]
+    aliases: ["sl", "liststaff"]
   motd:
     description: MOTD utilities.

@@ -1,6 +1,6 @@
 package legendarena;
 
-import legendapi.KotlinTest;
+import legendapi.utils.KotlinLoaderTools;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -11,35 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class LegendArenaLoader extends JavaPlugin {
 
     public void onEnable() {
-        //fucking bukkit dependencies
-        getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-            @Override
-            public void run() {
-                boolean failed = false;
-                try {
-                    new KotlinTest().test();
-                } catch(Exception ex) {
-                    failed = true;
-                }
-
-                if(failed) {
-                    while(failed) {
-                        try {
-                            Thread.sleep(2000);
-                        } catch(InterruptedException ex) {
-                            //
-                        }
-                        failed = false;
-                        try {
-                            new KotlinTest().test();
-                        } catch(Exception ex) {
-                            failed = true;
-                        }
-                    }
-                }
-                new LegendArena().onEnable();
-            }
-        }, 40l);
+        //fucking bukkit dependencies not working how they should
+        new KotlinLoaderTools(new LegendArena(), this).run();
     }
 
     public void onDisable() {

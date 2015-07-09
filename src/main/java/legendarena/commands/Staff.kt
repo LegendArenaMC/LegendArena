@@ -4,6 +4,7 @@ import legendapi.message.Message
 import legendapi.utils.ChatUtils
 import legendapi.utils.Cooldown
 import legendapi.utils.Rank
+import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -23,8 +24,8 @@ class Staff: CommandExecutor {
             sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "WELCOME, TO THE MONSTERCAT PODCAST")
             return true
         }
-        if(!Rank.isRanked(sender, Rank.HELPER)) {
-            sender.sendMessage(Rank.noPermissions(Rank.HELPER))
+        if(!Rank.HELPER.isRanked(sender)) {
+            sender.sendMessage(RankUtils.noPermissions(Rank.HELPER))
             return true
         }
         if(args.size() == 0) {
@@ -42,7 +43,7 @@ class Staff: CommandExecutor {
                     if (Bukkit.getPlayer(args[1]) != null) {
                         @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
-                        sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + Rank.getRank(p))
+                        sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
                         sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
                         sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getGameMode())
                         sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getUniqueId())
@@ -62,8 +63,8 @@ class Staff: CommandExecutor {
                     sender.sendMessage("" + ChatColor.YELLOW + "- GLOBALMUTE")
                 } else {
                     if (args[1].equals("globalmute")) {
-                        if(!Rank.isRanked(sender, Rank.MOD)) {
-                            sender.sendMessage(Rank.noPermissions(Rank.MOD))
+                        if(!Rank.MOD.isRanked(sender)) {
+                            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
                             return true
                         }
                         if(ChatSystem.isChatMuted()) {
@@ -78,8 +79,8 @@ class Staff: CommandExecutor {
                             ChatSystem.setChatMuted(true)
                         }
                     } else if(args[1].equals("clearchat")) {
-                        if(!Rank.isRanked(sender, Rank.ADMIN)) {
-                            sender.sendMessage(Rank.noPermissions(Rank.ADMIN))
+                        if(!Rank.ADMIN.isRanked(sender)) {
+                            sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                             return true
                         }
                         if(c != null && !c!!.done()) {

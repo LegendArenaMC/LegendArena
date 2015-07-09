@@ -2,6 +2,7 @@ package legendarena.commands
 
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
+import legendapi.utils.RankUtils
 import legendarena.hub.HubWarper
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -16,8 +17,8 @@ class Gadgets : CommandExecutor {
             sender.sendMessage("Sorry - you can only do this as a player :(")
             return true //Do nothing if it's not a player
         }
-        if(!Rank.isRanked(sender, Rank.MOD)) {
-            sender.sendMessage(Rank.noPermissions(Rank.MOD))
+        if(!Rank.MOD.isRanked(sender)) {
+            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
             return true
         }
         if(args.size() == 0) {

@@ -80,7 +80,7 @@ class MainMenu : Listener {
         val pInv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu")
         pInv.setContents(inv!!.getContents())
         pInv.setItem(19, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Emeralds", "" + ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore.getEmeralds(p) + ChatColor.YELLOW + " emeralds!"))
-        if(Rank.isRanked(p, Rank.HELPER))
+        if(Rank.HELPER.isRanked(p))
             pInv.setItem(22, MenuUtils.createItem(Material.PAPER, "" + ChatColor.GREEN + "Staff Tools", ""))
         p.openInventory(pInv)
     }

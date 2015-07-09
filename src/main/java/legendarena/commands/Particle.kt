@@ -2,6 +2,7 @@ package legendarena.commands
 
 import legendapi.utils.Cooldown
 import legendapi.utils.Rank
+import legendapi.utils.RankUtils
 import legendarena.hub.menu.ParticleMenu
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -14,8 +15,8 @@ class Particle : CommandExecutor {
     private val cooldown = HashMap<UUID, Cooldown>()
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        if(!Rank.isRanked(sender, Rank.MEMBERPLUS)) {
-            sender.sendMessage(Rank.noPermissions(Rank.MEMBERPLUS))
+        if(!Rank.MEMBERPLUS.isRanked(sender)) {
+            sender.sendMessage(RankUtils.noPermissions(Rank.MEMBERPLUS))
             return true
         }
         if(cooldown.containsKey((sender as Player).getUniqueId()) && !cooldown.get(sender.getUniqueId()).done()) {

@@ -1,5 +1,6 @@
 package legendarena.chat;
 
+import legendapi.log.BukLog;
 import legendapi.message.Message;
 import legendapi.utils.*;
 import org.bukkit.Bukkit;
@@ -36,13 +37,20 @@ public class ChatSystem {
     }
 
     /**
-     * yip yip yip com-put-or yip yip yip<br><br>
+     * yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip<br><br>
      *
-     * Little easter egg. Because why the fuck not.<br>
+     * Little easter egg. Because why the fuck not. <em>it's not like I have anything better to do with my life anyways...</em><br>
      * ( this is a reference to: https://www.youtube.com/watch?v=-2ZkJd4u0Us )
      */
     private static boolean isYipYip(String m) {
         return StringUtils.toLower(m).contains("yip") && StringUtils.toLower(m).contains("computer");
+    }
+
+    /**
+     * We get it Sky fans. You like budder. You don't have to bug us about it.
+     */
+    private static boolean isBudder(String m) {
+        return StringUtils.toLower(m).contains("budder");
     }
 
     /**
@@ -53,7 +61,9 @@ public class ChatSystem {
      */
     private static String getParsedChatMessage(String msg, Player p) {
         if(isYipYip(msg))
-            return (Rank.YOUTUBE.isRanked(p) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip com-put-or yip yip yip";
+            return (Rank.YOUTUBE.isRanked(p) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip";
+        if(isBudder(msg))
+            p.sendMessage("We get it. You like budder. You don't have to bug us about it.");
 
         if(Rank.YOUTUBE.isRanked(p))
             return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™").replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
@@ -135,6 +145,7 @@ public class ChatSystem {
      * @param msg The message to send
      */
     public static void msg(Player p, String msg) {
+        new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).info("Channel: " + getChannel(p) + " / Player: " + p.getName() + " / Message: " + msg);
         switch(getChannel(p)) {
             case ADMIN:
                 for(Player p1 : Bukkit.getOnlinePlayers()) {
@@ -163,6 +174,10 @@ public class ChatSystem {
                     }
                 new Message().append(getChatMessage(msg, p)).broadcast();
                 break;
+            default:
+                //bitch like hell, because this really should NOT be triggered in any case, no matter how logical it is
+                notice("Error: Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " is trying to use an invalid channel (" + ChatColor.YELLOW + getChannel(p) + ChatColor.RED + ") - THIS SHOULD NOT HAPPEN!");
+                break;
         }
     }
 
@@ -185,11 +200,6 @@ public class ChatSystem {
 
         @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
         public void onChat(AsyncPlayerChatEvent ev) {
-            if(RegexUtils.contains(ev.getMessage(), "[Tt]hank [Mm]r [Ss]ketal")) {
-                ev.getPlayer().sendMessage(ChatColor.BLUE + "You're actually going to thank an internet meme here? You must need some friends.");
-                ev.setCancelled(true);
-                return;
-            }
             msg(ev.getPlayer(), ev.getMessage());
             ev.setCancelled(true); //fuck it, what's the worst that could happen[tm]
         }

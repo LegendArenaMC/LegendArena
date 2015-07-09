@@ -1,5 +1,6 @@
 package legendarena
 
+import legendapi.utils.KotlinUtils
 import legendapi.utils.SetupUtils
 import legendapi.utils.VersionUtils
 import legendarena.commands.*
@@ -10,9 +11,9 @@ import legendarena.listeners.PlayerJoinListener
 import legendarena.listeners.ServerPingListener
 import org.bukkit.Bukkit
 
-class LegendArena {
+class LegendArena : KotlinUtils() {
 
-    protected fun onEnable() {
+    override fun onEnable() {
         var setup = SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
 
         // ACTUAL SETUP STUFF
@@ -57,7 +58,7 @@ class LegendArena {
         VersionUtils.setVersion("KotlinLoader", VersionUtils.getVersion("Kotlin")) //compatibility stuff if other plugins want to use KotlinLoader instead of Kotlin
     }
 
-    protected fun onDisable() {
+    override fun onDisable() {
         Bukkit.getScheduler().cancelTasks(Bukkit.getPluginManager().getPlugin("LegendArena"))
     }
 

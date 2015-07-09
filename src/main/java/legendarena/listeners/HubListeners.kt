@@ -3,6 +3,8 @@ package legendarena.listeners
 import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.Cooldown
+import legendapi.utils.LegendAPIUtils
+import legendapi.utils.VersionUtils
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu
 import org.bukkit.ChatColor
@@ -19,7 +21,7 @@ class HubListeners : Listener {
 
     /**
      * WUBBBBBB
-
+     *
      * ...sorry, I couldn't resist.
      */
     EventHandler(ignoreCancelled = true)
@@ -31,11 +33,19 @@ class HubListeners : Listener {
     EventHandler
     public fun listenForInteract(ev: PlayerInteractEvent) {
         try {
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()))
+            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId())) {
+                //if(LegendAPIUtils.debug)
+                //    ev.getPlayer().sendMessage("player is not exempted, cancelling event...")
                 ev.setCancelled(true)
-            if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK)
+            }
+            if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK) {
+                //if(LegendAPIUtils.debug)
+                //    ev.getPlayer().sendMessage("is not a right click, skipping...")
                 return
-            if(ev.getItem() === HubWarper.getCustomization()) {
+            }
+            if(ev.getItem() == HubWarper.getMainMenu()) {
+                //if(LegendAPIUtils.debug)
+                //    ev.getPlayer().sendMessage("item is a hub menu item - all checks passed, showing menu...")
                 if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
                     val c = cooldown.get(ev.getPlayer().getUniqueId())
                     if(!c.done()) {
@@ -46,8 +56,11 @@ class HubListeners : Listener {
                 MainMenu().show(ev.getPlayer())
                 if(!ev.isCancelled())
                     ev.setCancelled(true)
-                cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(2.0))
-            }
+                cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))
+            }// else {
+            //    if(LegendAPIUtils.debug)
+            //        ev.getPlayer().sendMessage("not a main menu item, skipping...")
+            //}
         } catch(ex: Exception) {
             //ignore
         }

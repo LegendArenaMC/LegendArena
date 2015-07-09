@@ -40,31 +40,33 @@ class ChatMenu : Listener {
 
     }
 
-    companion object {
 
-        private var inv: Inventory? = null
-        private var init = false
+    private var inv: Inventory? = null
+    private var init = false
 
-        private fun init(p: Plugin) {
-            if(init) return  //if we've already initialized the chat menu, don't do anything
-            inv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
+    public constructor() {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+    }
 
-            inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+    private fun init(p: Plugin) {
+        if(init) return  //if we've already initialized the chat menu, don't do anything
+        inv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
 
-            inv!!.setItem(19, MenuUtils.createItem(Material.BEDROCK, "" + ChatColor.GREEN + "Global", ""))
-            inv!!.setItem(23, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Alert", ""))
-            inv!!.setItem(24, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Admin", ""))
-            inv!!.setItem(25, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Staff", ""))
+        inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
 
-            Bukkit.getPluginManager().registerEvents(ChatMenu(), p)
-            init = true
-        }
+        inv!!.setItem(19, MenuUtils.createItem(Material.BEDROCK, "" + ChatColor.GREEN + "Global", ""))
+        inv!!.setItem(23, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Alert", ""))
+        inv!!.setItem(24, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Admin", ""))
+        inv!!.setItem(25, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Staff", ""))
 
-        public fun show(p: Player) {
-            init(Bukkit.getPluginManager().getPlugin("LegendArena"))
-            val pInv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
-            pInv.setContents(inv!!.getContents())
-            p.openInventory(pInv)
-        }
+        Bukkit.getPluginManager().registerEvents(ChatMenu(), p)
+        init = true
+    }
+
+    public fun show(p: Player) {
+        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        val pInv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
+        pInv.setContents(inv!!.getContents())
+        p.openInventory(pInv)
     }
 }
