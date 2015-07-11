@@ -43,3 +43,5 @@ commands:
     aliases: ["sl", "liststaff"]
   motd:
     description: MOTD utilities.
+  shadow:
+    description: Shadow utils.

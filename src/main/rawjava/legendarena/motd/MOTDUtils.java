@@ -47,10 +47,13 @@ public class MOTDUtils {
             "Arch Linux!", //reference to Arch Linux, a... well.. Linux distro.. the name kind of gave that away.
             "\"Who the hell are you?\" Nyah!", //Reference to Eggs Guide to Minecraft ep. 15
             "Kurz Gesagt!", //reference to the YouTube channel with that name (which frankly is amazing)
-            "Reddit v4: Now with more Pao!" //reference to the recent #RedditRevolt and Digg v4 (also let's be honest who actually remembers Digg)
+            "Reddit v4: Now with more Pao!", //reference to the recent #RedditRevolt and Digg v4 (also let's be honest who actually remembers Digg)
+            "NEWS FLASH! Pao has resigned!" //HOLY SHIT WHAT IS GOING ON AT REDDIT'S OFFICES
     };
 
     private static final String[] songList = {
+            "I'll beee goneee, in a daaayyyy...", //reference to "a-ha - Take On Me" (also, I'm unsure if it actually is "in a day" or not)
+            "Everybody wants to rule the world...", //reference to "Lorde - Everybody Wants To Rule The World"
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "When all of your wind, is gone...", //again, reference to the above song
             "The girl that time forgot...", //reference to "Hellberg - The Girl"
@@ -72,16 +75,14 @@ public class MOTDUtils {
     };
 
     private static final String[] randomList = {
-            "Is not a Zone UHC server.", //pardon me, just poking fun at the Zone UHC server
             "Why circle pizzas? Why not square pizzas?", //#BlameJaden
-            "こんにちは日本！", //translated is "Hello Japan!" (yes, I used google translate, too lazy to bother actually trying to translate it (plus because japaneese, pls))
-            "Pika-pi!",
+            "Pika pi!",
             "MadeIn(Kotlin)",
             "Uses.some(new Java());",
             "Achievement get!",
             "Pay the court a fine or serve your sentence.", //blame Oblivion
             "Your stolen goods are now forfeit.", //again, blame Oblivion
-            "\"When is HL3 released?\" In 2198-- no, 2431.",
+            "\"When is HL3 released?\" In 2198-- no, 2604.",
             "WELCOME, TO THE MONSTERCAT PODCAST.",
             "15 Reddit clones on the wall, 15 Reddit clones...",
             "Half Life 3 confirmed", //inb4 /u/WhenIsHL3 bot
@@ -97,13 +98,18 @@ public class MOTDUtils {
             "Water cooled!", //reference to water cooling, a thing you can do with a computer in place of (most?) fans
             "Woo, Voat!", //pst: voat.co/v/legendarena
             "#RedditRevolt", //reference to revolts against very shitty actions that the reddit admins made
-            "It's the Paolice, open the door!", //blame reddit 2k15
-            "62.4k coins!", //reference to around pixel's current Arcade coins amount on hypixel (..I'll admit it, I'm addicted to Build Battle)
+            "67.1k coins!", //reference to around pixel's insane amount of Arcade coins on Hypxel (..I'll admit it, I'm addicted to Build Battle (that and I'm a coin hoarder))
             "The Minecraft movie is a block buster!", //blame jaden
             "News flash! Creepers on the loose!",
-            "News flash! A hacker has DOWNLOADED YOUR FREEDOM!",
+            "A hacker has DOWNLOADED YOUR FREEDOM!",
             "Free wiffy?", //reference to the villager saying "free wifi" as "free wiffy" in the Minecon 2015 opening ceremony animation
             "Mmm, wiffy...",
+            "git rekt", //I regret all of this. all of it.
+            "Who you gonna call? [Ghostbusters!]",
+            "I ain't afraid of no ghosts.",
+            "But this is too much paperwork to do!",
+            "Obsessive Blocky Race Cars!", //reference to Turbo Kart Racers on Hypixel
+            "An update to XRay is available.", //obligatory disclaimer - we do not support xray cheaters, nor do we allow it
             "But this is Ireland!",
             "London! London! London! London! Hurry!",
             "Skittles have taken the internet!",
@@ -159,6 +165,7 @@ public class MOTDUtils {
             return "Happy birthday, Pixel! <3";
         else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().getMonth() == Months.NOVEMBER)
             return "Happy birthday, Jaden! <3";
+
         Random r = new Random();
         int rL = r.nextInt(3);
         String return1;
@@ -176,6 +183,7 @@ public class MOTDUtils {
                 return1 = randomList[r.nextInt(randomList.length)];
                 break;
         }
+
         while(return1.equals(lastMOTDGiven)) {
             rL = r.nextInt(3);
             switch(rL) {
@@ -193,6 +201,7 @@ public class MOTDUtils {
                     break;
             }
         }
+
         lastMOTDGiven = return1;
         return return1;
     }

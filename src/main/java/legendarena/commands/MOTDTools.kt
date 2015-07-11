@@ -51,7 +51,7 @@ class MOTDTools : CommandExecutor {
             if(args.size() == 1) {
                 sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDUtils.getNotice())
             } else {
-                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0, 1) + "\"")
+                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
                 MOTDUtils.setNotice(ChatUtils.formatCast(args, 0))
             }
         } else if(args[0].equals("setmotd")) {

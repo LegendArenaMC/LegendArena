@@ -43,7 +43,6 @@ class EmeraldMenu : Listener {
         inv!!.setItem(13, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
         inv!!.setItem(32, MenuUtils.createItem(Material.NETHER_BRICK_ITEM, "" + ChatColor.GREEN + "Booster", "" + ChatColor.RED + "Soon™"))
 
-
         Bukkit.getPluginManager().registerEvents(EmeraldMenu(), p)
         init = true
     }

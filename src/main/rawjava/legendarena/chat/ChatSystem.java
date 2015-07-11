@@ -19,6 +19,7 @@ public class ChatSystem {
 
     private static HashMap<UUID, Channel> channels = new HashMap<>();
     private static boolean mute = false;
+    private static HashMap<UUID, Boolean> muteStatus = new HashMap<>();
 
     /**
      * Is the chat currently globally muted?
@@ -37,10 +38,40 @@ public class ChatSystem {
     }
 
     /**
+     * Shadow-mute a player. Still accepts messages but only shows it to staff and the player in question.
+     * @param p The player to shadow-mute
+     */
+    public static void toggleShadowMute(Player p, String muter) {
+        if(isShadowMuted(p)) {
+            muteStatus.remove(p.getUniqueId());
+            notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+            return;
+        }
+        muteStatus.put(p.getUniqueId(), true);
+        notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+    }
+
+    /**
+     * Is the player shadow muted?
+     * @return If shadow muted, returns true - elsewise false
+     */
+    public static boolean isShadowMuted(Player p) {
+        return muteStatus.containsKey(p.getUniqueId()) && muteStatus.get(p.getUniqueId());
+    }
+
+    /**
+     * Is a player muted?
+     * @return If muted, returns true - elsewise false
+     */
+    public static boolean isMuted(Player p) {
+        return muteStatus.containsKey(p.getUniqueId()) && !muteStatus.get(p.getUniqueId());
+    }
+
+    /**
      * yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip<br><br>
      *
      * Little easter egg. Because why the fuck not. <em>it's not like I have anything better to do with my life anyways...</em><br>
-     * ( this is a reference to: https://www.youtube.com/watch?v=-2ZkJd4u0Us )
+     * ( ps: this is a reference to https://www.youtube.com/watch?v=-2ZkJd4u0Us )
      */
     private static boolean isYipYip(String m) {
         return StringUtils.toLower(m).contains("yip") && StringUtils.toLower(m).contains("computer");
@@ -63,10 +94,11 @@ public class ChatSystem {
         if(isYipYip(msg))
             return (Rank.YOUTUBE.isRanked(p) ? ChatColor.WHITE : ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip";
         if(isBudder(msg))
-            p.sendMessage("We get it. You like budder. You don't have to bug us about it.");
+            p.sendMessage("We get it. You like budder. You don't have to bug us about it. (seriously, please stop bugging us about it, we beg of you...)");
 
         if(Rank.YOUTUBE.isRanked(p))
-            return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™").replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
+            return ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', msg.replace("[tm]", "™")
+                    .replace("#LoveWins", "#LoveWins " + ChatUtils.chars[9]));
         else
             return ChatColor.GRAY + msg;
     }
@@ -133,7 +165,7 @@ public class ChatSystem {
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(!Rank.MOD.isRanked(p))
                 continue;
-            p.sendMessage(ChatUtils.getCustomMsg("Notice") + ChatColor.RED + msg);
+            p.sendMessage(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg);
         }
     }
 
@@ -145,6 +177,35 @@ public class ChatSystem {
      * @param msg The message to send
      */
     public static void msg(Player p, String msg) {
+        if(isShadowMuted(p)) {
+            //player is shadow muted, don't give a shit about broadcasting it to anyone but the player and staff (with a shadowmuted tag)
+            String builtMsg;
+            switch(getChannel(p)) {
+                case ADMIN:
+                    builtMsg = Channel.ADMIN.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg);
+                    break;
+                case ALERT:
+                    builtMsg = Channel.ALERT.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg);
+                    break;
+                case STAFF:
+                    builtMsg = Channel.STAFF.getFormat().replace("{USERDISPLAY}", getFormattedName(p)).replace("{MESSAGE}", msg);
+                    break;
+
+                case GLOBAL:
+                    builtMsg = getChatMessage(msg, p);
+                    break;
+
+                default:
+                    //bitch like hell, because this really should NOT be triggered in any case, no matter how logical it is
+                    notice("Error: Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " is trying to use an invalid channel (" + ChatColor.YELLOW + getChannel(p) + ChatColor.RED + ") - THIS SHOULD NOT HAPPEN!");
+                    return;
+            }
+            p.sendMessage(builtMsg);
+            new Message().append(ChatColor.RED + "SHADOWMUTED " + ChatColor.DARK_GRAY + "| " + getFormattedName(p) + ": " + ChatColor.GRAY + msg).broadcast(Rank.MOD);
+            new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).info("[SHADOWMUTED] Channel: " + getChannel(p) + " / Player: " + p.getName() + " / Message: " + msg);
+            return;
+        }
+
         new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).info("Channel: " + getChannel(p) + " / Player: " + p.getName() + " / Message: " + msg);
         switch(getChannel(p)) {
             case ADMIN:
@@ -177,7 +238,7 @@ public class ChatSystem {
             default:
                 //bitch like hell, because this really should NOT be triggered in any case, no matter how logical it is
                 notice("Error: Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " is trying to use an invalid channel (" + ChatColor.YELLOW + getChannel(p) + ChatColor.RED + ") - THIS SHOULD NOT HAPPEN!");
-                break;
+                return;
         }
     }
 
