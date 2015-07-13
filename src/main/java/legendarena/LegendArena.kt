@@ -9,6 +9,7 @@ import legendarena.listeners.ChatListener
 import legendarena.listeners.HubListeners
 import legendarena.listeners.PlayerJoinListener
 import legendarena.listeners.ServerPingListener
+import legendarena.listeners.menu.*
 import org.bukkit.Bukkit
 
 class LegendArena : KotlinUtils() {
@@ -39,6 +40,14 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(ServerPingListener())
         setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
+
+        //this took me more time to figure out than I wish to admit.
+
+        setup.registerListener(MainMenuListener())
+        setup.registerListener(ChatMenuListener())
+        setup.registerListener(EmeraldMenuListener())
+        setup.registerListener(MinigameMenuListener())
+        setup.registerListener(StaffMenuListener())
 
         setup.announceStatus("Setting up timers...")
 

@@ -14,36 +14,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
 import java.util.*
 
-class MinigameMenu : Listener {
-
-    EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        if (!ev.getInventory().getName().equals(inv!!.getName())) return
-        try {
-            if(ev.getCurrentItem().getItemMeta() == null) return
-            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Hub")) {
-                ev.setCancelled(true)
-                ev.getWhoClicked().closeInventory()
-                val p = ev.getWhoClicked() as Player
-                p.teleport(Bukkit.getWorld("world").getSpawnLocation())
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Never Have I Ever")) {
-                ev.setCancelled(true)
-                ev.getWhoClicked().closeInventory()
-                ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
-                ev.setCancelled(true)
-                ev.getWhoClicked().closeInventory()
-                MainMenu().show(ev.getWhoClicked() as Player)
-            } else {
-                //failsafe
-                ev.setCancelled(true)
-            }
-        } catch (ignore: Exception) {
-            // Ignore the error
-        }
-
-    }
-
+class MinigameMenu {
 
     private var inv: Inventory? = null
     private var init = false
@@ -67,8 +38,6 @@ class MinigameMenu : Listener {
 
         for(a in items.keySet())
             inv!!.setItem(a, items.get(a))
-
-        Bukkit.getPluginManager().registerEvents(this, p)
 
         init = true
     }

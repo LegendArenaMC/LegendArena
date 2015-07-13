@@ -27,22 +27,12 @@ class MOTDTools : CommandExecutor {
             sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", java.lang.String.valueOf(MOTDUtils.getAmountOfMOTDs())))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff motd notice [notice]", "Sets the MOTD notice"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd notice [notice]", "Sets the MOTD notice"))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd lastgiven", "Get the last given randomized MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd getmotd", "Get the currently showing MOTD."))
-        } else if(args[0].equals("list")) {
-            val rawList = MOTDUtils.getList()
-            val rawSongs = rawList.get(ListType.SONG)
-            val rawReferences = rawList.get(ListType.REFERENCE)
-            val rawRandom = rawList.get(ListType.RANDOM)
-            var finishedList = ChatUtils.getCustomMsg("MOTD")
-            for(add in rawSongs)
-                finishedList += (if (finishedList == ChatUtils.getCustomMsg("MOTD")) "\"" + add + "\"" else ", \"" + add + "\"")
-            for(add in rawReferences)
-                finishedList += (if (finishedList == ChatUtils.getCustomMsg("MOTD")) "\"" + add + "\"" else ", \"" + add + "\"")
-            for(add in rawRandom)
-                finishedList += (if (finishedList == ChatUtils.getCustomMsg("MOTD")) "\"" + add + "\"" else ", \"" + add + "\"")
-            sender.sendMessage(finishedList)
+        } else if(args[0].equals("lastgiven")) {
+            sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + MOTDUtils.getLastMOTDGiven())
         } else if(args[0].equals("notice")) {
             if(!Rank.ADMIN.isRanked(sender)) {
                 sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))

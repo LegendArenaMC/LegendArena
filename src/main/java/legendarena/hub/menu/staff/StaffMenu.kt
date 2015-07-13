@@ -14,27 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
 
-class StaffMenu : Listener {
-
-    EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        try {
-            if (!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Staff Menu")) return
-            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Chat Selector")) {
-                ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat menu")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
-                ev.getWhoClicked().closeInventory()
-                MainMenu().show(ev.getWhoClicked() as Player)
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global Mute")) {
-                (ev.getWhoClicked() as Player).performCommand("staff chat globalmute")
-                ev.getInventory().setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
-            }
-            ev.setCancelled(true)
-        } catch(ignore: Exception) {
-            // Ignore the error
-        }
-    }
+class StaffMenu {
 
     public constructor() {
         init(Bukkit.getPluginManager().getPlugin("LegendArena"))
@@ -49,7 +29,6 @@ class StaffMenu : Listener {
 
         inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
 
-        Bukkit.getPluginManager().registerEvents(StaffMenu(), p)
         init = true
     }
 

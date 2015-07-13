@@ -34,6 +34,8 @@ public class MOTDUtils {
             "Rise and shine, Mr. Freeman. Rise and shine.", //*yawn* hl2..
             "Wake up, and smell the ashes.", //bla bla bla you get the idea by now, HL2 bla bla bla
             "Run, would you kindly?", //bioshock (infinite?) reference
+            "The world mourns, as on days like these, we are all Brits.", //reference to Fallout 3 Numbers Station ( it's really a good read, btw - http://creepypasta.wikia.com/wiki/Fallout_3:_Numbers_Station )
+            "I can't believe they've actually done it. Not long left.", //reference to the above ...thing.. (unsure if the number station is a real thing in FO3, but just gonna assume not for now)
             "\"A man chooses, a slave obeys.\"", //obligatory bioshock quote
             "Just remember to land on one foot.", //portal reference
             "The cake is a lie.", //portal...
@@ -77,7 +79,7 @@ public class MOTDUtils {
     private static final String[] randomList = {
             "Why circle pizzas? Why not square pizzas?", //#BlameJaden
             "Pika pi!",
-            "MadeIn(Kotlin)",
+            "MadeIn(Kotlin())",
             "Uses.some(new Java());",
             "Achievement get!",
             "Pay the court a fine or serve your sentence.", //blame Oblivion
@@ -97,6 +99,7 @@ public class MOTDUtils {
             "Mostly because Tunnel Snakes rule.",
             "Water cooled!", //reference to water cooling, a thing you can do with a computer in place of (most?) fans
             "Woo, Voat!", //pst: voat.co/v/legendarena
+            "Woo, reddit!",
             "#RedditRevolt", //reference to revolts against very shitty actions that the reddit admins made
             "67.1k coins!", //reference to around pixel's insane amount of Arcade coins on Hypxel (..I'll admit it, I'm addicted to Build Battle (that and I'm a coin hoarder))
             "The Minecraft movie is a block buster!", //blame jaden
@@ -121,6 +124,7 @@ public class MOTDUtils {
             "That's right #7, it's a cube.",
             "What are you doing here? This is not your battle!",
             "Introducing the all new Power Drill!",
+            "GAMIG WLDLEF PLS MK IF RDDT WR 10% HNST WTH US", //..I regret this MOTD. (seriously, why did I ever make it.)
             "100? 200 more for sparta!", //100 MOTD HYPE
             "5 Best Minecraft Funny An-OHGODWHYMYSPLEEEEN",
             "Get your brand new Spork! Now with 40% more spoon!",

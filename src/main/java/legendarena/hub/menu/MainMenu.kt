@@ -18,47 +18,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
 
-class MainMenu : Listener {
-
-    EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Main Menu")) return
-            when(ev.getCurrentItem().getItemMeta().getDisplayName()) {
-                "" + ChatColor.GREEN + "Warper" -> {
-                    ev.getWhoClicked().closeInventory()
-                    MinigameMenu().show(ev.getWhoClicked() as Player)
-                }
-                "" + ChatColor.GREEN + "Particles" -> {
-                    /*if(Rank.isRanked(ev.getWhoClicked(), Rank.MEMBERPLUS)) {
-                        if(!(EmeraldsCore.getEmeralds((Player) ev.getWhoClicked()) > 15)) {
-                            ev.getWhoClicked().closeInventory();
-                            new Message(MessageType.SUBTITLE).append(ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!").send((Player) ev.getWhoClicked());
-                        }
-                    }*/
-                    Message().append("" + ChatColor.GREEN + "Particles will be fixed soon[tm]; sorry :( -Pixel").send(Sound.ANVIL_BREAK, ev.getWhoClicked() as Player)
-                    ev.getWhoClicked().closeInventory()
-                    //ParticleMenu.show((Player) ev.getWhoClicked());
-                }
-                "" + ChatColor.GREEN + "Staff Tools" -> {
-                    ev.getWhoClicked().closeInventory()
-                    StaffMenu().show(ev.getWhoClicked() as Player)
-                }
-                "" + ChatColor.GREEN + "Music" -> {
-                    ev.getWhoClicked().closeInventory()
-                    ev.getWhoClicked().sendMessage("" + ChatColor.RED + "Music selector coming soon, to a Legend Arena server near you.")
-                }
-                "" + ChatColor.GREEN + "Emeralds" -> {
-                    ev.getWhoClicked().closeInventory()
-                    EmeraldMenu().show(ev.getWhoClicked() as Player)
-                }
-            }
-            ev.setCancelled(true)
-        } catch(ignore: Exception) {
-            // Ignore the error
-        }
-
-    }
+class MainMenu {
 
     private var inv: Inventory? = null
 
@@ -72,8 +32,6 @@ class MainMenu : Listener {
         inv!!.setItem(4, MenuUtils.createItem(Material.WATCH, "" + ChatColor.GREEN + "Warper", ""))
         inv!!.setItem(40, MenuUtils.createItem(Material.JUKEBOX, "" + ChatColor.GREEN + "Music", ""))
         inv!!.setItem(25, MenuUtils.createItem(Material.YELLOW_FLOWER, "" + ChatColor.GREEN + "Particles", ""))
-
-        Bukkit.getPluginManager().registerEvents(this, p)
     }
 
     public fun show(p: Player) {

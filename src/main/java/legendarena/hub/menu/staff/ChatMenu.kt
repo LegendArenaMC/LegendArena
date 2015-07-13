@@ -11,35 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
 
-class ChatMenu : Listener {
-
-    EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        try {
-            if(!ev.getInventory().getName().equals("" + ChatColor.BLUE + "Chat Selector")) return
-            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global")) {
-                ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat off")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Alert")) {
-                ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat alert")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Admin")) {
-                ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat admin")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Staff")) {
-                ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat staff")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global")) {
-                ev.getWhoClicked().closeInventory()
-                StaffMenu().show(ev.getWhoClicked() as Player)
-            }
-            ev.setCancelled(true)
-        } catch(ignore: Exception) {
-            // Ignore the error
-        }
-
-    }
-
+class ChatMenu {
 
     private var inv: Inventory? = null
     private var init = false
@@ -59,7 +31,6 @@ class ChatMenu : Listener {
         inv!!.setItem(24, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Admin", ""))
         inv!!.setItem(25, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Staff", ""))
 
-        Bukkit.getPluginManager().registerEvents(ChatMenu(), p)
         init = true
     }
 

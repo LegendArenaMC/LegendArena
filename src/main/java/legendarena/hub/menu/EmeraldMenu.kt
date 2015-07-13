@@ -13,25 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
 
-class EmeraldMenu : Listener {
-
-    EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Emeralds Menu")) return
-            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Emeralds") || ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Booster")) {
-                ev.getWhoClicked().closeInventory()
-                ev.getWhoClicked().sendMessage("...you really expected that would do something. wow. I'm amazed. no, really, I'm amazed.")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
-                ev.getWhoClicked().closeInventory()
-                MainMenu().show(ev.getWhoClicked() as Player)
-            }
-            ev.setCancelled(true)
-        } catch(ignore: Exception) {
-            // Ignore the error
-        }
-
-    }
+class EmeraldMenu {
 
     private var inv: Inventory? = null
     private var init = false
@@ -43,7 +25,6 @@ class EmeraldMenu : Listener {
         inv!!.setItem(13, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
         inv!!.setItem(32, MenuUtils.createItem(Material.NETHER_BRICK_ITEM, "" + ChatColor.GREEN + "Booster", "" + ChatColor.RED + "Soon™"))
 
-        Bukkit.getPluginManager().registerEvents(EmeraldMenu(), p)
         init = true
     }
 

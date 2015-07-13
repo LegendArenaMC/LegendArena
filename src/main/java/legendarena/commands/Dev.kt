@@ -40,7 +40,7 @@ class Dev : CommandExecutor {
 
     public fun humanReadableByteCount(bytes: Long, si: Boolean): String {
         val unit = if (si) 1000 else 1024
-        if (bytes < unit) return "" + bytes + " B"
+        if(bytes < unit) return "" + bytes + " B"
         val exp = (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
         //if IntelliJ complains on the + symbol, it's fine - ignore it
         val pre = (if(si) "kMGTPE" else "KMGTPE").charAt(exp - 1) + (if(si) "" else "i")
