@@ -24,8 +24,8 @@ class Particle : CommandExecutor {
             return true
         }
         ParticleMenu().show(sender)
-        //2 second cooldown
-        cooldown.put(sender.getUniqueId(), Cooldown(2.0))
+        //1 second cooldown
+        cooldown.put(sender.getUniqueId(), Cooldown(1.0))
         return true
     }
 

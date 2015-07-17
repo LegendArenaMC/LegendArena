@@ -2,8 +2,9 @@ package legendarena.listeners.menu
 
 import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
-import legendarena.chat.ChatSystem
+import legendarena.chat.ChatSystemOld
 import legendarena.hub.menu.MainMenu
+import legendarena.hub.menu.staff.ChatMenu
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -19,13 +20,13 @@ class StaffMenuListener : Listener {
             if (!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Staff Menu")) return
             if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Chat Selector")) {
                 ev.getWhoClicked().closeInventory()
-                (ev.getWhoClicked() as Player).performCommand("chat menu")
+                ChatMenu().show(ev.getWhoClicked() as Player)
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
                 ev.getWhoClicked().closeInventory()
                 MainMenu().show(ev.getWhoClicked() as Player)
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global Mute")) {
-                (ev.getWhoClicked() as Player).performCommand("staff chat globalmute")
-                ev.getInventory().setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
+                (ev.getWhoClicked() as Player).performCommand("chat manage globalmute")
+                ev.getInventory().setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystemOld.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
             }
             ev.setCancelled(true)
         } catch(ignore: Exception) {

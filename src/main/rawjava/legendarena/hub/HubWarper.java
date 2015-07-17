@@ -21,8 +21,7 @@ public class HubWarper {
             for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
                 if(!Rank.ADMIN.isRanked(p)) p.getInventory().clear();
-                if(p.getInventory().getItem(4) != getMainMenu()) p.getInventory().setItem(4, getMainMenu());
-                //TODO: Obligatory "Fucking fix me you moron Pixel"
+                if(!p.getInventory().getItem(4).getItemMeta().getDisplayName().equals(getMainMenu().getItemMeta().getDisplayName())) p.getInventory().setItem(4, getMainMenu());
                 //fuck you too async (this is just a memory leak waiting to happen, by the way)
                 Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
                     public void run() {
@@ -35,10 +34,8 @@ public class HubWarper {
     }
 
     public static void toggleExemption(UUID p) {
-        if(isExempt(p))
-            exempt.remove(p);
-        else
-            exempt.add(p);
+        if(isExempt(p)) exempt.remove(p);
+        else exempt.add(p);
     }
 
     public static boolean isExempt(UUID p) {

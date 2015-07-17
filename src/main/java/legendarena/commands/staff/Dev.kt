@@ -1,4 +1,4 @@
-package legendarena.commands
+package legendarena.commands.staff
 
 import legendapi.message.Message
 import legendapi.utils.CalendarUtils
@@ -16,11 +16,12 @@ class Dev : CommandExecutor {
         if(!Rank.FOUNDER.isRanked(sender))
             return false
         if(args.size() == 0) {
-            //thanks kotlin for not liking sender.sendMessage([color] + [string])
-            val blue = "" + ChatColor.BLUE
+            //thanks kotlin for not liking sender.sendMessage([color] + [string]) (also ignore the change from blue to green with no var name change)
+            val blue = "" + ChatColor.GREEN
             sender.sendMessage(ChatUtils.getFormattedHeader("Server Info"))
             sender.sendMessage(blue + "Free memory: " + humanReadableByteCount((Runtime.getRuntime().freeMemory() / 8), true))
-            sender.sendMessage(blue + "Used memory: " + humanReadableByteCount((Runtime.getRuntime().totalMemory() / 8), true))
+            //ignore the horrible code to get used memory
+            sender.sendMessage(blue + "Used memory: " + humanReadableByteCount(((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 8), true))
             sender.sendMessage(blue + "Max memory: " + humanReadableByteCount((Runtime.getRuntime().maxMemory() / 8), true))
             sender.sendMessage(blue + "Date: " + CalendarUtils().getDateString())
             sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
@@ -31,9 +32,10 @@ class Dev : CommandExecutor {
             //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
             //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
         } else if(args[0].equals("gc")) {
-            sender.sendMessage("Running garbage collector....")
+            sender.sendMessage("" + ChatColor.YELLOW + "Running garbage collector....")
+            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
             System.gc()
-            sender.sendMessage("Successfully ran garbage collector.")
+            sender.sendMessage("" + ChatColor.GREEN + "Successfully ran garbage collector.")
         }
         return true
     }

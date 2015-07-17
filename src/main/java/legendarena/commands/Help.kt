@@ -1,6 +1,7 @@
 package legendarena.commands
 
 import legendapi.utils.ChatUtils
+import legendapi.utils.StringUtils
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

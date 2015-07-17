@@ -1,4 +1,4 @@
-package legendarena.commands
+package legendarena.commands.staff
 
 import legendapi.emeralds.EmeraldsCore
 import legendapi.utils.ChatUtils

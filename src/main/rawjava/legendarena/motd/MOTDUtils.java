@@ -81,6 +81,7 @@ public class MOTDUtils {
             "Pika pi!",
             "MadeIn(Kotlin())",
             "Uses.some(new Java());",
+            "var lennart = Lennart()", //kotlin version of the splash screen message "Lennart lennart = new Lennart();"
             "Achievement get!",
             "Pay the court a fine or serve your sentence.", //blame Oblivion
             "Your stolen goods are now forfeit.", //again, blame Oblivion
@@ -107,7 +108,9 @@ public class MOTDUtils {
             "A hacker has DOWNLOADED YOUR FREEDOM!",
             "Free wiffy?", //reference to the villager saying "free wifi" as "free wiffy" in the Minecon 2015 opening ceremony animation
             "Mmm, wiffy...",
-            "git rekt", //I regret all of this. all of it.
+            "Now pick up that can.", //half life 2 reference. now pick up that can.
+            "λ 3", //Half Life 3 - the character is a Lambda, famous for Half Life's logo
+            "git rekt", //reference to the Git SCM, with "git" in place of "get"
             "Who you gonna call? [Ghostbusters!]",
             "I ain't afraid of no ghosts.",
             "But this is too much paperwork to do!",

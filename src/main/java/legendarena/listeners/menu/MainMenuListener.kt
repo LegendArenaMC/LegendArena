@@ -5,7 +5,6 @@ import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
-import legendarena.hub.menu.EmeraldMenu
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.staff.StaffMenu
 import org.bukkit.ChatColor
@@ -44,7 +43,6 @@ class MainMenuListener : Listener {
                 ev.getWhoClicked().sendMessage("" + ChatColor.RED + "Music selector coming soon, to a Legend Arena server near you.")
             } else if(itemName == "" + ChatColor.GREEN + "Emeralds") {
                 ev.getWhoClicked().closeInventory()
-                EmeraldMenu().show(ev.getWhoClicked() as Player)
             }
             ev.setCancelled(true)
         } catch(ignore: Exception) {

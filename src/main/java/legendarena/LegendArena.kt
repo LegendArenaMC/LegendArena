@@ -4,6 +4,7 @@ import legendapi.utils.KotlinUtils
 import legendapi.utils.SetupUtils
 import legendapi.utils.VersionUtils
 import legendarena.commands.*
+import legendarena.commands.staff.*
 import legendarena.hub.HubWarper
 import legendarena.listeners.ChatListener
 import legendarena.listeners.HubListeners
@@ -45,7 +46,6 @@ class LegendArena : KotlinUtils() {
 
         setup.registerListener(MainMenuListener())
         setup.registerListener(ChatMenuListener())
-        setup.registerListener(EmeraldMenuListener())
         setup.registerListener(MinigameMenuListener())
         setup.registerListener(StaffMenuListener())
 

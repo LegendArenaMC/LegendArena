@@ -1,11 +1,11 @@
-package legendarena.commands
+package legendarena.commands.staff
 
 import legendapi.message.Message
 import legendapi.utils.ChatUtils
 import legendapi.utils.Cooldown
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
-import legendarena.chat.ChatSystem
+import legendarena.chat.ChatSystemOld
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -44,7 +44,7 @@ class Staff: CommandExecutor {
                         @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
                         sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
+                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystemOld.getChannel(p))
                         sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getGameMode())
                         sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getUniqueId())
                         sender.sendMessage("" + ChatColor.YELLOW + "Speed; WALK " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getWalkSpeed())
@@ -60,25 +60,8 @@ class Staff: CommandExecutor {
                 if(args.size() == 1) {
                     sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Chat Management suboptions:")
                     sender.sendMessage("" + ChatColor.YELLOW + "- CLEARCHAT [reason]")
-                    sender.sendMessage("" + ChatColor.YELLOW + "- GLOBALMUTE")
                 } else {
-                    if (args[1].equals("globalmute")) {
-                        if(!Rank.MOD.isRanked(sender)) {
-                            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
-                            return true
-                        }
-                        if(ChatSystem.isChatMuted()) {
-                            Message().append(" ").broadcast()
-                            Message().append(ChatUtils.getCustomMsg("Chat Management") + "Staff member " + ChatColor.YELLOW + sender.getName() + ChatColor.BLUE + " has lifted the global mute.").broadcast()
-                            Message().append(" ").broadcast()
-                            ChatSystem.setChatMuted(false)
-                        } else {
-                            Message().append(" ").broadcast()
-                            Message().append(ChatUtils.getCustomMsg("Chat Management") + "Staff member " + ChatColor.YELLOW + sender.getName() + ChatColor.BLUE + " has globally muted the chat.").broadcast()
-                            Message().append(" ").broadcast()
-                            ChatSystem.setChatMuted(true)
-                        }
-                    } else if(args[1].equals("clearchat")) {
+                    if(args[1].equals("clearchat")) {
                         if(!Rank.ADMIN.isRanked(sender)) {
                             sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                             return true
@@ -92,7 +75,6 @@ class Staff: CommandExecutor {
                     } else {
                         sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Chat Management suboptions:")
                         sender.sendMessage("" + ChatColor.YELLOW + "- CLEARCHAT [reason]")
-                        sender.sendMessage("" + ChatColor.YELLOW + "- GLOBALMUTE")
                     }
                 }
             } else {

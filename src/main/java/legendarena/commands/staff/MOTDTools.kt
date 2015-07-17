@@ -1,9 +1,10 @@
-package legendarena.commands
+package legendarena.commands.staff
 
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
-import legendarena.chat.ChatSystem
+import legendapi.utils.StringUtils
+import legendarena.chat.ChatSystemOld
 import legendarena.motd.ListType
 import legendarena.motd.MOTDUtils
 import org.bukkit.ChatColor
@@ -25,7 +26,7 @@ class MOTDTools : CommandExecutor {
         }
         if(args.size() == 0) {
             sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", java.lang.String.valueOf(MOTDUtils.getAmountOfMOTDs())))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd notice [notice]", "Sets the MOTD notice"))
             sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd lastgiven", "Get the last given randomized MOTD."))
@@ -41,7 +42,7 @@ class MOTDTools : CommandExecutor {
             if(args.size() == 1) {
                 sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDUtils.getNotice())
             } else {
-                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
+                ChatSystemOld.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
                 MOTDUtils.setNotice(ChatUtils.formatCast(args, 0))
             }
         } else if(args[0].equals("setmotd")) {

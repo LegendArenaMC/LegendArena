@@ -17,14 +17,17 @@ class Firework : CommandExecutor {
             sender.sendMessage("Sorry - you can only do this as a player :(")
             return true
         }
+
         if(!Rank.MEMBERPLUS.isRanked(sender)) {
             sender.sendMessage(RankUtils.noPermissions(Rank.MEMBERPLUS))
             return true
         }
+
         if(cooldown.containsKey(sender.getUniqueId()) && !cooldown.get(sender.getUniqueId()).done()) {
             sender.sendMessage(cooldown.get(sender.getUniqueId()).getTimeRemaining())
             return true
         }
+
         PluginUtils.shootFireworks(sender)
         //3 second cooldown
         cooldown.put(sender.getUniqueId(), Cooldown(3.0))
