@@ -4,7 +4,7 @@ import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendapi.utils.StringUtils
-import legendarena.chat.ChatSystemOld
+import legendarena.chat.ChatSystem
 import legendarena.motd.ListType
 import legendarena.motd.MOTDUtils
 import org.bukkit.ChatColor
@@ -42,7 +42,7 @@ class MOTDTools : CommandExecutor {
             if(args.size() == 1) {
                 sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Current notice: " + ChatColor.GREEN + MOTDUtils.getNotice())
             } else {
-                ChatSystemOld.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
+                ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
                 MOTDUtils.setNotice(ChatUtils.formatCast(args, 0))
             }
         } else if(args[0].equals("setmotd")) {

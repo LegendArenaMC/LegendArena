@@ -23,10 +23,10 @@ class MainMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        init()
     }
 
-    private fun init(p: Plugin) {
+    private fun init() {
         inv = Bukkit.createInventory(null, 45, ChatUtils.getCustomMsg("Menus") + "Main Menu")
 
         inv!!.setItem(4, MenuUtils.createItem(Material.WATCH, "" + ChatColor.GREEN + "Warper", ""))

@@ -4,7 +4,7 @@ import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendapi.utils.StringUtils
-import legendarena.chat.ChatSystemOld
+import legendarena.chat.ChatSystem
 import legendarena.chat.ShadowMuteNotAllowedException
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -38,7 +38,7 @@ class Shadow : CommandExecutor {
             }
 
             try {
-                ChatSystemOld.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.getName())
+                ChatSystem.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.getName())
             } catch(ex: ShadowMuteNotAllowedException) {
                 sender.sendMessage("" + ChatColor.RED + "Shadow mutes are currently disallowed!")
             }

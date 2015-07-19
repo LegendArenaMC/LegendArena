@@ -5,7 +5,7 @@ import legendapi.utils.ChatUtils
 import legendapi.utils.Cooldown
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
-import legendarena.chat.ChatSystemOld
+import legendarena.chat.ChatSystem
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -44,7 +44,7 @@ class Staff: CommandExecutor {
                         @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
                         sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystemOld.getChannel(p))
+                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
                         sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getGameMode())
                         sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getUniqueId())
                         sender.sendMessage("" + ChatColor.YELLOW + "Speed; WALK " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getWalkSpeed())

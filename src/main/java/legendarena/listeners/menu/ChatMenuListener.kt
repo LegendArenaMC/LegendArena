@@ -25,7 +25,7 @@ class ChatMenuListener : Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Staff")) {
                 ev.getWhoClicked().closeInventory()
                 (ev.getWhoClicked() as Player).performCommand("chat staff")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "⇐ Back")) {
                 ev.getWhoClicked().closeInventory()
                 StaffMenu().show(ev.getWhoClicked() as Player)
             }
@@ -33,7 +33,6 @@ class ChatMenuListener : Listener {
         } catch(ignore: Exception) {
             // Ignore the error
         }
-
     }
 
 }

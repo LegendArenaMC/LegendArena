@@ -17,10 +17,10 @@ class ChatMenu {
     private var init = false
 
     public constructor() {
-        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        init()
     }
 
-    private fun init(p: Plugin) {
+    private fun init() {
         if(init) return  //if we've already initialized the chat menu, don't do anything
         inv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
 
@@ -35,7 +35,6 @@ class ChatMenu {
     }
 
     public fun show(p: Player) {
-        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
         val pInv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
         pInv.setContents(inv!!.getContents())
         p.openInventory(pInv)

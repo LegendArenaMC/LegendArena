@@ -20,10 +20,10 @@ class MinigameMenu {
     private var init = false
 
     public constructor() {
-        init(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        init()
     }
 
-    private fun init(p: Plugin) {
+    private fun init() {
         if(init) return
 
         val items = HashMap<Int, ItemStack>()
