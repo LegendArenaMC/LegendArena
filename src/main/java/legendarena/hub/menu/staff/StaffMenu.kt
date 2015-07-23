@@ -37,6 +37,7 @@ class StaffMenu {
         pInv.setContents(inv!!.getContents())
         pInv.setItem(19, MenuUtils.createItem(Material.GLASS, "" + ChatColor.GREEN + "Chat Selector", "" + ChatColor.BLUE + "Current channel: " + ChatColor.RED + (if (ChatSystem.getChannel(p) == null) "PUBLIC" else ChatSystem.getChannel(p))))
         pInv.setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
+        pInv.setItem(25, MenuUtils.createItem(Material.IRON_PLATE, "" + ChatColor.GREEN + "Portable JumpPad", "" + ChatColor.BLUE + "Whee!"))
         p.openInventory(pInv)
     }
 }

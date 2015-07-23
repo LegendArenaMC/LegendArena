@@ -7,15 +7,15 @@ import org.bukkit.entity.Player
 
 public enum class Channel {
 
-    ADMIN(Rank.ADMIN, "" + ChatColor.RED + "ADMIN" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.RED + " {MESSAGE}"),
-    ALERT(Rank.HELPER, "" + ChatColor.RED + "ALERT" + ChatColor.YELLOW + "({USERDISPLAY}" + ChatColor.YELLOW + ") " + ChatColor.GOLD + "{MESSAGE}"),
-    STAFF(Rank.HELPER, "" + ChatColor.RED + "STAFF" + ChatColor.DARK_GRAY + " | " + ChatColor.RED + "{USERDISPLAY} " + ChatColor.DARK_RED + ChatUtils.chars[1] + ChatColor.DARK_GREEN + " {MESSAGE}"),
+    ADMIN(Rank.ADMIN),
+    ALERT(Rank.HELPER),
+    STAFF(Rank.HELPER),
     GLOBAL();
 
     private var rank: Rank
     private var format: String? = null
 
-    private constructor(rank: Rank, format: String) {
+    private constructor(rank: Rank) {
         this.rank = rank
         this.format = format
     }

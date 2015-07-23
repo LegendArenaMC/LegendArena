@@ -1,6 +1,7 @@
 package legendarena.chat;
 
 import legendapi.log.BukLog;
+import legendapi.log.Level;
 import legendapi.message.Message;
 import legendapi.utils.*;
 import org.bukkit.Bukkit;
@@ -37,6 +38,7 @@ public class ChatSystem {
      */
     public static void setGlobalMute(boolean set) {
         mute = set;
+        new Message().append(ChatUtils.getCustomMsg("Chat") + "Chat has been " + (set ? "globally muted" : "un-globally muted") + "!");
     }
 
     /**
@@ -153,21 +155,24 @@ public class ChatSystem {
     public static void msg(Player p, String msg) {
         //Obligatory "this is MUCH nicer" comment after function re-write
 
-        String tmp = _msg(msg, p);
-        if(tmp == null)
+        String msg1 = _msg(msg, p);
+        if(msg1 == null)
             return;
 
-        Message built = new Message().append(tmp);
+        Message built = new Message().append(msg1);
 
         if(isShadowMuted(p)) {
             Message shadowBuilt = new Message().append(ChatColor.RED + "[SHADOWMUTED]" + ChatColor.WHITE + built.toString());
             shadowBuilt.broadcast(Rank.MOD);
             built.send(p);
 
+            new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.INFO, ChatColor.stripColor(shadowBuilt.toString()));
+
             return;
         }
 
         built.broadcast(getChannel(p).getRank());
+        new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.INFO, ChatColor.stripColor(built.toString()));
     }
 
     private static String _msg(String m, Player p) {

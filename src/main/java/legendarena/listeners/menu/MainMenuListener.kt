@@ -25,11 +25,12 @@ class MainMenuListener : Listener {
                 MinigameMenu().show(ev.getWhoClicked() as Player)
             } else if(itemName == "" + ChatColor.GREEN + "Particles") {
                 if(!Rank.MEMBERPLUS.isRanked(ev.getWhoClicked() as Player)) {
-                    if(EmeraldsCore.getEmeralds(ev.getWhoClicked() as Player) < 15) {
+                    if(EmeraldsCore().getEmeralds(ev.getWhoClicked() as Player) < 15) {
                         ev.getWhoClicked().closeInventory()
                         Message(MessageType.SUBTITLE).append(ChatUtils.Messages.errorMsg + "You are not a Member+, nor have more than 15 emeralds!").send(ev.getWhoClicked() as Player)
+                        return
                     } else {
-                        EmeraldsCore.removeEmeralds(ev.getWhoClicked() as Player, 15, false)
+                        EmeraldsCore().removeEmeralds(ev.getWhoClicked() as Player, 15, false)
                     }
                 }
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Particles will be fixed soon[tm]; sorry :( -Pixel")

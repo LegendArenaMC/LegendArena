@@ -21,7 +21,13 @@ public class HubWarper {
             for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
                 if(!Rank.ADMIN.isRanked(p)) p.getInventory().clear();
-                if(!p.getInventory().getItem(4).getItemMeta().getDisplayName().equals(getMainMenu().getItemMeta().getDisplayName())) p.getInventory().setItem(4, getMainMenu());
+                try {
+                    if(!p.getInventory().getItem(4).getItemMeta().getDisplayName()
+                            .equals(getMainMenu().getItemMeta().getDisplayName())) p.getInventory().setItem(4, getMainMenu());
+                }
+                catch(Exception ex) {
+                    p.getInventory().setItem(4, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
+                }
                 //fuck you too async (this is just a memory leak waiting to happen, by the way)
                 Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
                     public void run() {

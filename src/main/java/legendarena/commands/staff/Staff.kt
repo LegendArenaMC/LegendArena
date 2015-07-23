@@ -11,6 +11,8 @@ import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Creeper
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import java.text.MessageFormat
 
@@ -24,10 +26,28 @@ class Staff: CommandExecutor {
             sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "WELCOME, TO THE MONSTERCAT PODCAST")
             return true
         }
+
         if(!Rank.HELPER.isRanked(sender)) {
             sender.sendMessage(RankUtils.noPermissions(Rank.HELPER))
             return true
         }
+
+        if(args.size() >= 1 && args[0].equals("gerald")) {
+            //ah, A->N (for the nubs who have no idea what that is: Approaching Nirvana). your streams never fail to make me laugh.
+
+            //read the following message in a Monty Python-type voice for maximum laughing
+            sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "Gerald! Gerald please!")
+            //yes, I am this lazy when it comes to casting EVERYTHING. sue me.
+            var p = (sender as Player)
+            var gerald = (p.getWorld().spawnEntity(p.getLocation(), EntityType.CREEPER) as Creeper)
+            gerald.setPowered(true)
+            gerald.setCustomNameVisible(true)
+            gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
+            gerald.setTarget(sender)
+
+            return true
+        }
+
         if(args.size() == 0) {
             help(sender, "1")
         } else {
@@ -54,29 +74,17 @@ class Staff: CommandExecutor {
                         sender.sendMessage("" + ChatColor.RED + "Player \"" + args[0] + "\" was not found!") //the player was not found
                     }
                 }
-            } else if (args[0].equals("motd")) {
-                //MOTDList.run(sender, args)
-            } else if (args[0].equals("chat")) {
-                if(args.size() == 1) {
-                    sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Chat Management suboptions:")
-                    sender.sendMessage("" + ChatColor.YELLOW + "- CLEARCHAT [reason]")
-                } else {
-                    if(args[1].equals("clearchat")) {
-                        if(!Rank.ADMIN.isRanked(sender)) {
-                            sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
-                            return true
-                        }
-                        if(c != null && !c!!.done()) {
-                            sender.sendMessage(MessageFormat.format("{0} (this is a GLOBAL cooldown!)", c!!.getTimeRemaining()))
-                            return true
-                        }
-                        ChatUtils.clearChat(sender.getName())
-                        c = Cooldown(120.0)
-                    } else {
-                        sender.sendMessage("" + ChatColor.LIGHT_PURPLE + "Chat Management suboptions:")
-                        sender.sendMessage("" + ChatColor.YELLOW + "- CLEARCHAT [reason]")
-                    }
+            } else if(args[0].equals("clearchat")) {
+                if(!Rank.ADMIN.isRanked(sender)) {
+                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                    return true
                 }
+                if(c != null && !c!!.done()) {
+                    sender.sendMessage(MessageFormat.format("{0} (this is a GLOBAL cooldown!)", c!!.getTimeRemaining()))
+                    return true
+                }
+                ChatUtils.clearChat(sender.getName())
+                c = Cooldown(120.0)
             } else {
                 help(sender, "unknown")
             }
@@ -90,11 +98,10 @@ class Staff: CommandExecutor {
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff help [page]", "Displays this menu, or optionally, a help page."))
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."))
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff chat <various suboptions...>", "Chat managment tools."))
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff motd [various suboptions...]", "MOTD-related info."))
+                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff clearchat", "Clear the current server's chat."))
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
             }
-            else -> sender.sendMessage(ChatUtils.Messages.errorMsg + "I don't know what help page you mean :(")
+            else -> sender.sendMessage(ChatUtils.Messages.errorMsg + "I don't know what you mean :(")
         }
     }
 

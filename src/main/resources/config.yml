@@ -1,2 +1,4 @@
+#Currently none of these do anything. I'll get around to coding these in soon[tm]
+
 enableWarpCommand: true
-isLobbyServer: false
+isLobbyServer: true

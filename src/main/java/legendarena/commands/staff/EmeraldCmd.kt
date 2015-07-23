@@ -13,6 +13,17 @@ import org.bukkit.entity.Player
 
 class EmeraldCmd : CommandExecutor {
 
+    internal var emeralds: EmeraldsCore? = null
+    internal var disabledDueToVaultBreakage = false
+
+    public constructor() {
+        try {
+            this.emeralds = EmeraldsCore()
+        } catch(ex: Exception) {
+            this.disabledDueToVaultBreakage = true
+        }
+    }
+
     private fun help(sender: CommandSender) {
         sender.sendMessage(ChatUtils.getFormattedHeader("Staff Commands"))
         sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
@@ -23,10 +34,9 @@ class EmeraldCmd : CommandExecutor {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        try {
-            EmeraldsCore.init() //make sure the emerald core is indeed initalized
-        } catch(ex: Exception) {
-            sender.sendMessage("" + ChatColor.RED + "Cannot initialize Emerald Core. Reason: " + ex.getMessage() + " ( report this issue here: https://github.com/LegendArenaMC/LegendArena/issues )")
+        if(disabledDueToVaultBreakage) {
+            sender.sendMessage("" + ChatColor.RED + "Seems a certain person forgot to install Vault or an economy plugin. As a result, the Emeralds system is currently offline. Sorry!")
+            return true
         }
 
         if(args.size() == 0)
@@ -34,7 +44,7 @@ class EmeraldCmd : CommandExecutor {
         else {
             if(args[0].equals("info")) {
                 sender.sendMessage(ChatUtils.getFormattedHeader("Your Emerald Info"))
-                sender.sendMessage("" + ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + ChatUtils.chars[1] + ChatColor.GREEN + " " + EmeraldsCore.getEmeralds(sender as Player))
+                sender.sendMessage("" + ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + ChatUtils.chars[1] + ChatColor.GREEN + " " + emeralds!!.getEmeralds(sender as Player))
             } else if(args[0].equals("add")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
@@ -56,7 +66,7 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Adding " + add + " emerald(s)...")
-                    EmeraldsCore.addEmeralds(p, add, true)
+                    emeralds!!.addEmeralds(p, add, true)
                 }
             } else if(args[0].equals("remove") || args[0].equals("take")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
@@ -79,12 +89,12 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
 
-                    if(remove > EmeraldsCore.getEmeralds(p)) {
+                    if(remove > emeralds!!.getEmeralds(p)) {
                         sender.sendMessage("" + ChatColor.RED + "That player does not have that many emeralds!")
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Removing " + remove + " emerald(s)...")
-                    EmeraldsCore.removeEmeralds(p, remove, true)
+                    emeralds!!.removeEmeralds(p, remove, true)
                 }
             } else if(args[0].equals("reset")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
@@ -104,7 +114,7 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Setting player's emerald count to zero...")
-                    EmeraldsCore.resetEmeralds(p, true, sender.getName())
+                    emeralds!!.resetEmeralds(p, true, sender.getName())
                 }
             } else {
                 help(sender)

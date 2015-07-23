@@ -1,9 +1,6 @@
 package legendarena.commands.staff
 
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
-import legendapi.utils.StringUtils
+import legendapi.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.motd.ListType
 import legendarena.motd.MOTDUtils
@@ -77,6 +74,44 @@ class MOTDTools : CommandExecutor {
             }
         } else if(args[0].equals("getmotd")) {
             sender.sendMessage(MOTDUtils.getBuiltMOTD())
+        } else if(args[0].equals("list")) {
+            if(args.size() == 1) {
+                var page = PagedUtils(15)
+                page.input(MOTDUtils.getFullMOTDArrayList())
+                var a = page.output()
+
+                var built = ""
+                for(b in a) {
+                    if(built == "")
+                        built = "\"" + b + "\""
+                    else
+                        built += ", \"" + b + "\""
+                }
+
+                sender.sendMessage("" + ChatColor.BLUE + built)
+            } else {
+                try {
+                    //give no shits about the return as long as it isn't an exception
+                    Integer.getInteger(args[1])
+                } catch(ex: Exception) {
+                    sender.sendMessage("" + ChatColor.RED + "\"" + args[1] + "\" is not an integer!")
+                    return
+                }
+
+                var page = PagedUtils(15, Integer.getInteger(args[1]))
+                page.input(MOTDUtils.getFullMOTDArrayList())
+                var a = page.output()
+
+                var built = ""
+                for(b in a) {
+                    if(built == "")
+                        built = "\"" + b + "\""
+                    else
+                        built += ", \"" + b + "\""
+                }
+
+                sender.sendMessage("" + ChatColor.BLUE + built)
+            }
         }
     }
 

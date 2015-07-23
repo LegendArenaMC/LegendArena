@@ -5,10 +5,12 @@ import legendapi.utils.CalendarUtils
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.VersionUtils
+import legendarena.hub.JumpPad
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
 class Dev : CommandExecutor {
 
@@ -27,25 +29,25 @@ class Dev : CommandExecutor {
             sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
             sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("Kotlin"))
             sender.sendMessage(blue + "API version: " + VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"")
-            //sender.sendMessage(" ");
-            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
-            //sender.sendMessage(ChatColor.BLUE + "Particle amount: " + ParticleCore.amountOfActiveParticles((Player) sender));
-            //sender.sendMessage(ChatColor.YELLOW + "--.{ Debug Info }.--");
+            return true
         } else if(args[0].equals("gc")) {
             sender.sendMessage("" + ChatColor.YELLOW + "Running garbage collector....")
-            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
+            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.FOUNDER)
             System.gc()
             sender.sendMessage("" + ChatColor.GREEN + "Successfully ran garbage collector.")
+            return true
+        } else if(args[0].equals("jp")) {
+            JumpPad.jump(sender as Player)
+            return true
         }
-        return true
+        return false
     }
 
     public fun humanReadableByteCount(bytes: Long, si: Boolean): String {
         val unit = if (si) 1000 else 1024
         if(bytes < unit) return "" + bytes + " B"
         val exp = (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
-        //if IntelliJ complains on the + symbol, it's fine - ignore it
-        val pre = (if(si) "kMGTPE" else "KMGTPE").charAt(exp - 1) + (if(si) "" else "i")
+        val pre = "" + (if(si) "kMGTPE" else "KMGTPE").charAt(exp - 1) + (if(si) "" else "i")
         return java.lang.String.format("%.1f %sB", bytes / Math.pow(unit.toDouble(), exp.toDouble()), pre)
     }
 

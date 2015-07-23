@@ -6,6 +6,7 @@ import legendapi.utils.VersionUtils
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.hub.HubWarper
+import legendarena.hub.JumpPad
 import legendarena.listeners.ChatListener
 import legendarena.listeners.HubListeners
 import legendarena.listeners.PlayerJoinListener
@@ -47,6 +48,7 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(MainMenuListener())
         setup.registerListener(ChatMenuListener())
         setup.registerListener(MinigameMenuListener())
+        setup.registerListener(JumpPad.JumpPadListener())
         setup.registerListener(StaffMenuListener())
 
         setup.announceStatus("Setting up timers...")
@@ -65,7 +67,7 @@ class LegendArena : KotlinUtils() {
 
         VersionUtils.setVersion("LegendArena", "1.0-SNAPSHOT")
         VersionUtils.setVersion("Kotlin", "0.12.613")
-        VersionUtils.setVersion("KotlinLoader", VersionUtils.getVersion("Kotlin")) //compatibility stuff if other plugins want to use KotlinLoader instead of Kotlin
+        VersionUtils.setVersion("KotlinLoader", VersionUtils.getVersion("Kotlin")) //compatibility stuff if other plugins want to use KotlinLoader instead of Kotlin for the version String getter (..thing)
     }
 
     override fun onDisable() {

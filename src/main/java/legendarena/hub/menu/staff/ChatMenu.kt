@@ -21,7 +21,7 @@ class ChatMenu {
     }
 
     private fun init() {
-        if(init) return  //if we've already initialized the chat menu, don't do anything
+        if(init) return //if we've already initialized the chat menu, don't do anything
         inv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
 
         inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))

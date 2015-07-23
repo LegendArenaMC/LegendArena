@@ -52,7 +52,7 @@ class ChatSystemUtils {
      * @return The chat message
      */
     public fun getChatMessage(msg: String, p: Player): String {
-        return getFormattedName(p) + " " + ChatColor.GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p)
+        return getFormattedName(p) + " " + ChatColor.DARK_GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p)
     }
 
 }

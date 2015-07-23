@@ -1,6 +1,8 @@
 package legendarena.listeners
 
 import legendapi.message.Message
+import legendapi.utils.Rank
+import legendarena.chat.ChatSystem
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,6 +18,8 @@ class PlayerJoinListener : Listener {
             Message().append("" + ChatColor.GREEN + "Legend Arena is a work-in-progress minigames server. For now, as there are no functioning minigames (sorry! we're working on it!), you can hang out in the hub and talk to others.").send(ev.getPlayer())
             Message().append("" + ChatColor.GREEN + "If you wish to help us get the minigames finished faster, our plugins are all open-source: " + ChatColor.YELLOW + "https://github.com/LegendArenaMC").send(ev.getPlayer())
         }
+        if(ChatSystem.isShadowMuted(ev.getPlayer()))
+            ChatSystem.notice("Player \"" + ev.getPlayer().getName() + "\" is shadow muted.")
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {
