@@ -20,20 +20,32 @@ public class HubWarper {
         public void run() {
             for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
-                if(!Rank.ADMIN.isRanked(p)) p.getInventory().clear();
-                try {
-                    if(!p.getInventory().getItem(4).getItemMeta().getDisplayName()
-                            .equals(getMainMenu().getItemMeta().getDisplayName())) p.getInventory().setItem(4, getMainMenu());
-                }
-                catch(Exception ex) {
-                    p.getInventory().setItem(4, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
-                }
-                //fuck you too async (this is just a memory leak waiting to happen, by the way)
-                Bukkit.getScheduler().runTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
-                    public void run() {
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true));
+                if(!Rank.FOUNDER.isRanked(p)) p.getInventory().clear();
+                if(Rank.MOD.isRanked(p)) {
+                    try {
+                        if(p.getInventory().getItem(5) != getMainMenu())
+                            p.getInventory().setItem(5, getMainMenu());
                     }
-                });
+                    catch(Exception ex) {
+                        p.getInventory().setItem(5, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
+                    }
+                    try {
+                        if(p.getInventory().getItem(3) != getStaffMenu())
+                            p.getInventory().setItem(3, getStaffMenu());
+                    }
+                    catch(Exception ex) {
+                        p.getInventory().setItem(3, getStaffMenu());
+                    }
+                } else {
+                    try {
+                        if(p.getInventory().getItem(4) != getMainMenu())
+                            p.getInventory().setItem(4, getMainMenu());
+                    }
+                    catch(Exception ex) {
+                        p.getInventory().setItem(4, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
+                    }
+                }
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true));
             }
         }
 
@@ -49,7 +61,15 @@ public class HubWarper {
     }
 
     public static ItemStack getMainMenu() {
-        return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu");
+        return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", ChatColor.BLUE + "Right click me to bring up the main menu!");
+    }
+
+    public static ItemStack getStaffMenu() {
+        return MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Menu", ChatColor.BLUE + "Right click me to bring up the staff menu!");
+    }
+
+    public static ItemStack getSoonTM() {
+        return MenuUtils.createItem(Material.APPLE, ChatColor.GREEN + "Soon[tm]", ChatColor.BLUE + "Hm? What's this? It looks edible... but it seems to be useless...");
     }
 
 }

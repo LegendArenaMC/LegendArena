@@ -4,6 +4,7 @@ import legendapi.emeralds.EmeraldsCore
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
+import legendarena.LegendArena
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -35,7 +36,7 @@ class EmeraldCmd : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(disabledDueToVaultBreakage) {
-            sender.sendMessage("" + ChatColor.RED + "Seems a certain person forgot to install Vault or an economy plugin. As a result, the Emeralds system is currently offline. Sorry!")
+            sender.sendMessage("" + ChatColor.RED + "Seems a certain someone forgot to install Vault and/or an economy plugin. As a result, the Emeralds system is currently offline. Sorry!")
             return true
         }
 
@@ -62,7 +63,7 @@ class EmeraldCmd : CommandExecutor {
                     try {
                         add = Integer.parseInt(args[2])
                     } catch(ex: Exception) {
-                        sender.sendMessage("" + ChatColor.RED + "\"" + args[2] + "\" is not a double!")
+                        sender.sendMessage("" + ChatColor.RED + "\"" + args[2] + "\" is not a integer!")
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Adding " + add + " emerald(s)...")
@@ -109,7 +110,7 @@ class EmeraldCmd : CommandExecutor {
                         sender.sendMessage(ChatUtils.getCustomMsg("Staff") + "You must be really fun at parties.")
                         return true
                     }
-                    if(p == null) {
+                    if(p == null && args[2] != "--FORCE") {
                         sender.sendMessage("" + ChatColor.RED + "That player was not found!")
                         return true
                     }

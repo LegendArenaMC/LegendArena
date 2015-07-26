@@ -11,16 +11,17 @@ import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
 class Shadow : CommandExecutor {
 
-    override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>?): Boolean {
+    override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>): Boolean {
         if(!Rank.ADMIN.isRanked(sender)) {
             sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
             return true
         }
 
-        if(args!!.size() == 0) {
+        if(args.size() == 0) {
             help(sender)
             return true
         }
@@ -44,7 +45,11 @@ class Shadow : CommandExecutor {
             }
 
         } else if(StringUtils.toLower(args[0]).equals("ignore")) {
-            //TODO: Add ignore list
+            var e = ChatSystem.toggleShadowMuteNotice(sender as Player)
+            if(e)
+                sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "Now ignoring shadow mutes.")
+            else
+                sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "No lionger ignoring shadow mutes.")
         }
 
         else help(sender)

@@ -25,15 +25,13 @@ class MinigameMenuListener : Listener {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if (ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GRAY + "⇐ Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 MainMenu().show(ev.getWhoClicked() as Player)
-            } else {
-                //failsafe
+            } else
                 ev.setCancelled(true)
-            }
-        } catch (ignore: Exception) {
+        } catch(ignore: Exception) {
             // Ignore the error
         }
 

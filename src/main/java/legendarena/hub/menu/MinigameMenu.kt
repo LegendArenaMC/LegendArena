@@ -30,7 +30,7 @@ class MinigameMenu {
 
         //TODO: Clean this damn thing up
 
-        items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
+        items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back"))
         items.put(21, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
         items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 

@@ -1,6 +1,8 @@
 package legendarena.hub.menu.staff
 
+import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
+import legendarena.chat.ChatSystem
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -9,34 +11,45 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
+import java.util.*
 
 class ChatMenu {
 
     private var inv: Inventory? = null
-    private var init = false
 
     public constructor() {
-        init()
-    }
+        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Chat Menu")
 
-    private fun init() {
-        if(init) return //if we've already initialized the chat menu, don't do anything
-        inv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
+        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
 
-        inv!!.setItem(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back", ""))
-
-        inv!!.setItem(19, MenuUtils.createItem(Material.BEDROCK, "" + ChatColor.GREEN + "Global", ""))
-        inv!!.setItem(23, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Alert", ""))
-        inv!!.setItem(24, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Admin", ""))
-        inv!!.setItem(25, MenuUtils.createItem(Material.APPLE, "" + ChatColor.GREEN + "Staff", ""))
-
-        init = true
+        inv!!.setItem(0, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Global", "Click to join " + ChatColor.GRAY + "GLOBAL" + ChatColor.BLUE + " channel.", 8))
+        inv!!.setItem(1, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Dev", "Click to join " + ChatColor.DARK_PURPLE + "DEV" + ChatColor.BLUE + " channel.", 10))
+        inv!!.setItem(2, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Admin", "Click to join " + ChatColor.DARK_RED + "ADMIN" + ChatColor.BLUE + " channel.", 14))
+        inv!!.setItem(3, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Staff", "Click to join " + ChatColor.GREEN + "STAFF" + ChatColor.BLUE + " channel.", 5))
+        inv!!.setItem(4, createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Alert", "Click to join " + ChatColor.RED + "ALERT" + ChatColor.BLUE + " channel.", 14))
     }
 
     public fun show(p: Player) {
-        val pInv = Bukkit.createInventory(null, 27, "" + ChatColor.BLUE + "Chat Selector")
-        pInv.setContents(inv!!.getContents())
-        p.openInventory(pInv)
+        var pinv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Chat Menu")
+        pinv.setContents(inv!!.getContents())
+        pinv!!.setItem(7, MenuUtils.createItem(Material.PAPER, "" + ChatColor.GREEN + "Current Channel", "" + ChatSystem.getChannelName(p)))
+        p.openInventory(pinv)
     }
+
+    /**
+     * Yes, I am this lazy.
+     *
+     * Don't ask.
+     */
+    internal fun createItem(material: Material, name: String, lore: String, color: Short): ItemStack {
+        val i = ItemStack(material, 1, color)
+        val im = i.getItemMeta()
+        im.setDisplayName(name)
+        im.setLore(Arrays.asList<String>("" + ChatColor.BLUE + lore))
+        i.setItemMeta(im)
+        return i
+    }
+
 }

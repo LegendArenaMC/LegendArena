@@ -1,5 +1,6 @@
 package legendarena.commands.staff
 
+import legendapi.emeralds.EmeraldsCore
 import legendapi.message.Message
 import legendapi.utils.CalendarUtils
 import legendapi.utils.ChatUtils
@@ -15,7 +16,7 @@ import org.bukkit.entity.Player
 class Dev : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        if(!Rank.FOUNDER.isRanked(sender))
+        if(!Rank.DEV.isRanked(sender))
             return false
         if(args.size() == 0) {
             //thanks kotlin for not liking sender.sendMessage([color] + [string]) (also ignore the change from blue to green with no var name change)
@@ -39,6 +40,9 @@ class Dev : CommandExecutor {
         } else if(args[0].equals("jp")) {
             JumpPad.jump(sender as Player)
             return true
+        } else if(args[0].equals("resetemeralds")) {
+            EmeraldsCore().resetEmeralds(sender as Player, false, "Fixing Stuffs")
+            sender.sendMessage("" + ChatColor.GREEN + "Emeralds reset.")
         }
         return false
     }

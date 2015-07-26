@@ -2,6 +2,7 @@ package legendarena.commands
 
 import legendapi.emeralds.EmeraldsCore
 import legendapi.utils.*
+import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -29,6 +30,7 @@ class Firework : CommandExecutor {
         }
 
         PluginUtils.shootFireworks(sender)
+        sender.sendMessage("" + ChatColor.GREEN + "Woo, fireworks!")
         //3 second cooldown
         cooldown.put(sender.getUniqueId(), Cooldown(3.0))
         return true

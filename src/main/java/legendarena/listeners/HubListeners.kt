@@ -4,10 +4,14 @@ import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.Cooldown
 import legendapi.utils.LegendAPIUtils
+import legendapi.utils.MenuUtils
 import legendapi.utils.VersionUtils
+import legendarena.LegendArena
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu
+import legendarena.hub.menu.staff.StaffMenu
 import org.bukkit.ChatColor
+import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -33,7 +37,7 @@ class HubListeners : Listener {
     EventHandler
     public fun listenForInteract(ev: PlayerInteractEvent) {
         try {
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId())) {
+            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode) {
                 //if(LegendAPIUtils.debug)
                 //    ev.getPlayer().sendMessage("player is not exempted, cancelling event...")
                 ev.setCancelled(true)
@@ -45,7 +49,7 @@ class HubListeners : Listener {
             }
             if(ev.getItem() == HubWarper.getMainMenu()) {
                 //if(LegendAPIUtils.debug)
-                //    ev.getPlayer().sendMessage("item is a hub menu item - all checks passed, showing menu...")
+                //    ev.getPlayer().sendMessage("item is a hub menu item - all checks passed, showing hub menu...")
                 if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
                     val c = cooldown.get(ev.getPlayer().getUniqueId())
                     if(!c.done()) {
@@ -57,7 +61,15 @@ class HubListeners : Listener {
                 if(!ev.isCancelled())
                     ev.setCancelled(true)
                 cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))
-            }// else {
+            } else if(ev.getItem() == HubWarper.getStaffMenu()) {
+                //if(LegendAPIUtils.debug)
+                //    ev.getPlayer().sendMessage("item is a staff menu item - all checks passed, showing staff menu...")
+                StaffMenu().show(ev.getPlayer())
+                if(!ev.isCancelled())
+                    ev.setCancelled(true)
+            }
+
+            // else {
             //    if(LegendAPIUtils.debug)
             //        ev.getPlayer().sendMessage("not a main menu item, skipping...")
             //}

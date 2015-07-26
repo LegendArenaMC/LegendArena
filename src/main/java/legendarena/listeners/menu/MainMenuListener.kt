@@ -33,15 +33,9 @@ class MainMenuListener : Listener {
                         EmeraldsCore().removeEmeralds(ev.getWhoClicked() as Player, 15, false)
                     }
                 }
-                ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Particles will be fixed soon[tm]; sorry :( -Pixel")
+                ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Particle selector will be fixed soon[tm]; sorry :( -Pixel")
                 ev.getWhoClicked().closeInventory()
                 //ParticleMenu.show(ev.getWhoClicked() as Player)
-            } else if(itemName == "" + ChatColor.GREEN + "Staff Tools") {
-                ev.getWhoClicked().closeInventory()
-                StaffMenu().show(ev.getWhoClicked() as Player)
-            } else if(itemName == "" + ChatColor.GREEN + "Music") {
-                ev.getWhoClicked().closeInventory()
-                ev.getWhoClicked().sendMessage("" + ChatColor.RED + "Music selector coming soon, to a Legend Arena server near you.")
             } else if(itemName == "" + ChatColor.GREEN + "Emeralds") {
                 ev.getWhoClicked().closeInventory()
             }

@@ -42,7 +42,7 @@ class ChatSystemUtils {
      * @return The formatted name
      */
     public fun getFormattedName(p: Player): String {
-        return RankUtils.getRankPrefix(RankUtils.getRank(p)) + ChatColor.RESET + (if (RankUtils.getRank(p) !== Rank.MEMBER) " " else "") + p.getName()
+        return "" + RankUtils.getRank(p).getNameColor() + p.getName()
     }
 
     /**

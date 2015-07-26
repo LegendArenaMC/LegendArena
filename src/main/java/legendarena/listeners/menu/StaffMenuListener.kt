@@ -6,6 +6,7 @@ import legendarena.chat.ChatSystem
 import legendarena.hub.JumpPad
 import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.staff.ChatMenu
+import legendarena.hub.menu.staff.JumpPadMenu
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -27,11 +28,12 @@ class StaffMenuListener : Listener {
                 MainMenu().show(ev.getWhoClicked() as Player)
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global Mute")) {
                 (ev.getWhoClicked() as Player).performCommand("chat manage globalmute")
-                ev.getInventory().setItem(22, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Portable JumpPad")) {
-                JumpPad.jump(ev.getWhoClicked() as Player)
+                ev.getInventory().setItem(4, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "Global Mute", "" + ChatColor.BLUE + "Current status: " + ChatColor.RED + (if (ChatSystem.isChatMuted()) "ON" else "OFF") + ChatColor.GRAY + " (click to toggle)"))
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "JumpPads")) {
                 ev.getWhoClicked().closeInventory()
-            }
+                JumpPadMenu().show(ev.getWhoClicked() as Player)
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Close Menu"))
+                ev.getWhoClicked().closeInventory()
             ev.setCancelled(true)
         } catch(ignore: Exception) {
             // Ignore the error

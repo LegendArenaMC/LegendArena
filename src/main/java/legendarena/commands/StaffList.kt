@@ -20,7 +20,7 @@ class StaffList : CommandExecutor {
                 staffOnline.add(p)
         sender.sendMessage(ChatUtils.getFormattedHeader("Staff Members"))
         if(staffOnline.isEmpty())
-            sender.sendMessage("" + ChatColor.RED + "There's no staff online right now :(")
+            sender.sendMessage("" + ChatColor.RED + "There's no staff online on this server right now :(")
         else
             for(p in staffOnline)
                 sender.sendMessage("" + ChatColor.RED + p.getName() + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + RankUtils.getRank(p))

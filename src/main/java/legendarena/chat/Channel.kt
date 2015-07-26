@@ -8,16 +8,15 @@ import org.bukkit.entity.Player
 public enum class Channel {
 
     ADMIN(Rank.ADMIN),
+    DEV(Rank.DEV),
     ALERT(Rank.HELPER),
     STAFF(Rank.HELPER),
     GLOBAL();
 
     private var rank: Rank
-    private var format: String? = null
 
     private constructor(rank: Rank) {
         this.rank = rank
-        this.format = format
     }
 
     private constructor() {
@@ -26,10 +25,6 @@ public enum class Channel {
 
     public fun getRank(): Rank {
         return rank
-    }
-
-    public fun getFormat(): String {
-        return format!!
     }
 
 }

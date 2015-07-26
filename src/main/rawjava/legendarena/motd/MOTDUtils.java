@@ -78,7 +78,6 @@ public class MOTDUtils {
             "var lennart = Lennart()", //kotlin version of the splash screen message "Lennart lennart = new Lennart();"
             "Achievement get!",
             "\"When is HL3 released?\" In 2198-- no, 2628.",
-            "HTML tags lea͠ki̧n͘g fr̶ǫm ̡yo\u200B͟ur eye͢s̸ ̛l̕ik͏e liq\u200Buid pain", //have you tried using an XML parser? ( reference: http://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags )
             "WELCOME, TO THE MONSTERCAT PODCAST.",
             "15 Reddit clones on the wall, 15 Reddit clones...",
             "s/admins/badmins", //reference to Jaden's tweet about reddit admins
@@ -135,6 +134,9 @@ public class MOTDUtils {
             "dinnerbone pls can i has hug i want hug",
             "Read more JComic!",
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?", //don't mind me, just poking fun at the butthurt fanboys
+            "NSAdows 10: Now with 150% more NSA!",
+            "o man i cannot into CSS", //see /r/Ooer (or for ultra "WTF"-ness - /r/OoerIntensifies (also, good luck with that one))
+            "Sticky keys? What's that?" //obligatory "windows krill" commment
     };
 
     private static final String[] gameList = {
@@ -145,11 +147,11 @@ public class MOTDUtils {
             "Wake up, and smell the ashes.", //bla bla bla you get the idea by now, HL2 bla bla bla
             "Run, would you kindly?", //bioshock (infinite?) reference
             "11-10-15", //obligatory reference to Fallout 4's release date
-            "Now pick up that can.", //half life 2 reference. now pick up that can.
-            "λ 3", //Half Life 3 - the character is a Lambda, which is used as Half Life's logo
+            "Now pick up that can.", //half life 2 episode 1 (0? eh, unsure about it and frankly don't care enough to check right now) reference. now pick up that can.
+            "λ 3", //[Half Life] 3 - the special character is a Lambda, which is used as Half Life's logo
             "Pay the court a fine or serve your sentence.", //blame Oblivion
             "Your stolen goods are now forfeit.", //again, blame Oblivion
-            "\"A man chooses, a slave obeys.\"", //obligatory bioshock quote
+            "\"A man chooses, a slave obeys.\"", //bioshock quote
             "Obsessive Blocky Race Cars!", //reference to Turbo Kart Racers on Hypixel (also god damn is it addicting as hell)
             "The Minecraft movie is a block buster!", //blame jaden
             "Just remember to land on one foot.", //portal reference
@@ -229,11 +231,13 @@ public class MOTDUtils {
 
     public static String getBuiltMOTD() {
         String random = getRandomMOTD();
+
         ChatColor randomC1 = ChatColor.RED;
         ChatColor randomC2 = ChatColor.GREEN;
 
         if(!noDecor) return "" + randomC1 + "Legend Arena" + ChatColor.YELLOW + " {" + MOTDUtils.getNotice() + "}" +
                 '\n' + ChatColor.DARK_GRAY + "//" + randomC2 + random;
+
         else return override;
     }
 

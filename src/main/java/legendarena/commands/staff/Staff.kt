@@ -6,6 +6,7 @@ import legendapi.utils.Cooldown
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
+import legendarena.utils.MobSpawnUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -37,13 +38,16 @@ class Staff: CommandExecutor {
 
             //read the following message in a Monty Python-type voice for maximum laughing
             sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "Gerald! Gerald please!")
-            //yes, I am this lazy when it comes to casting EVERYTHING. sue me.
-            var p = (sender as Player)
-            var gerald = (p.getWorld().spawnEntity(p.getLocation(), EntityType.CREEPER) as Creeper)
+            var gerald = (MobSpawnUtils().spawn(EntityType.CREEPER, (sender as Player).getLocation()) as Creeper)
             gerald.setPowered(true)
             gerald.setCustomNameVisible(true)
             gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
             gerald.setTarget(sender)
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), Runnable({
+                fun run() {
+                    gerald.setHealth(0.0)
+                }
+            }), 40L)
 
             return true
         }
@@ -85,7 +89,11 @@ class Staff: CommandExecutor {
                 }
                 ChatUtils.clearChat(sender.getName())
                 c = Cooldown(120.0)
-            } else {
+            } else if(args[0].equals("vanish")) {
+                //
+            }
+
+            else {
                 help(sender, "unknown")
             }
         }
@@ -98,6 +106,7 @@ class Staff: CommandExecutor {
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff help [page]", "Displays this menu, or optionally, a help page."))
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."))
+                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff vanish", "Poof."))
                 sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff clearchat", "Clear the current server's chat."))
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
             }

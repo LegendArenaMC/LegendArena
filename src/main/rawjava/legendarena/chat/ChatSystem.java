@@ -7,10 +7,6 @@ import legendapi.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +17,7 @@ public class ChatSystem {
     private static HashMap<UUID, Channel> channels = new HashMap<>();
     private static boolean mute = false;
     private static HashMap<UUID, Boolean> muteStatus = new HashMap<>();
+    private static ArrayList<UUID> ignoreShadowMuteNotice = new ArrayList<>();
 
     private static boolean allowShadowMute = true;
 
@@ -39,6 +36,19 @@ public class ChatSystem {
     public static void setGlobalMute(boolean set) {
         mute = set;
         new Message().append(ChatUtils.getCustomMsg("Chat") + "Chat has been " + (set ? "globally muted" : "un-globally muted") + "!");
+    }
+
+    /**
+     * Toggle if a certain staff member should see shadow mute notices or not.
+     * @param p The staff member to toggle notices for
+     */
+    public static boolean toggleShadowMuteNotice(Player p) {
+        if(ignoreShadowMuteNotice.contains(p.getUniqueId())) {
+            ignoreShadowMuteNotice.remove(p.getUniqueId());
+            return false;
+        }
+        ignoreShadowMuteNotice.add(p.getUniqueId());
+        return true;
     }
 
     /**
@@ -109,6 +119,28 @@ public class ChatSystem {
         return channels.get(p.getUniqueId());
     }
 
+    public static String getChannelName(Channel c) {
+        switch(c) {
+            case ADMIN:
+                return ChatColor.DARK_RED + c.toString().toUpperCase();
+            case DEV:
+                return ChatColor.DARK_PURPLE + c.toString().toUpperCase();
+            case ALERT:
+                return ChatColor.RED + c.toString().toUpperCase();
+            case STAFF:
+                return ChatColor.GREEN + c.toString().toUpperCase();
+            case GLOBAL:
+                return ChatColor.GRAY + c.toString().toUpperCase();
+
+            default:
+                return c.toString().toUpperCase();
+        }
+    }
+
+    public static String getChannelName(Player p) {
+        return getChannelName(getChannel(p));
+    }
+
     /**
      * Adds a player to a certain channel.
      * @param p The player to target
@@ -117,6 +149,8 @@ public class ChatSystem {
     public static void add(Player p, Channel channel) {
         if(p == null || !p.isOnline())
             throw new NullPointerException();
+        if(!channel.getRank().isRanked(p))
+            throw new UnsupportedOperationException("Player cannot enter this channel");
         UUID pUUID = p.getUniqueId();
         if(channels.containsKey(pUUID))
             channels.remove(pUUID);
@@ -162,7 +196,7 @@ public class ChatSystem {
         Message built = new Message().append(msg1);
 
         if(isShadowMuted(p)) {
-            Message shadowBuilt = new Message().append(ChatColor.RED + "[SHADOWMUTED]" + ChatColor.WHITE + built.toString());
+            Message shadowBuilt = new Message().append(ChatColor.RED + "[SHADOWMUTED] " + ChatColor.WHITE + built.toString());
             shadowBuilt.broadcast(Rank.MOD);
             built.send(p);
 
@@ -176,21 +210,18 @@ public class ChatSystem {
     }
 
     private static String _msg(String m, Player p) {
-        switch(getChannel(p)) {
-            case ADMIN:
-                return Channel.ADMIN.getFormat().replace("{USERDISPLAY}", new ChatSystemUtils().getFormattedName(p)).replace("{MESSAGE}", m);
-            case ALERT:
-                return Channel.ALERT.getFormat().replace("{USERDISPLAY}", new ChatSystemUtils().getFormattedName(p)).replace("{MESSAGE}", m);
-            case STAFF:
-                return Channel.STAFF.getFormat().replace("{USERDISPLAY}", new ChatSystemUtils().getFormattedName(p)).replace("{MESSAGE}", m);
-            case GLOBAL:
-                return new ChatSystemUtils().getChatMessage(m, p);
+        if(getChannel(p) == Channel.GLOBAL)
+            return new ChatSystemUtils().getChatMessage(m, p);
 
-            default:
-                //bitch like hell, because this really should NOT be triggered in any case, no matter how logical it is
-                notice("Error: Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " is trying to use an invalid channel (" + ChatColor.YELLOW + getChannel(p) + ChatColor.RED + ") - THIS SHOULD NOT HAPPEN!");
-                return null;
-        }
+        String built = ChatColor.YELLOW + "";
+
+        //bla bla probably inefficient as fuck but, well - fuck it. (plus, this lets me just add channels to the channel class + implement them and done
+
+        built += getChannel(p).toString().toUpperCase() + " " + ChatColor.DARK_GRAY + "|" + ChatColor.YELLOW + " ";
+        built += RankUtils.getRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.chars[1] + " " + ChatColor.YELLOW;
+        built += m;
+
+        return built;
     }
 
     public static void msg(Player p, String msg, Channel c) {
