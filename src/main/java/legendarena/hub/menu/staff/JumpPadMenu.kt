@@ -32,4 +32,5 @@ class JumpPadMenu {
     public fun show(p: Player) {
         p.openInventory(inv)
     }
+
 }

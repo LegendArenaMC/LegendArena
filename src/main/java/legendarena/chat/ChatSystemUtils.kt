@@ -1,5 +1,6 @@
 package legendarena.chat
 
+import legendapi.fanciful.FancyMessage
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils

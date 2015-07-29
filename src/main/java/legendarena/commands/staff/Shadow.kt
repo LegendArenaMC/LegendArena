@@ -49,7 +49,7 @@ class Shadow : CommandExecutor {
             if(e)
                 sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "Now ignoring shadow mutes.")
             else
-                sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "No lionger ignoring shadow mutes.")
+                sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "No longer ignoring shadow mutes.")
         }
 
         else help(sender)

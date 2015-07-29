@@ -9,6 +9,7 @@ import legendarena.chat.ChatSystem
 import legendarena.utils.MobSpawnUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -43,11 +44,7 @@ class Staff: CommandExecutor {
             gerald.setCustomNameVisible(true)
             gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
             gerald.setTarget(sender)
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), Runnable({
-                fun run() {
-                    gerald.setHealth(0.0)
-                }
-            }), 40L)
+            gerald.setHealth(1.0)
 
             return true
         }

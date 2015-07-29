@@ -42,7 +42,7 @@ class MOTDTools : CommandExecutor {
                 ChatSystem.notice("Staff member " + sender.getName() + " has changed the MOTD notice from \"" + MOTDUtils.getNotice() + "\" to \"" + ChatUtils.formatCast(args, 0) + "\"")
                 MOTDUtils.setNotice(ChatUtils.formatCast(args, 0))
             }
-        } else if(args[0].equals("setmotd")) {
+        } else if(args[0].equals("setmotd") || args[0].equals("override")) {
             if(!Rank.ADMIN.isRanked(sender)) {
                 sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                 return

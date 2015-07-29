@@ -31,7 +31,7 @@ class EmeraldCmd : CommandExecutor {
         sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
         sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
         sender.sendMessage(ChatUtils.getFormattedHeader("User Commands"))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds info", "Shows your emeralds info."))
+        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds amount", "Shows how many emeralds you have."))
     }
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
@@ -43,9 +43,8 @@ class EmeraldCmd : CommandExecutor {
         if(args.size() == 0)
             help(sender)
         else {
-            if(args[0].equals("info")) {
-                sender.sendMessage(ChatUtils.getFormattedHeader("Your Emerald Info"))
-                sender.sendMessage("" + ChatColor.YELLOW + "Amount " + ChatColor.YELLOW + ChatUtils.chars[1] + ChatColor.GREEN + " " + emeralds!!.getEmeralds(sender as Player))
+            if(args[0].equals("amount")) {
+                sender.sendMessage(ChatUtils.getFormattedHelpMsg("You Have", "" + emeralds!!.getEmeralds(sender as Player) + " emeralds"))
             } else if(args[0].equals("add")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))

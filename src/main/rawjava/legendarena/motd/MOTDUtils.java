@@ -32,7 +32,6 @@ public class MOTDUtils {
             "Does not support the Adventure Update.", //the Adventure Update is /Beta/ 1.8 - this is release 1.8 we're on
             "All your base are belong to us.", //You know what this is a reference to. If you don't know, you fail at the internet.
             "The world mourns, as on days like these, we are all Brits.", //reference to Fallout 3 Numbers Station ( it's really a good read, btw - http://creepypasta.wikia.com/wiki/Fallout_3:_Numbers_Station )
-            "I can't believe they've actually done it. Not long left.", //reference to the above ...thing.. (unsure if the number station is a real thing in FO3, but just gonna assume not for now)
             "Have you tried turning it off and on again?", //reference to IT Crowd (and half of IT)
             "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
             "IT'S DONOR, NOT DONATOR", //tiny rant about people using donator instead of donor (seriously, fucking learn the difference, PLEASE)

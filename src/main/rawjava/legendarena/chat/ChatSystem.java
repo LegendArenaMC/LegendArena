@@ -40,7 +40,7 @@ public class ChatSystem {
 
     /**
      * Toggle if a certain staff member should see shadow mute notices or not.
-     * @param p The staff member to toggle notices for
+     * @param p The staff member to toggle shadowmute notices on/off for
      */
     public static boolean toggleShadowMuteNotice(Player p) {
         if(ignoreShadowMuteNotice.contains(p.getUniqueId())) {
@@ -197,7 +197,14 @@ public class ChatSystem {
 
         if(isShadowMuted(p)) {
             Message shadowBuilt = new Message().append(ChatColor.RED + "[SHADOWMUTED] " + ChatColor.WHITE + built.toString());
-            shadowBuilt.broadcast(Rank.MOD);
+            for(Player p2 : Bukkit.getOnlinePlayers()) {
+                if(ignoreShadowMuteNotice.contains(p2.getUniqueId()))
+                    continue;
+                if(!Rank.MOD.isRanked(p2))
+                    continue;
+                shadowBuilt.send(p2);
+            }
+            //shadowBuilt.broadcast(Rank.MOD);
             built.send(p);
 
             new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.INFO, ChatColor.stripColor(shadowBuilt.toString()));

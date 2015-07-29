@@ -1,11 +1,8 @@
 package legendarena.hub.particles;
 
-import legendarena.hub.particles.lib.ParticleEffect;
-import org.bukkit.Location;
+public class ParticleCore {
 
-public class ParticleCore implements Runnable {
-
-    public void run() {
+    /*public void run() {
         //
     }
 
@@ -23,6 +20,6 @@ public class ParticleCore implements Runnable {
 
     public static void playEffect(int disperse, int yDisperse, Location l, ParticleEffect p, float speed, int amount, int radius) {
         p.display(disperse, yDisperse, disperse, speed, amount, l, radius);
-    }
+    }*/
 
 }

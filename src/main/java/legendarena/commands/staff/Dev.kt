@@ -1,6 +1,7 @@
 package legendarena.commands.staff
 
 import legendapi.emeralds.EmeraldsCore
+import legendapi.emeralds.VaultReflector
 import legendapi.message.Message
 import legendapi.utils.CalendarUtils
 import legendapi.utils.ChatUtils
@@ -17,7 +18,7 @@ class Dev : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(!Rank.DEV.isRanked(sender))
-            return false
+            return false //pretend the command is broken/not registered
         if(args.size() == 0) {
             //thanks kotlin for not liking sender.sendMessage([color] + [string]) (also ignore the change from blue to green with no var name change)
             val blue = "" + ChatColor.GREEN
@@ -28,7 +29,7 @@ class Dev : CommandExecutor {
             sender.sendMessage(blue + "Max memory: " + humanReadableByteCount((Runtime.getRuntime().maxMemory() / 8), true))
             sender.sendMessage(blue + "Date: " + CalendarUtils().getDateString())
             sender.sendMessage(ChatUtils.getFormattedHeader("API/Library Versions"))
-            sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("Kotlin"))
+            sender.sendMessage(blue + "Kotlin version: " + VersionUtils.getVersion("KotlinLoader"))
             sender.sendMessage(blue + "API version: " + VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"")
             return true
         } else if(args[0].equals("gc")) {
@@ -41,8 +42,8 @@ class Dev : CommandExecutor {
             JumpPad.jump(sender as Player)
             return true
         } else if(args[0].equals("resetemeralds")) {
-            EmeraldsCore().resetEmeralds(sender as Player, false, "Fixing Stuffs")
-            sender.sendMessage("" + ChatColor.GREEN + "Emeralds reset.")
+            EmeraldsCore().resetEmeralds(sender as Player, false, "Dev Command Manual Reset")
+            sender.sendMessage("" + ChatColor.GREEN + "Emeralds amount reset.")
         }
         return false
     }

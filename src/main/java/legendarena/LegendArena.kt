@@ -11,10 +11,11 @@ import legendarena.listeners.*
 import legendarena.listeners.menu.*
 import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
+import java.util.*
 
 class LegendArena : KotlinUtils() {
 
-    public final var devMode: Boolean = true
+    public final var devMode: Boolean = false
 
     override fun onEnable() {
         var setup = SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
@@ -25,7 +26,6 @@ class LegendArena : KotlinUtils() {
 
         setup.registerCommand(Staff(), "staff")
         setup.registerCommand(Dev(), "dev")
-        setup.registerCommand(Particle(), "particles")
         setup.registerCommand(Chat(), "chat")
         setup.registerCommand(Help(), "help")
         setup.registerCommand(Firework(), "firework")
@@ -34,6 +34,7 @@ class LegendArena : KotlinUtils() {
         setup.registerCommand(StaffList(), "stafflist")
         setup.registerCommand(MOTDTools(), "motd")
         setup.registerCommand(Gadgets(), "gadgets")
+        setup.registerCommand(Autoban(), "autoban")
         setup.registerCommand(EmeraldCmd(), "emeralds")
 
         setup.announceStatus("Setting up listeners...")
@@ -44,6 +45,7 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
         setup.registerListener(BlockPlaceListener())
+        setup.registerListener(PlayerDamageListener())
 
         //this took me more time to figure out than I wish to admit.
 
@@ -56,26 +58,36 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up timers...")
 
         setup.registerNonAsyncTimer(HubWarper.InitPlayers(), 10)
+        setup.registerNonAsyncTimer(JumpPad.Timer(), 5)
 
         setup.announceStatus("Setting up aliases...")
 
         setup.setAliases("chat", "sc", "c", "say")
         setup.setAliases("stafflist", "sl", "liststaff")
-        setup.setAliases("particles", "ps", "particle")
         setup.setAliases("firework", "fw")
         setup.setAliases("gadgets", "gs")
 
+        setup.announceStatus("Setting up configuration...")
+
+        var config = ConfigUtils.config
+        config.addDefault("configVersion", 1)
+        config.addDefault("enable.lobbyServer", true)
+        config.addDefault("enable.warp", true)
+        config.addDefault("hubWorld", "world")
+        var founders = ArrayList<String>();
+        founders.add("ThePixelDev")
+        founders.add("ZRaptor22")
+        config.addDefault("founders", founders)
+        config.genIfNotExists("configVersion")
+
         setup.announceStatus("Running extra setup stuff...")
 
-        ConfigUtils.init();
         VersionUtils.setVersion("LegendArena", "1.0-SNAPSHOT")
-        VersionUtils.setVersion("Kotlin", "0.12.613")
-        VersionUtils.setVersion("KotlinLoader", VersionUtils.getVersion("Kotlin")) //compatibility stuff if other plugins want to use KotlinLoader instead of Kotlin for the version String getter (..thing)
+        VersionUtils.setVersion("KotlinLoader", "0.12.613")
     }
 
     override fun onDisable() {
         Bukkit.getScheduler().cancelTasks(Bukkit.getPluginManager().getPlugin("LegendArena"))
-        ConfigUtils.saveConfig();
     }
 
 }

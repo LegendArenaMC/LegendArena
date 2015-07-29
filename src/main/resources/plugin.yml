@@ -1,11 +1,11 @@
 main: legendarena.LegendArenaLoader
 name: LegendArena
 depend: ["KotlinLoader", "LegendAPI"]
-version: 1.0-SNAPSHOT
+version: 1.0
 website: "http://thenamedev.net/legendarena/"
 author: ThePixelDev
 authors: ["FOSS Contributors"]
-description: "§cLegend Arena custom plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"
+description: "§cLegend Arena plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"
 commands:
   firework:
     description: Fireworks! Yaaay!
@@ -14,10 +14,6 @@ commands:
   warp:
     description: Warps you to different areas. Whee!
     usage: "/warp"
-  particles:
-    description: Particles. Yay!
-    usage: "/particles"
-    aliases: ["particle", "ps"]
   gadgets:
     description: Gadgets control command.
     usage: "/gadgets [player]"
@@ -45,3 +41,8 @@ commands:
     description: MOTD utilities.
   shadow:
     description: Shadow utils.
+  autoban:
+    description: Banned!
+  punish:
+    description: Get banned, son!
+    aliases: ["ban", "kick", "warn"]

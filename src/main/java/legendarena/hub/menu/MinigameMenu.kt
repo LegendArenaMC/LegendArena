@@ -17,15 +17,8 @@ import java.util.*
 class MinigameMenu {
 
     private var inv: Inventory? = null
-    private var init = false
 
     public constructor() {
-        init()
-    }
-
-    private fun init() {
-        if(init) return
-
         val items = HashMap<Int, ItemStack>()
 
         //TODO: Clean this damn thing up
@@ -38,8 +31,6 @@ class MinigameMenu {
 
         for(a in items.keySet())
             inv!!.setItem(a, items.get(a))
-
-        init = true
     }
 
     public fun show(p: Player) {

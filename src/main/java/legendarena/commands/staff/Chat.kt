@@ -17,7 +17,7 @@ class Chat : CommandExecutor {
 
     private fun run(sender: CommandSender, args: Array<String>) {
         if(!Rank.HELPER.isRanked(sender as Player)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+            sender.sendMessage(RankUtils.noPermissions(Rank.HELPER))
             return
         }
 

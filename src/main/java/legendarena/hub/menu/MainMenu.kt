@@ -23,21 +23,16 @@ class MainMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        init()
-    }
+        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Main Menu")
 
-    private fun init() {
-        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Main Menu")
-
-        inv!!.setItem(4, MenuUtils.createItem(Material.WATCH, "" + ChatColor.GREEN + "Warper"))
+        inv!!.setItem(0, MenuUtils.createItem(Material.WATCH, "" + ChatColor.GREEN + "Warper"))
         //inv!!.setItem(22, MenuUtils.createItem(Material.JUKEBOX, "" + ChatColor.GREEN + "Music"))
-        inv!!.setItem(24, MenuUtils.createItem(Material.POTION, "" + ChatColor.GREEN + "Particles"))
     }
 
     public fun show(p: Player) {
-        val pInv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Main Menu")
+        val pInv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Main Menu")
         pInv.setContents(inv!!.getContents())
-        pInv.setItem(20, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Emeralds", "" + ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore().getEmeralds(p) + ChatColor.YELLOW + " emeralds!"))
+        pInv.setItem(8, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Emeralds", "" + ChatColor.YELLOW + "You have " + ChatColor.RED + EmeraldsCore().getEmeralds(p) + ChatColor.YELLOW + " emeralds!"))
         p.openInventory(pInv)
     }
 }

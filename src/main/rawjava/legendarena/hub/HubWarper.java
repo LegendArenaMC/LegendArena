@@ -20,14 +20,14 @@ public class HubWarper {
         public void run() {
             for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
-                if(!Rank.FOUNDER.isRanked(p)) p.getInventory().clear();
+                if(!Rank.MOD.isRanked(p)) p.getInventory().clear();
                 if(Rank.MOD.isRanked(p)) {
                     try {
                         if(p.getInventory().getItem(5) != getMainMenu())
                             p.getInventory().setItem(5, getMainMenu());
                     }
                     catch(Exception ex) {
-                        p.getInventory().setItem(5, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
+                        p.getInventory().setItem(5, getMainMenu()); //I BROKE IT ALL, MY TERMINAL IS BEING SPAMMED CURRENTLY, SEND HELP
                     }
                     try {
                         if(p.getInventory().getItem(3) != getStaffMenu())
@@ -36,13 +36,20 @@ public class HubWarper {
                     catch(Exception ex) {
                         p.getInventory().setItem(3, getStaffMenu());
                     }
+                    try {
+                        if(p.getInventory().getItem(4) == getMainMenu())
+                            p.getInventory().setItem(4, MenuUtils.createItem(Material.AIR));
+                    }
+                    catch(Exception ex) {
+                        //do nothing
+                    }
                 } else {
                     try {
                         if(p.getInventory().getItem(4) != getMainMenu())
                             p.getInventory().setItem(4, getMainMenu());
                     }
                     catch(Exception ex) {
-                        p.getInventory().setItem(4, getMainMenu()); //I BROKE IT ALL, MY CONSOLE IS BEING SPAMMED CURRENTLY, SEND HELP
+                        p.getInventory().setItem(4, getMainMenu());
                     }
                 }
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true));

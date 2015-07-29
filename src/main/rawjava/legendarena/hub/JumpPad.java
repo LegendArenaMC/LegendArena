@@ -1,12 +1,8 @@
 package legendarena.hub;
 
-import legendapi.message.Message;
 import legendapi.utils.Cooldown;
-import legendarena.hub.particles.ParticleCore;
-import legendarena.hub.particles.lib.ParticleEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +15,6 @@ public class JumpPad {
 
     public static void jump(Player p) {
         p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1));
-        new Message().send(Sound.FIZZ, 6, p);
     }
 
     public static class JumpPadListener implements Listener {
@@ -28,6 +23,7 @@ public class JumpPad {
 
         @EventHandler
         public void listenForMove(final PlayerMoveEvent ev) {
+            //noinspection deprecation
             if(!ev.getPlayer().isOnGround()) return;
             if(cooldown.containsKey(ev.getPlayer().getUniqueId()))
                 if(!cooldown.get(ev.getPlayer().getUniqueId()).done())
@@ -39,6 +35,30 @@ public class JumpPad {
                         jump(ev.getPlayer());
                     }
                 }, 2l);
+            }
+        }
+
+    }
+
+    public static class Timer implements Runnable {
+
+        private HashMap<UUID, Cooldown> cooldown = new HashMap<>();
+
+        public void run() {
+            for(final Player p : Bukkit.getOnlinePlayers()) {
+                //noinspection deprecation
+                if(!p.isOnGround()) return;
+                if(cooldown.containsKey(p.getUniqueId()))
+                    if(!cooldown.get(p.getUniqueId()).done())
+                        return;
+                if(p.getLocation().getBlock().getType() == Material.IRON_PLATE && p.getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.REDSTONE_BLOCK) {
+                    cooldown.put(p.getUniqueId(), new Cooldown(0.05));
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("LegendArena"), new Runnable() {
+                        public void run() {
+                            jump(p);
+                        }
+                    }, 2l);
+                }
             }
         }
 
