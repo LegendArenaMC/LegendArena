@@ -220,11 +220,11 @@ public class ChatSystem {
         if(getChannel(p) == Channel.GLOBAL)
             return new ChatSystemUtils().getChatMessage(m, p);
 
-        String built = ChatColor.YELLOW + "";
+        String built = "";
 
         //bla bla probably inefficient as fuck but, well - fuck it. (plus, this lets me just add channels to the channel class + implement them and done
 
-        built += getChannel(p).toString().toUpperCase() + " " + ChatColor.DARK_GRAY + "|" + ChatColor.YELLOW + " ";
+        built += getChannelName(getChannel(p)) + " " + ChatColor.DARK_GRAY + "|" + ChatColor.YELLOW + " ";
         built += RankUtils.getRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.chars[1] + " " + ChatColor.YELLOW;
         built += m;
 

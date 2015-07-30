@@ -48,7 +48,6 @@ public class MOTDUtils {
     };
 
     private static final String[] songList = {
-            "I'll beee goneee, in a daaayyyy...", //reference to "a-ha - Take On Me" (also, I'm unsure if it actually is "in a day" or not)
             "Everybody wants to rule the world...", //reference to "Lorde - Everybody Wants To Rule The World"
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "what is 'real'?", //reference to "Varien - Supercell"'s music video
@@ -134,6 +133,10 @@ public class MOTDUtils {
             "Read more JComic!",
             "WHERE'S MY SNAPSHOT!?!? WHERE IS IT!?", //don't mind me, just poking fun at the butthurt fanboys
             "NSAdows 10: Now with 150% more NSA!",
+            "Go back to your Linux subs with your tinfoil hats", //fuck you too "PCMasterRace" elitists. Seriously, please. For the love of GabeN, DON'T BE AN ELITIST.
+            "\"I would switch to Linux, but...\"", //WE GET IT, YOU DON'T HAVE YOUR "[Generic Shitty Triple-A Game Title]" on Linux (ahem - sorry, GNU/Linux). Plus, if you used GNU/Linux, and showed support for a Linux port of said game, maybe there actually would be a GNU/Linux version of the game. </rant>
+            "I'd just like to interject for a moment..", //What you refer to as "Linux", is, in fact, GNU/Linux, as I've recently taken to calling it, GNU+Linux. (sorry)
+            "Windows? Pfft. I scoff at your licenses.", //..I need to make a linuxJokeList.
             "o man i cannot into CSS", //see /r/Ooer (or for ultra "WTF"-ness - /r/OoerIntensifies (also, good luck with that one))
             "Sticky keys? What's that?" //obligatory "windows krill" commment
     };
@@ -158,7 +161,8 @@ public class MOTDUtils {
             "Good that's still working.", //*yawn* portal, again..
             "SPAAAAAACEEE", //bla bla bla portal reference, you probably get the idea by now
             "News flash! Creepers on the loose!",
-            "Half Life 3 confirmed" //inb4 /u/WhenIsHL3 bot
+            "Half Life 3 confirmed", //inb4 /u/WhenIsHL3 bot
+            "gaben can i pls have herf lerf fer" //HALF LIFE 4 CONFIRMED GUYS!
     };
 
     /**

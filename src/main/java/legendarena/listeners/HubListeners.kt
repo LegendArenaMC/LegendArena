@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import java.util.*
 
-class HubListeners : Listener {
+public class HubListeners : Listener {
 
     private val cooldown = HashMap<UUID, Cooldown>()
 

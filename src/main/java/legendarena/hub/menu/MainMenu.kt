@@ -18,7 +18,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
 
-class MainMenu {
+Deprecated class MainMenu {
 
     private var inv: Inventory? = null
 

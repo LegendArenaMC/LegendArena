@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.ServerListPingEvent
 
-class ServerPingListener: Listener {
+public class ServerPingListener: Listener {
 
     EventHandler fun listenForPing(ev: ServerListPingEvent) {
         ev.setMotd(MOTDUtils.getBuiltMOTD())

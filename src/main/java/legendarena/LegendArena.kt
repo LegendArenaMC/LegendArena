@@ -49,7 +49,7 @@ class LegendArena : KotlinUtils() {
 
         //this took me more time to figure out than I wish to admit.
 
-        setup.registerListener(MainMenuListener())
+        //setup.registerListener(MainMenuListener())
         setup.registerListener(ChatMenuListener())
         setup.registerListener(MinigameMenuListener())
         setup.registerListener(JumpPadMenuListener())

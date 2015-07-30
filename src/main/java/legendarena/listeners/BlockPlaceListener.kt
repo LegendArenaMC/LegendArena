@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 
-class BlockPlaceListener : Listener {
+public class BlockPlaceListener : Listener {
 
     EventHandler
     public fun listenForPlace(ev: BlockPlaceEvent) {
