@@ -28,7 +28,7 @@ class ChatMenu {
         inv!!.setItem(1, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Dev", "Click to join " + ChatColor.DARK_PURPLE + "DEV" + ChatColor.BLUE + " channel.", 10))
         inv!!.setItem(2, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Admin", "Click to join " + ChatColor.DARK_RED + "ADMIN" + ChatColor.BLUE + " channel.", 14))
         inv!!.setItem(3, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Staff", "Click to join " + ChatColor.GREEN + "STAFF" + ChatColor.BLUE + " channel.", 5))
-        inv!!.setItem(4, createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Alert", "Click to join " + ChatColor.RED + "ALERT" + ChatColor.BLUE + " channel.", 14))
+        inv!!.setItem(4, createItem(Material.STAINED_GLASS, "" + ChatColor.GREEN + "Alert", "Click to join " + ChatColor.RED + "ALERT" + ChatColor.BLUE + " channel.", 1))
     }
 
     public fun show(p: Player) {
@@ -42,6 +42,14 @@ class ChatMenu {
      * Yes, I am this lazy.
      *
      * Don't ask.
+     *
+     * I have my reasoning.
+     *
+     * Mainly because fuck you.
+     *
+     * And fuck MenuUtils.
+     *
+     * And also you.
      */
     internal fun createItem(material: Material, name: String, lore: String, color: Short): ItemStack {
         val i = ItemStack(material, 1, color)

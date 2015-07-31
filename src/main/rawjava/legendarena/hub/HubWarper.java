@@ -68,15 +68,11 @@ public class HubWarper {
     }
 
     public static ItemStack getMainMenu() {
-        return MenuUtils.createItem(Material.NETHER_STAR, ChatColor.GREEN + "Main Menu", ChatColor.BLUE + "Right click me to bring up the main menu!");
+        return MenuUtils.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ChatColor.BLUE + "Right click me to bring up the warper!");
     }
 
     public static ItemStack getStaffMenu() {
         return MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Menu", ChatColor.BLUE + "Right click me to bring up the staff menu!");
-    }
-
-    public static ItemStack getSoonTM() {
-        return MenuUtils.createItem(Material.APPLE, ChatColor.GREEN + "Soon[tm]", ChatColor.BLUE + "Hm? What's this? It looks edible... but it seems to be useless...");
     }
 
 }

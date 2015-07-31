@@ -19,22 +19,18 @@ class MinigameMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        val items = HashMap<Int, ItemStack>()
+        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Warper")
 
-        //TODO: Clean this damn thing up
+        //"because inv could have changed since the last if check" go home intellij you're drunk
+        inv!!.setItem(0, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
+        inv!!.setItem(1, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 
-        items.put(4, MenuUtils.createItem(Material.BED, "" + ChatColor.GRAY + "⇐ Back"))
-        items.put(21, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
-        items.put(23, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
-
-        inv = Bukkit.createInventory(null, 27, ChatUtils.getCustomMsg("Menus") + "Warper")
-
-        for(a in items.keySet())
-            inv!!.setItem(a, items.get(a))
+        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "Close Menu"))
     }
 
     public fun show(p: Player) {
-        p.closeInventory()
+        //...who thought this was a good idea to call a closeInventory function
+        //p.closeInventory()
         p.openInventory(inv)
     }
 

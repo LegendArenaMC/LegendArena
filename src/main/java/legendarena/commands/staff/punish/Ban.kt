@@ -4,12 +4,20 @@
 
 package legendarena.commands.staff.punish
 
-import legendarena.punish.PunishCmd
+import legendapi.utils.StaffPlayer
+import org.bukkit.command.Command
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class Ban : PunishCmd {
+class Ban : CommandExecutor {
 
-    override public fun run(p: Player, staff: Player) {
+    override fun onCommand(sender: CommandSender?, p1: Command?, p2: String?, args: Array<out String>?): Boolean {
+        //
+        return true
+    }
+
+    public fun run(p: Player, staff: StaffPlayer) {
         //
     }
 

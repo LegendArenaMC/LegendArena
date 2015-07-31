@@ -3,7 +3,6 @@ package legendarena.hub.menu.staff
 import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
 import legendarena.chat.ChatSystem
-import legendarena.hub.menu.MainMenu
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material

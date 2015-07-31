@@ -74,44 +74,16 @@ class MOTDTools : CommandExecutor {
             }
         } else if(args[0].equals("getmotd")) {
             sender.sendMessage(MOTDUtils.getBuiltMOTD())
-        } else if(args[0].equals("list")) {
-            if(args.size() == 1) {
-                var page = PagedUtils(15)
-                page.input(MOTDUtils.getFullMOTDArrayList())
-                var a = page.output()
+        }
 
-                var built = ""
-                for(b in a) {
-                    if(built == "")
-                        built = "\"" + b + "\""
-                    else
-                        built += ", \"" + b + "\""
-                }
-
-                sender.sendMessage("" + ChatColor.BLUE + built)
-            } else {
-                try {
-                    //give no shits about the return as long as it isn't an exception
-                    Integer.getInteger(args[1])
-                } catch(ex: Exception) {
-                    sender.sendMessage("" + ChatColor.RED + "\"" + args[1] + "\" is not an integer!")
-                    return
-                }
-
-                var page = PagedUtils(15, Integer.getInteger(args[1]))
-                page.input(MOTDUtils.getFullMOTDArrayList())
-                var a = page.output()
-
-                var built = ""
-                for(b in a) {
-                    if(built == "")
-                        built = "\"" + b + "\""
-                    else
-                        built += ", \"" + b + "\""
-                }
-
-                sender.sendMessage("" + ChatColor.BLUE + built)
-            }
+        else {
+            sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd notice [notice]", "Sets the MOTD notice"))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd lastgiven", "Get the last given randomized MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
+            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd getmotd", "Get the currently showing MOTD."))
         }
     }
 

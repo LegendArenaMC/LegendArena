@@ -23,8 +23,7 @@ public class JumpPad {
 
         @EventHandler
         public void listenForMove(final PlayerMoveEvent ev) {
-            //noinspection deprecation
-            if(!ev.getPlayer().isOnGround()) return;
+            if(ev.getPlayer().isFlying()) return;
             if(cooldown.containsKey(ev.getPlayer().getUniqueId()))
                 if(!cooldown.get(ev.getPlayer().getUniqueId()).done())
                     return;
@@ -34,7 +33,7 @@ public class JumpPad {
                     public void run() {
                         jump(ev.getPlayer());
                     }
-                }, 2l);
+                }, 1l);
             }
         }
 

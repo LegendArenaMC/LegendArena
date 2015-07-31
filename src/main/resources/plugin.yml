@@ -11,9 +11,6 @@ commands:
     description: Fireworks! Yaaay!
     usage: "/firework"
     aliases: ["fw"]
-  warp:
-    description: Warps you to different areas. Whee!
-    usage: "/warp"
   gadgets:
     description: Gadgets control command.
     usage: "/gadgets [player]"
@@ -43,6 +40,11 @@ commands:
     description: Shadow utils.
   autoban:
     description: Banned!
-  punish:
-    description: Get banned, son!
-    aliases: ["ban", "kick", "warn"]
+  ban:
+    description: Punish command - ban
+  kick:
+    description: Punish command - kick
+  warn:
+    description: Punish command - warn
+  mute:
+    description: Punish command - mute

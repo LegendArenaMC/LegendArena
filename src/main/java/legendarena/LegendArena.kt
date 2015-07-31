@@ -29,7 +29,6 @@ class LegendArena : KotlinUtils() {
         setup.registerCommand(Chat(), "chat")
         setup.registerCommand(Help(), "help")
         setup.registerCommand(Firework(), "firework")
-        setup.registerCommand(Warp(), "warp")
         setup.registerCommand(Shadow(), "shadow")
         setup.registerCommand(StaffList(), "stafflist")
         setup.registerCommand(MOTDTools(), "motd")

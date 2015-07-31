@@ -21,11 +21,6 @@ class StaffList : CommandExecutor {
         for(p in Bukkit.getOnlinePlayers())
             if(Rank.HELPER.isRanked(p))
                 staffOnline.add(p)
-        /*if(staffOnline.isEmpty())
-            sender.sendMessage("" + ChatColor.RED + "There's no staff online on this server right now :(")
-        else
-            for(p in staffOnline)
-                sender.sendMessage("" + ChatColor.RED + p.getName() + ChatColor.DARK_GRAY + " // " + ChatColor.GREEN + RankUtils.getRank(p))*/
         var msg = FancyMessage("-•- [Online Staff] -•-")
                 .color(ChatColor.GREEN)
         if(staffOnline.isEmpty()) {
@@ -39,7 +34,7 @@ class StaffList : CommandExecutor {
                     .then(p.getName())
                         .color(RankUtils.getRank(p).getNameColor())
                         .suggest("/msg " + p.getName() + " ")
-                        .itemTooltip(MenuUtils.createItem(Material.PAPER, "" + ChatColor.GREEN + "Click here to message", "" + RankUtils.getRank(p).getNameColor() + p.getName()))
+                        .tooltip("Click to message " + p.getName())
                     .then(" // ")
                         .color(ChatColor.DARK_GRAY)
                     .then(RankUtils.getRank(p).toString())
