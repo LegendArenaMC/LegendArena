@@ -1,5 +1,6 @@
 package legendarena.commands.staff
 
+import legendapi.fanciful.FancyMessage
 import legendapi.message.Message
 import legendapi.utils.ChatUtils
 import legendapi.utils.Cooldown
@@ -17,6 +18,7 @@ import org.bukkit.entity.Creeper
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import java.text.MessageFormat
+import java.util.*
 
 class Staff: CommandExecutor {
 
@@ -45,6 +47,34 @@ class Staff: CommandExecutor {
             gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
             gerald.setTarget(sender)
             gerald.setHealth(1.0)
+
+            return true
+        } else if(args.size() >= 1 && args[0].equals("bridge")) {
+
+            Thread(Runnable() {
+                fun run() {
+                    //this is overly complicated for an easter egg, by the way.
+                    FancyMessage("What, is your name?")
+                                .color(ChatColor.BLUE)
+                            .then("\"" + sender.getName() + "\"\n")
+                                .color(ChatColor.GREEN)
+                            .send(sender)
+                    Thread.sleep(1000)
+                    FancyMessage("What, is your quest?")
+                                .color(ChatColor.BLUE)
+                            .then("\"To seek the holy Grail.\"\n")
+                                .color(ChatColor.GREEN)
+                            .send(sender)
+                    Thread.sleep(1000)
+                    FancyMessage("What, is your favourite color?\n")
+                                .color(ChatColor.BLUE)
+                            .then("\"Blue. No, yEEEEEELOOOOOWWWWWW\"")
+                                .color(ChatColor.GREEN)
+                            .send(sender)
+                    Thread.sleep(500)
+                    (sender as Player).setHealth(0.0)
+                }
+            }).start();
 
             return true
         }
@@ -87,7 +117,7 @@ class Staff: CommandExecutor {
                 ChatUtils.clearChat(sender.getName())
                 c = Cooldown(120.0)
             } else if(args[0].equals("vanish")) {
-                //
+                sender.sendMessage("soon[tm]")
             }
 
             else {

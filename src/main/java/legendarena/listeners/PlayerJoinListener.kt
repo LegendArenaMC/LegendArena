@@ -6,6 +6,7 @@ import legendapi.utils.MenuUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
+import legendarena.staffutils.VanishUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -32,12 +33,14 @@ public class PlayerJoinListener : Listener {
                     .then("!")
                         .color(ChatColor.GREEN)
                     .then("\n\n")
-                    .then("As the server is still in alpha, expect bugs. (sorry about that by the way!)")
+                    .then("As the server is still in alpha, expect bugs. (sorry about that, by the way!)")
                         .color(ChatColor.YELLOW)
                     .send(ev.getPlayer())
         }
         if(ChatSystem.isShadowMuted(ev.getPlayer()))
             ChatSystem.notice("Player \"" + ev.getPlayer().getName() + "\" is shadow muted.")
+
+        VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {

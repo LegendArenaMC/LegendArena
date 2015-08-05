@@ -23,10 +23,10 @@ class JumpPadMenu {
     public constructor() {
         inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Jump Pads Menu")
 
-        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
-
         inv!!.setItem(0, MenuUtils.createItem(Material.IRON_PLATE, "" + ChatColor.GREEN + "Get JumpPad"))
         inv!!.setItem(1, MenuUtils.createItem(Material.GOLD_PLATE, "" + ChatColor.GREEN + "Portable JumpPad"))
+
+        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
     }
 
     public fun show(p: Player) {
