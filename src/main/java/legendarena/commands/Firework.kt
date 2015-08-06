@@ -1,6 +1,8 @@
 package legendarena.commands
 
 import legendapi.emeralds.EmeraldsCore
+import legendapi.message.Message
+import legendapi.message.MessageType
 import legendapi.utils.*
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -30,7 +32,9 @@ class Firework : CommandExecutor {
         }
 
         PluginUtils.shootFireworks(sender)
-        sender.sendMessage("" + ChatColor.GREEN + "Woo, fireworks!")
+        //sender.sendMessage("" + ChatColor.GREEN + "Woo, fireworks!\n \nJust FYI, if you don't see the particles, your resource pack may have them removed.")
+        Message(MessageType.TITLE).append("" + ChatColor.GREEN + "Woo, fireworks!").send(sender)
+        Message(MessageType.SUBTITLE).append("" + ChatColor.YELLOW + "Just FYI, if you don't see particles, your resource pack may have them disabled.").send(sender)
         //3 second cooldown
         cooldown.put(sender.getUniqueId(), Cooldown(3.0))
         return true

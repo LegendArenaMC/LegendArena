@@ -1,8 +1,10 @@
 package legendarena.hub;
 
+import legendapi.message.Message;
 import legendapi.utils.Cooldown;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +19,7 @@ public class JumpPad {
 
     public static void jump(Player p) {
         p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1));
+        new Message().setSound(Sound.STEP_SNOW).setPitch(2f).send(p);
     }
 
     public static class JumpPadListener implements Listener {
@@ -28,25 +31,18 @@ public class JumpPad {
                 if(!cooldown.get(ev.getPlayer().getUniqueId()).done())
                     return;
             if(ev.getPlayer().getLocation().getBlock().getType() == Material.IRON_PLATE && ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.REDSTONE_BLOCK) {
-                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.05));
-                jump(ev.getPlayer());
-            }
-        }
-
-    }
-
-    public static class Timer implements Runnable {
-
-        public void run() {
-            for(final Player p : Bukkit.getOnlinePlayers()) {
-                if(p.isFlying()) return;
-                if(cooldown.containsKey(p.getUniqueId()))
-                    if(!cooldown.get(p.getUniqueId()).done())
-                        return;
-                if(p.getLocation().getBlock().getType() == Material.IRON_PLATE && p.getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.REDSTONE_BLOCK) {
-                    cooldown.put(p.getUniqueId(), new Cooldown(0.05));
-                    jump(p);
-                }
+                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.08));
+                //new Thread() is to run Thread.sleep() without interrupting the rest of the server
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(150);
+                        } catch(InterruptedException e) {
+                            //
+                        }
+                        jump(ev.getPlayer());
+                    }
+                }).start();
             }
         }
 

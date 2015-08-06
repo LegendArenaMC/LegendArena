@@ -48,7 +48,6 @@ class LegendArena : KotlinUtils() {
 
         //this took me more time to figure out than I wish to admit.
 
-        //setup.registerListener(MainMenuListener())
         setup.registerListener(ChatMenuListener())
         setup.registerListener(MinigameMenuListener())
         setup.registerListener(JumpPadMenuListener())
@@ -57,7 +56,6 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up timers...")
 
         setup.registerNonAsyncTimer(HubWarper.InitPlayers(), 10)
-        setup.registerNonAsyncTimer(JumpPad.Timer(), 5)
 
         setup.announceStatus("Setting up aliases...")
 
@@ -69,15 +67,26 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up configuration...")
 
         var config = ConfigUtils.config
-        config.addDefault("configVersion", 1)
+        var configVer = 2
+        config.setConfigVersion(configVer)
         config.addDefault("enable.lobbyServer", true)
+        config.addDefault("enable.staffHub", true)
         config.addDefault("enable.warp", true)
-        config.addDefault("hubWorld", "world")
+        config.addDefault("hub.world", "world")
+        config.addDefault("hub.location.note", "Leave the following blank for the default world spawn location.")
+        config.addDefault("hub.location.x", "")
+        config.addDefault("hub.location.y", "")
+        config.addDefault("hub.location.z", "")
+        config.addDefault("staffhubhub.world", "world")
+        config.addDefault("staffhub.location.note", "As with the Hub world location, leave the following blank for default world spawn location.")
+        config.addDefault("staffhub.location.x", "")
+        config.addDefault("staffhub.location.y", "")
+        config.addDefault("staffhub.location.z", "")
         var founders = ArrayList<String>();
         founders.add("ThePixelDev")
         founders.add("ZRaptor22")
         config.addDefault("founders", founders)
-        config.genIfNotExists("configVersion")
+        config.upgradeIfConfVersionIsNot(configVer)
 
         setup.announceStatus("Running extra setup stuff...")
 

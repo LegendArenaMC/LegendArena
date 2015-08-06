@@ -52,7 +52,7 @@ public class HubWarper {
                         p.getInventory().setItem(4, getMainMenu());
                     }
                 }
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false));
             }
         }
 
