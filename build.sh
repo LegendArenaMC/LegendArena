@@ -10,7 +10,3 @@ fi
 
 rm build/libs/LegendArena.jar
 mv build/libs/LegendArena-all.jar build/libs/LegendArena.jar
-
-if env | grep -q ^SNAPCI= then
-    gradle upload
-fi
