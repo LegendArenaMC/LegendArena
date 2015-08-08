@@ -1,8 +1,11 @@
 package legendapi.message
 
+import legendapi.log.BukLog
 import legendapi.utils.Rank
+import legendarena.LegendArena
 import org.bukkit.Bukkit
 import org.bukkit.Sound
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class Message {
@@ -13,10 +16,10 @@ class Message {
     private var stay = 10
     private var fadeOut = 5
 
-    private var sound : Sound? = null
+    private var sound: Sound? = null
     private var pitch = 1f
 
-    private var builder : StringBuilder? = null
+    private var builder: StringBuilder? = null
 
     internal var reflector = MessageReflector()
 
@@ -46,91 +49,56 @@ class Message {
     public fun send(vararg p: Player) {
         var msg = toString()
 
-        if(msg != "")
-            for(p1 in p) {
-                if(sound != null) {
-                    p1.playSound(p1.getLocation(), sound, pitch, pitch)
-                }
-                if(type == MessageType.CHAT) {
-                    p1.sendMessage(msg)
-                    continue
-                }
-                if(type == MessageType.TITLE) {
-                    reflector.send(1, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.SUBTITLE) {
-                    reflector.send(0, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.ACTIONBAR) {
-                    reflector.sendActionbar(p1, msg)
-                    continue
-                }
-            }
+        for(p1 in p) {
+            if(sound != null)
+                p1.playSound(p1.getLocation(), sound, pitch, pitch)
+            if(msg != "")
+                _send(p1)
+        }
+    }
+
+    public fun send(p: CommandSender) {
+        if(sound != null)
+            (p as Player).playSound(p.getLocation(), sound, pitch, pitch)
+        _send(p as Player)
     }
 
     Deprecated public fun send(s: Sound, vararg p: Player) {
         setSound(s)
 
-        //Terrible hack for temporary backwards compatibility
-
         var msg = toString()
 
-        if(msg != "")
-            for(p1 in p) {
-                if(sound != null) {
-                    p1.playSound(p1.getLocation(), sound, pitch, pitch)
-                }
-                if(type == MessageType.CHAT) {
-                    p1.sendMessage(msg)
-                    continue
-                }
-                if(type == MessageType.TITLE) {
-                    reflector.send(1, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.SUBTITLE) {
-                    reflector.send(0, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.ACTIONBAR) {
-                    reflector.sendActionbar(p1, msg)
-                    continue
-                }
-            }
+        for(p1 in p) {
+            if(sound != null)
+                p1.playSound(p1.getLocation(), sound, pitch, pitch)
+            if(msg != "")
+                _send(p1)
+        }
     }
 
     Deprecated public fun send(s: Sound, pi: Float, vararg p: Player) {
         setPitch(pi)
         setSound(s)
 
-        //Terrible hack for temporary backwards compatibility
-
         var msg = toString()
 
-        if(msg != "")
-            for(p1 in p) {
-                if(sound != null) {
-                    p1.playSound(p1.getLocation(), sound, pitch, pitch)
-                }
-                if(type == MessageType.CHAT) {
-                    p1.sendMessage(msg)
-                    continue
-                }
-                if(type == MessageType.TITLE) {
-                    reflector.send(1, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.SUBTITLE) {
-                    reflector.send(0, p1, msg, fadeIn, stay, fadeOut)
-                    continue
-                }
-                if(type == MessageType.ACTIONBAR) {
-                    reflector.sendActionbar(p1, msg)
-                    continue
-                }
-            }
+        for(p1 in p) {
+            if(sound != null)
+                p1.playSound(p1.getLocation(), sound, pitch, pitch)
+            if(msg != "")
+                _send(p1)
+        }
+    }
+
+    internal fun _send(p: Player) {
+        var msg = toString()
+        if((msg == "" || msg == "\n") && sound != null) return
+        when(type) {
+            MessageType.CHAT -> p.sendMessage(msg)
+            MessageType.ACTIONBAR -> reflector.sendActionbar(p, msg)
+            MessageType.TITLE -> reflector.send(1, p, msg, fadeIn, stay, fadeOut)
+            MessageType.SUBTITLE -> reflector.send(0, p, msg, fadeIn, stay, fadeOut)
+        }
     }
 
     public fun broadcast() {
@@ -145,6 +113,9 @@ class Message {
         }
     }
 
+    /**
+     * Even I have no idea why this function exists.
+     */
     public fun broadcast(vararg r: Rank) {
         for(p in Bukkit.getOnlinePlayers())
             for(b in r) {
@@ -152,18 +123,6 @@ class Message {
                 send(p)
                 break
             }
-    }
-
-    Deprecated public fun broadcast(r: Rank, s: Sound) {
-        for(p in Bukkit.getOnlinePlayers()) {
-            if(!r.isRanked(p)) continue
-            send(s, p)
-        }
-    }
-
-    Deprecated public fun broadcast(s: Sound) {
-        for(p in Bukkit.getOnlinePlayers())
-            send(s, p)
     }
 
     override public fun toString(): String {

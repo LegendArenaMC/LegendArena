@@ -39,7 +39,7 @@ public class VanishUtils {
 
             vanish(p);
             if(vanishMsg) {
-                p.sendMessage(ChatUtils.getCustomMsg("Vanish") + "You have vanished.");
+                p.sendMessage(ChatUtils.getCustomMsg("Vanish") + "You have vanished. Poof.");
                 new Message().append(ChatUtils.getCustomMsg("Staff") + "Player " + p.getName() + " has vanished. Poof.").broadcast(Rank.MOD);
             }
         }
@@ -54,19 +54,14 @@ public class VanishUtils {
     }
 
     /**
-     * @return List of currently vanished players, by UUID
-     */
-    public static ArrayList<UUID> getVanishedPlayerList() {
-        return vanishedPlayers;
-    }
-
-    /**
      * Hide all currently vanished players from a player. Best used on join.
      * @param p The player to hide vanished players from
      */
     public static void hideVanishedPlayersFrom(Player p) {
         for(UUID v : vanishedPlayers) {
-            //
+            if(Bukkit.getPlayer(v) == null)
+                continue; //assume the vanished player is not on the server
+            p.hidePlayer(Bukkit.getPlayer(v));
         }
     }
 

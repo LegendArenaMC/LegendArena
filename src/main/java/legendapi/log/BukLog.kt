@@ -5,6 +5,7 @@
 package legendapi.log
 
 import legendapi.utils.StringUtils
+import legendarena.LegendArena
 import org.bukkit.Bukkit
 import org.bukkit.plugin.Plugin
 import java.util.logging.Logger
@@ -50,7 +51,12 @@ class BukLog {
     }
 
     fun dumpError(ex: Throwable, reason: String) {
-        log(Level.INTERNALERROR, "An error was encountered while " + reason + "! (\"" + ex.getMessage() + "\")")
+        if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
+            ex.printStackTrace()
+            log(Level.PIXELBROKEIT, "An error was encountered while " + reason + "! (see above for stacktrace)")
+        } else {
+            log(Level.INTERNALERROR, "An error was encountered while " + reason + "! (\"" + ex.getMessage() + "\")")
+        }
     }
 
 }

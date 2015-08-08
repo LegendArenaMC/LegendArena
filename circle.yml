@@ -1,0 +1,8 @@
+dependencies:
+  override:
+    - echo "circleci, pls." #seems circleci randomly decides to work or not with the dependencies task, so just don't do it regardless of whether it'd work or not
+
+test:
+  post:
+    - gradle check upload
+    - mv build/reports/findbugs/main.xml $CIRCLE_TEST_REPORTS

@@ -81,10 +81,13 @@ public enum class Rank {
 
     public fun isRanked(p: CommandSender): Boolean {
         if(p is ConsoleCommandSender) return true
-        else if(autoReturnTrue == true) return true
-        else if(isDev == true) return DeveloperListUtils.isDeveloper(p as Player)
-        else if(isFounder == true) return p.getName().equals("ThePixelDev") || p.getName().equals("ZRaptor22")
-        else return p.hasPermission(permission)
+        when(this) {
+            Rank.MEMBER -> return true
+            Rank.DEV -> return DeveloperListUtils.isDeveloper(p as Player)
+            Rank.FOUNDER -> return p.getName().equals("ThePixelDev") || p.getName().equals("ZRaptor22")
+
+            else -> return p.hasPermission(permission)
+        }
     }
 
     public fun getNameColor(): ChatColor {

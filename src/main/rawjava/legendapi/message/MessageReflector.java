@@ -16,12 +16,13 @@ import java.util.Map;
 /**
  * Reflects titles and subtitles, version independent. Heavily adapted before use.
  *
- * <br><br>Note by Pixel: Taken from NetworkUtilities. (ps: go check it out! the plugin is seriously awesome)
+ * <br><br>Note by Pixel: Taken from NetworkUtilities, with minor tweaks. (ps: go check it out! the plugin is seriously awesome)
  *
  * @version 1.1.0
  * @author Maxim Van de Wynckel
  * @see Message
  */
+@SuppressWarnings("ALL")
 public class MessageReflector {
 
     /* Title packet */
@@ -57,7 +58,7 @@ public class MessageReflector {
             Method sendPacket = getMethod(connection.getClass(), "sendPacket");
             sendPacket.invoke(connection, packet);
 
-            Object serialized = getMethod(nmsChatSerializer, "a", String.class).invoke(null, "{text:\"" + ChatColor.translateAlternateColorCodes('&', title) + "\"" + "}");
+            Object serialized = getMethod(nmsChatSerializer, "a", String.class).invoke(null, "{text:\"" + title + "\"" + "}");
             packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[type], serialized);
             sendPacket.invoke(connection, packet);
         } catch(Exception ignore) {}
@@ -127,8 +128,8 @@ public class MessageReflector {
         Class<?> clazz = null;
         try {
             clazz = Class.forName(fullName);
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
         return clazz;
     }

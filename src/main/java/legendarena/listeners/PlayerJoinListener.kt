@@ -18,14 +18,13 @@ public class PlayerJoinListener : Listener {
 
     EventHandler fun listenForJoin(ev: PlayerJoinEvent) {
         ev.setJoinMessage("")
-        if(!ev.getPlayer().hasPlayedBefore()) {
+        if(!ev.getPlayer().hasPlayedBefore())
             FancyMessage("Welcome to ")
                         .color(ChatColor.GREEN)
                     .then("Legend Arena")
                         .color(ChatColor.YELLOW)
                         .link("http://thenamedev.net/legendarena/")
-                        .itemTooltip(MenuUtils.createItem(Material.PAPER,
-                                "" + ChatColor.GREEN + "Click to open the Legend Arena site!"))
+                        .tooltip("" + ChatColor.GREEN + "Click to open the Legend Arena site")
                     .then(", ")
                         .color(ChatColor.GREEN)
                     .then(ev.getPlayer().getName())
@@ -36,7 +35,6 @@ public class PlayerJoinListener : Listener {
                     .then("As the server is still in alpha, expect bugs. (sorry about that, by the way!)")
                         .color(ChatColor.YELLOW)
                     .send(ev.getPlayer())
-        }
         if(ChatSystem.isShadowMuted(ev.getPlayer()))
             ChatSystem.notice("Player \"" + ev.getPlayer().getName() + "\" is shadow muted.")
 

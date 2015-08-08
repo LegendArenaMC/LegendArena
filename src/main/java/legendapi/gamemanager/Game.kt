@@ -4,14 +4,36 @@
 
 package legendapi.gamemanager
 
+import legendapi.utils.SetupUtils
+import org.bukkit.plugin.Plugin
+
 class Game {
 
-    public constructor() {
+    var p: Plugin? = null
+    var setup: SetupUtils? = null
+
+    public constructor(p: Plugin) {
         //TODO: Plugin field init stuffs
+        this.p = p
+        this.setup = SetupUtils(p)
     }
 
     public fun register(reg: GameTool) {
-        //TODO: Mass instance checking
+        if(reg is GameListener) {
+            //register as a listener
+            setup!!.registerListener(reg)
+        } else if(reg is GameTimer) {
+            //register as a non async timer
+            setup!!.registerNonAsyncTimer(reg, reg.delay())
+        }
+    }
+
+    public fun setState(state: GameState) {
+        //TODO: State stuff
+    }
+
+    internal fun announceNetworkStatus(state: GameState) {
+        //TODO: if checks to see if the config has this is a network or a singular server
     }
 
 }

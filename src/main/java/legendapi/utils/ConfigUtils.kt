@@ -4,6 +4,7 @@
 
 package legendapi.utils
 
+import com.sun.istack.internal.Nullable
 import legendapi.exceptions.AreYouDrunkException
 import legendapi.log.BukLog
 import legendapi.log.Level
@@ -33,17 +34,6 @@ public class ConfigUtils {
 
         configFile = File(p.getDataFolder().getAbsolutePath(), "Config.yml")
 
-        if(!configFile!!.exists())
-            try {
-                //Thanks Java[tm]
-                p.getDataFolder().mkdirs()
-                didExist = !configFile!!.createNewFile()
-                log!!.log(Level.DEBUG, "Config file generated.")
-            } catch(ex: IOException) {
-                log!!.dumpError(ex, "generating config file")
-                log!!.log(Level.INTERNALERROR, "Error while creating configuration file for plugin \"" + p.getDescription().getName() + "\"! (see above for reason)")
-            }
-
         this.p = p
         config = YamlConfiguration.loadConfiguration(configFile)
     }
@@ -66,20 +56,28 @@ public class ConfigUtils {
     }
 
     public fun upgradeIfConfVersionIsNot(check: Int) {
-        if(!didExist) {
-            //config file didn't exist, generate the config and exit out
+        if(!configFile!!.exists()) {
+            try {
+                //Thanks Java[tm]
+                p!!.getDataFolder().mkdirs()
+                didExist = !configFile!!.createNewFile()
+                log!!.log(Level.DEBUG, "Config file generated.")
+            } catch(ex: IOException) {
+                log!!.dumpError(ex, "generating config file")
+                log!!.log(Level.INTERNALERROR, "Error while creating configuration file for plugin \"" + p!!.getDescription().getName() + "\"! (see above for reason)")
+            }
             genDefaults()
             return
         }
         if(confVersion != check)
             throw AreYouDrunkException()
         if(!contains("configVersion")) {
-            //there is no config value with the option we need, just gen the default config and return out
+            //we've probably never generated the config this run, generate it and exit
             genDefaults()
             return
         }
         if(get("configVersion") !is Int) {
-            //something is wrong, throw a warning in the server log, reset the config to default and return out
+            //something is wrong, throw a warning in the server log, reset the config to default and exit
             BukLog(p!!).log(Level.WARNING, "WARNING! CONFIG VERSION VALUE TAMPERING HAS OCCURED (or a very horrible internal error) - resetting config to default...")
             resetConfig()
             return
@@ -96,9 +94,8 @@ public class ConfigUtils {
             else {
                 if(get(i) == defaults.get(i))
                     continue
-                else
-                    //sorry server owners! too lazy to make a new config system just to identify manually changed values! (blame bukkit[tm])
-                    set(i, defaults.get(i))
+                //sorry server owners! too lazy to make a new config system just to identify manually changed values! (blame bukkit[tm])
+                set(i, defaults.get(i))
             }
         }
         saveConfig()

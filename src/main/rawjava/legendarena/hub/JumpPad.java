@@ -19,7 +19,7 @@ public class JumpPad {
 
     public static void jump(Player p) {
         p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1));
-        new Message().setSound(Sound.STEP_SNOW).setPitch(2f).send(p);
+        new Message().setSound(Sound.DIG_SNOW).send(p);
     }
 
     public static class JumpPadListener implements Listener {
@@ -31,7 +31,7 @@ public class JumpPad {
                 if(!cooldown.get(ev.getPlayer().getUniqueId()).done())
                     return;
             if(ev.getPlayer().getLocation().getBlock().getType() == Material.IRON_PLATE && ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.REDSTONE_BLOCK) {
-                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.08));
+                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.3)); //I hate to be the person who destroys fun, but it has to be this way ;-; (tl;dr damn you race conditions)
                 //new Thread() is to run Thread.sleep() without interrupting the rest of the server
                 new Thread(new Runnable() {
                     public void run() {

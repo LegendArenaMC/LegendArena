@@ -1,4 +1,4 @@
-# [Legend Arena](http://thenamedev.net/legendarena/) [![Build Status](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master/build_image)](https://snap-ci.com/LegendArenaMC/LegendArena/branch/master)
+# [Legend Arena](http://thenamedev.net/legendarena/) [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena)
 
 The Legend Arena plugin is a Bukkit plugin designed with minigames, for Legend Arena.
 We have decided to open source the plugin in order to allow people to help get the server ready for full release.
@@ -18,4 +18,4 @@ A copy of said license can be found in the [LICENSE.md](https://github.com/Legen
 
 Done.
 
-Or, get a pre-built jar from the SnapCI builds. (click on the build status image at the top of this README)
+Or, get a pre-built jar from the CircleCI builds. (click on the build status image at the top of this README)

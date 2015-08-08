@@ -26,7 +26,7 @@ public final class ArrayWrapper<E> {
 	 * Creates an array wrapper with some elements.
 	 * @param elements The elements of the array.
 	 */
-	public ArrayWrapper(E... elements){
+	public ArrayWrapper(E... elements) {
 		setArray(elements);
 	}
 	
@@ -36,7 +36,7 @@ public final class ArrayWrapper<E> {
 	 * Retrieves a reference to the wrapped array instance.
 	 * @return The array wrapped by this instance.
 	 */
-	public E[] getArray(){
+	public E[] getArray() {
 		return _array;	
 	}
 	
@@ -44,8 +44,8 @@ public final class ArrayWrapper<E> {
 	 * Set this wrapper to wrap a new array instance.
 	 * @param array The new wrapped array.
 	 */
-	public void setArray(E[] array){
-		Validate.notNull(array, "The array must not be null.");
+	public void setArray(E[] array) {
+		Validate.notNull(array, "The array cannot be null");
 		_array = array;
 	}
 	
@@ -55,14 +55,9 @@ public final class ArrayWrapper<E> {
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean equals(Object other)
-    {
-        if (!(other instanceof ArrayWrapper))
-        {
-            return false;
-        }
-        return Arrays.equals(_array, ((ArrayWrapper)other)._array);
-    }
+	public boolean equals(Object other) {
+		return other instanceof ArrayWrapper && Arrays.equals(_array, ((ArrayWrapper) other)._array);
+	}
 
 	/**
 	 * Gets the hash code represented by this objects value.
@@ -70,8 +65,7 @@ public final class ArrayWrapper<E> {
 	 * @return This object's hash code.
 	 */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Arrays.hashCode(_array);
     }
     
@@ -92,19 +86,17 @@ public final class ArrayWrapper<E> {
         }
         
         
-        if(size < 0){
+        if(size < 0) {
         	size = 0;
-        	// Ugly hack: Count it ourselves
-        	for(@SuppressWarnings("unused") T element : list){
+        	//Ugly hack: Count it ourselves
+        	for(@SuppressWarnings("unused") T element : list)
         		size++;
-        	}
         }
     	
         T[] result = (T[]) Array.newInstance(c, size);
         int i = 0;
-        for(T element : list){ // Assumes iteration order is consistent
+        for(T element : list) // Assumes iteration order is consistent
     		result[i++] = element; // Assign array element at index THEN increment counter
-    	}
         return result;
     }
 }
