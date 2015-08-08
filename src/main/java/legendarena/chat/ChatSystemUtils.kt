@@ -28,9 +28,9 @@ class ChatSystemUtils {
      */
     private fun getParsedChatMessage(msg: String, p: Player): String {
         if(isYipYip(msg))
-            return "" + (if (Rank.YOUTUBE.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip"
+            return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip"
 
-        if(Rank.YOUTUBE.isRanked(p))
+        if(Rank.VIP.isRanked(p))
             //ignore intellij's yelling at the use of "(msg as java.lang.String)" (blame Kotlin not having [String].replace etc)
             return "" + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', (msg as java.lang.String).replace("[tm]", "™"))
         else

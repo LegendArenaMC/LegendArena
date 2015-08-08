@@ -1,6 +1,8 @@
 package legendarena.commands.staff
 
 import legendapi.emeralds.EmeraldsCore
+import legendapi.fanciful.FancyMessage
+import legendapi.log.BukLog
 import legendapi.utils.ChatUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
@@ -15,13 +17,14 @@ import org.bukkit.entity.Player
 class EmeraldCmd : CommandExecutor {
 
     internal var emeralds: EmeraldsCore? = null
-    internal var disabledDueToVaultBreakage = false
+    internal var itBroke = false
 
     public constructor() {
         try {
             this.emeralds = EmeraldsCore()
         } catch(ex: Exception) {
-            this.disabledDueToVaultBreakage = true
+            BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpError(ex, "initializing the Emeralds command")
+            this.itBroke = true
         }
     }
 
@@ -35,8 +38,15 @@ class EmeraldCmd : CommandExecutor {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        if(disabledDueToVaultBreakage) {
-            sender.sendMessage("" + ChatColor.RED + "Seems a certain someone forgot to install Vault and/or an economy plugin. As a result, the Emeralds system is currently offline. Sorry!")
+        if(itBroke) {
+            FancyMessage("Seems a ")
+                        .color(ChatColor.RED)
+                    .then("certain someone")
+                        .color(ChatColor.RED)
+                        .tooltip("*cough Pixel cough*")
+                    .then("broke the Legend Economy class. Sorry!")
+                        .color(ChatColor.RED)
+                    .send(sender)
             return true
         }
 

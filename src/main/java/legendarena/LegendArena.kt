@@ -1,6 +1,7 @@
 package legendarena
 
 import legendapi.utils.KotlinUtils
+import legendapi.utils.LegendAPIUtils
 import legendapi.utils.SetupUtils
 import legendapi.utils.VersionUtils
 import legendarena.commands.*
@@ -15,12 +16,17 @@ import java.util.*
 
 class LegendArena : KotlinUtils() {
 
-    public final var devMode: Boolean = false
+    public final var devMode: Boolean = true
 
     override fun onEnable() {
-        var setup = SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        var p = Bukkit.getPluginManager().getPlugin("LegendArena")
+        var setup = SetupUtils(p)
 
         // ACTUAL SETUP STUFF
+
+        setup.announceStatus("Setting up configuration...")
+
+        setupConfig()
 
         setup.announceStatus("Setting up commands...")
 
@@ -64,11 +70,19 @@ class LegendArena : KotlinUtils() {
         setup.setAliases("firework", "fw")
         setup.setAliases("gadgets", "gs")
 
-        setup.announceStatus("Setting up configuration...")
+        setup.announceStatus("Finishing up...")
 
+        VersionUtils.setVersion("LegendArena", "1.1-SNAPSHOT")
+        VersionUtils.setVersion("KotlinLoader", "0.12.613")
+
+        setup.announceStatus("LegendArena v" + p.getDescription().getVersion() + " fully loaded.")
+    }
+
+    internal fun setupConfig() {
         var config = ConfigUtils.config
-        var configVer = 2
+        var configVer = 3
         config.setConfigVersion(configVer)
+        config.addDefault("debug", true)
         config.addDefault("enable.lobbyServer", true)
         config.addDefault("enable.staffHub", true)
         config.addDefault("enable.warp", true)
@@ -82,16 +96,17 @@ class LegendArena : KotlinUtils() {
         config.addDefault("staffhub.location.x", "")
         config.addDefault("staffhub.location.y", "")
         config.addDefault("staffhub.location.z", "")
+        config.addDefault("emeralds.storage", "sqlite")
+        config.addDefault("emeralds.table", "emeralds")
+        config.addDefault("emeralds.mysql.host", "127.0.0.1")
+        config.addDefault("emeralds.mysql.password", "sup3rs3cr3tp@ssw0rd")
+        config.addDefault("emeralds.mysql.database", "emeralds")
+        config.addDefault("emeralds.sqlite.file", "emeralds.db")
         var founders = ArrayList<String>();
         founders.add("ThePixelDev")
         founders.add("ZRaptor22")
         config.addDefault("founders", founders)
         config.upgradeIfConfVersionIsNot(configVer)
-
-        setup.announceStatus("Running extra setup stuff...")
-
-        VersionUtils.setVersion("LegendArena", "1.0-SNAPSHOT")
-        VersionUtils.setVersion("KotlinLoader", "0.12.613")
     }
 
     override fun onDisable() {
