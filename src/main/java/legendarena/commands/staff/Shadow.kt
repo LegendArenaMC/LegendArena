@@ -29,7 +29,7 @@ class Shadow : CommandExecutor {
         if(StringUtils.toLower(args[0]).equals("mute")) {
 
             if(args.size() == 1) {
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/shadow mute <player>", "Shadow mute a player."))
+                sender.sendMessage(ChatUtils.getFormattedMsg("/shadow mute <player>", "Shadow mute a player."))
                 return true
             }
 
@@ -59,9 +59,9 @@ class Shadow : CommandExecutor {
 
     internal fun help(sender: CommandSender) {
         sender.sendMessage(ChatUtils.getFormattedHeader("Shadow Utils"))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/shadow mute <player>", "Shadow mute a player."))
-        //sender.sendMessage(ChatUtils.getFormattedHelpMsg("/shadow list", "List currently shadow muted players."))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/shadow ignore", "Ignore shadow muted players messages. [WIP]"))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/shadow mute <player>", "Shadow mute a player."))
+        //sender.sendMessage(ChatUtils.getFormattedMsg("/shadow list", "List currently shadow muted players."))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/shadow ignore", "Ignore shadow muted players messages. [WIP]"))
     }
 
 }

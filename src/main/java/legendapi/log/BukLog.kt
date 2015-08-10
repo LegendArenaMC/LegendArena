@@ -59,4 +59,13 @@ class BukLog {
         }
     }
 
+    fun dumpRawError(ex: Throwable, reason: String) {
+        if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
+            ex.printStackTrace()
+            log(Level.PIXELBROKEIT, reason + " (see above for stacktrace)")
+        } else {
+            log(Level.INTERNALERROR, reason + " (\"" + ex.getMessage() + "\")")
+        }
+    }
+
 }

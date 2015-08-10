@@ -19,4 +19,19 @@ public class StringUtils {
         return lower.toLowerCase();
     }
 
+    public static boolean contains(String check, String doesContain) {
+        return check.contains(doesContain);
+    }
+
+    public static boolean startsWith(String check, String doesStartWith) {
+        return check.startsWith(doesStartWith);
+    }
+
+    public static char[] toChars(String from) {
+        return from.toCharArray();
+    }
+
+    public static String replace(String target, String replace, String with) {
+        return target.replace(replace, with);
+    }
 }

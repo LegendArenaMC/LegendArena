@@ -63,33 +63,6 @@ class Message {
         _send(p as Player)
     }
 
-    Deprecated public fun send(s: Sound, vararg p: Player) {
-        setSound(s)
-
-        var msg = toString()
-
-        for(p1 in p) {
-            if(sound != null)
-                p1.playSound(p1.getLocation(), sound, pitch, pitch)
-            if(msg != "")
-                _send(p1)
-        }
-    }
-
-    Deprecated public fun send(s: Sound, pi: Float, vararg p: Player) {
-        setPitch(pi)
-        setSound(s)
-
-        var msg = toString()
-
-        for(p1 in p) {
-            if(sound != null)
-                p1.playSound(p1.getLocation(), sound, pitch, pitch)
-            if(msg != "")
-                _send(p1)
-        }
-    }
-
     internal fun _send(p: Player) {
         var msg = toString()
         if((msg == "" || msg == "\n") && sound != null) return

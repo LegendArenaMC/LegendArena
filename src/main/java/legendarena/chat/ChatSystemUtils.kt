@@ -21,12 +21,21 @@ class ChatSystemUtils {
     }
 
     /**
+     * GOD DAMNIT YELLOW PLAGUE, FUCK OFF
+     */
+    private fun isMinions(m: String): Boolean {
+        return StringUtils.contains(StringUtils.toLower(m), "minions")
+    }
+
+    /**
      * Get a parsed chat message.
      * @param msg The message
      * @param p The player
      * @return The parsed message
      */
     private fun getParsedChatMessage(msg: String, p: Player): String {
+        if(isMinions(msg))
+            return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "I hate the yellow plague that is Minions." //MINIONS. FUCK OFF. PLEASE.
         if(isYipYip(msg))
             return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip"
 
@@ -53,7 +62,20 @@ class ChatSystemUtils {
      * @return The chat message
      */
     public fun getChatMessage(msg: String, p: Player): String {
-        return getFormattedName(p) + " " + ChatColor.DARK_GRAY + ChatUtils.chars[1] + " " + getParsedChatMessage(msg, p)
+        return getFormattedName(p) + " " + ChatColor.DARK_GRAY + ChatUtils.specialCharacters[1] + " " + getParsedChatMessage(msg, p)
+    }
+
+    public fun parseColors(msg: String, p: Player): String {
+        if(!Rank.VIP.isRanked(p))
+            return msg
+        if(StringUtils.contains(msg, "&rb&")) {
+            var e = StringUtils.replace(msg, "&rb& ", "")
+            if(e == msg) //in case they were smart enough to not put a space after "&rb&"
+                e = StringUtils.replace(msg, "&rb&", "")
+
+            return ChatUtils.randomRainbow(e)
+        }
+        return ChatColor.translateAlternateColorCodes('&', msg) //we aren't doing rainbow text, call Bukkit's ChatColor.translateAlternateColorCodes()
     }
 
 }

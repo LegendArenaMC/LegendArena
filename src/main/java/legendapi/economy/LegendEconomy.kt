@@ -10,6 +10,8 @@ import legendapi.utils.LegendAPIUtils
 import legendapi.utils.StringUtils
 import org.bukkit.Bukkit
 import java.io.File
+import java.sql.ResultSet
+import java.sql.SQLException
 
 /**
  * SQL is fun. /s
@@ -36,19 +38,20 @@ public class LegendEconomy {
     }
 
     public constructor() {
-        var config = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
-        if(StringUtils.toLower(config.get("emeralds.storage") as String) == Types.MYSQL.getTypeString()) {
+        //var config = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        /*if(StringUtils.toLower(config.get("emeralds.storage") as String) == Types.MYSQL.getTypeString()) {
             var host = config.get("emeralds.mysql.host") as String
             var user = config.get("emeralds.mysql.user") as String
             var pass = config.get("emeralds.mysql.password") as String
             db = config.get("emeralds.mysql.database") as String
             table = StringUtils.toUpper(config.get("emeralds.table") as String) //insert table flip joke here
             sql = LegendSQL(host, db, user, pass)
-        } else {
+        } else {*/
             //assume we're using sqlite
-            var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + (config.get("emeralds.sqlite.file") as String))
+            //var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + (config.get("emeralds.sqlite.file") as String))
+            var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + "emeralds.db")
             sql = LegendSQL(dbFile)
-        }
+        //}
 
         setup()
     }
@@ -60,15 +63,16 @@ public class LegendEconomy {
     }
 
     public fun getEmeralds(p: String): Int {
-        var rs = sql!!.sqlQuery("SELECT * FROM " + table + ";")
-        var a = 0
-        while(rs.next())
-            if(rs.getString("name") == p) {
-                a = rs.getInt("emeralds")
-                break
-            }
+        var rs = sql!!.sqlQuery("SELECT EMERALDS FROM " + table + " WHERE NAME=\"" + p + "\";")
+        var amount = 0
+        if(rs.next())
+            amount = rs.getInt("emeralds")
         rs.close()
-        return a
+        return amount
+    }
+
+    public fun getEmeraldsRS(): ResultSet {
+        return sql!!.sqlQuery("SELECT * FROM " + table + ";")
     }
 
     public fun addEmeralds(p: String, a: Int) {
@@ -86,7 +90,7 @@ public class LegendEconomy {
     public fun setEmeralds(p: String, a: Int) {
         if(a <= -1)
             throw Exception("A player's emeralds count cannot be less than 0")
-        sql!!.standardQuery("UPDATE OR ROLLBACK " + table + " set EMERALDS = " + a + " where NAME = " + p + ";")
+        sql!!.standardQuery("UPDATE OR ROLLBACK " + table + " set EMERALDS = " + a + " where NAME = \"" + p + "\";")
     }
 
 }

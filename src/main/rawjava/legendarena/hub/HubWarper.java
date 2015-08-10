@@ -2,6 +2,7 @@ package legendarena.hub;
 
 import legendapi.utils.MenuUtils;
 import legendapi.utils.Rank;
+import legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

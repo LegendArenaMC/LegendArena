@@ -19,7 +19,7 @@ class EmeraldsCore {
 
     public constructor() {}
 
-    protected fun getEcon(): LegendEconomy {
+    public fun getEcon(): LegendEconomy {
         return econ
     }
 
@@ -31,7 +31,7 @@ class EmeraldsCore {
         if(amount < 1)
             throw NullPointerException()
         else if(amount >= Integer.MAX_VALUE)
-            throw AreYouDrunkException() //hopefully, no one is actually an idiot enough to hit this (...I'll give it a year)
+            throw AreYouDrunkException("Amount cannot be over max value of an Integer") //hopefully, no one is actually an idiot enough to hit this (...I'll give it a year)
         getEcon().takeEmeralds(p.getName(), amount)
         if(showMsg)
             p.sendMessage(ChatUtils.getCustomMsg("Emeralds") + "You lost " + ChatColor.DARK_PURPLE + amount + ChatColor.BLUE + " emerald(s). You now have " + ChatColor.DARK_PURPLE + getEmeralds(p) + ChatColor.BLUE + " emerald(s).")

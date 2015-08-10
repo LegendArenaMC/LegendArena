@@ -7,6 +7,7 @@ import legendapi.utils.Cooldown
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
+import legendarena.hub.HubWarper
 import legendarena.utils.MobSpawnUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -72,7 +73,11 @@ class Staff: CommandExecutor {
                                 .color(ChatColor.GREEN)
                             .send(sender)
                     Thread.sleep(500)
-                    (sender as Player).setHealth(0.0)
+                    if(!HubWarper.isExempt((sender as Player).getUniqueId()))
+                        HubWarper.toggleExemption((sender).getUniqueId())
+                    (sender).setHealth(0.0)
+                    if(HubWarper.isExempt((sender).getUniqueId()))
+                        HubWarper.toggleExemption((sender).getUniqueId())
                 }
             }).start();
 

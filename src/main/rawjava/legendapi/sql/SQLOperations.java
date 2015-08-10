@@ -8,16 +8,23 @@ import java.sql.*;
 
 public class SQLOperations {
 
-	protected synchronized int standardQuery(String query, Connection connection) throws SQLException{
-		Statement statement = connection.createStatement();
-		int rowsUpdated = statement.executeUpdate(query);
-		statement.close();
+	protected synchronized int standardQuery(String query, Connection connection) throws SQLException {
+		Statement statement = null;
+		int rowsUpdated = 0;
+		try {
+			statement = connection.createStatement();
+			rowsUpdated = statement.executeUpdate(query);
+		} catch(Exception ex) {
+
+		} finally {
+			if(statement != null)
+				statement.close();
+		}
 		return rowsUpdated;
 	}
 
 	protected synchronized ResultSet sqlQuery(String query, Connection connection) throws SQLException {
-		Statement statement = connection.createStatement();
-		return statement.executeQuery(query);
+		return connection.createStatement().executeQuery(query);
 	}
 
 	protected synchronized boolean checkTable(String table, Connection connection) throws SQLException {

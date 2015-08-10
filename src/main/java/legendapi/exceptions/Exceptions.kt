@@ -13,7 +13,7 @@ class CancelledEventException : RuntimeException()
  */
 class InsertNewUserException : RuntimeException("Insert new user and press any key to continue")
 
-class MistakesWereMadeException : RuntimeException("mistakes were made.")
+class MistakesWereMadeException : RuntimeException("mistakes were very well made.")
 
 /**
  * Don't even ask. Just don't.
@@ -24,4 +24,4 @@ class PleaseRespectTablesException : RuntimeException()
 
 class YoureOnYourOwnException(s: String) : RuntimeException()
 
-class AreYouDrunkException : RuntimeException()
+class AreYouDrunkException(s: String) : RuntimeException()

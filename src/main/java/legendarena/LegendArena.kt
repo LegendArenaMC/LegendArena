@@ -16,7 +16,7 @@ import java.util.*
 
 class LegendArena : KotlinUtils() {
 
-    public final var devMode: Boolean = true
+    public final var devMode: Boolean = false
 
     override fun onEnable() {
         var p = Bukkit.getPluginManager().getPlugin("LegendArena")
@@ -49,6 +49,9 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
+        setup.registerListener(PlayerMoveListener())
+        setup.registerListener(ArmourStandListener())
+        setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
         setup.registerListener(PlayerDamageListener())
 
@@ -79,9 +82,9 @@ class LegendArena : KotlinUtils() {
     }
 
     internal fun setupConfig() {
-        var config = ConfigUtils.config
-        var configVer = 3
-        config.setConfigVersion(configVer)
+        //var config = ConfigUtils.config
+        //var configVer = 3
+        /*config.setConfigVersion(configVer)
         config.addDefault("debug", true)
         config.addDefault("enable.lobbyServer", true)
         config.addDefault("enable.staffHub", true)
@@ -106,7 +109,7 @@ class LegendArena : KotlinUtils() {
         founders.add("ThePixelDev")
         founders.add("ZRaptor22")
         config.addDefault("founders", founders)
-        config.upgradeIfConfVersionIsNot(configVer)
+        config.upgradeIfConfVersionIsNot(configVer)*/
     }
 
     override fun onDisable() {

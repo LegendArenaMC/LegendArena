@@ -30,11 +30,11 @@ class EmeraldCmd : CommandExecutor {
 
     private fun help(sender: CommandSender) {
         sender.sendMessage(ChatUtils.getFormattedHeader("Staff Commands"))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
         sender.sendMessage(ChatUtils.getFormattedHeader("User Commands"))
-        sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds amount", "Shows how many emeralds you have."))
+        sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds amount", "Shows how many emeralds you have."))
     }
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
@@ -44,7 +44,7 @@ class EmeraldCmd : CommandExecutor {
                     .then("certain someone")
                         .color(ChatColor.RED)
                         .tooltip("*cough Pixel cough*")
-                    .then(" broke the Legend Economy class. Sorry!")
+                    .then(" broke the Legend Economy class (or screwed up the ConfigUtils class, yet again). Sorry!")
                         .color(ChatColor.RED)
                     .send(sender)
             return true
@@ -54,14 +54,14 @@ class EmeraldCmd : CommandExecutor {
             help(sender)
         else {
             if(args[0].equals("amount")) {
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("You Have", "" + emeralds!!.getEmeralds(sender as Player) + " emeralds"))
+                sender.sendMessage(ChatUtils.getFormattedMsg("You Have", "" + emeralds!!.getEmeralds(sender as Player) + " emeralds"))
             } else if(args[0].equals("add")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
                     return true
                 }
                 if(args.size() <= 2)
-                    sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
+                    sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
                 else {
                     val p = Bukkit.getPlayer(args[1])
                     if(p == null) {
@@ -84,7 +84,7 @@ class EmeraldCmd : CommandExecutor {
                     return true
                 }
                 if(args.size() <= 2) {
-                    sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
+                    sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
                 } else {
                     val p = Bukkit.getPlayer(args[1])
                     if(p == null) {
@@ -112,7 +112,7 @@ class EmeraldCmd : CommandExecutor {
                     return true
                 }
                 if(args.size() < 2) {
-                    sender.sendMessage(ChatUtils.getFormattedHelpMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
+                    sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
                 } else {
                     val p = Bukkit.getPlayer(args[1])
                     if(Rank.MOD.isRanked(p)) {

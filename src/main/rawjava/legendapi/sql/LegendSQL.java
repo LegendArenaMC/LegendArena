@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Code mostly stolen (*ahem* sorry, utilized) from Sync.
+ */
 public class LegendSQL extends SQLOperations {
 
     private enum Type {
@@ -75,7 +78,7 @@ public class LegendSQL extends SQLOperations {
      * @return If the connection succeeded
      */
     public boolean initialise() {
-        if(schema == Type.MYSQL) {
+        if(schema == Type.MYSQL)
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + "/" + database, username, password);
@@ -83,8 +86,8 @@ public class LegendSQL extends SQLOperations {
             } catch(ClassNotFoundException | SQLException ex) {
                 ex.printStackTrace();
             }
-        } else {
-            if (!databaseFile.exists()) {
+        else {
+            if(!databaseFile.exists()) {
                 try {
                     databaseFile.createNewFile();
                 } catch(IOException ex) {

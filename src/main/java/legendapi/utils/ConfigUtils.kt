@@ -4,7 +4,6 @@
 
 package legendapi.utils
 
-import com.sun.istack.internal.Nullable
 import legendapi.exceptions.AreYouDrunkException
 import legendapi.log.BukLog
 import legendapi.log.Level
@@ -18,6 +17,8 @@ import java.util.HashMap
 
 /**
  * Base is stolen from the LegendArena plugin's first ConfigUtils class.
+ *
+ * Also: WHY THE FUCK DO YOU NOT WORK. WHAT THE FUCK IS WRONG WITH YOU, YOU IDIOTIC PIECE OF CRAP, CONFIGUTILS. FUCK YOU. /innerrage
  */
 public class ConfigUtils {
 
@@ -27,9 +28,13 @@ public class ConfigUtils {
     internal var p: Plugin? = null
     internal var log: BukLog? = null
     internal var confVersion = 1
-    internal var didExist = true
 
     public constructor(p: Plugin) {
+        this.p = p
+        this.log = BukLog(p)
+    }
+
+    /*public constructor(p: Plugin) {
         this.log = BukLog(p)
 
         configFile = File(p.getDataFolder().getAbsolutePath(), "Config.yml")
@@ -136,6 +141,6 @@ public class ConfigUtils {
             throw Exception("Could not reset configuration!")
         }
         config = YamlConfiguration.loadConfiguration(configFile)
-    }
+    }*/
 
 }

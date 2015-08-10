@@ -1,7 +1,7 @@
 main: legendarena.LegendArenaLoader
 name: LegendArena
 depend: ["KotlinLoader"]
-version: 1.0
+version: 1.2
 website: "http://thenamedev.net/legendarena/"
 author: ThePixelDev
 authors: ["FOSS Contributors"]

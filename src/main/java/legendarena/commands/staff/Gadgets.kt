@@ -5,6 +5,7 @@ import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.hub.HubWarper
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -31,7 +32,7 @@ class Gadgets : CommandExecutor {
             }
         } else {
             if(Bukkit.getPlayer(args[0]) == null) {
-                sender.sendMessage(ChatUtils.Messages.errorMsg + "Player \"" + args[0] + "\" was not found.")
+                sender.sendMessage(ChatUtils.getCustomMsg("" + ChatColor.RED + "Error") + "Player \"" + args[0] + "\" was not found.")
             } else {
                 val p = Bukkit.getPlayer(args[0])
                 val u = p.getUniqueId()

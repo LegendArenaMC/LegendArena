@@ -20,7 +20,7 @@ public enum class Rank {
      *
      * When the Rank class is asked if the member is a Developer, it polls the `legendapi.utils.DeveloperListUtils` class.
      */
-    DEV(true, ""),
+    DEV(true),
     /**
      * Administrator rank.
      */
@@ -54,29 +54,12 @@ public enum class Rank {
      */
     MEMBER(false);
 
-    private var isFounder = false
-    private var isDev = false
-    private var autoReturnTrue = false
     private var permission = ""
 
-    private constructor(isFounder: Boolean) {
-        if(!isFounder)
-            autoReturnTrue = true
-        else
-            this.isFounder = true
-    }
+    private constructor(isSpecialRank: Boolean) {}
 
     private constructor(permission: String) {
         this.permission = permission
-    }
-
-    private constructor(dummy: Boolean, dummy2: String) {
-        this.isDev = true
-    }
-
-    @Deprecated
-    public fun isRanked(p: CommandSender, r: Rank): Boolean {
-        return isRanked(p)
     }
 
     public fun isRanked(p: CommandSender): Boolean {
@@ -84,7 +67,7 @@ public enum class Rank {
         when(this) {
             Rank.MEMBER -> return true
             Rank.DEV -> return DeveloperListUtils.isDeveloper(p as Player)
-            Rank.FOUNDER -> return p.getName().equals("ThePixelDev") || p.getName().equals("ZRaptor22")
+            Rank.FOUNDER -> return p.getName().equals("ThePixelDev") || (p as Player).getUniqueId().toString().equals("2dec56e8-5548-4d89-8967-ee0da35f9874") //the UUID is Jaden - who apparently changes his IGN a lot.
 
             else -> return p.hasPermission(permission)
         }

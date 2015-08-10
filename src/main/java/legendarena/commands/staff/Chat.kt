@@ -1,5 +1,6 @@
 package legendarena.commands.staff
 
+import legendapi.fanciful.FancyMessage
 import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.ChatUtils
@@ -15,6 +16,10 @@ import org.bukkit.entity.Player
 
 class Chat : CommandExecutor {
 
+    internal fun getChannelColor(c: Channel, p: CommandSender): ChatColor {
+        return if(c.getRank().isRanked(p)) ChatColor.GREEN else ChatColor.RED
+    }
+
     private fun run(sender: CommandSender, args: Array<String>) {
         if(!Rank.HELPER.isRanked(sender as Player)) {
             sender.sendMessage(RankUtils.noPermissions(Rank.HELPER))
@@ -22,13 +27,27 @@ class Chat : CommandExecutor {
         }
 
         if(args.size() == 0) {
-            sender.sendMessage(ChatUtils.getFormattedHeader("Chat System"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat off", "Exits any special chats and enters global chat"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat admin", "Enters ADMIN chat."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat alert", "Enters ALERT chat."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat staff", "Enters STAFF chat."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat dev", "Enters DEV chat."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/chat manage", "Manage chat settings."))
+            sender.sendMessage(ChatUtils.getFormattedHeader("Available Channels"))
+            FancyMessage("GLOBAL")
+                        .color(ChatColor.GREEN)
+                    .command("/c off")
+                    .send(sender)
+            FancyMessage("STAFF")
+                        .color(getChannelColor(Channel.STAFF, sender))
+                    .command("/c staff")
+                    .send(sender)
+            FancyMessage("ALERT")
+                        .color(getChannelColor(Channel.ALERT, sender))
+                    .command("/c alert")
+                    .send(sender)
+            FancyMessage("ADMIN")
+                        .color(getChannelColor(Channel.ADMIN, sender))
+                    .command("/c admin")
+                    .send(sender)
+            FancyMessage("DEV")
+                        .color(getChannelColor(Channel.DEV, sender))
+                    .command("/c dev")
+                    .send(sender)
             return
         }
 

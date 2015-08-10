@@ -20,12 +20,18 @@ class Dev : CommandExecutor {
         if(!Rank.DEV.isRanked(sender))
             return false //pretend the command is broken/not registered
         if(args.size() == 0) {
-            //thanks kotlin for not liking sender.sendMessage([color] + [string]) (also ignore the change from blue to green with no var name change)
             var msg = Message()
 
-            msg.append(ChatUtils.getFormattedHeader("Server Info") + "\n")
-            msg.append(getReadableMemory().toString())
-            msg.append(ChatUtils.getFormattedMsg("Date", CalendarUtils().getDateString()) + "\n")
+            msg.append(ChatUtils.getFormattedHeader("Operating System") + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Architecture", System.getProperty("os.arch")) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("OS Name", System.getProperty("os.name")) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Version", System.getProperty("os.version")) + "\n")
+            msg.append(ChatUtils.getFormattedHeader("System") + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
+            msg.append(ChatUtils.getFormattedHeader("API/Library Versions") + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("KotlinLoader")) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + "\n")
 
             msg.send(sender)
             return true
@@ -43,21 +49,12 @@ class Dev : CommandExecutor {
             sender.sendMessage("" + ChatColor.GREEN + "Emeralds amount reset.")
         }
 
-        else if(args[0].equals("moreinfo")) {
-            var msg = Message()
-
-            msg.append(ChatUtils.getFormattedHeader("Operating System") + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Architecture", System.getProperty("os.arch")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("OS Name", System.getProperty("os.name")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Version", System.getProperty("os.version")) + "\n")
-            msg.append(ChatUtils.getFormattedHeader("System") + "\n")
-            msg.append(getReadableMemory().toString())
-            msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
-            msg.append(ChatUtils.getFormattedHeader("API/Library Versions") + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("KotlinLoader")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + "\n")
-
-            msg.send(sender)
+        else if(args[0].equals("emeraldsrs")) {
+            var rs = EmeraldsCore().getEcon().getEmeraldsRS()
+            while(rs.next()) {
+                sender.sendMessage("" + rs.getString("name") + ": " + rs.getInt("emeralds"))
+            }
+            rs.close()
         }
         return true
     }
@@ -65,9 +62,7 @@ class Dev : CommandExecutor {
     public fun getReadableMemory(): Message {
         var msg = Message()
 
-        msg.append(ChatUtils.getFormattedMsg("Free memory", FileUtils.byteCountToDisplaySize(Math.round(getFreeMemory()).toLong())) + "\n")
-        msg.append(ChatUtils.getFormattedMsg("Max memory", FileUtils.byteCountToDisplaySize(Math.round(getMaxMemory()).toLong())) + "\n")
-        msg.append(ChatUtils.getFormattedMsg("Used memory", FileUtils.byteCountToDisplaySize(Math.round(getUsedMemory()).toLong()) + " (" + getUsedMemoryPercentage() + "%)") + "\n")
+        msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
 
         //msg.append(blue + "Free memory: " + FileUtils.byteCountToDisplaySize(Math.round(getFreeMemory()).toLong()))
         //msg.append(blue + "Max memory: " + FileUtils.byteCountToDisplaySize(Math.round(getMaxMemory()).toLong()))
