@@ -4,15 +4,13 @@
 
 package legendarena.listeners.menu
 
-import legendapi.emeralds.EmeraldsCore
 import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
-import legendapi.utils.Rank
 import legendarena.hub.JumpPad
-import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.staff.StaffMenu
+import legendarena.hub.particles.ParticleCore
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -20,14 +18,17 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-public class JumpPadMenuListener : Listener {
+public class ParticleMenuListener : Listener {
 
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
         try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Jump Pads Menu")) return
-            if(ev.getCurrentItem().getType() == Material.GOLD_PLATE) {
-                JumpPad.jump(ev.getWhoClicked() as Player)
+            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Particles")) return
+            ev.setCancelled(true)
+            var itemName = ev.getCurrentItem().getItemMeta().getDisplayName()
+            if(itemName == "" + ChatColor.GREEN + "Fire Particles") {
+                sendSelectMsg(ev.getWhoClicked() as Player, ParticleCore.ParticleType.FIRE)
+                ParticleCore.setParticles(ParticleCore.ParticleType.FIRE, ev.getWhoClicked() as Player)
                 ev.getWhoClicked().closeInventory()
             } else if(ev.getCurrentItem().getType() == Material.IRON_PLATE) {
                 (ev.getWhoClicked() as Player).getInventory().addItem(MenuUtils.createItem(Material.IRON_PLATE, "" + ChatColor.GREEN + "JumpPad", "" + ChatColor.GREEN + "Place me anywhere to create a " + ChatColor.YELLOW + "JumpPad" + ChatColor.GREEN + "!"))
@@ -35,11 +36,14 @@ public class JumpPadMenuListener : Listener {
                 ev.getWhoClicked().closeInventory()
                 StaffMenu().show(ev.getWhoClicked() as Player)
             }
-            ev.setCancelled(true)
         } catch(ignore: Exception) {
             // Ignore the error
         }
 
+    }
+
+    private fun sendSelectMsg(p: Player, type: ParticleCore.ParticleType) {
+        Message(MessageType.ACTIONBAR).append(ChatUtils.getCustomMsg("Particles") + "Selected " + ChatColor.YELLOW + type + ChatColor.BLUE + " particles").send(p)
     }
 
 }

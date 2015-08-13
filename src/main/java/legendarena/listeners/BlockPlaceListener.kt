@@ -17,9 +17,8 @@ public class BlockPlaceListener : Listener {
     public fun listenForPlace(ev: BlockPlaceEvent) {
         try {
             if(!Rank.ADMIN.isRanked(ev.getPlayer())) return
-            if(ev.getItemInHand().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "JumpPad")) {
+            if(ev.getItemInHand().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "JumpPad"))
                 ev.getBlock().getLocation().subtract(0.0, 1.0, 0.0).getBlock().setType(Material.REDSTONE_BLOCK)
-            }
         } catch(ignore: Exception) {}
     }
 

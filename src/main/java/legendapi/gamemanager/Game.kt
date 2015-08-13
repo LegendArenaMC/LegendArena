@@ -7,7 +7,8 @@ package legendapi.gamemanager
 import legendapi.utils.SetupUtils
 import org.bukkit.plugin.Plugin
 
-class Game {
+@SuppressWarnings("ALL") //the game API is being re-written slowly, ignore all warnings temporarily
+public class Game {
 
     var p: Plugin? = null
     var setup: SetupUtils? = null

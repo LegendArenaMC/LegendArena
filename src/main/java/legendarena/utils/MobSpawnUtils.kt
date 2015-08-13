@@ -12,7 +12,7 @@ import org.bukkit.entity.EntityType
 
 public class MobSpawnUtils {
 
-    public fun spawn(e: EntityType, l: Location): Entity? {
+    @Deprecated public fun spawn(e: EntityType, l: Location): Entity? {
         return l.getWorld().spawnEntity(l, e)
     }
 

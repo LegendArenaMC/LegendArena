@@ -14,13 +14,13 @@ public enum class Rank {
     /**
      * Founder rank. (really just a renamed Owner rank in a sense)
      */
-    FOUNDER(true),
+    FOUNDER(),
     /**
      * Developer rank.
      *
-     * When the Rank class is asked if the member is a Developer, it polls the `legendapi.utils.DeveloperListUtils` class.
+     * When the Rank class is asked if the member is a Developer, it polls the [SpecialStaffListUtils] class.
      */
-    DEV(true),
+    DEV(),
     /**
      * Administrator rank.
      */
@@ -52,11 +52,11 @@ public enum class Rank {
     /**
      * Default user rank. This is only here as a catch-all, really. Not much else use.
      */
-    MEMBER(false);
+    MEMBER();
 
     private var permission = ""
 
-    private constructor(isSpecialRank: Boolean) {}
+    private constructor() {}
 
     private constructor(permission: String) {
         this.permission = permission
@@ -66,13 +66,16 @@ public enum class Rank {
         if(p is ConsoleCommandSender) return true
         when(this) {
             Rank.MEMBER -> return true
-            Rank.DEV -> return DeveloperListUtils.isDeveloper(p as Player)
-            Rank.FOUNDER -> return p.getName().equals("ThePixelDev") || (p as Player).getUniqueId().toString().equals("2dec56e8-5548-4d89-8967-ee0da35f9874") //the UUID is Jaden - who apparently changes his IGN a lot.
+            Rank.DEV -> return SpecialStaffListUtils.isDeveloper(p as Player)
+            Rank.FOUNDER -> return SpecialStaffListUtils.isFounder(p as Player) //yes, I know, it calls DeveloperListUtils. no, I don't care.
 
             else -> return p.hasPermission(permission)
         }
     }
 
+    /**
+     * Yes, I realize it's Color, not Colour. Fuck it, too lazy to go through more code to fix it.
+     */
     public fun getNameColor(): ChatColor {
         when(this) {
             Rank.FOUNDER -> return ChatColor.LIGHT_PURPLE

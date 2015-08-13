@@ -11,16 +11,6 @@ import org.bukkit.entity.Player
 class ChatSystemUtils {
 
     /**
-     * yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip
-     *
-     * Little easter egg. Because why the fuck not. *it's not like I have anything better to do with my life anyways...*
-     * ( ps: this is a reference to https://www.youtube.com/watch?v=-2ZkJd4u0Us )
-     */
-    private fun isYipYip(m: String): Boolean {
-        return (StringUtils.toLower(m) as java.lang.String).contains("yip") && (StringUtils.toLower(m) as java.lang.String).contains("computer")
-    }
-
-    /**
      * GOD DAMNIT YELLOW PLAGUE, FUCK OFF
      */
     private fun isMinions(m: String): Boolean {
@@ -36,12 +26,10 @@ class ChatSystemUtils {
     private fun getParsedChatMessage(msg: String, p: Player): String {
         if(isMinions(msg))
             return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "I hate the yellow plague that is Minions." //MINIONS. FUCK OFF. PLEASE.
-        if(isYipYip(msg))
-            return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "yip yip yip yip yip com-put-or com-put-or computor computor yip yip yip"
 
         if(Rank.VIP.isRanked(p))
             //ignore intellij's yelling at the use of "(msg as java.lang.String)" (blame Kotlin not having [String].replace etc)
-            return "" + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', (msg as java.lang.String).replace("[tm]", "™"))
+            return "" + ChatColor.WHITE + parseColors(StringUtils.replace(msg, "[tm]", "™"), p)
         else
             return "" + ChatColor.GRAY + msg
     }

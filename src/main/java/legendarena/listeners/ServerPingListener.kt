@@ -12,6 +12,7 @@ public class ServerPingListener: Listener {
 
     EventHandler fun listenForPing(ev: ServerListPingEvent) {
         ev.setMotd(MOTDUtils.getBuiltMOTD())
+        ev.setMaxPlayers(ev.getNumPlayers() + 1)
     }
 
 }

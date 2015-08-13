@@ -2,7 +2,6 @@ package legendarena.hub;
 
 import legendapi.utils.MenuUtils;
 import legendapi.utils.Rank;
-import legendarena.LegendArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,38 +20,13 @@ public class HubWarper {
         public void run() {
             for(final Player p : Bukkit.getOnlinePlayers()) {
                 if(exempt.contains(p.getUniqueId())) continue;
-                if(!Rank.MOD.isRanked(p)) p.getInventory().clear();
                 if(Rank.MOD.isRanked(p)) {
-                    try {
-                        if(p.getInventory().getItem(5) != getMainMenu())
-                            p.getInventory().setItem(5, getMainMenu());
-                    }
-                    catch(Exception ex) {
-                        p.getInventory().setItem(5, getMainMenu()); //I BROKE IT ALL, MY TERMINAL IS BEING SPAMMED CURRENTLY, SEND HELP
-                    }
-                    try {
-                        if(p.getInventory().getItem(3) != getStaffMenu())
-                            p.getInventory().setItem(3, getStaffMenu());
-                    }
-                    catch(Exception ex) {
-                        p.getInventory().setItem(3, getStaffMenu());
-                    }
-                    try {
-                        if(p.getInventory().getItem(4) == getMainMenu())
-                            p.getInventory().setItem(4, MenuUtils.createItem(Material.AIR));
-                    }
-                    catch(Exception ex) {
-                        //do nothing
-                    }
-                } else {
-                    try {
-                        if(p.getInventory().getItem(4) != getMainMenu())
-                            p.getInventory().setItem(4, getMainMenu());
-                    }
-                    catch(Exception ex) {
-                        p.getInventory().setItem(4, getMainMenu());
-                    }
-                }
+                    if(!p.getInventory().getItem(5).getItemMeta().getDisplayName().equals(getMainMenu(p.getName()).getItemMeta().getDisplayName()))
+                        p.getInventory().setItem(5, getMainMenu(p.getName()));
+                    p.getInventory().setItem(3, getStaffMenu());
+                } else
+                if(!p.getInventory().getItem(4).getItemMeta().getDisplayName().equals(getMainMenu(p.getName()).getItemMeta().getDisplayName()))
+                    p.getInventory().setItem(4, getMainMenu(p.getName()));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false));
             }
         }
@@ -68,12 +42,12 @@ public class HubWarper {
         return exempt.contains(p);
     }
 
-    public static ItemStack getMainMenu() {
-        return MenuUtils.createItem(Material.WATCH, ChatColor.GREEN + "Warper", ChatColor.BLUE + "Right click me to bring up the warper!");
+    public static ItemStack getMainMenu(String player) {
+        return MenuUtils.createHead(player, ChatColor.GREEN + "Main Menu");
     }
 
     public static ItemStack getStaffMenu() {
-        return MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Menu", ChatColor.BLUE + "Right click me to bring up the staff menu!");
+        return MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Menu");
     }
 
 }

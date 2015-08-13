@@ -30,17 +30,16 @@ public class ConfigUtils {
     internal var confVersion = 1
 
     public constructor(p: Plugin) {
-        this.p = p
-        this.log = BukLog(p)
-    }
-
-    /*public constructor(p: Plugin) {
         this.log = BukLog(p)
 
         configFile = File(p.getDataFolder().getAbsolutePath(), "Config.yml")
 
         this.p = p
-        config = YamlConfiguration.loadConfiguration(configFile)
+        try {
+            config = YamlConfiguration.loadConfiguration(configFile)
+        } catch(ex: Exception) {
+            resetConfig()
+        }
     }
 
     public fun saveConfig() {
@@ -60,50 +59,9 @@ public class ConfigUtils {
         this.confVersion = ver
     }
 
-    public fun upgradeIfConfVersionIsNot(check: Int) {
-        if(!configFile!!.exists()) {
-            try {
-                //Thanks Java[tm]
-                p!!.getDataFolder().mkdirs()
-                didExist = !configFile!!.createNewFile()
-                log!!.log(Level.DEBUG, "Config file generated.")
-            } catch(ex: IOException) {
-                log!!.dumpError(ex, "generating config file")
-                log!!.log(Level.INTERNALERROR, "Error while creating configuration file for plugin \"" + p!!.getDescription().getName() + "\"! (see above for reason)")
-            }
+    public fun genIfDoesNotExist(key: String) {
+        if(!contains(key))
             genDefaults()
-            return
-        }
-        if(confVersion != check)
-            throw AreYouDrunkException()
-        if(!contains("configVersion")) {
-            //we've probably never generated the config this run, generate it and exit
-            genDefaults()
-            return
-        }
-        if(get("configVersion") !is Int) {
-            //something is wrong, throw a warning in the server log, reset the config to default and exit
-            BukLog(p!!).log(Level.WARNING, "WARNING! CONFIG VERSION VALUE TAMPERING HAS OCCURED (or a very horrible internal error) - resetting config to default...")
-            resetConfig()
-            return
-        }
-        if((get("configVersion") as Int) < check)
-            upgradeConfig()
-    }
-
-    public fun upgradeConfig() {
-        BukLog(p!!).log(Level.INFO, "Upgrading configuration for plugin \"" + p!!.getDescription().getName() + "\"...")
-        for(i in defaults.keySet()) {
-            if(!contains(i))
-                set(i, defaults.get(i))
-            else {
-                if(get(i) == defaults.get(i))
-                    continue
-                //sorry server owners! too lazy to make a new config system just to identify manually changed values! (blame bukkit[tm])
-                set(i, defaults.get(i))
-            }
-        }
-        saveConfig()
     }
 
     public fun contains(key: String): Boolean {
@@ -127,10 +85,15 @@ public class ConfigUtils {
         for(i in defaults.keySet())
             set(i, defaults.get(i))
         log!!.log(Level.DEBUG, "Config generated.")
+        saveConfig()
     }
 
     public fun resetConfig() {
-        configFile!!.delete()
+        try {
+            configFile!!.delete()
+        } catch(ex: IOException) {
+            //do nothing
+        }
         config = null
         try {
             //thanks java[tm]
@@ -141,6 +104,7 @@ public class ConfigUtils {
             throw Exception("Could not reset configuration!")
         }
         config = YamlConfiguration.loadConfiguration(configFile)
-    }*/
+        genDefaults()
+    }
 
 }

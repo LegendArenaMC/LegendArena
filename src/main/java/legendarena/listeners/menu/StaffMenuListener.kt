@@ -13,7 +13,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-class StaffMenuListener : Listener {
+public class StaffMenuListener : Listener {
 
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {

@@ -21,11 +21,10 @@ class MinigameMenu {
     public constructor() {
         inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Warper")
 
-        //"because inv could have changed since the last if check" go home intellij you're drunk
         inv!!.setItem(0, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
         inv!!.setItem(1, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 
-        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "Close Menu"))
+        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
     }
 
     public fun show(p: Player) {

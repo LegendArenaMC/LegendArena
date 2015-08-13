@@ -6,6 +6,7 @@ import legendapi.utils.MenuUtils
 import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
+import legendarena.hub.HubWarper
 import legendarena.staffutils.VanishUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -13,6 +14,8 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 public class PlayerJoinListener : Listener {
 
@@ -39,6 +42,10 @@ public class PlayerJoinListener : Listener {
             ChatSystem.notice("Player \"" + ev.getPlayer().getName() + "\" is shadow muted.")
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
+
+        ev.getPlayer().getInventory().setItem(5, HubWarper.getMainMenu(ev.getPlayer().getName()))
+        ev.getPlayer().getInventory().setItem(3, HubWarper.getStaffMenu())
+        ev.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false))
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {

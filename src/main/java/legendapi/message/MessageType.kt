@@ -5,6 +5,7 @@ enum class MessageType {
     CHAT,
     TITLE,
     SUBTITLE,
-    ACTIONBAR
+    ACTIONBAR,
+    FANCIFUL
 
 }

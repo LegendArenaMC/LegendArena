@@ -7,7 +7,7 @@ package legendarena.hub
 import legendapi.utils.Rank
 import org.bukkit.entity.Player
 
-interface Gadget {
+public interface Gadget {
 
     /**
      * Can be null to signify anyone can use this.

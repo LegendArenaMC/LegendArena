@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-class ChatMenuListener : Listener {
+public class ChatMenuListener : Listener {
 
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {

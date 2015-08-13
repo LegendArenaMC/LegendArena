@@ -22,7 +22,7 @@ class Firework : CommandExecutor {
         }
 
         if(!Rank.MEMBERPLUS.isRanked(sender)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.MEMBERPLUS))
+            RankUtils.fancyNoPermissions(Rank.MEMBERPLUS, sender)
             return true
         }
 

@@ -79,9 +79,9 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 				nmsPacketPlayOutChatConstructor = Reflection.getNMSClass("PacketPlayOutChat").getDeclaredConstructor(Reflection.getNMSClass("IChatBaseComponent"));
 				nmsPacketPlayOutChatConstructor.setAccessible(true);
 			} catch (NoSuchMethodException ex) {
-				new BukLog().dumpError(ex, "attempting to find Minecraft method or constructor");
+				new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpError(ex, "attempting to find Minecraft method or constructor");
 			} catch (SecurityException ex) {
-				new BukLog().dumpRawError(ex, "Could not access constructor!");
+				new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpRawError(ex, "Could not access constructor!");
 			}
 		}
 	}
@@ -440,7 +440,7 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 					result.messageParts.add(new MessagePart(TextualComponent.rawText("\n")));
 			} catch(CloneNotSupportedException e) {
 				//Bukkit.getLogger().log(Level.WARNING, "Failed to clone object", e);
-				new BukLog().dumpError(e, "attempting to clone object");
+				new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpError(e, "attempting to clone object");
 				return this;
 			}
 		}

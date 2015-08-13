@@ -9,7 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerTeleportEvent
 
-class PlayerMoveListener : Listener {
+public class PlayerMoveListener : Listener {
 
     EventHandler public fun listenForMove(ev: PlayerMoveEvent) {
         if(ev.getTo().getY() < -5) {

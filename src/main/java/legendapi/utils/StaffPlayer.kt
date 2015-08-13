@@ -9,7 +9,7 @@ import org.bukkit.entity.Player
 public class StaffPlayer {
 
     var p: Player? = null
-    var r: Rank? = null //protip: don't name this "rank" unless you want IntelliJ to bitch about it constantly.
+    var r: Rank? = null
 
     public constructor(p: Player) {
         this.p = p
@@ -20,8 +20,16 @@ public class StaffPlayer {
         return p!!
     }
 
+    public fun getFormattedName(): String {
+        return "" + r!!.getNameColor() + p!!.getName()
+    }
+
     public fun getRank(): Rank {
         return r!!
+    }
+
+    fun getName(): String {
+        return getPlayer().getName()
     }
 
 }

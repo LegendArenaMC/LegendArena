@@ -33,7 +33,7 @@ class Staff: CommandExecutor {
         }
 
         if(!Rank.HELPER.isRanked(sender)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.HELPER))
+            RankUtils.fancyNoPermissions(Rank.HELPER, sender)
             return true
         }
 
@@ -46,40 +46,7 @@ class Staff: CommandExecutor {
             gerald.setPowered(true)
             gerald.setCustomNameVisible(true)
             gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
-            gerald.setTarget(sender)
-            gerald.setHealth(1.0)
-
-            return true
-        } else if(args.size() >= 1 && args[0].equals("bridge")) {
-
-            Thread(Runnable() {
-                fun run() {
-                    //this is overly complicated for an easter egg, by the way.
-                    FancyMessage("What, is your name?")
-                                .color(ChatColor.BLUE)
-                            .then("\"" + sender.getName() + "\"\n")
-                                .color(ChatColor.GREEN)
-                            .send(sender)
-                    Thread.sleep(1000)
-                    FancyMessage("What, is your quest?")
-                                .color(ChatColor.BLUE)
-                            .then("\"To seek the holy Grail.\"\n")
-                                .color(ChatColor.GREEN)
-                            .send(sender)
-                    Thread.sleep(1000)
-                    FancyMessage("What, is your favourite color?\n")
-                                .color(ChatColor.BLUE)
-                            .then("\"Blue. No, yEEEEEELOOOOOWWWWWW\"")
-                                .color(ChatColor.GREEN)
-                            .send(sender)
-                    Thread.sleep(500)
-                    if(!HubWarper.isExempt((sender as Player).getUniqueId()))
-                        HubWarper.toggleExemption((sender).getUniqueId())
-                    (sender).setHealth(0.0)
-                    if(HubWarper.isExempt((sender).getUniqueId()))
-                        HubWarper.toggleExemption((sender).getUniqueId())
-                }
-            }).start();
+            gerald.setHealth(0.5)
 
             return true
         }
@@ -94,25 +61,25 @@ class Staff: CommandExecutor {
                     help(sender, args[1])
             } else if(args[0].equals("info")) {
                 if(args.size() == 1)
-                    sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."))
+                    ChatUtils.fancyHelpSuggestMsg("/staff info <player>", "Gets various info about a specified player.", "staff info", true).send(sender)
                 else {
                     if (Bukkit.getPlayer(args[1]) != null) {
                         @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
-                        sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.chars[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.chars[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getGameMode())
-                        sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getUniqueId())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; WALK " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getWalkSpeed())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; FLY " + ChatUtils.chars[1] + ChatColor.GREEN + " " + p.getFlySpeed())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Global Bans " + ChatUtils.chars[1] + ChatColor.GREEN + " http://fishbans.com/u/" + p.getName())
+                        sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
+                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
+                        sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getGameMode())
+                        sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getUniqueId())
+                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; WALK " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getWalkSpeed())
+                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; FLY " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getFlySpeed())
+                        sender.sendMessage("" + ChatColor.YELLOW + "Global Bans " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " http://fishbans.com/u/" + p.getName())
                     } else {
                         sender.sendMessage("" + ChatColor.RED + "Player \"" + args[0] + "\" was not found!") //the player was not found
                     }
                 }
             } else if(args[0].equals("clearchat")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
-                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                    RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
                 if(c != null && !c!!.done()) {
@@ -136,13 +103,19 @@ class Staff: CommandExecutor {
         when(page) {
             "1" -> {
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff help [page]", "Displays this menu, or optionally, a help page."))
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff info <player>", "Gets info about a specified player."))
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff vanish", "Poof."))
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/staff clearchat", "Clear the current server's chat."))
+                ChatUtils.fancyHelpSuggestMsg("/staff info <player>", "Gets various info about a specified player.", "staff info", true).send(sender)
+                ChatUtils.fancyHelpSuggestMsg("/staff lockdown <0/1/2>", "Set the current lockdown level. [See \"/staff help lockdown\" for more info]", "staff lockdown", true).send(sender)
+                ChatUtils.fancyHelpMsg("/staff vanish", "Poof.", "staff vanish", true).send(sender)
+                ChatUtils.fancyHelpMsg("/staff clearchat", "Clear the current server's chat for everyone.", "staff clearchat", true).send(sender)
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
             }
-            else -> sender.sendMessage(ChatUtils.Messages.errorMsg + "I don't know what you mean :(")
+            "lockdown" -> {
+                ChatUtils.fancyHelpSuggestMsg("/staff lockdown <0/1/2>", "Set the current lockdown level. Currently a work in progress.", "staff lockdown", true).send(sender)
+                ChatUtils.fancyHelpMsg("/staff lockdown 0", "Level 0 lockdown, the basic mode.", "staff lockdown 0", true).send(sender)
+                ChatUtils.fancyHelpMsg("/staff lockdown 1", "Level 1 lockdown, locks all normal players out from this server only.", "staff lockdown 1", true).send(sender)
+                ChatUtils.fancyHelpMsg("/staff lockdown 2", "Level 2 lockdown, locks all normal players out from the entire network. [ONLY USABLE BY FOUNDER RANKED STAFF]", "staff lockdown 2", true).send(sender)
+            }
+            else -> sender.sendMessage(ChatUtils.getCustomMsg("" + ChatColor.RED + "Error") + "I don't know what you mean :(")
         }
     }
 

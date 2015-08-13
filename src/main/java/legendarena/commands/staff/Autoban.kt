@@ -20,7 +20,7 @@ class Autoban : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>): Boolean {
         if(!Rank.MOD.isRanked(sender as Player)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
+            RankUtils.fancyNoPermissions(Rank.MOD, sender as Player)
             return true
         }
 
@@ -37,7 +37,7 @@ class Autoban : CommandExecutor {
         //walls of code are fun (/s)
         //also no this isn't a gui. because fuck you. [tm]
         //..that, and I don't want to bother writing a AutoBanGUI class.
-        //and because it'd leak memory like Chrome eats it. (..not that this already doesn't, this would just be easier to do, rather than a Menu, Listener and such)
+        //and because it'd leak memory like Chrome eats it. (..not that this already doesn't a bit, this setup is just easier to do (in both code and RAM usage), rather than a Menu, Listener and stuff like that)
         FancyMessage("Banning player ")
                     .color(ChatColor.GREEN)
                 .then(target)

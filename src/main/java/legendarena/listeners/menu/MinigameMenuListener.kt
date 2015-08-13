@@ -8,13 +8,12 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-class MinigameMenuListener : Listener {
+public class MinigameMenuListener : Listener {
 
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
-        if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Warper")) return
         try {
-            if(ev.getCurrentItem().getItemMeta() == null) return
+            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Warper")) return
             if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Hub")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
@@ -24,7 +23,7 @@ class MinigameMenuListener : Listener {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Close Menu")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
             } else

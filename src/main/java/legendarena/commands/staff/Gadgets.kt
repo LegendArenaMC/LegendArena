@@ -19,7 +19,7 @@ class Gadgets : CommandExecutor {
             return true //Do nothing if it's not a player
         }
         if(!Rank.MOD.isRanked(sender)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
+            RankUtils.fancyNoPermissions(Rank.MOD, sender)
             return true
         }
         if(args.size() == 0) {

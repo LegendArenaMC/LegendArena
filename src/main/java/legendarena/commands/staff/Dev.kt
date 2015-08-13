@@ -2,10 +2,7 @@ package legendarena.commands.staff
 
 import legendapi.emeralds.EmeraldsCore
 import legendapi.message.Message
-import legendapi.utils.CalendarUtils
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.VersionUtils
+import legendapi.utils.*
 import legendarena.hub.JumpPad
 import org.apache.commons.io.FileUtils
 import org.bukkit.ChatColor
@@ -17,8 +14,10 @@ import org.bukkit.entity.Player
 class Dev : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
-        if(!Rank.DEV.isRanked(sender))
-            return false //pretend the command is broken/not registered
+        if(!Rank.DEV.isRanked(sender)) {
+            RankUtils.fancyNoPermissions(Rank.DEV, sender as Player)
+            return true
+        }
         if(args.size() == 0) {
             var msg = Message()
 
@@ -30,8 +29,8 @@ class Dev : CommandExecutor {
             msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
             msg.append(ChatUtils.getFormattedHeader("API/Library Versions") + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("KotlinLoader")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("Kotlin")) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + " (backend ID: " + VersionUtils.getAPIVersionInt() + ")\n")
 
             msg.send(sender)
             return true
@@ -44,31 +43,18 @@ class Dev : CommandExecutor {
         } else if(args[0].equals("jp")) {
             JumpPad.jump(sender as Player)
             return true
-        } else if(args[0].equals("resetemeralds")) {
-            EmeraldsCore().resetEmeralds(sender as Player, false, "Dev Command Manual Reset")
-            sender.sendMessage("" + ChatColor.GREEN + "Emeralds amount reset.")
         }
 
-        else if(args[0].equals("emeraldsrs")) {
-            var rs = EmeraldsCore().getEcon().getEmeraldsRS()
-            while(rs.next()) {
-                sender.sendMessage("" + rs.getString("name") + ": " + rs.getInt("emeralds"))
-            }
-            rs.close()
+        else if(args[0].equals("testnoperms")) {
+            RankUtils.fancyNoPermissions(Rank.MEMBERPLUS, sender as Player)
+            RankUtils.fancyNoPermissions(Rank.VIP, sender)
+            RankUtils.fancyNoPermissions(Rank.HELPER, sender)
+            RankUtils.fancyNoPermissions(Rank.MOD, sender)
+            RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
+            RankUtils.fancyNoPermissions(Rank.DEV, sender)
+            RankUtils.fancyNoPermissions(Rank.FOUNDER, sender)
         }
         return true
-    }
-
-    public fun getReadableMemory(): Message {
-        var msg = Message()
-
-        msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
-
-        //msg.append(blue + "Free memory: " + FileUtils.byteCountToDisplaySize(Math.round(getFreeMemory()).toLong()))
-        //msg.append(blue + "Max memory: " + FileUtils.byteCountToDisplaySize(Math.round(getMaxMemory()).toLong()))
-        //msg.append(blue + "Used memory: " + FileUtils.byteCountToDisplaySize(Math.round(getUsedMemory()).toLong()) + " (" + getUsedMemoryPercentage() + "%)")
-
-        return msg
     }
 
     public fun getMaxMemory(): Double {

@@ -54,10 +54,10 @@ class EmeraldCmd : CommandExecutor {
             help(sender)
         else {
             if(args[0].equals("amount")) {
-                sender.sendMessage(ChatUtils.getFormattedMsg("You Have", "" + emeralds!!.getEmeralds(sender as Player) + " emeralds"))
+                sender.sendMessage(ChatUtils.getFormattedMsg("You Have", "" + emeralds!!.getEmeralds(sender.getName()) + " emeralds"))
             } else if(args[0].equals("add")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
-                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                    RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
                 if(args.size() <= 2)
@@ -76,11 +76,11 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Adding " + add + " emerald(s)...")
-                    emeralds!!.addEmeralds(p, add, true)
+                    emeralds!!.addEmeralds(p.getName(), add)
                 }
             } else if(args[0].equals("remove") || args[0].equals("take")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
-                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                    RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
                 if(args.size() <= 2) {
@@ -99,16 +99,16 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
 
-                    if(remove > emeralds!!.getEmeralds(p)) {
+                    if(remove > emeralds!!.getEmeralds(p.getName())) {
                         sender.sendMessage("" + ChatColor.RED + "That player does not have that many emeralds!")
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Removing " + remove + " emerald(s)...")
-                    emeralds!!.removeEmeralds(p, remove, true)
+                    emeralds!!.removeEmeralds(p.getName(), remove)
                 }
             } else if(args[0].equals("reset")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
-                    sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                    RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
                 if(args.size() < 2) {
@@ -119,12 +119,8 @@ class EmeraldCmd : CommandExecutor {
                         sender.sendMessage(ChatUtils.getCustomMsg("Staff") + "You must be really fun at parties.")
                         return true
                     }
-                    if(p == null && args[2] != "--FORCE") {
-                        sender.sendMessage("" + ChatColor.RED + "That player was not found!")
-                        return true
-                    }
                     sender.sendMessage("" + ChatColor.GREEN + "Setting player's emerald count to zero...")
-                    emeralds!!.resetEmeralds(p, true, sender.getName())
+                    emeralds!!.resetEmeralds(p.getName())
                 }
             } else {
                 help(sender)

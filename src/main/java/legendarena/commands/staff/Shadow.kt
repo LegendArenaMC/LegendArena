@@ -17,7 +17,7 @@ class Shadow : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>): Boolean {
         if(!Rank.ADMIN.isRanked(sender)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+            RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
             return true
         }
 

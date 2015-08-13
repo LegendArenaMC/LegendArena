@@ -7,7 +7,11 @@ public class VersionUtils {
     private static HashMap<String, String> versionList = new HashMap<>();
 
     public static String getAPIVersion() {
-        return "1.1-SNAPSHOT";
+        return "1.2-SNAPSHOT";
+    }
+
+    public static int getAPIVersionInt() {
+        return 3;
     }
 
     /**

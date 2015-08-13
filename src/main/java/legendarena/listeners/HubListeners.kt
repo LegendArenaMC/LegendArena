@@ -8,7 +8,7 @@ import legendapi.utils.MenuUtils
 import legendapi.utils.VersionUtils
 import legendarena.LegendArena
 import legendarena.hub.HubWarper
-import legendarena.hub.menu.MinigameMenu
+import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.staff.StaffMenu
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -26,7 +26,7 @@ public class HubListeners : Listener {
     /**
      * WUBBBBBB
      *
-     * ...sorry, I couldn't resist.
+     * ...sorry, I couldn't resist
      */
     EventHandler(ignoreCancelled = true)
     public fun listenForDrop(ev: PlayerDropItemEvent) {
@@ -41,7 +41,7 @@ public class HubListeners : Listener {
                 ev.setCancelled(true)
             if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK)
                 return
-            if(ev.getItem() == HubWarper.getMainMenu()) {
+            if(ev.getItem().getItemMeta().getDisplayName().equals(HubWarper.getMainMenu(ev.getPlayer().getName()).getItemMeta().getDisplayName())) {
                 if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
                     val c = cooldown.get(ev.getPlayer().getUniqueId())
                     if(!c.done()) {
@@ -49,7 +49,7 @@ public class HubListeners : Listener {
                         return
                     }
                 }
-                MinigameMenu().show(ev.getPlayer())
+                MainMenu().show(ev.getPlayer())
                 if(!ev.isCancelled())
                     ev.setCancelled(true)
                 cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))

@@ -35,6 +35,9 @@ class GamePlayer {
      */
     public fun setState(state: GamePlayerState) {
         this.state = state
+        if(state == GamePlayerState.SPECTATOR) {
+            getPlayer().spigot().setCollidesWithEntities(false)
+        }
     }
 
 }

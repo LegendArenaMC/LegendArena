@@ -22,6 +22,10 @@ class MistakesWereMadeException : RuntimeException("mistakes were very well made
  */
 class PleaseRespectTablesException : RuntimeException()
 
+@SuppressWarnings("ALL")
 class YoureOnYourOwnException(s: String) : RuntimeException()
 
+@SuppressWarnings("ALL")
 class AreYouDrunkException(s: String) : RuntimeException()
+
+class DeprecatedException() : Exception()

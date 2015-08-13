@@ -1,5 +1,6 @@
 package legendapi.message
 
+import legendapi.fanciful.FancyMessage
 import legendapi.log.BukLog
 import legendapi.utils.Rank
 import legendarena.LegendArena
@@ -11,6 +12,8 @@ import org.bukkit.entity.Player
 class Message {
 
     private var type = MessageType.CHAT
+
+    private var fanciful: FancyMessage? = null
 
     private var fadeIn = 5
     private var stay = 10
@@ -30,9 +33,20 @@ class Message {
     }
 
     public fun append(msg: String): Message {
+        if(type == MessageType.FANCIFUL)
+            throw ClassCastException("You can't append a String onto a FancyMessage!")
         if(builder == null)
             builder = StringBuilder()
         builder!!.append(msg)
+        return this
+    }
+
+    public fun append(msg: FancyMessage): Message {
+        if(type != MessageType.FANCIFUL) {
+            if(builder != null)
+                builder = null
+        }
+        this.fanciful = msg
         return this
     }
 
@@ -63,7 +77,7 @@ class Message {
         _send(p as Player)
     }
 
-    internal fun _send(p: Player) {
+    private fun _send(p: Player) {
         var msg = toString()
         if((msg == "" || msg == "\n") && sound != null) return
         when(type) {
@@ -71,6 +85,7 @@ class Message {
             MessageType.ACTIONBAR -> reflector.sendActionbar(p, msg)
             MessageType.TITLE -> reflector.send(1, p, msg, fadeIn, stay, fadeOut)
             MessageType.SUBTITLE -> reflector.send(0, p, msg, fadeIn, stay, fadeOut)
+            MessageType.FANCIFUL -> fanciful!!.send(p)
         }
     }
 

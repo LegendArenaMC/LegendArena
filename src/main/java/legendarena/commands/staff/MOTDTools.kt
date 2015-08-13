@@ -18,22 +18,22 @@ class MOTDTools : CommandExecutor {
 
     fun run(sender: CommandSender, args: Array<String>) {
         if (!Rank.MOD.isRanked(sender)) {
-            sender.sendMessage(RankUtils.noPermissions(Rank.MOD))
+            RankUtils.fancyNoPermissions(Rank.MOD, sender)
             return
         }
         if(args.size() == 0) {
             sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd notice [notice]", "Sets the MOTD notice"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd lastgiven", "Get the last given randomized MOTD."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd getmotd", "Get the currently showing MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
+            sender.sendMessage(ChatUtils.getFormattedMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd notice [notice]", "Sets the MOTD notice"))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd lastgiven", "Get the last given randomized MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd getmotd", "Get the currently showing MOTD."))
         } else if(args[0].equals("lastgiven")) {
             sender.sendMessage(ChatUtils.getCustomMsg("MOTD") + MOTDUtils.getLastMOTDGiven())
         } else if(args[0].equals("notice")) {
             if(!Rank.ADMIN.isRanked(sender)) {
-                sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                 return
             }
             if(args.size() == 1) {
@@ -44,11 +44,11 @@ class MOTDTools : CommandExecutor {
             }
         } else if(args[0].equals("setmotd") || args[0].equals("override")) {
             if(!Rank.ADMIN.isRanked(sender)) {
-                sender.sendMessage(RankUtils.noPermissions(Rank.ADMIN))
+                RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                 return
             }
             if(args.size() == 1) {
-                sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
+                //sender.sendMessage(ChatUtils.getFormattedMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD."))
                 return
             }
             if(args.size() == 2) {
@@ -78,13 +78,27 @@ class MOTDTools : CommandExecutor {
 
         else {
             sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd notice [notice]", "Sets the MOTD notice"))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd lastgiven", "Get the last given randomized MOTD."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
-            sender.sendMessage(ChatUtils.getFormattedHelpMsg("/motd getmotd", "Get the currently showing MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
+            sender.sendMessage(ChatUtils.getFormattedMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd notice [notice]", "Sets the MOTD notice"))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd lastgiven", "Get the last given randomized MOTD."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
+            sender.sendMessage(ChatUtils.getFormattedMsg("/motd getmotd", "Get the currently showing MOTD."))
         }
+    }
+
+    private fun help(sender: CommandSender) {
+        sender.sendMessage(ChatUtils.getFormattedHeader("MOTD Randomizer"))
+        sender.sendMessage(ChatUtils.getFormattedMsg("Amount of MOTDs", StringUtils.valueOf(MOTDUtils.getAmountOfMOTDs())))
+        sender.sendMessage(ChatUtils.getFormattedMsg("Current notice", "\"" + MOTDUtils.getNotice() + "\""))
+        //sender.sendMessage(ChatUtils.getFormattedMsg("/motd notice [notice]", "Sets the MOTD notice"))
+        //sender.sendMessage(ChatUtils.getFormattedMsg("/motd lastgiven", "Get the last given randomized MOTD."))
+        //sender.sendMessage(ChatUtils.getFormattedMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override."))
+        //sender.sendMessage(ChatUtils.getFormattedMsg("/motd getmotd", "Get the currently showing MOTD."))
+        ChatUtils.fancyHelpSuggestMsg("/motd notice [notice]", "Sets the MOTD notice", "motd notice", true)
+        ChatUtils.fancyHelpMsg("/motd lastgiven", "Get the last given randomized MOTD. In the case of an override, always returns the current MOTD.", "motd lastgiven", true)
+        ChatUtils.fancyHelpSuggestMsg("/motd setmotd <[--nodecor] New MOTD|--clear>", "Sets or clears the MOTD override.", "motd setmotd", true)
+        ChatUtils.fancyHelpMsg("/motd getmotd", "Get the currently showing MOTD.", "motd getmotd", true)
     }
 
 }

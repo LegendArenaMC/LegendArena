@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent
 
-class ArmourStandListener : Listener {
+public class ArmourStandListener : Listener {
 
     EventHandler public fun listenForArmourStand(ev: PlayerArmorStandManipulateEvent) {
         if(HubWarper.isExempt(ev.getPlayer().getUniqueId()))

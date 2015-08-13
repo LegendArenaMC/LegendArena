@@ -20,12 +20,6 @@ class BukLog {
     internal var p: Plugin? = null
     internal var l: Logger? = null
 
-    Deprecated
-    public constructor() {
-        p = Bukkit.getPluginManager().getPlugin("LegendArena")
-        l = Bukkit.getLogger()
-    }
-
     public constructor(p: Plugin) {
         this.p = p
         l = Bukkit.getLogger()
