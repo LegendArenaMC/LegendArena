@@ -13,7 +13,7 @@ public class ChatMenuListener : Listener {
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
         try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Chat Menu")) return
+            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Chat Selector")) return
             if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Global")) {
                 ev.getWhoClicked().closeInventory()
                 (ev.getWhoClicked() as Player).performCommand("chat off")

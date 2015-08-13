@@ -35,16 +35,21 @@ public class PlayerJoinListener : Listener {
                     .then("!")
                         .color(ChatColor.GREEN)
                     .then("\n\n")
+                    //server soon to be in public beta, by the way!
+                    //...well, that is, if I can be bothered to work on Never Have I Ever in the next two years.
                     .then("As the server is still in alpha, expect bugs. (sorry about that, by the way!)")
                         .color(ChatColor.YELLOW)
                     .send(ev.getPlayer())
         if(ChatSystem.isShadowMuted(ev.getPlayer()))
-            ChatSystem.notice("Player \"" + ev.getPlayer().getName() + "\" is shadow muted.")
+            ChatSystem.notice("Player " + ChatColor.YELLOW + ev.getPlayer().getName() + ChatColor.DARK_PURPLE + " is currently shadow muted.")
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
-        ev.getPlayer().getInventory().setItem(5, HubWarper.getMainMenu(ev.getPlayer().getName()))
-        ev.getPlayer().getInventory().setItem(3, HubWarper.getStaffMenu())
+        if(Rank.MOD.isRanked(ev.getPlayer())) {
+            ev.getPlayer().getInventory().setItem(5, HubWarper.getMainMenu(ev.getPlayer().getName()))
+            ev.getPlayer().getInventory().setItem(3, HubWarper.getStaffMenu())
+        } else
+            ev.getPlayer().getInventory().setItem(4, HubWarper.getMainMenu(ev.getPlayer().getName()))
         ev.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false))
     }
 

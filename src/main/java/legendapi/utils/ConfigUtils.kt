@@ -94,7 +94,9 @@ public class ConfigUtils {
         } catch(ex: IOException) {
             //do nothing
         }
+
         config = null
+
         try {
             //thanks java[tm]
             p!!.getDataFolder().mkdirs()
@@ -103,6 +105,7 @@ public class ConfigUtils {
             BukLog(p!!).dumpError(ex, "resetting configuration for plugin " + p!!.getDescription().getName())
             throw Exception("Could not reset configuration!")
         }
+
         config = YamlConfiguration.loadConfiguration(configFile)
         genDefaults()
     }

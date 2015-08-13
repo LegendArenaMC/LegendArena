@@ -18,7 +18,7 @@ public class StaffMenuListener : Listener {
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
         try {
-            if (!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Staff Menu")) return
+            if (!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Staff")) return
             if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Chat Selector")) {
                 ev.getWhoClicked().closeInventory()
                 ChatMenu().show(ev.getWhoClicked() as Player)

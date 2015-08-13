@@ -172,11 +172,7 @@ public class ChatSystem {
      * @param msg The notice to send
      */
     public static void notice(String msg) {
-        for(Player p : Bukkit.getOnlinePlayers()) {
-            if(!Rank.MOD.isRanked(p))
-                continue;
-            p.sendMessage(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg);
-        }
+        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg).broadcast(Rank.MOD);
     }
 
     /**

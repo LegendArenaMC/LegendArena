@@ -83,7 +83,7 @@ class Staff: CommandExecutor {
                     return true
                 }
                 if(c != null && !c!!.done()) {
-                    sender.sendMessage(MessageFormat.format("{0} (this is a GLOBAL cooldown!)", c!!.getTimeRemaining()))
+                    sender.sendMessage(MessageFormat.format("{0} (this is a SERVER-WIDE (not network-wide) cooldown!)", c!!.getTimeRemaining()))
                     return true
                 }
                 ChatUtils.clearChat(sender.getName())

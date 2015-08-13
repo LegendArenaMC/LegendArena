@@ -21,7 +21,7 @@ class JumpPadMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Jump Pads Menu")
+        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Jump Pads")
 
         inv!!.setItem(0, MenuUtils.createItem(Material.IRON_PLATE, "" + ChatColor.GREEN + "Get JumpPad"))
         inv!!.setItem(1, MenuUtils.createItem(Material.GOLD_PLATE, "" + ChatColor.GREEN + "Portable JumpPad"))

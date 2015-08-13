@@ -20,7 +20,7 @@ class ChatMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Chat Menu")
+        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Chat Selector")
 
         inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
 

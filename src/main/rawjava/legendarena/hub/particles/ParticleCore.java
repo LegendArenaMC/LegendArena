@@ -13,7 +13,6 @@ import java.util.UUID;
 public class ParticleCore implements Runnable {
 
     private static HashMap<ParticleType, ArrayList<UUID>> players = new HashMap<>();
-    private static ArrayList<UUID> multiSelect = new ArrayList<>();
 
     public void run() {
         for(ParticleType t : players.keySet()) {
@@ -56,24 +55,13 @@ public class ParticleCore implements Runnable {
         setParticles(type, p.getUniqueId());
     }
 
-    public static boolean allowMultiParticles(UUID u) {
-        return multiSelect.contains(u);
-    }
-
-    public static void toggleMultiParticles(UUID u) {
-        if(allowMultiParticles(u))
-            multiSelect.remove(u);
-        else
-            multiSelect.add(u);
-    }
-
     public enum ParticleType {
 
         FIRE(ParticleEffect.FLAME),
         ENDER(ParticleEffect.PORTAL),
         ENCHANT(ParticleEffect.ENCHANTMENT_TABLE),
-        CLOUD(ParticleEffect.CLOUD),
         REDSTONE(ParticleEffect.REDSTONE),
+        CRIT(ParticleEffect.CRIT),
         COLOURFUL(ParticleEffect.SPELL);
 
         private ParticleEffect particle = null;
@@ -87,12 +75,26 @@ public class ParticleCore implements Runnable {
         }
 
         public void play(Player p) {
+            Location l = p.getLocation().add(0.0, 0.5, 0.0);
             switch(getEffect()) {
                 case SPELL:
                     playColourful(p.getLocation());
+                    break;
+                case PORTAL:
+                    getEffect().display(1, 1, 1, 0, 3, l, 30);
+                    break;
+                case ENCHANTMENT_TABLE:
+                    getEffect().display(1, 1, 1, 0, 3, l, 30);
+                    break;
+                case CRIT:
+                    getEffect().display(1, 1, 1, 0, 10, l, 30);
+                    break;
+                case FLAME:
+                    getEffect().display(1, 1, 1, 0, 3, l, 30);
+                    break;
 
                 default:
-                    getEffect().display(1, 1, 1, 1, 3, p.getLocation(), 30);
+                    getEffect().display(0, 0, 0, 0, 5, l, 30);
             }
         }
 
@@ -100,9 +102,19 @@ public class ParticleCore implements Runnable {
             switch(getEffect()) {
                 case SPELL:
                     playColourful(l);
+                    break;
+                case PORTAL:
+                    getEffect().display(1, 1, 1, 0, 5, l, 30);
+                    break;
+                case CRIT:
+                    getEffect().display(1, 1, 1, 0, 10, l, 30);
+                    break;
+                case FLAME:
+                    getEffect().display(1, 1, 1, 0, 10, l, 30);
+                    break;
 
                 default:
-                    getEffect().display(1, 1, 1, 1, 3, l, 30);
+                    getEffect().display(0, 0, 0, 0, 5, l, 30);
             }
         }
 

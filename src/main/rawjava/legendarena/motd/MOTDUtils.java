@@ -2,6 +2,7 @@ package legendarena.motd;
 
 import legendapi.utils.CalendarUtils;
 import legendapi.utils.Months;
+import legendarena.utils.ConfigUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -164,6 +165,7 @@ public class MOTDUtils {
             "GNU Terry Pratchett", //reference to the "X-Clacks-Overhead: GNU Terry Pratchett" header in responses from some servers ( see: http://clacksoverhead.discworld.us/ )
             "314 clicks has resolved the issue.", //program not responding? CLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICK<and so on>
             "We have room for one more!", //reference to the server always having [current players online + 1] as the max player count
+            "WE'VE BEEN SMECKLEDORFED!", //see: http://redd.it/3g2e5j
     };
 
     private static final String[] gameList = {
@@ -357,8 +359,7 @@ public class MOTDUtils {
 
     public static void setNotice(String newNotice) {
         notice = newNotice.toUpperCase();
-        Bukkit.getPluginManager().getPlugin("LegendArena").getConfig().set("motdNotice", newNotice.toUpperCase());
-        Bukkit.getPluginManager().getPlugin("LegendArena").saveConfig();
+        ConfigUtils.config.set("notice", newNotice); //shitty storage of the notice? absolutely. works? yep. do I care? not right now.
     }
 
 }

@@ -16,10 +16,11 @@ import java.util.*
 
 class MinigameMenu {
 
+    public var invName: String = ChatUtils.getCustomMsg("Menus") + "Warper"
     private var inv: Inventory? = null
 
     public constructor() {
-        inv = Bukkit.createInventory(null, 9, ChatUtils.getCustomMsg("Menus") + "Warper")
+        inv = Bukkit.createInventory(null, 9, invName)
 
         inv!!.setItem(0, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
         inv!!.setItem(1, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))

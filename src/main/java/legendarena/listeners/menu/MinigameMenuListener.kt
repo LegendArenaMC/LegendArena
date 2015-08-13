@@ -1,19 +1,22 @@
 package legendarena.listeners.menu
 
 import legendapi.utils.ChatUtils
+import legendarena.hub.menu.MainMenu
+import legendarena.hub.menu.MinigameMenu
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
 public class MinigameMenuListener : Listener {
 
-    EventHandler
+    EventHandler(ignoreCancelled = false, priority = EventPriority.LOW)
     public fun onInventoryClick(ev: InventoryClickEvent) {
         try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Warper")) return
+            if(!ev.getInventory().getName().equals(MinigameMenu().invName)) return
             if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Hub")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
@@ -23,9 +26,10 @@ public class MinigameMenuListener : Listener {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Back")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "⇐ Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
+                MainMenu().show(ev.getWhoClicked() as Player)
             } else
                 ev.setCancelled(true)
         } catch(ignore: Exception) {

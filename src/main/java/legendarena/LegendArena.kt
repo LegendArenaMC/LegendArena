@@ -9,6 +9,7 @@ import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
 import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
+import legendarena.hub.particles.ParticleCore
 import legendarena.listeners.*
 import legendarena.listeners.menu.*
 import legendarena.utils.ConfigUtils
@@ -51,6 +52,10 @@ class LegendArena : KotlinUtils() {
 
         setup.registerCommand(Ban(), "ban")
 
+        setup.announceStatus("Setting up timers...")
+
+        setup.registerNonAsyncTimer(ParticleCore(), 2)
+
         setup.announceStatus("Setting up listeners...")
 
         setup.registerListener(ChatListener())
@@ -59,7 +64,6 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
         setup.registerListener(PlayerMoveListener())
-        setup.registerListener(ArmourStandListener())
         setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
         setup.registerListener(PlayerDamageListener())

@@ -25,7 +25,7 @@ public class JumpPadMenuListener : Listener {
     EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
         try {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Jump Pads Menu")) return
+            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Jump Pads")) return
             if(ev.getCurrentItem().getType() == Material.GOLD_PLATE) {
                 JumpPad.jump(ev.getWhoClicked() as Player)
                 ev.getWhoClicked().closeInventory()
