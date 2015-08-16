@@ -44,7 +44,6 @@ class LegendArena : KotlinUtils() {
         setup.registerCommand(Shadow(), "shadow")
         setup.registerCommand(MOTDTools(), "motd")
         setup.registerCommand(Gadgets(), "gadgets")
-        setup.registerCommand(Tag(), "tag")
         setup.registerCommand(Autoban(), "autoban")
 
         setup.announceStatus("Setting up user commands...")
@@ -80,6 +79,7 @@ class LegendArena : KotlinUtils() {
 
         setup.registerListener(MinigameMenuListener())
         setup.registerListener(MainMenuListener())
+        setup.registerListener(Tag.TagListener())
         setup.registerListener(ParticleMenuListener())
         setup.registerListener(JumpPadMenuListener())
         setup.registerListener(StaffMenuListener())
@@ -108,6 +108,7 @@ class LegendArena : KotlinUtils() {
         config.addDefault("enable.lobbyServer", true)
         config.addDefault("enable.staffHub", true)
         config.addDefault("enable.warp", true)
+        config.addDefault("hub.hubworld", "world")
         config.addDefault("emeralds.storage", "sqlite")
         config.addDefault("emeralds.table", "emeralds")
         config.addDefault("emeralds.mysql.host", "127.0.0.1")

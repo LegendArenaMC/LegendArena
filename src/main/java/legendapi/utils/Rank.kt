@@ -101,4 +101,16 @@ public enum class Rank {
         return internalId
     }
 
+    public fun isStaff(): Boolean {
+        when(this) {
+            FOUNDER -> return true
+            DEV -> return true
+            ADMIN -> return true
+            MOD -> return true
+            HELPER -> return true
+
+            else -> return false
+        }
+    }
+
 }

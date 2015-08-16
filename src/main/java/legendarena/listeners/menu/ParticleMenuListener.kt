@@ -10,6 +10,7 @@ import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
 import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
+import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.ParticleMenu
 import legendarena.hub.menu.staff.StaffMenu
 import legendarena.hub.particles.ParticleCore
@@ -55,6 +56,11 @@ public class ParticleMenuListener : Listener {
                 sendSelectMsg(ev.getWhoClicked() as Player, null)
                 ParticleCore.clearParticles(ev.getWhoClicked().getUniqueId())
                 ev.getWhoClicked().closeInventory()
+            }
+
+            else if(itemName == "" + ChatColor.GREEN + "Back") {
+                ev.getWhoClicked().closeInventory()
+                MainMenu().show(ev.getWhoClicked() as Player)
             }
         } catch(ignore: Exception) {
             // Ignore the error

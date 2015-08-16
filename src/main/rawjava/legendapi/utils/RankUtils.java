@@ -93,6 +93,10 @@ public class RankUtils {
         return getRank(p).getInternalId();
     }
 
+    public static boolean isTagged(Player p) {
+        return taggedRank.containsKey(p.getUniqueId());
+    }
+
     public static int getDisplayRankId(Player p) {
         if(!taggedRank.containsKey(p.getUniqueId()))
             return getRank(p).getInternalId();

@@ -5,6 +5,7 @@
 package legendarena.listeners.menu
 
 import legendapi.utils.ChatUtils
+import legendarena.commands.staff.Tag
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
 import org.bukkit.Bukkit
@@ -27,8 +28,11 @@ public class MainMenuListener : Listener {
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Particle Selector")) {
                 ev.getWhoClicked().closeInventory()
                 ParticleMenu().show(ev.getWhoClicked() as Player)
-            } else
-                ev.setCancelled(true)
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Tag Selector")) {
+                ev.getWhoClicked().closeInventory()
+                Tag().tagGUI(ev.getWhoClicked() as Player)
+            }
+            ev.setCancelled(true)
         } catch(ignore: Exception) {
             // Ignore the error
         }

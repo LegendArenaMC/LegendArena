@@ -3,6 +3,7 @@ package legendarena.listeners.menu
 import legendapi.utils.ChatUtils
 import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.MinigameMenu
+import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -21,17 +22,17 @@ public class MinigameMenuListener : Listener {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 val p = ev.getWhoClicked() as Player
-                p.teleport(Bukkit.getWorld("world").getSpawnLocation())
+                p.teleport(Bukkit.getWorld(ConfigUtils.config.get("hub.hubworld") as String).getSpawnLocation())
             } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Never Have I Ever")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "⇐ Back")) {
+            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Back")) {
                 ev.setCancelled(true)
                 ev.getWhoClicked().closeInventory()
                 MainMenu().show(ev.getWhoClicked() as Player)
-            } else
-                ev.setCancelled(true)
+            }
+            ev.setCancelled(true)
         } catch(ignore: Exception) {
             // Ignore the error
         }

@@ -25,7 +25,7 @@ class MinigameMenu {
         inv!!.setItem(0, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
         inv!!.setItem(1, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 
-        inv!!.setItem(8, MenuUtils.createItem(Material.BED, "" + ChatColor.GREEN + "⇐ Back"))
+        inv!!.setItem(8, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
     }
 
     public fun show(p: Player) {

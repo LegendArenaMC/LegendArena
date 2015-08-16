@@ -89,12 +89,18 @@ class Staff: CommandExecutor {
                 c = Cooldown(120.0)
             } else if(args[0].equals("vanish")) {
                 sender.sendMessage("soon[tm]")
-            }else if(args[0].equals("skull")) {
+            } else if(args[0].equals("skull")) {
                 if(args.size() == 1)
                     (sender as Player).getInventory().addItem(MenuUtils.createHead(sender.getName()))
                 else
                     (sender as Player).getInventory().addItem(MenuUtils.createHead(args[1]))
                 return true
+            } else if(args[0].equals("jp")) {
+                var inv = (sender as Player).getInventory()
+                inv.addItem(MenuUtils.createItem(Material.IRON_PLATE, "" + ChatColor.GREEN + "JumpPad", "" + ChatColor.GREEN + "Place me anywhere to create a " + ChatColor.YELLOW + "JumpPad" + ChatColor.GREEN + "!"))
+            } else if(args[0].equals("mainmenu")) {
+                var inv = (sender as Player).getInventory()
+                inv.addItem(HubWarper.getMainMenu(sender.getName()))
             }
 
             else {

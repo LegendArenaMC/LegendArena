@@ -39,6 +39,14 @@ public class ParticleCore implements Runnable {
         players.put(type, list);
     }
 
+    public static ParticleType getParticles(UUID u) {
+        for(ParticleType type : players.keySet())
+            if(players.get(type).contains(u))
+                return type;
+
+        return null;
+    }
+
     public static void clearParticles(UUID u) {
         for(ParticleType type : players.keySet()) {
             ArrayList<UUID> list = players.get(type);

@@ -19,12 +19,12 @@ class StaffList : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         val staffOnline = ArrayList<Player>()
         for(p in Bukkit.getOnlinePlayers())
-            if(Rank.HELPER.isRanked(p))
+            if(RankUtils.getDisplayRank(p).isStaff()) //respect staff who wish to not be visibly shown as staff via the tag system
                 staffOnline.add(p)
         var msg = FancyMessage("-•- [Online Staff] -•-")
                 .color(ChatColor.GREEN)
         if(staffOnline.isEmpty()) {
-            msg.then("There's no staff online :(")
+            msg.then("\nThere's no staff online :(")
                         .color(ChatColor.RED)
                     .send(sender)
             return true
@@ -32,12 +32,12 @@ class StaffList : CommandExecutor {
         for(p in staffOnline) {
            msg.then("\n")
                     .then(p.getName())
-                        .color(RankUtils.getRank(p).getNameColor())
+                        .color(RankUtils.getDisplayRank(p).getNameColor())
                         .suggest("/msg " + p.getName() + " ")
                         .tooltip("Click to message " + p.getName())
                     .then(" // ")
                         .color(ChatColor.DARK_GRAY)
-                    .then(RankUtils.getRank(p).toString())
+                    .then(RankUtils.getDisplayRank(p).toString())
                         .color(ChatColor.BLUE)
         }
 

@@ -16,21 +16,15 @@ public class ScoreboardSystem {
 
     private static ScoreboardManager sbm = Bukkit.getScoreboardManager();
     public final static Scoreboard sb = sbm.getNewScoreboard();
-    private static Team founder;
-    private static Team dev;
-    private static Team admin;
-    private static Team mod;
-    private static Team helper;
-    private static Team vip;
-    private static Team memberplus;
-    private static Team member;
+    private static Team founder, dev, admin,
+            mod, helper, vip,
+            memberplus, member;
 
     private static boolean init = false;
 
     public static void init() {
-        if(init) return;
-
-        //fucking bukkit
+        if(init) return; //I seriously hate having to make init() functions.
+        //Especially if they're public static.
 
         founder = sb.getTeam("Founder");
         dev = sb.getTeam("Dev");
@@ -135,7 +129,12 @@ public class ScoreboardSystem {
     }
 
     public static boolean needsUpdate(Player p) {
-        if(RankUtils.getDisplayRank(p).getInternalId() < RankUtils.getRank(p).getInternalId()) return true;
+        if(RankUtils.isTagged(p) && (RankUtils.getRankId(p) < 2)) {
+            RankUtils.clearTag(p);
+            return true;
+        }
+        if(RankUtils.isTagged(p))
+            return false; //is the player manually tagged as a different rank? if so, return false while they're tagged
         switch(RankUtils.getDisplayRank(p)) {
             case FOUNDER:
                 return founder.hasEntry(p.getName());

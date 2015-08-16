@@ -26,14 +26,16 @@ class ParticleMenu {
             return
         }
 
-        var pInv = Bukkit.createInventory(null, 9, invName)
-        pInv.setItem(0, MenuUtils.createItem(Material.BLAZE_POWDER, "" + ChatColor.GREEN + "Fire Particles"))
-        pInv.setItem(1, MenuUtils.createItem(Material.ENDER_CHEST, "" + ChatColor.GREEN + "End Particles"))
-        pInv.setItem(2, MenuUtils.createItem(Material.ENCHANTMENT_TABLE, "" + ChatColor.GREEN + "Enchant Particles"))
-        pInv.setItem(3, MenuUtils.createItem(Material.REDSTONE, "" + ChatColor.GREEN + "Redstone Particles"))
-        pInv.setItem(4, MenuUtils.createItem(Material.DIAMOND_SWORD, "" + ChatColor.GREEN + "Critical Hit Particles"))
+        var pInv = Bukkit.createInventory(null, 36, invName)
+        pInv.setItem(11, MenuUtils.createItem(Material.BLAZE_POWDER, "" + ChatColor.GREEN + "Fire Particles"))
+        pInv.setItem(12, MenuUtils.createItem(Material.ENDER_CHEST, "" + ChatColor.GREEN + "End Particles"))
+        pInv.setItem(13, MenuUtils.createItem(Material.ENCHANTMENT_TABLE, "" + ChatColor.GREEN + "Enchant Particles"))
+        pInv.setItem(14, MenuUtils.createItem(Material.REDSTONE, "" + ChatColor.GREEN + "Redstone Particles"))
+        pInv.setItem(15, MenuUtils.createItem(Material.DIAMOND_SWORD, "" + ChatColor.GREEN + "Critical Hit Particles"))
 
-        pInv.setItem(8, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "No Particles"))
+        pInv.setItem(30, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
+        pInv.setItem(31, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Current Particles", "" + ChatColor.BLUE + if(ParticleCore.getParticles(p.getUniqueId()) == null) "NONE" else ParticleCore.getParticles(p.getUniqueId()).toString()))
+        pInv.setItem(32, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "No Particles"))
         p.openInventory(pInv)
     }
 

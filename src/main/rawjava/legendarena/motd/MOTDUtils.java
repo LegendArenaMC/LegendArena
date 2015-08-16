@@ -164,6 +164,7 @@ public class MOTDUtils {
             "WE'VE BEEN SMECKLEDORFED!", //see: http://redd.it/3g2e5j
             "It broke.", //Something happened
             "Banning Hackers Wi- oh wait this isn't MCPvP",
+            "Unintellegent Text Spammer!", //british nub go away, ty
             "Monstercat - Now with 1,000% more Future Bass!", //also HOLY MOTHER OF WHAT, SOMEONE PREDICTED THE FUTURE (...bass) http://redd.it/3gxl3x
     };
 
