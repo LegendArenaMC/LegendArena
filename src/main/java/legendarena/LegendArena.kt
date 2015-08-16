@@ -12,13 +12,18 @@ import legendarena.hub.JumpPad
 import legendarena.hub.particles.ParticleCore
 import legendarena.listeners.*
 import legendarena.listeners.menu.*
+import legendarena.scoreboard.ScoreboardSystem
 import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
 import java.util.*
 
 class LegendArena : KotlinUtils() {
 
-    public final var devMode: Boolean = true
+    @Deprecated
+    /**
+     * Use the config key "enable.devserver" instead.
+     */
+    public final var devMode: Boolean = if(ConfigUtils.config.get("enable.devserver") == null) false else ConfigUtils.config.get("enable.devserver") as Boolean
 
     override fun onEnable() {
         var p = Bukkit.getPluginManager().getPlugin("LegendArena")
@@ -39,6 +44,7 @@ class LegendArena : KotlinUtils() {
         setup.registerCommand(Shadow(), "shadow")
         setup.registerCommand(MOTDTools(), "motd")
         setup.registerCommand(Gadgets(), "gadgets")
+        setup.registerCommand(Tag(), "tag")
         setup.registerCommand(Autoban(), "autoban")
 
         setup.announceStatus("Setting up user commands...")
@@ -55,6 +61,7 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up timers...")
 
         setup.registerNonAsyncTimer(ParticleCore(), 2)
+        setup.registerNonAsyncTimer(ScoreboardSystem.TimerLoop(), 5)
 
         setup.announceStatus("Setting up listeners...")
 
@@ -71,7 +78,6 @@ class LegendArena : KotlinUtils() {
 
         //this took me more time to figure out than I wish to admit.
 
-        setup.registerListener(ChatMenuListener())
         setup.registerListener(MinigameMenuListener())
         setup.registerListener(MainMenuListener())
         setup.registerListener(ParticleMenuListener())
@@ -89,6 +95,7 @@ class LegendArena : KotlinUtils() {
 
         VersionUtils.setVersion("LegendArena", "1.1-SNAPSHOT")
         VersionUtils.setVersion("Kotlin", "0.12.613")
+        ScoreboardSystem.init()
 
         setup.announceStatus("LegendArena v" + p.getDescription().getVersion() + " fully loaded.")
     }
@@ -107,6 +114,7 @@ class LegendArena : KotlinUtils() {
         config.addDefault("emeralds.mysql.password", "sup3rs3cr3tp@ssw0rd")
         config.addDefault("emeralds.mysql.database", "emeralds")
         config.addDefault("emeralds.sqlite.file", "emeralds.db")
+        config.addDefault("enable.devserver", false)
         var founders = ArrayList<String>();
         founders.add("ThePixelDev")
         founders.add("ZRaptor22")

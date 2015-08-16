@@ -18,7 +18,7 @@ public class CalendarUtils {
     private var year = 2015
 
     public constructor() {
-        month = cal.get(Calendar.MONTH) + 1 //fucking Calendar class...
+        month = cal.get(Calendar.MONTH) + 1 //damnit Calendar, why does your months have to be zero-indexed...
         day = cal.get(Calendar.DAY_OF_MONTH)
         year = cal.get(Calendar.YEAR)
         dayOfYear = cal.get(Calendar.DAY_OF_YEAR)

@@ -76,7 +76,7 @@ public class ConfigUtils {
         defaults.put(key, set)
     }
 
-    public fun get(key: String): Any {
+    public fun get(key: String): Any? {
         return config!!.get(key)
     }
 

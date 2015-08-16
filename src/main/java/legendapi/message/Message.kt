@@ -113,6 +113,10 @@ class Message {
             }
     }
 
+    public fun networkBroadcast() {
+        throw UnsupportedOperationException("Soon[tm]")
+    }
+
     override public fun toString(): String {
         if(builder == null)
             return ""

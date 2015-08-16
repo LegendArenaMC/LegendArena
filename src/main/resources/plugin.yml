@@ -49,3 +49,5 @@ commands:
     description: Punish command - warn
   mute:
     description: Punish command - mute
+  tag:
+    description: Change your rank tag.

@@ -30,7 +30,7 @@ class BukLog {
     }
 
     public fun log(l: Level, s: String): Unit = when(l) {
-        Level.ITSALLBROKEN -> log("IT'S ALL BROKEN", s)
+        Level.ITSALLBROKEN -> log("IT'S ALL BROKEN", s) //WE'RE ALL GONNA DIE
         Level.PIXELBROKEIT -> log("PIXEL BROKE IT", s)
         Level.SEVERE -> log("SEVERE", s)
         Level.WARNING -> log("WARNING", s)
@@ -44,6 +44,11 @@ class BukLog {
         log(Level.DEBUG, m)
     }
 
+    /**
+     * Dump an error into the console with a reason string.
+     *
+     * Example log: "An error occured while giving emeralds to all players! (Player "ZRaptor22" is a nub)" (sorry Jaden!)
+     */
     fun dumpError(ex: Throwable, reason: String) {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
@@ -53,6 +58,11 @@ class BukLog {
         }
     }
 
+    /**
+     * Dump an error into the console, with no "An error was occured while {x}" addition.
+     *
+     * Example log: "Exception occured while trying to give diamonds to ThePixelDev! (NullPointerException {...})"
+     */
     fun dumpRawError(ex: Throwable, reason: String) {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()

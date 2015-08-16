@@ -4,6 +4,8 @@
 
 package legendapi.economy
 
+import legendapi.log.BukLog
+import legendapi.log.Level
 import legendapi.sql.LegendSQL
 import legendapi.utils.ConfigUtils
 import legendapi.utils.LegendAPIUtils
@@ -12,6 +14,7 @@ import org.bukkit.Bukkit
 import java.io.File
 import java.sql.ResultSet
 import java.sql.SQLException
+import java.util.*
 
 /**
  * SQL is fun. /s
@@ -21,6 +24,8 @@ public class LegendEconomy {
     internal var sql: LegendSQL? = null
     internal var db = "emeralds"
     internal var table = "LA_EMERALDS"
+
+    internal var cache = HashMap<UUID, Int>()
 
     private enum class Types {
         MYSQL("mysql"),
@@ -38,20 +43,20 @@ public class LegendEconomy {
     }
 
     public constructor() {
-        //var config = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
-        /*if(StringUtils.toLower(config.get("emeralds.storage") as String) == Types.MYSQL.getTypeString()) {
+        var config = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
+        table = StringUtils.toUpper(config.get("emeralds.table") as String) //insert table flip joke here
+        if(StringUtils.toLower(config.get("emeralds.storage") as String) == Types.MYSQL.getTypeString()) {
+            //we're using mysql (recommended for an actual network setup, btw!), so setup host and database things
             var host = config.get("emeralds.mysql.host") as String
             var user = config.get("emeralds.mysql.user") as String
             var pass = config.get("emeralds.mysql.password") as String
             db = config.get("emeralds.mysql.database") as String
-            table = StringUtils.toUpper(config.get("emeralds.table") as String) //insert table flip joke here
             sql = LegendSQL(host, db, user, pass)
-        } else {*/
-            //assume we're using sqlite
-            //var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + (config.get("emeralds.sqlite.file") as String))
+        } else {
+            //assume we're using sqlite, so setup the sqlite db file
             var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + "emeralds.db")
             sql = LegendSQL(dbFile)
-        //}
+        }
 
         setup()
     }
@@ -63,25 +68,41 @@ public class LegendEconomy {
     }
 
     public fun getEmeralds(p: String): Int {
-        var rs = sql!!.sqlQuery("SELECT EMERALDS FROM " + table + " WHERE NAME=\"" + p + "\";")
+        //if(Bukkit.getPlayer(p) != null)
+            //if(cache.containsKey(Bukkit.getPlayer(p).getUniqueId())) return cache.get(Bukkit.getPlayer(p).getUniqueId())
+        var rs: ResultSet?
+        try {
+            rs = sql!!.sqlQuery("SELECT EMERALDS FROM `" + table + "` WHERE NAME=\"" + p + "\";")
+        } catch(ex: NullPointerException) {
+            setup() //attempt to setup the SQL database as the connection may be broken
+            return 0
+        }
         var amount = 0
-        if(rs.next())
+        if(rs!!.next())
             amount = rs.getInt("emeralds")
+        if(Bukkit.getPlayer(p) != null)
+            cache.put(Bukkit.getPlayer(p).getUniqueId(), amount)
         rs.close()
         return amount
     }
 
-    public fun getEmeraldsRS(): ResultSet {
-        return sql!!.sqlQuery("SELECT * FROM " + table + ";")
-    }
-
     public fun addEmeralds(p: String, a: Int) {
-        var currentEmeralds = getEmeralds(p)
+        var currentEmeralds = 0
+        try {
+            currentEmeralds = getEmeralds(p)
+        } catch(ex: NullPointerException) {
+            currentEmeralds = 0
+        }
         setEmeralds(p, currentEmeralds + a)
     }
 
     public fun takeEmeralds(p: String, a: Int) {
-        var currentEmeralds = getEmeralds(p)
+        var currentEmeralds = 0
+        try {
+            currentEmeralds = getEmeralds(p)
+        } catch(ex: NullPointerException) {
+            currentEmeralds = 0
+        }
         if(currentEmeralds - a <= -1)
             throw Exception("A player's emeralds count cannot be less than 0")
         setEmeralds(p, currentEmeralds - a)
@@ -90,7 +111,18 @@ public class LegendEconomy {
     public fun setEmeralds(p: String, a: Int) {
         if(a <= -1)
             throw Exception("A player's emeralds count cannot be less than 0")
-        sql!!.standardQuery("UPDATE OR ROLLBACK " + table + " set EMERALDS = " + a + " where NAME = \"" + p + "\";")
+        if(getEmeralds(p) == 0) {
+            sql!!.standardQuery("INSERT INTO `" + table + "` (`NAME`, `EMERALDS`) VALUES (\"" + p + "\", " + a + "; COMMIT;")
+            BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.DEBUG, "insert")
+        } else {
+            sql!!.standardQuery("UPDATE OR ROLLBACK `" + table + "` SET EMERALDS = " + a + " WHERE NAME = " + p + "; COMMIT;")
+            BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.DEBUG, "update")
+        }
+
+        sql!!.closeConnection()
+
+        if(Bukkit.getPlayer(p) != null)
+            cache.put(Bukkit.getPlayer(p).getUniqueId(), a)
     }
 
 }

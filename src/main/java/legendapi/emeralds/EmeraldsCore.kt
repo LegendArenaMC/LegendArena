@@ -38,6 +38,8 @@ class EmeraldsCore {
     public fun addEmeralds(p: String, amount: Int) {
         if(amount < 1)
             throw NullPointerException("You may want to actually give the player an emerald with the addEmeralds() function.")
+        else if(amount >= Integer.MAX_VALUE)
+            throw AreYouDrunkException("Amount cannot be over max value of an Integer") //hopefully, no one is actually an idiot enough to hit this (...I'll give it a year)
         econ.addEmeralds(p, amount)
     }
 

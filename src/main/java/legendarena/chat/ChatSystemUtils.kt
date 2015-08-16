@@ -11,24 +11,13 @@ import org.bukkit.entity.Player
 class ChatSystemUtils {
 
     /**
-     * GOD DAMNIT YELLOW PLAGUE, FUCK OFF
-     */
-    private fun isMinions(m: String): Boolean {
-        return StringUtils.contains(StringUtils.toLower(m), "minions")
-    }
-
-    /**
      * Get a parsed chat message.
      * @param msg The message
      * @param p The player
      * @return The parsed message
      */
     private fun getParsedChatMessage(msg: String, p: Player): String {
-        if(isMinions(msg))
-            return "" + (if (Rank.VIP.isRanked(p)) ChatColor.WHITE else ChatColor.GRAY) + "I hate the yellow plague that is Minions." //MINIONS. FUCK OFF. PLEASE.
-
-        if(Rank.VIP.isRanked(p))
-            //ignore intellij's yelling at the use of "(msg as java.lang.String)" (blame Kotlin not having [String].replace etc)
+        if(RankUtils.getDisplayRankId(p) >= 2)
             return "" + ChatColor.WHITE + parseColors(StringUtils.replace(msg, "[tm]", "™"), p)
         else
             return "" + ChatColor.GRAY + msg
@@ -40,7 +29,7 @@ class ChatSystemUtils {
      * @return The formatted name
      */
     public fun getFormattedName(p: Player): String {
-        return "" + RankUtils.getRank(p).getNameColor() + p.getName()
+        return "" + RankUtils.getDisplayRank(p).getNameColor() + p.getName()
     }
 
     /**
@@ -54,7 +43,7 @@ class ChatSystemUtils {
     }
 
     public fun parseColors(msg: String, p: Player): String {
-        if(!Rank.VIP.isRanked(p))
+        if(RankUtils.getDisplayRankId(p) < 2)
             return msg
         if(StringUtils.contains(msg, "&rb&")) {
             var e = StringUtils.replace(msg, "&rb& ", "")

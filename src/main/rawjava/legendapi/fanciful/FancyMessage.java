@@ -49,12 +49,11 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 	private static Constructor<?> nmsPacketPlayOutChatConstructor;
 
 	@Override
-	public FancyMessage clone() throws CloneNotSupportedException{
+	public FancyMessage clone() throws CloneNotSupportedException {
 		FancyMessage instance = (FancyMessage)super.clone();
 		instance.messageParts = new ArrayList<>(messageParts.size());
-		for(int i = 0; i < messageParts.size(); i++){
+		for(int i = 0; i < messageParts.size(); i++)
 			instance.messageParts.add(i, messageParts.get(i).clone());
-		}
 		instance.dirty = false;
 		instance.jsonString = null;
 		return instance;
@@ -78,9 +77,9 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 			try {
 				nmsPacketPlayOutChatConstructor = Reflection.getNMSClass("PacketPlayOutChat").getDeclaredConstructor(Reflection.getNMSClass("IChatBaseComponent"));
 				nmsPacketPlayOutChatConstructor.setAccessible(true);
-			} catch (NoSuchMethodException ex) {
+			} catch(NoSuchMethodException ex) {
 				new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpError(ex, "attempting to find Minecraft method or constructor");
-			} catch (SecurityException ex) {
+			} catch(SecurityException ex) {
 				new BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).dumpRawError(ex, "Could not access constructor!");
 			}
 		}
@@ -124,9 +123,8 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 	 * @exception IllegalArgumentException If the specified {@code ChatColor} enumeration value is not a color (but a format value).
 	 */
 	public FancyMessage color(final ChatColor color) {
-		if (!color.isColor()) {
+		if(!color.isColor())
 			throw new IllegalArgumentException(color.name() + " is not a color");
-		}
 		latest().color = color;
 		dirty = true;
 		return this;
@@ -139,11 +137,9 @@ public class FancyMessage implements JsonRepresentedObject, Cloneable, Iterable<
 	 * @exception IllegalArgumentException If any of the enumeration values in the array do not represent formatters.
 	 */
 	public FancyMessage style(ChatColor... styles) {
-		for (final ChatColor style : styles) {
-			if (!style.isFormat()) {
+		for(final ChatColor style : styles)
+			if(!style.isFormat())
 				throw new IllegalArgumentException(style.name() + " is not a style");
-			}
-		}
 		latest().styles.addAll(Arrays.asList(styles));
 		dirty = true;
 		return this;

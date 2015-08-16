@@ -19,8 +19,11 @@ shadowJar {
     dependencies {
         /*
           ..what?
-       */
+
+          hey, if it makes it easier for server owners to install the plugin, fuck it. I don't care about every conflict okay? ;-;
+        */
         include(dependency('com.google.code.gson:gson:2.1'))
+        include(dependency('me.confuser:BarAPI:3.0'))
         include(dependency('org.apache.directory.studio:org.apache.commons.io:2.4'))
     }
 }
@@ -36,10 +39,14 @@ repositories {
     maven {
         url "http://oss.sonatype.org/content/repositories/snapshots"
     }
+    maven {
+        url "http://ci.frostcast.net/plugin/repository/everything"
+    }
 }
 
 dependencies {
     compile group: 'org.spigotmc', name: 'spigot-api', version: '1.8.7-R0.1-SNAPSHOT'
+    compile group: 'me.confuser', name: 'BarAPI', version: '3.0'
     compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

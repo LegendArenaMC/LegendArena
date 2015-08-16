@@ -7,13 +7,16 @@ import legendapi.utils.Rank
 import legendapi.utils.RankUtils
 import legendarena.chat.ChatSystem
 import legendarena.hub.HubWarper
+import legendarena.scoreboard.ScoreboardSystem
 import legendarena.staffutils.VanishUtils
+import legendarena.utils.ConfigUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
@@ -45,11 +48,16 @@ public class PlayerJoinListener : Listener {
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
-        if(Rank.MOD.isRanked(ev.getPlayer())) {
-            ev.getPlayer().getInventory().setItem(5, HubWarper.getMainMenu(ev.getPlayer().getName()))
-            ev.getPlayer().getInventory().setItem(3, HubWarper.getStaffMenu())
-        } else
+        if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {
             ev.getPlayer().getInventory().setItem(4, HubWarper.getMainMenu(ev.getPlayer().getName()))
+            if(Rank.VIP.isRanked(ev.getPlayer())) {
+                ev.getPlayer().setAllowFlight(true)
+                ev.getPlayer().setFlying(true)
+                if(ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() != Material.AIR)
+                    ev.getPlayer().teleport(ev.getPlayer().getLocation().add(0.0, 3.0, 0.0), PlayerTeleportEvent.TeleportCause.PLUGIN)
+            }
+        }
+
         ev.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false))
     }
 

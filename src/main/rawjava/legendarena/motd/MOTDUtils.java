@@ -47,6 +47,7 @@ public class MOTDUtils {
             "We are [NVIDIA] Titans", //reference to "Razihel & Aero Chord - Titans" (and also NVIDIA Titan graphic cards)
             "I hate you. I love you.", //reference to "Aero Chord - Saiko" (also this song is strange as fuck)
             "I'm giving up on leaving you...", //reference to "Savoy, Sound Remedy & Jojee - Leaving You" (also how many artists working on the same song is the world record? I wonder...)
+            "Casual noob!" //I regret this. ( oh right. reference. https://www.youtube.com/watch?v=Kzv0FVKcZ8A )
     };
 
     private static final String[] randomList = {
@@ -74,7 +75,6 @@ public class MOTDUtils {
             "Water cooled!", //reference to water cooling, a thing you can do with a computer in place of (most?) fans
             "Woo, Voat!", //pst: voat.co/v/legendarena
             "Woo, reddit!",
-            "#RedditRevolt", //reference to revolts against very shitty actions that the reddit admins made
             "A hacker has DOWNLOADED YOUR FREEDOM!", //good 'ol bash.org...
             "But this is Ireland!",
             "*oof, gasp* Minecon...",
@@ -130,7 +130,7 @@ public class MOTDUtils {
             "I'll just check this quick BuzzFeed post. <2 Hours Later>",
             "I'll just go on Reddit for a moment. <10 Hours Later>",
             "It'll only take 3 minutes to download. <10 Years Later>",
-            "But it's only 1.5 Gigabytes!", //ah linux distros, you never fail to surprise me with how large your ISOs are. (..I'm looking at you, Linux Mint)
+            "But it's only 1.5 Gigabytes!", //ah linux distros, you never fail to surprise me with how large your ISOs are. (..I'm looking at you, Linux Mint & Fedora)
             "I'll have a <insert interesting french thing here>",
             "Something happened", //Something happened
             "JumpPads - now with 250% more bounce!",
@@ -139,7 +139,6 @@ public class MOTDUtils {
             "I think that dragon likes potatoes.",
             "That rainbow didn't taste like Skittles at all!",
             "Your server is bad and you should feel bad!",
-            "Who parked their car.. on my SANDWICH?",
             "Useless button, do not press",
             "Dezmond The Moon Bear!",
             "How did I get here? [THE END]",
@@ -153,19 +152,19 @@ public class MOTDUtils {
             "pls give 5 stars thnx",
             "Do you want to build a sn- *OOF*",
             "Ah, the 'ol MOTD-switch-aroo...", //reddit switcharoo, you never fail to amaze me (..sometimes, at least)
-            "Taking all night, but we're adding on, we promise",
             "Put a fountain in, as fountains are cool.",
             "We're gonna have to blow up some cars...",
             "Dinosaurs on a space ship",
             "The moon landing was a fake!",
-            "9/11 was a fak- AHH MY SPLEEEENNN", //we get it, "9/11 Truthers". You think 9/11 was fake. NOW FUCK OFF. YOU'RE BEATING A DEAD HORSE FOR WHAT IT'S WORTH. </rant>
+            "9/11 was a fak- AHH MY SPLEEEENNN", //we get it, "9/11 Truthers". You think 9/11 was fake. NOW GO AWAY. PLEASE. YOU'RE BEATING A DEAD HORSE FOR WHAT IT'S WORTH. </rant>
             "Poor Taren.", //if you don't get the reference, Taren (am I even getting that right? fuck it) is a Linus Media Group employee, i.e. the company(?) who makes LinusTechTips
             "Derpy sister is derpy", //OHGOD WHAT IS JADEN'S SISTER DOING NOW
-            "o man i cannot into CSS", //see /r/Ooer (or for ultra "WTF"-ness - /r/OoerIntensifies (also, good luck with that one))
             "GNU Terry Pratchett", //reference to the "X-Clacks-Overhead: GNU Terry Pratchett" header in responses from some servers ( see: http://clacksoverhead.discworld.us/ )
             "314 clicks has resolved the issue.", //program not responding? CLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICK<and so on>
-            "We have room for one more!", //reference to the server always having [current players online + 1] as the max player count
             "WE'VE BEEN SMECKLEDORFED!", //see: http://redd.it/3g2e5j
+            "It broke.", //Something happened
+            "Banning Hackers Wi- oh wait this isn't MCPvP",
+            "Monstercat - Now with 1,000% more Future Bass!", //also HOLY MOTHER OF WHAT, SOMEONE PREDICTED THE FUTURE (...bass) http://redd.it/3gxl3x
     };
 
     private static final String[] gameList = {
@@ -225,7 +224,7 @@ public class MOTDUtils {
     }
 
     public static String getRandomMOTD() {
-        //yes, hard-coded, full-out overrides. because fuck you[tm]
+        //yes, hard-coded, full-out overrides. because why not.[tm]
         if(new CalendarUtils().getDay() == 3 && new CalendarUtils().getMonth() == Months.MAY)
             return "Happy birthday, Pixel! <3";
         else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().getMonth() == Months.NOVEMBER)
@@ -235,6 +234,12 @@ public class MOTDUtils {
             return override;
 
         Random r = new Random();
+
+        //will this ever get hit? probably not. would it be interesting if it was hit? very yes.
+        if(r.nextInt(50) / 5 == 3) {
+            return "Easter egg!";
+        }
+
         int rL = r.nextInt(4) + 1;
         String return1;
 
@@ -284,11 +289,9 @@ public class MOTDUtils {
     public static String getBuiltMOTD() {
         String random = getRandomMOTD();
 
-        ChatColor randomC1 = ChatColor.RED;
-        ChatColor randomC2 = ChatColor.GREEN;
-
-        if(!noDecor) return "" + randomC1 + "Legend Arena" + ChatColor.YELLOW + " {" + MOTDUtils.getNotice() + "}" +
-                '\n' + ChatColor.DARK_GRAY + "//" + randomC2 + random;
+        if(!noDecor)
+            return ChatColor.RED + "Legend Arena" + ChatColor.GRAY + " { " + ChatColor.YELLOW + getNotice() + ChatColor.GRAY + " }" +
+                '\n' + ChatColor.DARK_GRAY + "//" + ChatColor.GREEN + random;
 
         else return override;
     }
@@ -350,7 +353,23 @@ public class MOTDUtils {
     }
 
     public static int getAmountOfMOTDs() {
-        return getFullMOTDArrayList().size();
+        return getSize(ListType.RANDOM) + getSize(ListType.LINUX) + getSize(ListType.SONG) + getSize(ListType.GAMING);
+    }
+
+    public static int getSize(ListType type) {
+        switch(type) {
+            case RANDOM:
+                return randomList.length;
+            case SONG:
+                return songList.length;
+            case LINUX:
+                return linuxList.length;
+            case GAMING:
+                return gameList.length;
+
+            default:
+                return 0;
+        }
     }
 
     public static String getLastMOTDGiven() {
@@ -359,7 +378,7 @@ public class MOTDUtils {
 
     public static void setNotice(String newNotice) {
         notice = newNotice.toUpperCase();
-        ConfigUtils.config.set("notice", newNotice); //shitty storage of the notice? absolutely. works? yep. do I care? not right now.
+        ConfigUtils.config.set("notice", newNotice); //horrible storage of the notice? absolutely. works? yes. do I care? not right now.
     }
 
 }

@@ -13,26 +13,28 @@ public enum class Rank {
 
     /**
      * Founder rank. (really just a renamed Owner rank in a sense)
+     *
+     * Polls [SpecialStaffListUtils] like the Dev rank.
      */
-    FOUNDER(),
+    FOUNDER("", 7),
     /**
      * Developer rank.
      *
      * When the Rank class is asked if the member is a Developer, it polls the [SpecialStaffListUtils] class.
      */
-    DEV(),
+    DEV("", 6),
     /**
      * Administrator rank.
      */
-    ADMIN("legendarena.rank.admin"),
+    ADMIN("legendarena.rank.admin", 5),
     /**
      * Moderator rank.
      */
-    MOD("legendarena.rank.mod"),
+    MOD("legendarena.rank.mod", 4),
     /**
      * Helper rank.
      */
-    HELPER("legendarena.rank.helper"),
+    HELPER("legendarena.rank.helper", 3),
     /**
      * VIP rank.
      *
@@ -44,30 +46,35 @@ public enum class Rank {
      *
      * - Founder/Owner (whichever one you prefer I guess) descretion (overrides the above two)
      */
-    VIP("legendarena.rank.vip"),
+    VIP("legendarena.rank.vip", 2),
     /**
      * Donor rank. Only gives cosmetic options.
+     *
+     * Planned to be 10 dollars in the Legend Arena store.
      */
-    MEMBERPLUS("legendarena.rank.memberplus"),
+    MEMBERPLUS("legendarena.rank.memberplus", 1),
     /**
      * Default user rank. This is only here as a catch-all, really. Not much else use.
      */
-    MEMBER();
+    MEMBER("", 0);
 
     private var permission = ""
+    private var internalId = 0
 
     private constructor() {}
 
-    private constructor(permission: String) {
+    private constructor(permission: String, internalId: Int) {
         this.permission = permission
+        this.internalId = internalId
     }
 
     public fun isRanked(p: CommandSender): Boolean {
         if(p is ConsoleCommandSender) return true
+
         when(this) {
             Rank.MEMBER -> return true
             Rank.DEV -> return SpecialStaffListUtils.isDeveloper(p as Player)
-            Rank.FOUNDER -> return SpecialStaffListUtils.isFounder(p as Player) //yes, I know, it calls DeveloperListUtils. no, I don't care.
+            Rank.FOUNDER -> return SpecialStaffListUtils.isFounder(p as Player)
 
             else -> return p.hasPermission(permission)
         }
@@ -80,7 +87,7 @@ public enum class Rank {
         when(this) {
             Rank.FOUNDER -> return ChatColor.LIGHT_PURPLE
             Rank.DEV -> return ChatColor.DARK_PURPLE
-            Rank.ADMIN -> return ChatColor.RED
+            Rank.ADMIN -> return ChatColor.DARK_RED
             Rank.MOD -> return ChatColor.RED
             Rank.HELPER -> return ChatColor.GREEN
             Rank.VIP -> return ChatColor.GOLD
@@ -88,6 +95,10 @@ public enum class Rank {
 
             else -> return ChatColor.GRAY
         }
+    }
+
+    public fun getInternalId(): Int {
+        return internalId
     }
 
 }

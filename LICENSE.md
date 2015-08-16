@@ -32,3 +32,8 @@ You Can, But We'd Prefer You Not To
 
 1. Fork the plugin and make it closed source
 2. Remove all reference to us in your fork(s)
+
+TL;DR
+====
+
+Code away.

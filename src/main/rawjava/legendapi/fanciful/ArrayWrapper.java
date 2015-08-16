@@ -79,7 +79,7 @@ public final class ArrayWrapper<E> {
      @SuppressWarnings("unchecked")
     public static <T> T[] toArray(Iterable<? extends T> list, Class<T> c) {
         int size = -1;
-        if(list instanceof Collection<?>){
+        if(list instanceof Collection<?>) {
         	@SuppressWarnings("rawtypes")
 			Collection coll = (Collection)list;
         	size = coll.size();

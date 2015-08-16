@@ -1,14 +1,11 @@
 package legendarena.commands.staff
 
+import legendapi.emeralds.EmeraldsCore
 import legendapi.fanciful.FancyMessage
 import legendapi.message.Message
-import legendapi.utils.ChatUtils
-import legendapi.utils.Cooldown
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendapi.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.hub.HubWarper
-import legendarena.utils.MobSpawnUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -27,7 +24,7 @@ class Staff: CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(args.size() >= 1 && args[0].equals("monstercat")) {
-            //shh....
+            //shh.... no one must know of this easter egg...
             sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "WELCOME, TO THE MONSTERCAT PODCAST")
             return true
         }
@@ -42,7 +39,7 @@ class Staff: CommandExecutor {
 
             //read the following message in a Monty Python-type voice for maximum laughing
             sender.sendMessage(ChatUtils.getCustomMsg("Irrelevent Jokes") + "Gerald! Gerald please!")
-            var gerald = (MobSpawnUtils().spawn(EntityType.CREEPER, (sender as Player).getLocation()) as Creeper)
+            var gerald = (PluginUtils.spawn(EntityType.CREEPER, (sender as Player).getLocation()) as Creeper)
             gerald.setPowered(true)
             gerald.setCustomNameVisible(true)
             gerald.setCustomName("" + ChatColor.YELLOW + "Gerald")
@@ -63,16 +60,18 @@ class Staff: CommandExecutor {
                 if(args.size() == 1)
                     ChatUtils.fancyHelpSuggestMsg("/staff info <player>", "Gets various info about a specified player.", "staff info", true).send(sender)
                 else {
-                    if (Bukkit.getPlayer(args[1]) != null) {
+                    if(Bukkit.getPlayer(args[1]) != null) {
                         @suppress("deprecation") val p = Bukkit.getPlayer(args[1])
                         sender.sendMessage(ChatUtils.getFormattedHeader("Info: " + p.getName()))
-                        sender.sendMessage("" + ChatColor.YELLOW + "User rank " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + RankUtils.getRank(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Chat channel " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + ChatSystem.getChannel(p))
-                        sender.sendMessage("" + ChatColor.YELLOW + "Gamemode " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getGameMode())
-                        sender.sendMessage("" + ChatColor.YELLOW + "UUID " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getUniqueId())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; WALK " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getWalkSpeed())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Speed; FLY " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " " + p.getFlySpeed())
-                        sender.sendMessage("" + ChatColor.YELLOW + "Global Bans " + ChatUtils.specialCharacters[1] + ChatColor.GREEN + " http://fishbans.com/u/" + p.getName())
+                        sender.sendMessage(ChatUtils.getFormattedMsg("User rank", RankUtils.getRank(p).toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("Tagged as", RankUtils.getDisplayRank(p).toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("Emeralds", EmeraldsCore().getEmeralds(p.getName()).toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("In channel", ChatSystem.getChannel(p).toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("UUID", p.getUniqueId().toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("Speed; WALK", p.getWalkSpeed().toString()))
+                        sender.sendMessage(ChatUtils.getFormattedMsg("Speed; FLY", p.getFlySpeed().toString()))
+
+                        //for people who are wondering "why was the fishbans link removed?" - fishbans seems to be going out of disrepair, so it's not really something I'll link to anymore. -Pixel
                     } else {
                         sender.sendMessage("" + ChatColor.RED + "Player \"" + args[0] + "\" was not found!") //the player was not found
                     }
@@ -90,6 +89,12 @@ class Staff: CommandExecutor {
                 c = Cooldown(120.0)
             } else if(args[0].equals("vanish")) {
                 sender.sendMessage("soon[tm]")
+            }else if(args[0].equals("skull")) {
+                if(args.size() == 1)
+                    (sender as Player).getInventory().addItem(MenuUtils.createHead(sender.getName()))
+                else
+                    (sender as Player).getInventory().addItem(MenuUtils.createHead(args[1]))
+                return true
             }
 
             else {
@@ -105,6 +110,7 @@ class Staff: CommandExecutor {
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
                 ChatUtils.fancyHelpSuggestMsg("/staff info <player>", "Gets various info about a specified player.", "staff info", true).send(sender)
                 ChatUtils.fancyHelpSuggestMsg("/staff lockdown <0/1/2>", "Set the current lockdown level. [See \"/staff help lockdown\" for more info]", "staff lockdown", true).send(sender)
+                ChatUtils.fancyHelpSuggestMsg("/staff skull [playername]", "", "staff skull", true).send(sender)
                 ChatUtils.fancyHelpMsg("/staff vanish", "Poof.", "staff vanish", true).send(sender)
                 ChatUtils.fancyHelpMsg("/staff clearchat", "Clear the current server's chat for everyone.", "staff clearchat", true).send(sender)
                 sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")

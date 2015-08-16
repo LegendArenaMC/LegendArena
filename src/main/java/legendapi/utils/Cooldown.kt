@@ -22,7 +22,8 @@ public class Cooldown {
     }
 
     public fun getTimeRemaining(): String {
-        return ChatUtils.getCustomMsg("Cooldown") + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.BLUE + seconds + "s"
+        //return ChatUtils.getCustomMsg("Cooldown") + remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.BLUE + seconds + "s"
+        return ChatUtils.getFormattedMsg("Remaining cooldown", remainingSeconds() + ChatColor.GRAY + "/" + ChatColor.BLUE + seconds + "s")
     }
 
 }

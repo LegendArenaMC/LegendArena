@@ -7,6 +7,11 @@ import org.bukkit.entity.Player;
  */
 public class SpecialStaffListUtils {
 
+    /**
+     * To get a player's UUID, use <a href="https://gist.github.com/Cryptkeeper/02812c2d4c2286e87440">this Bash script</a>.<br><br>
+     *
+     * (thanks Crypt!)
+     */
     private static final String[] devUUIDList = {
             "70336328-0de7-430e-8cba-2779e2a05ab5" //Pixel
     };

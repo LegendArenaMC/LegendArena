@@ -35,7 +35,7 @@ public class ChatSystem {
      */
     public static void setGlobalMute(boolean set) {
         mute = set;
-        new Message().append(ChatUtils.getCustomMsg("Chat") + "Chat has been " + (set ? "globally muted" : "un-globally muted") + "!");
+        new Message().append(ChatUtils.getCustomMsg("Chat") + "Chat has been " + (set ? "globally muted" : "un-globally muted") + "!").broadcast();
     }
 
     /**
@@ -134,6 +134,24 @@ public class ChatSystem {
 
             default:
                 return c.toString().toUpperCase();
+        }
+    }
+
+    public static ChatColor getChannelColour(Channel c) {
+        switch(c) {
+            case ADMIN:
+                return ChatColor.DARK_RED;
+            case DEV:
+                return ChatColor.DARK_PURPLE;
+            case ALERT:
+                return ChatColor.RED;
+            case STAFF:
+                return ChatColor.GREEN;
+            case GLOBAL:
+                return ChatColor.GRAY;
+
+            default:
+                return ChatColor.GRAY;
         }
     }
 

@@ -21,8 +21,10 @@ class ParticleMenu {
     public constructor() {}
 
     public fun show(p: Player) {
-        if(!Rank.VIP.isRanked(p))
+        if(!Rank.VIP.isRanked(p)) {
             RankUtils.fancyNoPermissions(Rank.VIP, p)
+            return
+        }
 
         var pInv = Bukkit.createInventory(null, 9, invName)
         pInv.setItem(0, MenuUtils.createItem(Material.BLAZE_POWDER, "" + ChatColor.GREEN + "Fire Particles"))

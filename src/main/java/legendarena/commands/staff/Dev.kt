@@ -25,6 +25,8 @@ class Dev : CommandExecutor {
             msg.append(ChatUtils.getFormattedMsg("Architecture", System.getProperty("os.arch")) + "\n")
             msg.append(ChatUtils.getFormattedMsg("OS Name", System.getProperty("os.name")) + "\n")
             msg.append(ChatUtils.getFormattedMsg("Version", System.getProperty("os.version")) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Date [UK Format]", CalendarUtils().getDateString()) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Date [US Format]", CalendarUtils().getDateFormat(CalendarUtils.DateLocale.US)) + "\n")
             msg.append(ChatUtils.getFormattedHeader("System") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
@@ -42,6 +44,10 @@ class Dev : CommandExecutor {
             return true
         } else if(args[0].equals("jp")) {
             JumpPad.jump(sender as Player)
+            return true
+        } else if(args[0].equals("cooldown")) {
+            var c = Cooldown(999.0)
+            sender.sendMessage(c.getTimeRemaining())
             return true
         }
 

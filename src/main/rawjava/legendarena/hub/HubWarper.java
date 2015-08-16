@@ -15,24 +15,6 @@ public class HubWarper {
 
     private static ArrayList<UUID> exempt = new ArrayList<>();
 
-    public static class InitPlayers implements Runnable {
-
-        public void run() {
-            for(final Player p : Bukkit.getOnlinePlayers()) {
-                if(exempt.contains(p.getUniqueId())) continue;
-                if(Rank.MOD.isRanked(p)) {
-                    if(!p.getInventory().getItem(5).getItemMeta().getDisplayName().equals(getMainMenu(p.getName()).getItemMeta().getDisplayName()))
-                        p.getInventory().setItem(5, getMainMenu(p.getName()));
-                    p.getInventory().setItem(3, getStaffMenu());
-                } else
-                if(!p.getInventory().getItem(4).getItemMeta().getDisplayName().equals(getMainMenu(p.getName()).getItemMeta().getDisplayName()))
-                    p.getInventory().setItem(4, getMainMenu(p.getName()));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false));
-            }
-        }
-
-    }
-
     public static void toggleExemption(UUID p) {
         if(isExempt(p)) exempt.remove(p);
         else exempt.add(p);

@@ -7,7 +7,6 @@ package legendapi.gamemanager
 import legendapi.utils.SetupUtils
 import org.bukkit.plugin.Plugin
 
-@SuppressWarnings("ALL") //the game API is being re-written slowly, ignore all warnings temporarily
 public class Game {
 
     var p: Plugin? = null
@@ -31,10 +30,11 @@ public class Game {
 
     public fun setState(state: GameState) {
         //TODO: State stuff
+        //TODO: Announce network status
     }
 
     internal fun announceNetworkStatus(state: GameState) {
-        //TODO: if checks to see if the config has this is a network or a singular server
+        //TODO: Mass field of if checks to see if the config has this is a network or a singular server
     }
 
 }
