@@ -10,6 +10,7 @@ import legendarena.hub.HubWarper
 import legendarena.scoreboard.ScoreboardSystem
 import legendarena.staffutils.VanishUtils
 import legendarena.utils.ConfigUtils
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -48,7 +49,14 @@ public class PlayerJoinListener : Listener {
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
-        /*if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {
+        if(ev.getPlayer().getUniqueId().toString().equals("e5a2912f-c6a4-4182-b896-78567f1b404c")) {
+            if(Bukkit.getPlayer("ThePixelDev") != null)
+            Message().append("" + ChatColor.RED + "WARNING! " + ChatColor.YELLOW + "British Nub has joined!")
+        }
+
+        ScoreboardSystem.setRank(ev.getPlayer(), RankUtils.getDisplayRank(ev.getPlayer()))
+
+        if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {
             var needToAddSpeedEffect = true
 
             for(a in ev.getPlayer().getActivePotionEffects())
@@ -66,7 +74,7 @@ public class PlayerJoinListener : Listener {
                 if(ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() != Material.AIR)
                     ev.getPlayer().teleport(ev.getPlayer().getLocation().add(0.0, 3.0, 0.0), PlayerTeleportEvent.TeleportCause.PLUGIN)
             }
-        }*/
+        }
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {
