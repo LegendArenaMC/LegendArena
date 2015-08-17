@@ -33,6 +33,7 @@ public class MOTDUtils {
             "$communicate - Is this real?", //you get the idea by now
             "We will start from the start...", //reference to "Tristam & Braken - Far Away"
             "When all of your wind, is gone...", //reference to the above song
+            "You scored: 0", //reference to "Astronaut, Eyes - Pinball (Dubsidia Remix)"
             "The girl that time forgot...", //reference to "Hellberg - The Girl"
             "We are the music makers.", //reference to "Direct - Lonely Soul"
             "And we, are the dreamers of dreams.", //reference to above song
@@ -127,11 +128,7 @@ public class MOTDUtils {
             "I may be bionic, but seriously I won't do your homework.",
             "Oh yeah? Well I can type 75 words per SECOND!",
             "Now now, don't forget to eat your vegetables!",
-            "I'll just check this quick BuzzFeed post. <2 Hours Later>",
-            "I'll just go on Reddit for a moment. <10 Hours Later>",
-            "It'll only take 3 minutes to download. <10 Years Later>",
-            "But it's only 1.5 Gigabytes!", //ah linux distros, you never fail to surprise me with how large your ISOs are. (..I'm looking at you, Linux Mint & Fedora)
-            "I'll have a <insert interesting french thing here>",
+            "But it's only 1.5 Gigabytes!", //ah linux distros, you never fail to surprise me with how large your ISOs are. (..I'm looking at you, Linux Mint, Korora & Fedora)
             "Something happened", //Something happened
             "JumpPads - now with 250% more bounce!",
             "Deck the halls with cheesy breadsticks!",
@@ -165,11 +162,27 @@ public class MOTDUtils {
             "It broke.", //Something happened
             "Banning Hackers Wi- oh wait this isn't MCPvP",
             "Unintellegent Text Spammer!", //british nub go away, ty
+            "Vidya gaemz.", //vidya gaemz are best gaemz. (I regret nothing of this by the way)
+            "Akame!", //anime. pls. why are you so strange. pls. just, pls. i fna.
+            "IntelliJ isn't always intellegent.", //INTELLIJ. THERE IS A NULL CHECK TWO LINES ABOVE THIS CALL. LOOK.
+            "This isn't a batmobile in disguise, move on!", //blame jaden 2k15
+            "Time to check my email! In like 4 years!", //strongbad reference (and blame jaden again)
+            "I like to break windows. Colourful or not.", //blame jaden yet again
+            "\"Colorful\" Banned DansGame", //jaden 2k15 is a nub (british spelling op)
+            "That's a monsterous feline from that jukebox.", //jaden yet again
+            "Too many splitkillers...", //*yawn* jaden, again.. (and agario)
+            "Everybody do the flop!", //blame both asdfmovie and jaden
+            "ThePixelDev was thrown in the void by JadenJFilms", //again, jaden
+            "Mario must live on Mushroom Island!", //blame jaden 2k15 v1224
+            "JadenJFilms was thrown in the void by ThePixelDev",
+            "ThePixelDev was killed by Ste-wait, what?", //steve pls
+            "This is a minigame on Min- AAAH MY SPLEEEEN", //PLEASE STOP RECORDING EXCLUSIVELY ON MINEPLEX. PLEASE.
             "Monstercat - Now with 1,000% more Future Bass!", //also HOLY MOTHER OF WHAT, SOMEONE PREDICTED THE FUTURE (...bass) http://redd.it/3gxl3x
     };
 
     private static final String[] gameList = {
-            "Hype. Hype never changes.", //reference to Fallout 4(?)/3/2/1/NV (temporarily "Hype" instead of "War" because blame Fallout 4)
+            "War. War never changes.", //reference to Fallout 4(?)/3/2/1/NV
+            "War has changed.", //reference to the MGS4 opening cutscene
             "Wake up and smell the ashes.", //half life 2 reference
             "No one is more deserving of a rest", //hl2...
             "\"Is this Legend Arena?\" No, this is Patrick.",
@@ -177,14 +190,14 @@ public class MOTDUtils {
             "67.1k coins!", //reference to around pixel's insane amount of Arcade coins on Hypxel (..I'll admit it, I'm addicted to Build Battle (that and I'm a coin hoarder))
             "Rise and shine, Mr. Freeman. Rise and shine.", //*yawn* hl2..
             "Wake up, and smell the ashes.", //bla bla bla you get the idea by now, HL2 bla bla bla
+            "Now pick up that can.", //too lazy to copy/pasta the above comment. now pick up that can.
             "Run, would you kindly?", //bioshock (infinite?) reference
             "11-10-15", //obligatory reference to Fallout 4's release date
-            "Now pick up that can.", //half life 2 episode 1 (0? eh, unsure about it and frankly don't care enough to check right now) reference. now pick up that can.
             "λ 3", //[Half Life] 3 - the special character is a Lambda, which is used as Half Life's logo
             "Pay the court a fine or serve your sentence.", //blame Oblivion
             "Your stolen goods are now forfeit.", //again, blame Oblivion
             "\"A man chooses, a slave obeys.\"", //bioshock quote
-            "Obsessive Blocky Race Cars!", //reference to Turbo Kart Racers on Hypixel (also god damn is it addicting as hell)
+            "Obsessive Blocky Race Cars!", //reference to Turbo Kart Racers on Hypixel (also god damn, is it addicting as hell)
             "The Minecraft movie is a block buster!", //blame jaden
             "Just remember to land on one foot.", //portal reference
             "The cake is a lie.", //portal...
@@ -195,6 +208,7 @@ public class MOTDUtils {
             "Half Life 3 confirmed", //inb4 /u/WhenIsHL3 bot
             "gaben can i pls have herf lerf fer", //HALF LIFE 4 CONFIRMED GUYS!
             "Please stop with pointless FPS games, thanks", //I'm looking at you, Call of Duty...
+            "Make me a sandvich!", //sandvich is op
     };
 
     private static final String[] linuxList = {
@@ -207,11 +221,11 @@ public class MOTDUtils {
             "Arch Linux!",
             "Ubuntu!",
             "Fedora!",
-            "Minty fresh!", //reference to both Linux Mint (another Linux (fine, GNU/Linux) distrobution...), and the mint flavour
+            "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
+            "Minty fresh!", //reference to both Linux Mint (another Linux (fine, GNU/Linux) distrobution...), and the mint flavour (whynotboth.jpg)
             "USE GENTOO, NOOB",
             "Windows krill!",
-            "You Mac squid!",
-            "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
+            //"You Mac squid!", //disclaimer by Pixel: we do not condone the practice of calling mac users "squids" in real life.
     };
 
     /**
@@ -236,10 +250,9 @@ public class MOTDUtils {
 
         Random r = new Random();
 
-        //will this ever get hit? probably not. would it be interesting if it was hit? very yes.
-        if(r.nextInt(50) / 5 == 3) {
+        //will this ever get hit? maybe. would it be interesting if it was hit and someone posted it? very yes.
+        if(r.nextInt(50) / 5 == 3)
             return "Easter egg!";
-        }
 
         int rL = r.nextInt(4) + 1;
         String return1;

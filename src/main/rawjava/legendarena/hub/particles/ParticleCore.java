@@ -70,6 +70,7 @@ public class ParticleCore implements Runnable {
         ENCHANT(ParticleEffect.ENCHANTMENT_TABLE),
         REDSTONE(ParticleEffect.REDSTONE),
         CRIT(ParticleEffect.CRIT),
+        HEART(ParticleEffect.HEART),
         COLOURFUL(ParticleEffect.SPELL);
 
         private ParticleEffect particle = null;
@@ -84,26 +85,7 @@ public class ParticleCore implements Runnable {
 
         public void play(Player p) {
             Location l = p.getLocation().add(0.0, 0.5, 0.0);
-            switch(getEffect()) {
-                case SPELL:
-                    playColourful(p.getLocation());
-                    break;
-                case PORTAL:
-                    getEffect().display(1, 1, 1, 0, 3, l, 30);
-                    break;
-                case ENCHANTMENT_TABLE:
-                    getEffect().display(1, 1, 1, 0, 3, l, 30);
-                    break;
-                case CRIT:
-                    getEffect().display(1, 1, 1, 0, 10, l, 30);
-                    break;
-                case FLAME:
-                    getEffect().display(1, 1, 1, 0, 3, l, 30);
-                    break;
-
-                default:
-                    getEffect().display(0, 0, 0, 0, 5, l, 30);
-            }
+            play(l);
         }
 
         public void play(Location l) {
@@ -120,9 +102,18 @@ public class ParticleCore implements Runnable {
                 case FLAME:
                     getEffect().display(1, 1, 1, 0, 10, l, 30);
                     break;
+                case REDSTONE:
+                    l = l.add(0.0, 1, 0.0);
+                    getEffect().display(1, 0, 1, 0, 5, l, 30);
+                    break;
+
+                case HEART:
+                    l = l.add(0.0, 1, 0.0);
+                    getEffect().display(1, 1, 1, 0, 10, l, 30);
+                    break;
 
                 default:
-                    getEffect().display(0, 0, 0, 0, 5, l, 30);
+                    getEffect().display(1, 1, 1, 0, 5, l, 30);
             }
         }
 

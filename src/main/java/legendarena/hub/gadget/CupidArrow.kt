@@ -6,9 +6,10 @@ package legendarena.hub.gadget
 
 import legendapi.utils.Rank
 import legendarena.hub.Gadget
+import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 
-class CookieFountain : Gadget {
+class CupidArrow : Gadget {
 
     override fun activate(p: Player) {
         //
@@ -16,6 +17,10 @@ class CookieFountain : Gadget {
 
     override fun rankRequired(): Rank? {
         return null
+    }
+
+    override fun cooldownTime(): Int {
+        return 30
     }
 
 }

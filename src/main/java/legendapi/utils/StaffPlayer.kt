@@ -6,6 +6,11 @@ package legendapi.utils
 
 import org.bukkit.entity.Player
 
+/**
+ * Horrible wrapper for a Player that is a staff member.
+ *
+ * Does it work? Yes. Does it use memory like nobody's business? Depends.
+ */
 public class StaffPlayer {
 
     var p: Player? = null

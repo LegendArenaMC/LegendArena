@@ -9,6 +9,8 @@ import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
 import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
+import legendarena.hub.gadget.CupidArrowListener
+import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.particles.ParticleCore
 import legendarena.listeners.*
 import legendarena.listeners.menu.*
@@ -70,6 +72,7 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
         setup.registerListener(PlayerMoveListener())
+        setup.registerListener(CupidArrowListener())
         setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
         setup.registerListener(PlayerDamageListener())
@@ -77,7 +80,7 @@ class LegendArena : KotlinUtils() {
 
         //this took me more time to figure out than I wish to admit.
 
-        setup.registerListener(MinigameMenuListener())
+        setup.registerListener(MinigameMenu().Listener())
         setup.registerListener(MainMenuListener())
         setup.registerListener(Tag.TagListener())
         setup.registerListener(ParticleMenuListener())
@@ -116,7 +119,7 @@ class LegendArena : KotlinUtils() {
         config.addDefault("emeralds.mysql.database", "emeralds")
         config.addDefault("emeralds.sqlite.file", "emeralds.db")
         config.addDefault("enable.devserver", false)
-        var founders = ArrayList<String>();
+        var founders = ArrayList<String>()
         founders.add("ThePixelDev")
         founders.add("ZRaptor22")
         config.addDefault("founders", founders)

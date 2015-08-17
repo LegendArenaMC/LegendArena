@@ -6,6 +6,7 @@ import legendapi.utils.*
 import legendarena.hub.JumpPad
 import org.apache.commons.io.FileUtils
 import org.bukkit.ChatColor
+import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -48,6 +49,9 @@ class Dev : CommandExecutor {
         } else if(args[0].equals("cooldown")) {
             var c = Cooldown(999.0)
             sender.sendMessage(c.getTimeRemaining())
+            return true
+        } else if(args[0].equals("cupid")) {
+            (sender as Player).getInventory().addItem(MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Cupid Arrow"))
             return true
         }
 

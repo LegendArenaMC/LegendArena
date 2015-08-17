@@ -129,10 +129,6 @@ public class ScoreboardSystem {
     }
 
     public static boolean needsUpdate(Player p) {
-        if(RankUtils.isTagged(p) && (RankUtils.getRankId(p) < 2)) {
-            RankUtils.clearTag(p);
-            return true;
-        }
         if(RankUtils.isTagged(p))
             return false; //is the player manually tagged as a different rank? if so, return false while they're tagged
         switch(RankUtils.getDisplayRank(p)) {

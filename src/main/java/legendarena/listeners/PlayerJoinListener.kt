@@ -48,7 +48,17 @@ public class PlayerJoinListener : Listener {
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
-        if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {
+        /*if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {
+            var needToAddSpeedEffect = true
+
+            for(a in ev.getPlayer().getActivePotionEffects())
+                if(a.getType() == PotionEffectType.SPEED) { //does the player have the speed potion effect active?
+                    needToAddSpeedEffect = false
+                    break //break out of the loop because we've found they do have the effect
+                }
+
+            if(needToAddSpeedEffect)
+                ev.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false))
             ev.getPlayer().getInventory().setItem(4, HubWarper.getMainMenu(ev.getPlayer().getName()))
             if(Rank.VIP.isRanked(ev.getPlayer())) {
                 ev.getPlayer().setAllowFlight(true)
@@ -56,9 +66,7 @@ public class PlayerJoinListener : Listener {
                 if(ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() != Material.AIR)
                     ev.getPlayer().teleport(ev.getPlayer().getLocation().add(0.0, 3.0, 0.0), PlayerTeleportEvent.TeleportCause.PLUGIN)
             }
-        }
-
-        ev.getPlayer().addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, true, false))
+        }*/
     }
 
     EventHandler fun listenForQuit(ev: PlayerQuitEvent) {

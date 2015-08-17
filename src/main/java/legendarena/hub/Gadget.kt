@@ -19,4 +19,6 @@ public interface Gadget {
      */
     fun activate(p: Player);
 
+    fun cooldownTime(): Int;
+
 }
