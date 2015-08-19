@@ -1,6 +1,6 @@
 main: legendarena.LegendArenaLoader
 name: LegendArena
-depend: ["KotlinLoader"]
+depend: ["LegendFrame"]
 version: 1.2
 website: "http://thenamedev.net/legendarena/"
 author: ThePixelDev
@@ -14,7 +14,7 @@ commands:
   gadgets:
     description: Gadgets control command.
     usage: "/gadgets [player]"
-    aliases: [gs]
+    aliases: ["gs"]
   emeralds:
     description: Front-end command for the Emeralds system.
     usage: "/emeralds <suboption> [args]"

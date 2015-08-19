@@ -2,10 +2,10 @@ package legendapi.utils;
 
 import legendapi.KotlinTest;
 import legendapi.exceptions.FailedKotlinException;
-import legendapi.log.BukLog;
-import legendapi.log.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+
+import java.util.logging.Level;
 
 public class KotlinLoaderTools {
 
@@ -37,7 +37,7 @@ public class KotlinLoaderTools {
                         }
 
                         try {
-                            new BukLog(p).log(Level.INFO, "Kotlin wasn't found yet, waiting 0.5 seconds and trying again... [Attempt #" + attempt[0] + "]");
+                            Bukkit.getLogger().log(Level.INFO, "Kotlin wasn't found yet, waiting 0.5 seconds and trying again... [Attempt #" + attempt[0] + "]");
                             attempt[0]++;
                             Thread.sleep(500);
                         } catch(InterruptedException ex) {

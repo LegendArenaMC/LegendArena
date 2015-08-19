@@ -129,23 +129,21 @@ public class ScoreboardSystem {
     }
 
     public static boolean needsUpdate(Player p) {
-        if(RankUtils.isTagged(p))
-            return false; //is the player manually tagged as a different rank? if so, return false while they're tagged
         switch(RankUtils.getDisplayRank(p)) {
             case FOUNDER:
-                return founder.hasEntry(p.getName());
+                return !founder.hasEntry(p.getName());
             case ADMIN:
-                return admin.hasEntry(p.getName());
+                return !admin.hasEntry(p.getName());
             case MOD:
-                return mod.hasEntry(p.getName());
+                return !mod.hasEntry(p.getName());
             case HELPER:
-                return helper.hasEntry(p.getName());
+                return !helper.hasEntry(p.getName());
             case VIP:
-                return vip.hasEntry(p.getName());
+                return !vip.hasEntry(p.getName());
             case MEMBERPLUS:
-                return memberplus.hasEntry(p.getName());
+                return !memberplus.hasEntry(p.getName());
             case MEMBER:
-                return member.hasEntry(p.getName());
+                return !member.hasEntry(p.getName());
 
             default:
                 return true;

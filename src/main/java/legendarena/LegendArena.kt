@@ -1,9 +1,6 @@
 package legendarena
 
-import legendapi.utils.KotlinUtils
-import legendapi.utils.LegendAPIUtils
-import legendapi.utils.SetupUtils
-import legendapi.utils.VersionUtils
+import legendapi.utils.*
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
@@ -99,6 +96,7 @@ class LegendArena : KotlinUtils() {
         VersionUtils.setVersion("LegendArena", "1.1-SNAPSHOT")
         VersionUtils.setVersion("Kotlin", "0.12.613")
         ScoreboardSystem.init()
+        fixRankShit()
 
         setup.announceStatus("LegendArena v" + p.getDescription().getVersion() + " fully loaded.")
     }
@@ -124,6 +122,12 @@ class LegendArena : KotlinUtils() {
         founders.add("ZRaptor22")
         config.addDefault("founders", founders)
         config.genIfDoesNotExist("configVersion")
+    }
+
+    private fun fixRankShit() {
+        //fucking /reload
+        for(p in Bukkit.getOnlinePlayers())
+            ScoreboardSystem.setRank(p, RankUtils.getRank(p))
     }
 
     override fun onDisable() {

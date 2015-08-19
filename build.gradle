@@ -2,10 +2,8 @@ buildscript {
     ext.kotlin_version = '0.12.613'
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -13,20 +11,6 @@ buildscript {
 apply plugin: 'maven'
 apply plugin: 'kotlin'
 apply plugin: 'java'
-apply plugin: 'com.github.johnrengelman.shadow'
-
-shadowJar {
-    dependencies {
-        /*
-          ..what?
-
-          hey, if it makes it easier for server owners to install the plugin, fuck it. I don't care about every conflict okay? ;-;
-        */
-        include(dependency('com.google.code.gson:gson:2.1'))
-        include(dependency('me.confuser:BarAPI:3.0'))
-        include(dependency('org.apache.directory.studio:org.apache.commons.io:2.4'))
-    }
-}
 
 compileJava.options.encoding = 'UTF-8' //gradle, pls. just, pls. #gradlepls
 javadoc.options.encoding = 'UTF-8' //srsly gradle pls
