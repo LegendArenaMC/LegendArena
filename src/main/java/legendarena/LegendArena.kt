@@ -4,7 +4,6 @@ import legendapi.utils.*
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
-import legendarena.hub.EnderBow
 import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
 import legendarena.hub.menu.MinigameMenu
@@ -69,7 +68,6 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
-        setup.registerListener(EnderBow())
         setup.registerListener(PlayerMoveListener())
         setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
@@ -81,8 +79,6 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(MainMenuListener())
         setup.registerListener(Tag.TagListener())
         setup.registerListener(ParticleMenu().Listener())
-        setup.registerListener(JumpPadMenuListener())
-        setup.registerListener(StaffMenuListener())
 
         setup.announceStatus("Setting up aliases...")
 
