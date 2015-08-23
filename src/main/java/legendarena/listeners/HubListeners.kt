@@ -8,7 +8,6 @@ import legendapi.utils.VersionUtils
 import legendarena.LegendArena
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu
-import legendarena.hub.menu.staff.StaffMenu
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -55,10 +54,6 @@ public class HubListeners : Listener {
                 if(!ev.isCancelled())
                     ev.setCancelled(true)
                 cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))
-            } else if(ev.getItem() == HubWarper.getStaffMenu()) {
-                StaffMenu().show(ev.getPlayer())
-                if(!ev.isCancelled())
-                    ev.setCancelled(true)
             }
         } catch(ex: Exception) {
             if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode)

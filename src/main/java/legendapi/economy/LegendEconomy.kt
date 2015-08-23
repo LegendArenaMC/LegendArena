@@ -93,7 +93,7 @@ public class LegendEconomy {
     }
 
     public fun addEmeralds(p: String, a: Int) {
-        var currentEmeralds = 0
+        var currentEmeralds: Int
         try {
             currentEmeralds = getEmeralds(p)
         } catch(ex: NullPointerException) {
@@ -103,7 +103,7 @@ public class LegendEconomy {
     }
 
     public fun takeEmeralds(p: String, a: Int) {
-        var currentEmeralds = 0
+        var currentEmeralds: Int
         try {
             currentEmeralds = getEmeralds(p)
         } catch(ex: NullPointerException) {

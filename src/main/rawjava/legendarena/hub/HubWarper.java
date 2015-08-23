@@ -28,8 +28,4 @@ public class HubWarper {
         return MenuUtils.createHead(player, ChatColor.GREEN + "Main Menu");
     }
 
-    public static ItemStack getStaffMenu() {
-        return MenuUtils.createItem(Material.PAPER, ChatColor.GREEN + "Staff Menu");
-    }
-
 }
