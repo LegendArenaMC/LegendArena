@@ -7,7 +7,7 @@ public class VersionUtils {
     private static HashMap<String, String> versionList = new HashMap<>();
 
     public static String getAPIVersion() {
-        return "1.2-SNAPSHOT";
+        return "1.2";
     }
 
     public static int getAPIVersionInt() {
@@ -18,7 +18,7 @@ public class VersionUtils {
      * Codenames are usually generated here: http://www.michaelfogleman.com/phrases/
      */
     public static String getAPIVersionCodename() {
-        return "Something Witty";
+        return "Control Guide";
     }
 
     public static String getVersion(String plugin) {

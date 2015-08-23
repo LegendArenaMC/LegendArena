@@ -15,7 +15,7 @@ class Gadgets : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(sender !is Player) {
-            sender.sendMessage("Sorry - you can only do this as a player :(")
+            sender.sendMessage("You can only use this command as a Player, sorry!")
             return true //Do nothing if it's not a player
         }
         if(!Rank.MOD.isRanked(sender)) {

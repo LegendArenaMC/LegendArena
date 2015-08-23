@@ -37,7 +37,6 @@ class Autoban : CommandExecutor {
         //walls of code are fun (/s)
         //also no this isn't a gui. because fuck you. [tm]
         //..that, and I don't want to bother writing a AutoBanGUI class.
-        //and because it'd leak memory like Chrome eats it. (..not that this already doesn't leak a bit of memory, this setup is just easier to do (in both code and RAM usage), rather than a Menu, Listener and stuff like that)
         FancyMessage("Banning player ")
                     .color(ChatColor.GREEN)
                 .then(target)

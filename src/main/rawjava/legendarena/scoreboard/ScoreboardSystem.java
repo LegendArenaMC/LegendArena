@@ -6,7 +6,10 @@ package legendarena.scoreboard;
 
 import legendapi.utils.Rank;
 import legendapi.utils.RankUtils;
+import legendarena.staffutils.VanishType;
+import legendarena.staffutils.VanishUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -18,13 +21,24 @@ public class ScoreboardSystem {
     public final static Scoreboard sb = sbm.getNewScoreboard();
     private static Team founder, dev, admin,
             mod, helper, vip,
-            memberplus, member;
+            memberplus, member, spectator;
+
+    private static String[] colorCodes = {
+            "§d",
+            "§5",
+            "§4",
+            "§c",
+            "§a",
+            "§6",
+            "§9",
+            "§7",
+            "§8"
+    };
 
     private static boolean init = false;
 
     public static void init() {
-        if(init) return; //I seriously hate having to make init() functions.
-        //Especially if they're public static.
+        if(init) return;
 
         founder = sb.getTeam("Founder");
         dev = sb.getTeam("Dev");
@@ -34,55 +48,52 @@ public class ScoreboardSystem {
         vip = sb.getTeam("VIP");
         memberplus = sb.getTeam("MemberPlus");
         member = sb.getTeam("Member");
+        spectator = sb.getTeam("Spectator");
 
-        if(founder != null)
-            founder.setPrefix("§d");
-        else {
+        if(founder == null)
             founder = sb.registerNewTeam("Founder");
-            founder.setPrefix("§d");
-        }
-        if(dev != null)
-            dev.setPrefix("§5");
-        else {
+
+        founder.setPrefix(colorCodes[0]);
+
+        if(dev == null)
             dev = sb.registerNewTeam("Dev");
-            dev.setPrefix("§5");
-        }
-        if(admin != null)
-            admin.setPrefix("§4");
-        else {
+
+        dev.setPrefix(colorCodes[1]);
+
+        if(admin == null)
             admin = sb.registerNewTeam("Admin");
-            admin.setPrefix("§4");
-        }
-        if(mod != null)
-            mod.setPrefix("§c");
-        else {
+
+        admin.setPrefix(colorCodes[2]);
+
+        if(mod == null)
             mod = sb.registerNewTeam("Mod");
-            mod.setPrefix("§c");
-        }
-        if(helper != null)
-            helper.setPrefix("§a");
-        else {
+
+        mod.setPrefix(colorCodes[3]);
+
+        if(helper == null)
             helper = sb.registerNewTeam("Helper");
-            helper.setPrefix("§a");
-        }
-        if(vip != null)
-            vip.setPrefix("§6");
-        else {
+
+        helper.setPrefix(colorCodes[4]);
+
+        if(vip == null)
             vip = sb.registerNewTeam("VIP");
-            vip.setPrefix("§6");
-        }
-        if(memberplus != null)
-            memberplus.setPrefix("§9");
-        else {
+
+        vip.setPrefix(colorCodes[5]);
+
+        if(memberplus == null)
             memberplus = sb.registerNewTeam("MemberPlus");
-            memberplus.setPrefix("§9");
-        }
-        if(member != null)
-            member.setPrefix("§7");
-        else {
+
+        memberplus.setPrefix(colorCodes[6]);
+
+        if(member == null)
             member = sb.registerNewTeam("Member");
-            member.setPrefix("§7");
-        }
+
+        member.setPrefix(colorCodes[7]);
+
+        if(spectator == null)
+            spectator = sb.registerNewTeam("Spectator");
+
+        spectator.setPrefix(colorCodes[8]);
 
         init = true;
     }
@@ -117,6 +128,20 @@ public class ScoreboardSystem {
         }
     }
 
+    public static void setSpectator(Player p) {
+        clearTeam(p);
+        spectator.addEntry(p.getName());
+    }
+
+    public static void removeSpectator(Player p) {
+        spectator.removeEntry(p.getName());
+        setRank(p, RankUtils.getDisplayRank(p));
+    }
+
+    public static boolean isSpectator(Player p) {
+        return spectator.hasEntry(p.getName());
+    }
+
     public static void clearTeam(Player p) {
         founder.removeEntry(p.getName());
         dev.removeEntry(p.getName());
@@ -128,36 +153,37 @@ public class ScoreboardSystem {
         member.removeEntry(p.getName());
     }
 
-    public static boolean needsUpdate(Player p) {
-        switch(RankUtils.getDisplayRank(p)) {
-            case FOUNDER:
-                return !founder.hasEntry(p.getName());
-            case ADMIN:
-                return !admin.hasEntry(p.getName());
-            case MOD:
-                return !mod.hasEntry(p.getName());
-            case HELPER:
-                return !helper.hasEntry(p.getName());
-            case VIP:
-                return !vip.hasEntry(p.getName());
-            case MEMBERPLUS:
-                return !memberplus.hasEntry(p.getName());
-            case MEMBER:
-                return !member.hasEntry(p.getName());
-
-            default:
-                return true;
-        }
-    }
-
-    public static class TimerLoop implements Runnable {
+    public static class Timer implements Runnable {
 
         public void run() {
             for(Player p : Bukkit.getOnlinePlayers()) {
                 if(p.getScoreboard() != sb)
                     p.setScoreboard(sb);
+
                 if(needsUpdate(p))
                     setRank(p, RankUtils.getDisplayRank(p));
+            }
+        }
+
+        private static boolean needsUpdate(Player p) {
+            switch(RankUtils.getDisplayRank(p)) {
+                case FOUNDER:
+                    return !founder.hasEntry(p.getName());
+                case ADMIN:
+                    return !admin.hasEntry(p.getName());
+                case MOD:
+                    return !mod.hasEntry(p.getName());
+                case HELPER:
+                    return !helper.hasEntry(p.getName());
+                case VIP:
+                    return !vip.hasEntry(p.getName());
+                case MEMBERPLUS:
+                    return !memberplus.hasEntry(p.getName());
+                case MEMBER:
+                    return !member.hasEntry(p.getName());
+
+                default:
+                    return true;
             }
         }
 

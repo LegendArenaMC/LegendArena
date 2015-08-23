@@ -30,11 +30,10 @@ public class KotlinLoaderTools {
                     failed = true;
                 }
 
-                if(failed) {
+                if(failed)
                     while(failed) {
-                        if(attempt[0] >= 15) {
+                        if(attempt[0] >= 15)
                             throw new FailedKotlinException();
-                        }
 
                         try {
                             Bukkit.getLogger().log(Level.INFO, "Kotlin wasn't found yet, waiting 0.5 seconds and trying again... [Attempt #" + attempt[0] + "]");
@@ -52,10 +51,9 @@ public class KotlinLoaderTools {
                             failed = true;
                         }
                     }
-                }
                 c.onEnable();
             }
-        }, 40l);
+        }, 20l);
     }
 
 }

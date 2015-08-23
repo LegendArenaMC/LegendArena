@@ -8,7 +8,7 @@ import legendapi.utils.StringUtils
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
-class ChatSystemUtils {
+public class ChatSystemUtils {
 
     /**
      * Get a parsed chat message.
@@ -50,7 +50,7 @@ class ChatSystemUtils {
             if(e == msg) //in case they were smart enough to not put a space after "&rb&"
                 e = StringUtils.replace(msg, "&rb&", "")
 
-            return ChatUtils.randomRainbow(e)
+            return ChatUtils.formRainbow(e)
         }
         return ChatColor.translateAlternateColorCodes('&', msg) //we aren't doing rainbow text, call Bukkit's ChatColor.translateAlternateColorCodes()
     }

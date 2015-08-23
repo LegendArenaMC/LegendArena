@@ -13,6 +13,7 @@ import java.util.UUID;
 public class ParticleCore implements Runnable {
 
     private static HashMap<ParticleType, ArrayList<UUID>> players = new HashMap<>();
+    private static Random r = new Random();
 
     public void run() {
         for(ParticleType t : players.keySet()) {
@@ -71,7 +72,7 @@ public class ParticleCore implements Runnable {
         REDSTONE(ParticleEffect.REDSTONE),
         CRIT(ParticleEffect.CRIT),
         HEART(ParticleEffect.HEART),
-        COLOURFUL(ParticleEffect.SPELL);
+        COLOURFUL(ParticleEffect.SPELL_MOB);
 
         private ParticleEffect particle = null;
 
@@ -84,13 +85,13 @@ public class ParticleCore implements Runnable {
         }
 
         public void play(Player p) {
-            Location l = p.getLocation().add(0.0, 0.5, 0.0);
+            Location l = p.getLocation().add(0.0, 0.3, 0.0);
             play(l);
         }
 
         public void play(Location l) {
             switch(getEffect()) {
-                case SPELL:
+                case SPELL_MOB:
                     playColourful(l);
                     break;
                 case PORTAL:
@@ -103,13 +104,12 @@ public class ParticleCore implements Runnable {
                     getEffect().display(1, 1, 1, 0, 10, l, 30);
                     break;
                 case REDSTONE:
-                    l = l.add(0.0, 1, 0.0);
-                    getEffect().display(1, 0, 1, 0, 5, l, 30);
+                    getEffect().display(1, 1, 1, 0, 5, l, 30);
                     break;
 
                 case HEART:
-                    l = l.add(0.0, 1, 0.0);
-                    getEffect().display(1, 1, 1, 0, 10, l, 30);
+                    l = l.add(0.0, 2, 0.0);
+                    getEffect().display(0, 0, 0, 0, 1, l, 30);
                     break;
 
                 default:
@@ -118,8 +118,21 @@ public class ParticleCore implements Runnable {
         }
 
         private void playColourful(Location l) {
-            Random r = new Random();
-            int randomR = r.nextInt(255) + 1;
+            int randomR1 = r.nextInt(255) + 1;
+            int randomG1 = r.nextInt(255) + 1;
+            int randomB1 = r.nextInt(255) + 1;
+
+            int randomR2 = r.nextInt(255) + 1;
+            int randomG2 = r.nextInt(255) + 1;
+            int randomB2 = r.nextInt(255) + 1;
+
+            int randomR3 = r.nextInt(255) + 1;
+            int randomG3 = r.nextInt(255) + 1;
+            int randomB3 = r.nextInt(255) + 1;
+
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(randomR1, randomG1, randomB1), l, 10);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(randomR2, randomG2, randomB2), l, 10);
+            ParticleEffect.SPELL_MOB.display(new ParticleEffect.OrdinaryColor(randomR3, randomG3, randomB3), l, 10);
         }
 
     }

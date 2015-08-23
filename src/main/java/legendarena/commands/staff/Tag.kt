@@ -12,6 +12,7 @@ import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
 import legendarena.scoreboard.ScoreboardSystem
+import legendarena.staffutils.VanishUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -24,6 +25,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
+
+//TODO: Move this out of the Commands package
 
 class Tag {
 

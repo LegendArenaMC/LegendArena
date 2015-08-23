@@ -4,6 +4,9 @@ import legendapi.emeralds.EmeraldsCore
 import legendapi.message.Message
 import legendapi.utils.*
 import legendarena.hub.JumpPad
+import legendarena.scoreboard.ScoreboardSystem
+import legendarena.staffutils.VanishType
+import legendarena.staffutils.VanishUtils
 import org.apache.commons.io.FileUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -26,8 +29,8 @@ class Dev : CommandExecutor {
             msg.append(ChatUtils.getFormattedMsg("Architecture", System.getProperty("os.arch")) + "\n")
             msg.append(ChatUtils.getFormattedMsg("OS Name", System.getProperty("os.name")) + "\n")
             msg.append(ChatUtils.getFormattedMsg("Version", System.getProperty("os.version")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Date [UK Format]", CalendarUtils().getDateString()) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Date [US Format]", CalendarUtils().getDateFormat(CalendarUtils.DateLocale.US)) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Date [UK Format]", CalendarUtils().getDayString(false) + " " + CalendarUtils().getDateString()) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Date [US Format]", CalendarUtils().getDayString(false, CalendarUtils.DateLocale.US) + " " + CalendarUtils().getDateString(CalendarUtils.DateLocale.US)) + "\n")
             msg.append(ChatUtils.getFormattedHeader("System") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
@@ -49,9 +52,6 @@ class Dev : CommandExecutor {
         } else if(args[0].equals("cooldown")) {
             var c = Cooldown(999.0)
             sender.sendMessage(c.getTimeRemaining())
-            return true
-        } else if(args[0].equals("cupid")) {
-            (sender as Player).getInventory().addItem(MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Cupid Arrow"))
             return true
         }
 

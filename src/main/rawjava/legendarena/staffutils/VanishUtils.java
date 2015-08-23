@@ -17,6 +17,12 @@ public class VanishUtils {
 
     private static final ArrayList<UUID> vanishedPlayers = new ArrayList<>();
 
+    ////////////////////////////////////
+    //                                //
+    //          STATIC TOOLS          //
+    //                                //
+    ////////////////////////////////////
+
     /**
      * Toggle vanish for a player
      * @param p The player to toggle
@@ -34,6 +40,8 @@ public class VanishUtils {
                 p.sendMessage(ChatUtils.getCustomMsg("Vanish") + "You have unvanished.");
                 new Message().append(ChatUtils.getCustomMsg("Staff") + "Player " + p.getName() + " has unvanished.").broadcast(Rank.MOD);
             }
+
+            vanishedPlayers.remove(p.getUniqueId());
         } else {
             //vanish the player
 
@@ -42,6 +50,8 @@ public class VanishUtils {
                 p.sendMessage(ChatUtils.getCustomMsg("Vanish") + "You have vanished. Poof.");
                 new Message().append(ChatUtils.getCustomMsg("Staff") + "Player " + p.getName() + " has vanished. Poof.").broadcast(Rank.MOD);
             }
+
+            vanishedPlayers.add(p.getUniqueId());
         }
     }
 
@@ -54,20 +64,20 @@ public class VanishUtils {
     }
 
     /**
-     * Hide all currently vanished players from a player. Best used on join.
+     * Hide all currently vanished players from a player. Best used on a player's join.
      * @param p The player to hide vanished players from
      */
     public static void hideVanishedPlayersFrom(Player p) {
-        for(UUID v : vanishedPlayers) {
-            if(Bukkit.getPlayer(v) == null)
+        for(UUID u : vanishedPlayers) {
+            if(Bukkit.getPlayer(u) == null)
                 continue; //assume the vanished player is not on the server
-            p.hidePlayer(Bukkit.getPlayer(v));
+            p.hidePlayer(Bukkit.getPlayer(u));
         }
     }
 
     ////////////////////////////////////
     //                                //
-    //         INTERNAL STUFF         //
+    //         INTERNAL TOOLS         //
     //                                //
     ////////////////////////////////////
 
@@ -78,6 +88,8 @@ public class VanishUtils {
         for(Player o : Bukkit.getOnlinePlayers())
             if(!o.canSee(p))
                 o.showPlayer(p);
+
+        vanishedPlayers.remove(p.getUniqueId());
     }
 
     /**

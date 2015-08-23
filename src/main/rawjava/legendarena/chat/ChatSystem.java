@@ -236,10 +236,11 @@ public class ChatSystem {
 
         String built = "";
 
-        //bla bla probably inefficient as fuck but, well - fuck it. (plus, this lets me just add channels to the channel class + implement them and done
+        //bla bla probably inefficient as fuck but, well - fuck it.
+        // (plus, this lets me just add channels to the channel class + implement them and they're ready)
 
         built += getChannelName(getChannel(p)) + " " + ChatColor.DARK_GRAY + "|" + ChatColor.YELLOW + " ";
-        built += RankUtils.getRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.chars[1] + " " + ChatColor.YELLOW;
+        built += RankUtils.getRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.specialCharacters[1] + " " + ChatColor.YELLOW;
         built += m;
 
         return built;

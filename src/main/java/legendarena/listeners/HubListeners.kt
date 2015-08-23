@@ -3,7 +3,6 @@ package legendarena.listeners
 import legendapi.message.Message
 import legendapi.message.MessageType
 import legendapi.utils.Cooldown
-import legendapi.utils.LegendAPIUtils
 import legendapi.utils.MenuUtils
 import legendapi.utils.VersionUtils
 import legendarena.LegendArena
@@ -37,6 +36,9 @@ public class HubListeners : Listener {
     EventHandler
     public fun listenForInteract(ev: PlayerInteractEvent) {
         try {
+            if(ev.getItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "EnderBow"))
+                if(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+                    return
             if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode)
                 ev.setCancelled(true)
             if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK)
@@ -59,7 +61,8 @@ public class HubListeners : Listener {
                     ev.setCancelled(true)
             }
         } catch(ex: Exception) {
-            //ignore
+            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode)
+                ev.setCancelled(true)
         }
 
 

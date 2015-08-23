@@ -5,6 +5,7 @@ import legendapi.log.BukLog
 import legendapi.utils.Rank
 import legendarena.LegendArena
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -24,7 +25,7 @@ class Message {
 
     private var builder: StringBuilder? = null
 
-    internal var reflector = MessageReflector()
+    private var reflector = MessageReflector()
 
     public constructor() {}
 
@@ -38,6 +39,15 @@ class Message {
         if(builder == null)
             builder = StringBuilder()
         builder!!.append(msg)
+        return this
+    }
+
+    public fun append(color: ChatColor): Message {
+        if(type == MessageType.FANCIFUL)
+            throw ClassCastException("You can't append a ChatColor onto a FancyMessage!")
+        if(builder == null)
+            builder = StringBuilder()
+        builder!!.append("" + color)
         return this
     }
 
@@ -82,9 +92,9 @@ class Message {
         if((msg == "" || msg == "\n") && sound != null) return
         when(type) {
             MessageType.CHAT -> p.sendMessage(msg)
-            MessageType.ACTIONBAR -> reflector.sendActionbar(p, msg)
-            MessageType.TITLE -> reflector.send(1, p, msg, fadeIn, stay, fadeOut)
-            MessageType.SUBTITLE -> reflector.send(0, p, msg, fadeIn, stay, fadeOut)
+            MessageType.ACTIONBAR -> sendActionbar(p)
+            MessageType.TITLE -> sendTitle(p)
+            MessageType.SUBTITLE -> sendSubtitle(p)
             MessageType.FANCIFUL -> fanciful!!.send(p)
         }
     }
@@ -121,6 +131,18 @@ class Message {
         if(builder == null)
             return ""
         return builder.toString()
+    }
+
+    private fun sendTitle(p: Player) {
+        reflector.send(0, p, toString(), fadeIn, stay, fadeOut)
+    }
+
+    private fun sendSubtitle(p: Player) {
+        reflector.send(1, p, toString(), fadeIn, stay, fadeOut)
+    }
+
+    private fun sendActionbar(p: Player) {
+        reflector.sendActionbar(p, toString())
     }
 
 }

@@ -117,7 +117,7 @@ class Chat : CommandExecutor {
             if(args.size() == 1) {
                 sender.sendMessage(ChatUtils.getFormattedHeader("Chat Settings"))
                 ChatUtils.fancyHelpMsg("/chat manage globalmute", "Toggle chat global mute", "chat manage globalmute", true).send(sender)
-                ChatUtils.fancyHelpMsg("/chat mute allowsmute", "Toggle allowing of shadow mutes", "chat manage allowsmute", true).send(sender)
+                ChatUtils.fancyHelpMsg("/chat manage allowsmute", "Toggle allowing of shadow mutes", "chat manage allowsmute", true).send(sender)
                 return
             }
 

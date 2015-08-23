@@ -4,10 +4,11 @@ import legendapi.utils.*
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
+import legendarena.hub.EnderBow
 import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
-import legendarena.hub.gadget.CupidArrowListener
 import legendarena.hub.menu.MinigameMenu
+import legendarena.hub.menu.ParticleMenu
 import legendarena.hub.particles.ParticleCore
 import legendarena.listeners.*
 import legendarena.listeners.menu.*
@@ -59,7 +60,7 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up timers...")
 
         setup.registerNonAsyncTimer(ParticleCore(), 2)
-        setup.registerNonAsyncTimer(ScoreboardSystem.TimerLoop(), 5)
+        setup.registerNonAsyncTimer(ScoreboardSystem.Timer(), 5)
 
         setup.announceStatus("Setting up listeners...")
 
@@ -68,19 +69,18 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
+        setup.registerListener(EnderBow())
         setup.registerListener(PlayerMoveListener())
-        setup.registerListener(CupidArrowListener())
         setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
         setup.registerListener(PlayerDamageListener())
-        setup.registerListener(InventoryInteractListener())
 
         //this took me more time to figure out than I wish to admit.
 
         setup.registerListener(MinigameMenu().Listener())
         setup.registerListener(MainMenuListener())
         setup.registerListener(Tag.TagListener())
-        setup.registerListener(ParticleMenuListener())
+        setup.registerListener(ParticleMenu().Listener())
         setup.registerListener(JumpPadMenuListener())
         setup.registerListener(StaffMenuListener())
 
@@ -125,7 +125,7 @@ class LegendArena : KotlinUtils() {
     }
 
     private fun fixRankShit() {
-        //fucking /reload
+        //fucking /reload breaking the scoreboard system DansGame
         for(p in Bukkit.getOnlinePlayers())
             ScoreboardSystem.setRank(p, RankUtils.getRank(p))
     }

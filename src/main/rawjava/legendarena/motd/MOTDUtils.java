@@ -103,7 +103,6 @@ public class MOTDUtils {
             "It's so beast like!",
             "...am I floating.. AIEEEEEEEEEEeeeee... *CLANG*",
             "\"Do you know what time it is!?\" Uh... no?",
-            "Wait for it... wait for it... WUBBBBB", //ah, the drop is always the best part. (...usually, at least)
             "Not seen on TV.",
             "May contain peanuts.",
             "Fun for the whole family!",
@@ -141,7 +140,6 @@ public class MOTDUtils {
             "How did I get here? [THE END]",
             "What time is it? It's Muffin Time!",
             "Actually, it's 12:30.",
-            "MEEGAANNNNN!", //MEGAN! MEGAN!
             ":compileJava [100 Errors]", //I hate Java.[tm]
             "Every other page, splat.",
             "I got a thousand dollars, now I'll get Starbucks.",
@@ -168,7 +166,6 @@ public class MOTDUtils {
             "This isn't a batmobile in disguise, move on!", //blame jaden 2k15
             "Time to check my email! In like 4 years!", //strongbad reference (and blame jaden again)
             "I like to break windows. Colourful or not.", //blame jaden yet again
-            "\"Colorful\" Banned DansGame", //jaden 2k15 is a nub (british spelling op)
             "That's a monsterous feline from that jukebox.", //jaden yet again
             "Too many splitkillers...", //*yawn* jaden, again.. (and agario)
             "Everybody do the flop!", //blame both asdfmovie and jaden
@@ -176,7 +173,6 @@ public class MOTDUtils {
             "Mario must live on Mushroom Island!", //blame jaden 2k15 v1224
             "JadenJFilms was thrown in the void by ThePixelDev",
             "ThePixelDev was killed by Ste-wait, what?", //steve pls
-            "This is a minigame on Min- AAAH MY SPLEEEEN", //PLEASE STOP RECORDING EXCLUSIVELY ON MINEPLEX. PLEASE.
             "Monstercat - Now with 1,000% more Future Bass!", //also HOLY MOTHER OF WHAT, SOMEONE PREDICTED THE FUTURE (...bass) http://redd.it/3gxl3x
     };
 
@@ -207,6 +203,8 @@ public class MOTDUtils {
             "Five Nights at Freddy's 4! Now with 400% more idiocy!",
             "Half Life 3 confirmed", //inb4 /u/WhenIsHL3 bot
             "gaben can i pls have herf lerf fer", //HALF LIFE 4 CONFIRMED GUYS!
+            "Sister Magic!", //WHAT IS JADEN'S SISTER DOING NOW
+            "ROLLBACK, ROLLBACK!", //blame jaden's sister
             "Please stop with pointless FPS games, thanks", //I'm looking at you, Call of Duty...
             "Make me a sandvich!", //sandvich is op
     };
@@ -240,9 +238,9 @@ public class MOTDUtils {
 
     public static String getRandomMOTD() {
         //yes, hard-coded, full-out overrides. because why not.[tm]
-        if(new CalendarUtils().getDay() == 3 && new CalendarUtils().getMonth() == Months.MAY)
+        if(new CalendarUtils().getDay() == 3 && new CalendarUtils().isMonth(Months.MAY))
             return "Happy birthday, Pixel! <3";
-        else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().getMonth() == Months.NOVEMBER)
+        else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().isMonth(Months.NOVEMBER))
             return "Happy birthday, Jaden! <3";
 
         if(!override.equals(""))

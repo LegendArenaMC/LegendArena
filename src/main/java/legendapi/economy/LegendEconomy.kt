@@ -8,7 +8,6 @@ import legendapi.log.BukLog
 import legendapi.log.Level
 import legendapi.sql.LegendSQL
 import legendapi.utils.ConfigUtils
-import legendapi.utils.LegendAPIUtils
 import legendapi.utils.StringUtils
 import org.bukkit.Bukkit
 import java.io.File
@@ -23,7 +22,9 @@ public class LegendEconomy {
 
     internal var sql: LegendSQL? = null
     internal var db = "emeralds"
+    internal var p = Bukkit.getPluginManager().getPlugin("LegendArena")
     internal var table = "LA_EMERALDS"
+    internal var log = BukLog(p)
 
     internal var cache = HashMap<UUID, Int>()
 
@@ -54,7 +55,8 @@ public class LegendEconomy {
             sql = LegendSQL(host, db, user, pass)
         } else {
             //assume we're using sqlite, so setup the sqlite db file
-            var dbFile = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath() + File.separator + "emeralds.db")
+            //by the way! sqlite is good for basic single servers (like survival servers and such) but for networks - PLEASE, PLEASE, PLEASEEE USE MYSQL!
+            var dbFile = File(p.getDataFolder().getAbsolutePath() + File.separator + "emeralds.db")
             sql = LegendSQL(dbFile)
         }
 
@@ -62,6 +64,7 @@ public class LegendEconomy {
     }
 
     internal fun setup() {
+        log.debug("Setting up database...")
         sql!!.initialise()
         if(!sql!!.doesTableExist(table))
             sql!!.standardQuery("CREATE TABLE " + table + " ( NAME varchar(255), EMERALDS int );")
@@ -74,7 +77,10 @@ public class LegendEconomy {
         try {
             rs = sql!!.sqlQuery("SELECT EMERALDS FROM `" + table + "` WHERE NAME=\"" + p + "\";")
         } catch(ex: NullPointerException) {
-            setup() //attempt to setup the SQL database as the connection may be broken
+            setup() //attempt to setup the SQL database as the connection may be broken for some reason
+            return 0
+        } catch(ex: SQLException) {
+            log.log(Level.SEVERE, "ERROR! Attempting to get emeralds count for player " + p + " resulted in an SQLException!")
             return 0
         }
         var amount = 0

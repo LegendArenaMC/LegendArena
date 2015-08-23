@@ -43,7 +43,7 @@ class EmeraldCmd : CommandExecutor {
                         .color(ChatColor.RED)
                     .then("certain someone")
                         .color(ChatColor.RED)
-                        .tooltip("*cough Pixel cough*")
+                        .tooltip("" + ChatColor.GRAY + "*cough Pixel cough*")
                     .then(" broke the Legend Economy class (or screwed up the ConfigUtils class, yet again). Sorry!")
                         .color(ChatColor.RED)
                     .send(sender)

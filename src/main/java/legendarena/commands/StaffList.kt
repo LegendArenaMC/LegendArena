@@ -38,7 +38,7 @@ class StaffList : CommandExecutor {
                     .then(" // ")
                         .color(ChatColor.DARK_GRAY)
                     .then(RankUtils.getDisplayRank(p).toString())
-                        .color(ChatColor.BLUE)
+                        .color(RankUtils.getDisplayRank(p).getNameColor())
         }
 
         msg.send(sender)

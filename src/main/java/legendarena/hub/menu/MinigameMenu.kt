@@ -22,12 +22,12 @@ class MinigameMenu {
     private var inv: Inventory? = null
 
     public constructor() {
-        inv = Bukkit.createInventory(null, 9, invName)
+        inv = Bukkit.createInventory(null, 36, invName)
 
-        inv!!.setItem(0, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
-        inv!!.setItem(1, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
+        inv!!.setItem(12, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
+        inv!!.setItem(14, MenuUtils.createItem(Material.STAINED_CLAY, "" + ChatColor.GREEN + "Never Have I Ever"))
 
-        inv!!.setItem(8, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
+        inv!!.setItem(31, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
     }
 
     public fun show(p: Player) {

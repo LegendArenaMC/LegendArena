@@ -4,7 +4,8 @@
 
 package legendapi.utils
 
-import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.*
 
 public class CalendarUtils {
 
@@ -40,11 +41,23 @@ public class CalendarUtils {
      * Use getDateFormat(DateLocale().US) to override the default of UK formatting.
      */
     public fun getDateString(): String {
-        return getDateFormat(DateLocale.UK)
+        return getDateString(DateLocale.UK)
     }
 
-    public fun getDateFormat(locale: DateLocale): String {
+    public fun getDateString(locale: DateLocale): String {
         return (if (locale === DateLocale.UK) "" + day + "/" + month else "" + month + "/" + day) + "/" + year
+    }
+
+    public fun getDayString(fullString: Boolean): String {
+        return getDayString(fullString, DateLocale.UK)
+    }
+
+    public fun getDayString(fullString: Boolean, locale: DateLocale): String {
+        return SimpleDateFormat(if(fullString) "EEEE" else "E", if(locale == DateLocale.UK) Locale.UK else Locale.US).format(cal.getTime())
+    }
+
+    public fun isMonth(m: Months): Boolean {
+        return getMonth() == m.getMonthId()
     }
 
     public enum class DateLocale {
@@ -60,29 +73,6 @@ public class CalendarUtils {
          * <strong>DAY/MONTH/YEAR</strong>
          */
         UK
-    }
-
-    public enum class SpecialDays {
-        PIXEL(3, Months.MAY),
-        JADEN(16, Months.NOVEMBER),
-        APRILFOOLS(1, Months.APRIL),
-        INDEPENDENCEDAY(4, Months.JULY);
-
-        private var day = 0
-        private var month = 0
-
-        internal constructor(day: Int, month: Int) {
-            this.day = day
-            this.month = month
-        }
-
-        public fun getDay(): Int {
-            return this.day
-        }
-
-        public fun getMonth(): Int {
-            return month
-        }
 
     }
 
@@ -105,8 +95,8 @@ public class CalendarUtils {
         }
     }
 
-    public fun parseMonth(month: Int): String {
-        when(month) {
+    public fun parseMonth(month: Months): String {
+        when(month.getMonthId()) {
             1 -> return "January"
             2 -> return "Feburary"
             3 -> return "March"

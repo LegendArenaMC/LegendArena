@@ -6,6 +6,8 @@ import legendapi.message.Message
 import legendapi.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.hub.HubWarper
+import legendarena.staffutils.VanishType
+import legendarena.staffutils.VanishUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -81,14 +83,20 @@ class Staff: CommandExecutor {
                     RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
+
                 if(c != null && !c!!.done()) {
-                    sender.sendMessage(MessageFormat.format("{0} (this is a SERVER-WIDE (not network-wide) cooldown!)", c!!.getTimeRemaining()))
+                    sender.sendMessage(c!!.getTimeRemaining() + " (this is a SERVER-WIDE (not network-wide) cooldown!)")
                     return true
                 }
+
                 ChatUtils.clearChat(sender.getName())
                 c = Cooldown(120.0)
             } else if(args[0].equals("vanish")) {
-                sender.sendMessage("soon[tm]")
+                if(!Rank.MOD.isRanked(sender)) {
+                    RankUtils.fancyNoPermissions(Rank.MOD, sender)
+                    return true
+                }
+                VanishUtils.toggleVanish(sender as Player, true)
             } else if(args[0].equals("skull")) {
                 if(args.size() == 1)
                     (sender as Player).getInventory().addItem(MenuUtils.createHead(sender.getName()))
@@ -113,19 +121,11 @@ class Staff: CommandExecutor {
     private fun help(sender: CommandSender, page: String) {
         when(page) {
             "1" -> {
-                sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
+                sender.sendMessage(ChatUtils.getFormattedHeader("Staff [1/1]"))
                 ChatUtils.fancyHelpSuggestMsg("/staff info <player>", "Gets various info about a specified player.", "staff info", true).send(sender)
-                ChatUtils.fancyHelpSuggestMsg("/staff lockdown <0/1/2>", "Set the current lockdown level. [See \"/staff help lockdown\" for more info]", "staff lockdown", true).send(sender)
                 ChatUtils.fancyHelpSuggestMsg("/staff skull [playername]", "", "staff skull", true).send(sender)
                 ChatUtils.fancyHelpMsg("/staff vanish", "Poof.", "staff vanish", true).send(sender)
                 ChatUtils.fancyHelpMsg("/staff clearchat", "Clear the current server's chat for everyone.", "staff clearchat", true).send(sender)
-                sender.sendMessage("" + ChatColor.YELLOW + "----.{ Staff [1/1] }.----")
-            }
-            "lockdown" -> {
-                ChatUtils.fancyHelpSuggestMsg("/staff lockdown <0/1/2>", "Set the current lockdown level. Currently a work in progress.", "staff lockdown", true).send(sender)
-                ChatUtils.fancyHelpMsg("/staff lockdown 0", "Level 0 lockdown, the basic mode.", "staff lockdown 0", true).send(sender)
-                ChatUtils.fancyHelpMsg("/staff lockdown 1", "Level 1 lockdown, locks all normal players out from this server only.", "staff lockdown 1", true).send(sender)
-                ChatUtils.fancyHelpMsg("/staff lockdown 2", "Level 2 lockdown, locks all normal players out from the entire network. [ONLY USABLE BY FOUNDER RANKED STAFF]", "staff lockdown 2", true).send(sender)
             }
             else -> sender.sendMessage(ChatUtils.getCustomMsg("" + ChatColor.RED + "Error") + "I don't know what you mean :(")
         }

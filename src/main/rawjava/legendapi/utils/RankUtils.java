@@ -54,7 +54,6 @@ public class RankUtils {
     }
 
     public static void fancyNoPermissions(Rank r, CommandSender p) {
-        //return ChatUtils.getCustomMsg("Rank") + "Minimum rank required: " + ChatColor.YELLOW + r;
         new FancyMessage("Rank")
                     .color(ChatColor.GREEN)
                 .then(" " + ChatUtils.specialCharacters[1] + " ")
@@ -85,16 +84,12 @@ public class RankUtils {
                 return "Sell your soul to Legend Arena. (just kidding - only founders gets this rank (duh))";
 
             default:
-                return "Error - rank " + r + " was not recognized by howToGetRank()! (or it's the Member rank, in which case the plugin is drunk)";
+                return "Error - rank " + r + " was not recognized by howToGetRank()! (or it's the Member rank, in which case the plugin that is calling this function is drunk)";
         }
     }
 
     public static int getRankId(Player p) {
         return getRank(p).getInternalId();
-    }
-
-    public static boolean isTagged(Player p) {
-        return taggedRank.containsKey(p.getUniqueId());
     }
 
     public static int getDisplayRankId(Player p) {

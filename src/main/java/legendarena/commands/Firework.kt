@@ -17,7 +17,7 @@ class Firework : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(sender !is Player) {
-            sender.sendMessage("Sorry - you can only do this as a player :(")
+            sender.sendMessage("You can only use this command as a Player, sorry!")
             return true
         }
 
@@ -32,9 +32,7 @@ class Firework : CommandExecutor {
         }
 
         PluginUtils.shootFireworks(sender)
-        //sender.sendMessage("" + ChatColor.GREEN + "Woo, fireworks!\n \nJust FYI, if you don't see the particles, your resource pack may have them removed.")
         Message(MessageType.TITLE).append("" + ChatColor.GREEN + "Woo, fireworks!").send(sender)
-        Message(MessageType.SUBTITLE).append("" + ChatColor.YELLOW + "Just FYI, if you don't see particles, your resource pack may have them disabled.").send(sender)
         //3 second cooldown
         cooldown.put(sender.getUniqueId(), Cooldown(3.0))
         return true
