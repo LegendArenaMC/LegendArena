@@ -21,6 +21,10 @@ class SetupUtils(p: Plugin) {
   val pm = Bukkit.getPluginManager()
   val logger = Bukkit.getLogger()
 
+  def announceStatus(status: String): Unit = {
+
+  }
+
   def setupCommand(cmdName: String, cmd: CommandExecutor): Unit = {
     if(LegendAPI.debug)
       logger.log(Level.INFO, "DEBUG > Setting up command \"" + cmdName + "\"...")

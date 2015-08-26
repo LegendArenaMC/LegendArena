@@ -1,12 +1,10 @@
-/*
- * This plugin is copyright Legend Arena, 2014-current. See LICENSE.md for full license file.
- */
-
 package legendapi.utils;
 
 import org.bukkit.entity.Player;
 
-//TODO: Port to Scala
+/**
+ * Use this class to check if a player is a founder or developer.
+ */
 public class SpecialStaffListUtils {
 
     /**

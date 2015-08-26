@@ -22,23 +22,6 @@ public class ChatSystem {
     private static boolean allowShadowMute = true;
 
     /**
-     * Is the chat currently globally muted?
-     * @return The global mute status
-     */
-    public static boolean isChatMuted() {
-        return mute;
-    }
-
-    /**
-     * Set the global mute status
-     * @param set Should global mute be on or off?
-     */
-    public static void setGlobalMute(boolean set) {
-        mute = set;
-        new Message().append(ChatUtils.getCustomMsg("Chat") + "Chat has been " + (set ? "globally muted" : "un-globally muted") + "!").broadcast();
-    }
-
-    /**
      * Toggle if a certain staff member should see shadow mute notices or not.
      * @param p The staff member to toggle shadowmute notices on/off for
      */
@@ -70,36 +53,12 @@ public class ChatSystem {
         notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
     }
 
-    @SuppressWarnings("unused")
-    public static void toggleMute(Player p, String muter) {
-        //TODO: SQL mute
-
-        if(isShadowMuted(p)) return;
-
-        if(isMuted(p)) {
-            muteStatus.remove(p.getUniqueId());
-            notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
-            return;
-        }
-
-        muteStatus.put(p.getUniqueId(), false);
-        notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
-    }
-
     /**
      * Is the player shadow muted?
      * @return If shadow muted, returns true - elsewise false
      */
     public static boolean isShadowMuted(Player p) {
         return isShadowMuteAllowed() && muteStatus.containsKey(p.getUniqueId()) && muteStatus.get(p.getUniqueId());
-    }
-
-    /**
-     * Is a player muted?
-     * @return If muted, returns true - elsewise false
-     */
-    public static boolean isMuted(Player p) {
-        return muteStatus.containsKey(p.getUniqueId()) && !muteStatus.get(p.getUniqueId());
     }
 
     public static void allowShadowMute(boolean s) {

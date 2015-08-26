@@ -1,5 +1,7 @@
-main: legendarena.LegendArena
+main: legendarena.LegendArenaLoader
+#fuck you too bukkit
 depends: [LegendFrame]
+depend: [LegendFrame]
 name: LegendArena
 version: 1.3
 author: ThePixelDev

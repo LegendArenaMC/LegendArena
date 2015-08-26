@@ -2,7 +2,7 @@
  * This plugin is copyright Legend Arena, 2014-current. See LICENSE.md for full license file.
  */
 
-package legendapi.message;
+package legendapi.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

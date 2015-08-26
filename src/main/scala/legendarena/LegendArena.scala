@@ -4,18 +4,20 @@
 
 package legendarena
 
+import legendapi.log.{Level, BukLog}
 import legendapi.utils.SetupUtils
 import legendarena.command.Dev
-import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.Bukkit
 
-class LegendArena extends JavaPlugin {
+class LegendArena {
 
-  override def onEnable(): Unit = {
-    val setup = new SetupUtils(this)
+  def onEnable(): Unit = {
+    //noinspection JavaAccessorMethodCalledAsEmptyParen
+    val setup = new SetupUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
     setup.setupCommand("dev", new Dev())
   }
 
-  override def onDisable(): Unit = {
+  def onDisable(): Unit = {
     //TODO: Cleanup
   }
 

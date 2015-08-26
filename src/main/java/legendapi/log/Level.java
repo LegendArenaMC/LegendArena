@@ -8,6 +8,7 @@ public enum Level {
 
     ITALLBROKE,
     PIXELBROKEIT,
+    ERROR,
     SEVERE,
     WARNING,
     DEBUG,
