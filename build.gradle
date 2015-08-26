@@ -30,7 +30,7 @@ uploadArchives {
             repository(url: "http://mvn.thenamedev.net/content/repositories/snapshot") {
                 authentication(userName: "deploy", password: "$System.env.NEXUS_PASS")
             }
-            pom.version = "1.0-SNAPSHOT"
+            pom.version = "1.0-REFACTOR"
             pom.artifactId = "legendarena"
             pom.groupId = "net.thenamedev"
         }
