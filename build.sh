@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
-echo "Building `basename \`pwd\``..."
+echo "Building `basename \`pwd\`` on branch `git rev-parse --abbrev-ref HEAD`..."
+
+#set to abort build on any errors (non-zero exit codes)
 
 set -e
+
+if [ -f scripts/.notice ]; then
+    cat scripts/.notice
+    sleep 2
+fi
 
 #prefer system-wide installations of gradle than the gradle wrapper
 #(mainly to save the annoyance of downloading the gradle runtime if we don't need to)

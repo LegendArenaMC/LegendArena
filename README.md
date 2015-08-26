@@ -2,6 +2,8 @@
 
 The Legend Arena plugins are Bukkit plugins made for Legend Arena.
 
+DISCLAIMER: YOU ARE IN THE REFACTORING BRANCH - THIS CAN BE VERY UNSTABLE AND BREAK AT ANY MOMENT!
+
 # Current Plugin List
 
 * Legend Arena (you're here!)

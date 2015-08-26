@@ -1,51 +1,6 @@
-main: legendarena.LegendArenaLoader
+main: legendarena.LegendArena
+depends: [LegendFrame]
 name: LegendArena
-depend: ["LegendFrame"]
-version: 1.2
-website: "http://thenamedev.net/legendarena/"
+version: 1.3
 author: ThePixelDev
-authors: ["FOSS Contributors"]
-description: "§cLegend Arena plugin. §8Plugin source code: https://github.com/LegendArenaMC/LegendArena"
-commands:
-  firework:
-    description: Fireworks! Yaaay!
-    usage: "/firework"
-    aliases: ["fw"]
-  gadgets:
-    description: Gadgets control command.
-    usage: "/gadgets [player]"
-    aliases: ["gs"]
-  emeralds:
-    description: Front-end command for the Emeralds system.
-    usage: "/emeralds <suboption> [args]"
-  staff:
-    description: Various staff commands.
-    usage: "/staff <suboption> [args]"
-  help:
-    description: It looks like you want help. Do you want help with that? #yeah that was bad I'll show myself out
-    usage: "/help"
-  dev:
-    description: Developer utility command.
-    usage: "/dev [suboption] [args]"
-  chat:
-    description: Change your chat channel.
-    usage: "/chat <channel> [msg]"
-    aliases: ["c", "sc", "say"]
-  stafflist:
-    description: Shows currently online staff, and their ranks.
-    aliases: ["sl", "liststaff"]
-  motd:
-    description: MOTD utilities.
-  shadow:
-    description: Shadow utils.
-  autoban:
-    description: Banned!
-  #I should probably setup these as aliases of a punish command. eh, fuck it[tm]
-  ban:
-    description: Punish command - ban
-  kick:
-    description: Punish command - kick
-  warn:
-    description: Punish command - warn
-  mute:
-    description: Punish command - mute
+authors: [Various Contributors]
