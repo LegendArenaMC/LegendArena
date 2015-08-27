@@ -2,10 +2,11 @@
  * This plugin is copyright Legend Arena, 2014-current. See LICENSE.md for full license file.
  */
 
-package legendarena.commands.staff
+package legendarena.hub.menu
 
 import legendapi.exceptions.AreYouDrunkException
 import legendapi.fanciful.FancyMessage
+import legendapi.message.Message
 import legendapi.utils.*
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu
@@ -16,6 +17,7 @@ import legendarena.staffutils.VanishUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -26,15 +28,13 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
-//TODO: Move this out of the Commands package
-
 class Tag {
 
     private class TagGUI {
 
         public fun show(p: Player) {
             val inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Tag Selector")
-            inv.setItem(2, createItem("FOUNDER", 6))
+            inv.setItem(2, createItem("FOUNDER", 11))
             inv.setItem(3, createItem("DEV", 10))
             inv.setItem(4, createItem("ADMIN", 14))
             inv.setItem(5, createItem("MOD", 14, true))
@@ -71,12 +71,12 @@ class Tag {
         public fun setTag(p: Player, r: Rank?) {
             if(r == null) {
                 RankUtils.clearTag(p)
-                p.sendMessage("" + ChatColor.GREEN + "Cleared tag.")
+                Message().append("" + ChatColor.GREEN + "Cleared tag.").setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(p)
                 return
             }
             RankUtils.setTag(p, r)
             ScoreboardSystem.setRank(p, r)
-            p.sendMessage("" + ChatColor.GREEN + "Tagged yourself as a " + r.getNameColor() + r)
+            Message().append("" + ChatColor.GREEN + "Tagged yourself as a " + r.getNameColor() + r).setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(p)
         }
 
         EventHandler
@@ -152,6 +152,7 @@ class Tag {
                 } else if(itemName.equals("" + ChatColor.GREEN + "Back")) {
                     ev.getWhoClicked().closeInventory()
                     MainMenu().show(p)
+                    Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(p)
                 }
 
                 ev.setCancelled(true)

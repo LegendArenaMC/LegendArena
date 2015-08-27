@@ -1,11 +1,13 @@
 package legendarena.hub.menu
 
+import legendapi.message.Message
 import legendapi.utils.ChatUtils
 import legendapi.utils.MenuUtils
 import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -54,6 +56,7 @@ class MinigameMenu {
                     ev.setCancelled(true)
                     ev.getWhoClicked().closeInventory()
                     MainMenu().show(ev.getWhoClicked() as Player)
+                    Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
                 }
                 ev.setCancelled(true)
             } catch(ignore: Exception) {

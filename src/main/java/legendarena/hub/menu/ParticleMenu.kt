@@ -15,6 +15,7 @@ import legendarena.hub.particles.ParticleCore
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -66,30 +67,37 @@ class ParticleMenu {
                     select(ParticleCore.ParticleType.FIRE, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "End Particles") {
                     select(ParticleCore.ParticleType.ENDER, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "Enchant Particles") {
                     select(ParticleCore.ParticleType.ENCHANT, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "Redstone Particles") {
                     select(ParticleCore.ParticleType.REDSTONE, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "Critical Hit Particles") {
                     select(ParticleCore.ParticleType.CRIT, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "Heart Particles") {
                     select(ParticleCore.ParticleType.HEART, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 } else if(itemName == "" + ChatColor.GREEN + "Colorful Effect Particles") {
                     select(ParticleCore.ParticleType.COLOURFUL, ev.getWhoClicked() as Player)
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 }
 
                 else if(itemName == "" + ChatColor.GREEN + "No Particles") {
@@ -97,12 +105,14 @@ class ParticleMenu {
                     ParticleCore.clearParticles(ev.getWhoClicked().getUniqueId())
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
+                    Message().setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(ev.getWhoClicked() as Player)
                 }
 
                 else if(itemName == "" + ChatColor.GREEN + "Back") {
                     ev.getWhoClicked().closeInventory()
                     ev.setCancelled(true)
                     MainMenu().show(ev.getWhoClicked() as Player)
+                    Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
                 }
 
             } catch(ex: Exception) {

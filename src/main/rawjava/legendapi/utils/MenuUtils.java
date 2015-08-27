@@ -1,5 +1,6 @@
 package legendapi.utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
 import org.bukkit.inventory.ItemStack;
@@ -53,6 +54,14 @@ public class MenuUtils {
         im.setDisplayName(name);
         im.setLore(Arrays.asList(lores));
         i.setAmount(amount);
+        i.setItemMeta(im);
+        return i;
+    }
+
+    public static ItemStack createItem(Material material, String name, short damage) {
+        ItemStack i = new ItemStack(material, 1, damage);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(name);
         i.setItemMeta(im);
         return i;
     }

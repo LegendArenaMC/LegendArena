@@ -13,13 +13,17 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Deprecated
+/**
+ * Deprecated for the DoubleJump system instead.
+ */
 public class JumpPad {
 
     private static HashMap<UUID, Cooldown> cooldown = new HashMap<>();
 
     public static void jump(Player p) {
         p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1));
-        new Message().setSound(Sound.DIG_SNOW).send(p);
+        new Message().setSound(Sound.BAT_TAKEOFF).setPitch(1.0f, 1.5f).send(p);
     }
 
     public static class JumpPadListener implements Listener {

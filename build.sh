@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Building `basename \`pwd\``..."
+echo "Building `basename \`pwd\`` on branch `git rev-parse --abbrev-ref HEAD`..."
 
 set -e
 

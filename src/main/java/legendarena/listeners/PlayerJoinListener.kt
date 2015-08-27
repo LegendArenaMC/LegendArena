@@ -49,11 +49,6 @@ public class PlayerJoinListener : Listener {
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
-        if(ev.getPlayer().getUniqueId().toString().equals("e5a2912f-c6a4-4182-b896-78567f1b404c")) {
-            if(Bukkit.getPlayer("ThePixelDev") != null)
-            Message().append("" + ChatColor.RED + "WARNING! " + ChatColor.YELLOW + "British Nub has joined!")
-        }
-
         ScoreboardSystem.setRank(ev.getPlayer(), RankUtils.getDisplayRank(ev.getPlayer()))
 
         if(ConfigUtils.config.get("enable.lobbyServer") as Boolean) {

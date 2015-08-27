@@ -17,22 +17,21 @@ import org.bukkit.scoreboard.Team;
 
 public class ScoreboardSystem {
 
-    private static ScoreboardManager sbm = Bukkit.getScoreboardManager();
+    protected static ScoreboardManager sbm = Bukkit.getScoreboardManager();
     public final static Scoreboard sb = sbm.getNewScoreboard();
     private static Team founder, dev, admin,
             mod, helper, vip,
-            memberplus, member, spectator;
+            memberplus, member;
 
     private static String[] colorCodes = {
-            "§d",
+            "§3",
             "§5",
             "§4",
             "§c",
             "§a",
             "§6",
-            "§9",
-            "§7",
-            "§8"
+            "§b",
+            "§7"
     };
 
     private static boolean init = false;
@@ -48,7 +47,6 @@ public class ScoreboardSystem {
         vip = sb.getTeam("VIP");
         memberplus = sb.getTeam("MemberPlus");
         member = sb.getTeam("Member");
-        spectator = sb.getTeam("Spectator");
 
         if(founder == null)
             founder = sb.registerNewTeam("Founder");
@@ -90,11 +88,6 @@ public class ScoreboardSystem {
 
         member.setPrefix(colorCodes[7]);
 
-        if(spectator == null)
-            spectator = sb.registerNewTeam("Spectator");
-
-        spectator.setPrefix(colorCodes[8]);
-
         init = true;
     }
 
@@ -126,20 +119,6 @@ public class ScoreboardSystem {
                 member.addEntry(p.getName());
                 break;
         }
-    }
-
-    public static void setSpectator(Player p) {
-        clearTeam(p);
-        spectator.addEntry(p.getName());
-    }
-
-    public static void removeSpectator(Player p) {
-        spectator.removeEntry(p.getName());
-        setRank(p, RankUtils.getDisplayRank(p));
-    }
-
-    public static boolean isSpectator(Player p) {
-        return spectator.hasEntry(p.getName());
     }
 
     public static void clearTeam(Player p) {

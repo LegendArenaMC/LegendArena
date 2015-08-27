@@ -85,13 +85,13 @@ public enum class Rank {
      */
     public fun getNameColor(): ChatColor {
         when(this) {
-            Rank.FOUNDER -> return ChatColor.LIGHT_PURPLE
+            Rank.FOUNDER -> return ChatColor.DARK_AQUA
             Rank.DEV -> return ChatColor.DARK_PURPLE
             Rank.ADMIN -> return ChatColor.DARK_RED
             Rank.MOD -> return ChatColor.RED
             Rank.HELPER -> return ChatColor.GREEN
             Rank.VIP -> return ChatColor.GOLD
-            Rank.MEMBERPLUS -> return ChatColor.BLUE
+            Rank.MEMBERPLUS -> return ChatColor.AQUA
 
             else -> return ChatColor.GRAY
         }

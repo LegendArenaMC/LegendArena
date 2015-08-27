@@ -21,7 +21,8 @@ class Message {
     private var fadeOut = 5
 
     private var sound: Sound? = null
-    private var pitch = 1f
+    private var pitch1 = 1f
+    private var pitch2 = 1f
 
     private var builder: StringBuilder? = null
 
@@ -65,8 +66,9 @@ class Message {
         return this
     }
 
-    public fun setPitch(p: Float): Message {
-        pitch = p
+    public fun setPitch(p1: Float, p2: Float): Message {
+        pitch1 = p1
+        pitch2 = p2
         return this
     }
 
@@ -75,7 +77,7 @@ class Message {
 
         for(p1 in p) {
             if(sound != null)
-                p1.playSound(p1.getLocation(), sound, pitch, pitch)
+                p1.playSound(p1.getLocation(), sound, pitch1, pitch2)
             if(msg != "")
                 _send(p1)
         }
@@ -83,7 +85,7 @@ class Message {
 
     public fun send(p: CommandSender) {
         if(sound != null)
-            (p as Player).playSound(p.getLocation(), sound, pitch, pitch)
+            (p as Player).playSound(p.getLocation(), sound, pitch1, pitch2)
         _send(p as Player)
     }
 

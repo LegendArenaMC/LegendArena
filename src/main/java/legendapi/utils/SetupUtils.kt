@@ -27,6 +27,15 @@ public class SetupUtils {
         this.log = BukLog(p)
     }
 
+    public constructor(p: Plugin, quiet: Boolean) {
+        //someone remind me to fix this monstrocity of a plugin loading header message.
+        //Message().append(java.lang.String.format("%s-•- [%s%s%s] -•-", ChatColor.LIGHT_PURPLE, ChatColor.LIGHT_PURPLE, "Plugin: " + p.getDescription().getName(), ChatColor.LIGHT_PURPLE)).broadcast(Rank.DEV)
+        if(!quiet)
+            Message().append(ChatUtils.getCustomMsg("SetupUtils") + "Loading " + ChatColor.YELLOW + p.getDescription().getName())
+        this.p = p
+        this.log = BukLog(p)
+    }
+
     /**
      * Announce the init status
      * @param msg The message to announce
@@ -69,6 +78,14 @@ public class SetupUtils {
      */
     public fun registerNonAsyncTimer(run: Runnable, time: Long) {
         Bukkit.getScheduler().runTaskTimer(p, run, time, time)
+    }
+    /**
+     * Register a non-async timer
+     * @param run The runnable to register
+     * @param time The amount of ticks between each run
+     */
+    public fun registerNonAsyncTimer(run: Runnable, time1: Long, time2: Long) {
+        Bukkit.getScheduler().runTaskTimer(p, run, time1, time2)
     }
 
     /**

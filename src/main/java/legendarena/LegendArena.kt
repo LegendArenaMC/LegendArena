@@ -8,6 +8,7 @@ import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
+import legendarena.hub.menu.Tag
 import legendarena.hub.particles.ParticleCore
 import legendarena.listeners.*
 import legendarena.listeners.menu.*
@@ -20,7 +21,7 @@ class LegendArena : KotlinUtils() {
 
     @Deprecated
     /**
-     * Use the config key "enable.devserver" instead.
+     * Use the config key "enable.debug" instead.
      */
     public final var devMode: Boolean = if(ConfigUtils.config.get("enable.devserver") == null) false else ConfigUtils.config.get("enable.devserver") as Boolean
 

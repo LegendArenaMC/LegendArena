@@ -47,12 +47,14 @@ public class MOTDUtils {
             "And it went oh-woaah-ohhhhh...", //reference to "Tristam - I Remember"
             "We are [NVIDIA] Titans", //reference to "Razihel & Aero Chord - Titans" (and also NVIDIA Titan graphic cards)
             "I hate you. I love you.", //reference to "Aero Chord - Saiko" (also this song is strange as fuck)
+            "Can you see me? I can't see you", //ah Vinesauce. 10/10 ( reference: https://www.youtube.com/watch?v=i9-9ZahBR_4 )
             "I'm giving up on leaving you...", //reference to "Savoy, Sound Remedy & Jojee - Leaving You" (also how many artists working on the same song is the world record? I wonder...)
             "Casual noob!" //I regret this. ( oh right. reference. https://www.youtube.com/watch?v=Kzv0FVKcZ8A )
     };
 
     private static final String[] randomList = {
             "Have you tried turning it off and on again?", //reference to IT Crowd (and half of IT)
+            "Vinesauce-chan!", //nightcore. 10/10
             "#WhatDelay", //reference to Beam having a 3-sec delay [maybe even lower?] (btw: https://beam.pro/ is the URL for beam)
             "Kurz Gesagt!", //reference to the YouTube channel with that name (which frankly is amazing)
             "Why circle pizzas? Why not square pizzas?", //#BlameJaden
