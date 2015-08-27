@@ -4,8 +4,8 @@
 
 package legendarena.listeners.menu
 
-import legendapi.message.Message
-import legendapi.utils.ChatUtils
+import legendarena.api.message.Message
+import legendarena.api.utils.ChatUtils
 import legendarena.hub.menu.Tag
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu

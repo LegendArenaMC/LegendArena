@@ -1,10 +1,10 @@
 package legendarena.listeners
 
-import legendapi.message.Message
-import legendapi.message.MessageType
-import legendapi.utils.Cooldown
-import legendapi.utils.MenuUtils
-import legendapi.utils.VersionUtils
+import legendarena.api.message.Message
+import legendarena.api.message.MessageType
+import legendarena.api.utils.Cooldown
+import legendarena.api.utils.MenuUtils
+import legendarena.api.utils.VersionUtils
 import legendarena.LegendArena
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu

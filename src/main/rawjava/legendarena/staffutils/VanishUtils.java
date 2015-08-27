@@ -4,9 +4,9 @@
 
 package legendarena.staffutils;
 
-import legendapi.message.Message;
-import legendapi.utils.ChatUtils;
-import legendapi.utils.Rank;
+import legendarena.api.message.Message;
+import legendarena.api.utils.ChatUtils;
+import legendarena.api.utils.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

@@ -1,6 +1,6 @@
 package legendarena.hub.particles;
 
-import legendapi.particles.ParticleEffect;
+import legendarena.api.particles.ParticleEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

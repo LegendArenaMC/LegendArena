@@ -1,6 +1,6 @@
 package legendarena;
 
-import legendapi.utils.KotlinLoaderTools;
+import legendarena.api.utils.KotlinLoaderTools;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**

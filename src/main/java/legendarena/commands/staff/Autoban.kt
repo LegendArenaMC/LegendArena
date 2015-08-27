@@ -4,11 +4,11 @@
 
 package legendarena.commands.staff
 
-import legendapi.fanciful.FancyMessage
-import legendapi.utils.ChatUtils
-import legendapi.utils.MenuUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.MenuUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.command.Command

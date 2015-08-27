@@ -1,11 +1,11 @@
 package legendarena.commands.staff
 
-import legendapi.fanciful.FancyMessage
-import legendapi.message.Message
-import legendapi.message.MessageType
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.message.Message
+import legendarena.api.message.MessageType
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import legendarena.chat.Channel
 import legendarena.chat.ChatSystem
 import legendarena.chat.ChatSystemUtils

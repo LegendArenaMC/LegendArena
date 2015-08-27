@@ -1,6 +1,6 @@
 package legendarena
 
-import legendapi.utils.*
+import legendarena.api.utils.*
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*

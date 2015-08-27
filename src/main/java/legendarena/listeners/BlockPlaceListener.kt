@@ -4,7 +4,7 @@
 
 package legendarena.listeners
 
-import legendapi.utils.Rank
+import legendarena.api.utils.Rank
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.EventHandler

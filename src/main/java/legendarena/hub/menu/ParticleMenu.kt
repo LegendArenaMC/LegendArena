@@ -4,12 +4,12 @@
 
 package legendarena.hub.menu
 
-import legendapi.log.BukLog
-import legendapi.message.Message
-import legendapi.utils.ChatUtils
-import legendapi.utils.MenuUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.log.BukLog
+import legendarena.api.message.Message
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.MenuUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import legendarena.hub.HubWarper
 import legendarena.hub.particles.ParticleCore
 import org.bukkit.Bukkit

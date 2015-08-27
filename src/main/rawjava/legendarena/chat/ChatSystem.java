@@ -1,9 +1,9 @@
 package legendarena.chat;
 
-import legendapi.log.BukLog;
-import legendapi.log.Level;
-import legendapi.message.Message;
-import legendapi.utils.*;
+import legendarena.api.log.BukLog;
+import legendarena.api.log.Level;
+import legendarena.api.message.Message;
+import legendarena.api.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -186,11 +186,15 @@ public class ChatSystem {
     }
 
     /**
-     * Sends a staff notice to all online staff.
+     * Sends a staff notice to all online staff.<br><br>
+     *
+     * <strong>Use <code>Notification.alert()</code> instead.</strong>
+     *
      * @param msg The notice to send
      */
+    @Deprecated
     public static void notice(String msg) {
-        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg).broadcast(Rank.MOD);
+        Notification.alert(msg);
     }
 
     /**

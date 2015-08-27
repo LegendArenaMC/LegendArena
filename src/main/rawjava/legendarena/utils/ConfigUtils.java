@@ -11,6 +11,6 @@ import org.bukkit.Bukkit;
  */
 public class ConfigUtils {
 
-    public static final legendapi.utils.ConfigUtils config = new legendapi.utils.ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"));
+    public static final legendarena.api.utils.ConfigUtils config = new legendarena.api.utils.ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"));
 
 }

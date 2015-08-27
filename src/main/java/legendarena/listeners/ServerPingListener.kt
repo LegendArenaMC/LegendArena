@@ -1,7 +1,7 @@
 package legendarena.listeners
 
-import legendapi.message.Message
-import legendapi.utils.ChatUtils
+import legendarena.api.message.Message
+import legendarena.api.utils.ChatUtils
 import legendarena.motd.MOTDUtils
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler

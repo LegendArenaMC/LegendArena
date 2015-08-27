@@ -1,11 +1,11 @@
 package legendarena.commands.staff
 
-import legendapi.emeralds.EmeraldsCore
-import legendapi.fanciful.FancyMessage
-import legendapi.log.BukLog
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.emeralds.EmeraldsCore
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.log.BukLog
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import legendarena.LegendArena
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

@@ -1,7 +1,7 @@
 package legendarena.chat
 
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 

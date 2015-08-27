@@ -1,6 +1,6 @@
 package legendarena.commands.staff
 
-import legendapi.utils.*
+import legendarena.api.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.motd.ListType
 import legendarena.motd.MOTDUtils

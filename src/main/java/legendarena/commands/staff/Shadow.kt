@@ -1,9 +1,9 @@
 package legendarena.commands.staff
 
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
-import legendapi.utils.StringUtils
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
+import legendarena.api.utils.StringUtils
 import legendarena.chat.ChatSystem
 import legendarena.chat.ShadowMuteNotAllowedException
 import org.bukkit.Bukkit

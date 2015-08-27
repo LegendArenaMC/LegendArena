@@ -1,8 +1,8 @@
 package legendarena.commands.staff
 
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import legendarena.hub.HubWarper
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

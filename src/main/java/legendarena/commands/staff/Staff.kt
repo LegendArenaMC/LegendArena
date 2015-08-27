@@ -1,9 +1,9 @@
 package legendarena.commands.staff
 
-import legendapi.emeralds.EmeraldsCore
-import legendapi.fanciful.FancyMessage
-import legendapi.message.Message
-import legendapi.utils.*
+import legendarena.api.emeralds.EmeraldsCore
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.message.Message
+import legendarena.api.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.hub.HubWarper
 import legendarena.staffutils.VanishType

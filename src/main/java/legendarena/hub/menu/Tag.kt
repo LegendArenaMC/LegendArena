@@ -4,10 +4,10 @@
 
 package legendarena.hub.menu
 
-import legendapi.exceptions.AreYouDrunkException
-import legendapi.fanciful.FancyMessage
-import legendapi.message.Message
-import legendapi.utils.*
+import legendarena.api.exceptions.AreYouDrunkException
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.message.Message
+import legendarena.api.utils.*
 import legendarena.hub.HubWarper
 import legendarena.hub.menu.MainMenu
 import legendarena.hub.menu.MinigameMenu

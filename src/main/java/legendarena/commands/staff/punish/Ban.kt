@@ -4,13 +4,13 @@
 
 package legendarena.commands.staff.punish
 
-import legendapi.fanciful.FancyMessage
-import legendapi.message.Message
-import legendapi.utils.ChatUtils
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.message.Message
+import legendarena.api.utils.ChatUtils
 
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
-import legendapi.utils.StaffPlayer
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
+import legendarena.api.utils.StaffPlayer
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command

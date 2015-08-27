@@ -1,14 +1,9 @@
 package legendarena.hub;
 
-import legendapi.utils.MenuUtils;
-import legendapi.utils.Rank;
-import org.bukkit.Bukkit;
+import legendarena.api.utils.MenuUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+
 import java.util.*;
 
 public class HubWarper {

@@ -1,8 +1,7 @@
 package legendarena.hub;
 
-import legendapi.message.Message;
-import legendapi.utils.Cooldown;
-import org.bukkit.Bukkit;
+import legendarena.api.message.Message;
+import legendarena.api.utils.Cooldown;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

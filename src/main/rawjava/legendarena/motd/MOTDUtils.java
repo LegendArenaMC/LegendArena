@@ -1,9 +1,8 @@
 package legendarena.motd;
 
-import legendapi.utils.CalendarUtils;
-import legendapi.utils.Months;
+import legendarena.api.utils.CalendarUtils;
+import legendarena.api.utils.Months;
 import legendarena.utils.ConfigUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;

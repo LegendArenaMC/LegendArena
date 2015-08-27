@@ -1,8 +1,8 @@
 package legendarena.hub.menu
 
-import legendapi.message.Message
-import legendapi.utils.ChatUtils
-import legendapi.utils.MenuUtils
+import legendarena.api.message.Message
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.MenuUtils
 import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

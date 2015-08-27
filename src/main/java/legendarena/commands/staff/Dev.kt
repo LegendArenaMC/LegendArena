@@ -1,8 +1,8 @@
 package legendarena.commands.staff
 
-import legendapi.emeralds.EmeraldsCore
-import legendapi.message.Message
-import legendapi.utils.*
+import legendarena.api.emeralds.EmeraldsCore
+import legendarena.api.message.Message
+import legendarena.api.utils.*
 import legendarena.hub.JumpPad
 import legendarena.scoreboard.ScoreboardSystem
 import legendarena.staffutils.VanishType
@@ -36,7 +36,7 @@ class Dev : CommandExecutor {
             msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
             msg.append(ChatUtils.getFormattedHeader("API/Library Versions") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("Kotlin")) + "\n")
-            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + " (backend ID: " + VersionUtils.getAPIVersionInt() + ")\n")
+            msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + " (backend ID: " + VersionUtils.getAPIVersionId() + ")\n")
 
             msg.send(sender)
             return true

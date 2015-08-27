@@ -1,9 +1,9 @@
 package legendarena.commands
 
-import legendapi.fanciful.FancyMessage
-import legendapi.utils.ChatUtils
-import legendapi.utils.Rank
-import legendapi.utils.StringUtils
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.StringUtils
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

@@ -4,8 +4,8 @@
 
 package legendarena.hub.menu
 
-import legendapi.utils.ChatUtils
-import legendapi.utils.MenuUtils
+import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.MenuUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material

@@ -4,12 +4,9 @@
 
 package legendarena.scoreboard;
 
-import legendapi.utils.Rank;
-import legendapi.utils.RankUtils;
-import legendarena.staffutils.VanishType;
-import legendarena.staffutils.VanishUtils;
+import legendarena.api.utils.Rank;
+import legendarena.api.utils.RankUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;

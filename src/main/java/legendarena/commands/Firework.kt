@@ -1,9 +1,9 @@
 package legendarena.commands
 
-import legendapi.emeralds.EmeraldsCore
-import legendapi.message.Message
-import legendapi.message.MessageType
-import legendapi.utils.*
+import legendarena.api.emeralds.EmeraldsCore
+import legendarena.api.message.Message
+import legendarena.api.message.MessageType
+import legendarena.api.utils.*
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

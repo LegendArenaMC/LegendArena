@@ -1,11 +1,12 @@
 package legendarena.listeners
 
-import legendapi.fanciful.FancyMessage
-import legendapi.message.Message
-import legendapi.utils.MenuUtils
-import legendapi.utils.Rank
-import legendapi.utils.RankUtils
+import legendarena.api.fanciful.FancyMessage
+import legendarena.api.message.Message
+import legendarena.api.utils.MenuUtils
+import legendarena.api.utils.Rank
+import legendarena.api.utils.RankUtils
 import legendarena.chat.ChatSystem
+import legendarena.chat.Notification
 import legendarena.hub.HubWarper
 import legendarena.scoreboard.ScoreboardSystem
 import legendarena.staffutils.VanishUtils
@@ -45,7 +46,7 @@ public class PlayerJoinListener : Listener {
                         .color(ChatColor.YELLOW)
                     .send(ev.getPlayer())
         if(ChatSystem.isShadowMuted(ev.getPlayer()))
-            ChatSystem.notice("Player " + ChatColor.YELLOW + ev.getPlayer().getName() + ChatColor.DARK_PURPLE + " is currently shadow muted.")
+            Notification.alert("Player " + ChatColor.YELLOW + ev.getPlayer().getName() + ChatColor.DARK_PURPLE + " is currently shadow muted.")
 
         VanishUtils.hideVanishedPlayersFrom(ev.getPlayer());
 
