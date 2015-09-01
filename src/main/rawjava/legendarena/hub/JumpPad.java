@@ -34,7 +34,7 @@ public class JumpPad {
                 if(!cooldown.get(ev.getPlayer().getUniqueId()).done())
                     return;
             if(ev.getPlayer().getLocation().getBlock().getType() == Material.IRON_PLATE && ev.getPlayer().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.REDSTONE_BLOCK) {
-                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.3)); //I hate to be the person who destroys fun, but it has to be this way ;-; (tl;dr damn you race conditions)
+                cooldown.put(ev.getPlayer().getUniqueId(), new Cooldown(0.6)); //I hate to be the person who destroys fun, but it has to be this way ;-; (tl;dr damn you race conditions)
                 //new Thread() is to run Thread.sleep() without interrupting the rest of the server
                 new Thread(new Runnable() {
                     public void run() {

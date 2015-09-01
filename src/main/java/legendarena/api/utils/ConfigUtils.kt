@@ -22,12 +22,13 @@ import java.util.HashMap
  */
 public class ConfigUtils {
 
-    internal var config: FileConfiguration? = null
-    internal var configFile: File? = null
-    internal var defaults = HashMap<String, Any>()
-    internal var p: Plugin? = null
-    internal var log: BukLog? = null
-    internal var confVersion = 1
+    private var config: FileConfiguration? = null
+    private var configFile: File? = null
+    private var defaults = HashMap<String, Any>()
+    private var p: Plugin? = null
+    private var log: BukLog? = null
+    private var confVersion = 1
+    private var shutup = false
 
     public constructor(p: Plugin) {
         this.log = BukLog(p)
@@ -42,10 +43,52 @@ public class ConfigUtils {
         }
     }
 
+    public constructor(p: Plugin, fileName: String) {
+        this.log = BukLog(p)
+
+        configFile = File(p.getDataFolder().getAbsolutePath(), fileName + ".yml")
+
+        this.p = p
+        try {
+            config = YamlConfiguration.loadConfiguration(configFile)
+        } catch(ex: Exception) {
+            resetConfig()
+        }
+    }
+
+    public constructor(p: Plugin, f: File) {
+        this.log = BukLog(p)
+
+        configFile = f
+
+        this.p = p
+        try {
+            config = YamlConfiguration.loadConfiguration(configFile)
+        } catch(ex: Exception) {
+            resetConfig()
+        }
+    }
+
+    public constructor(p: Plugin, f: File, shutup: Boolean) {
+        this.shutup = shutup
+        this.log = BukLog(p)
+
+        configFile = f
+
+        this.p = p
+        try {
+            config = YamlConfiguration.loadConfiguration(configFile)
+        } catch(ex: Exception) {
+            resetConfig()
+        }
+    }
+
     public fun saveConfig() {
         try {
             config!!.save(configFile)
         } catch(ex: IOException) {
+            if(shutup)
+                return
             Bukkit.getLogger().info(" ")
             BukLog(p!!).log(Level.INTERNALERROR, "[[[ BEGIN ERROR SPAM ]]]")
             Bukkit.getLogger().info(" ")
@@ -81,10 +124,12 @@ public class ConfigUtils {
     }
 
     public fun genDefaults() {
-        log!!.log(Level.DEBUG, "Generating config from defaults...")
+        if(!shutup)
+            log!!.log(Level.DEBUG, "Generating config from defaults...")
         for(i in defaults.keySet())
             set(i, defaults.get(i))
-        log!!.log(Level.DEBUG, "Config generated.")
+        if(!shutup)
+            log!!.log(Level.DEBUG, "Config generated.")
         saveConfig()
     }
 
@@ -102,6 +147,8 @@ public class ConfigUtils {
             p!!.getDataFolder().mkdirs()
             configFile!!.createNewFile()
         } catch(ex: IOException) {
+            if(shutup)
+                throw Exception("Could not reset configuration!")
             BukLog(p!!).dumpError(ex, "resetting configuration for plugin " + p!!.getDescription().getName())
             throw Exception("Could not reset configuration!")
         }

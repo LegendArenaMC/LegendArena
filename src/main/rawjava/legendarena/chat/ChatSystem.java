@@ -62,12 +62,12 @@ public class ChatSystem {
 
         if(isShadowMuted(p)) {
             muteStatus.remove(p.getUniqueId());
-            notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
             return;
         }
 
         muteStatus.put(p.getUniqueId(), true);
-        notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
     }
 
     public static void toggleMute(Player p, String muter) {
@@ -75,12 +75,12 @@ public class ChatSystem {
 
         if(isMuted(p)) {
             muteStatus.remove(p.getUniqueId());
-            notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
             return;
         }
 
         muteStatus.put(p.getUniqueId(), false);
-        notice("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
     }
 
     /**
@@ -101,7 +101,7 @@ public class ChatSystem {
 
     public static void allowShadowMute(boolean s) {
         allowShadowMute = s;
-        notice("Shadow mutes have been " + (s ? "re-allowed" : "disallowed") + "!");
+        Notification.alert("Shadow mutes have been " + (s ? "re-allowed" : "disallowed") + "!");
     }
 
     public static boolean isShadowMuteAllowed() {

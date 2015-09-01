@@ -56,6 +56,7 @@ class LegendArena : KotlinUtils() {
         setup.announceStatus("Setting up punish commands...")
 
         setup.registerCommand(Ban(), "ban")
+        setup.registerCommand(Report(), "report")
 
         setup.announceStatus("Setting up timers...")
 
@@ -104,8 +105,6 @@ class LegendArena : KotlinUtils() {
         config.setConfigVersion(configVer)
         config.addDefault("debug", true)
         config.addDefault("enable.lobbyServer", true)
-        config.addDefault("enable.staffHub", true)
-        config.addDefault("enable.warp", true)
         config.addDefault("hub.hubworld", "world")
         config.addDefault("emeralds.storage", "sqlite")
         config.addDefault("emeralds.table", "emeralds")
@@ -114,10 +113,6 @@ class LegendArena : KotlinUtils() {
         config.addDefault("emeralds.mysql.database", "emeralds")
         config.addDefault("emeralds.sqlite.file", "emeralds.db")
         config.addDefault("enable.devserver", false)
-        var founders = ArrayList<String>()
-        founders.add("ThePixelDev")
-        founders.add("ZRaptor22")
-        config.addDefault("founders", founders)
         config.genIfDoesNotExist("configVersion")
     }
 

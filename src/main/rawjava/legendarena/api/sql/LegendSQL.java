@@ -89,6 +89,7 @@ public class LegendSQL extends SQLOperations {
         else {
             if(!databaseFile.exists()) {
                 try {
+                    //noinspection ResultOfMethodCallIgnored
                     databaseFile.createNewFile();
                 } catch(IOException ex) {
                     ex.printStackTrace();
@@ -121,6 +122,7 @@ public class LegendSQL extends SQLOperations {
      * @param query SQL query to run
      * @return Whether or not a result has been found in the query.
      */
+    @SuppressWarnings("unused")
     public boolean existanceQuery(String query) throws SQLException {
         this.refreshConnection();
         return super.sqlQuery(query, this.connection).next();

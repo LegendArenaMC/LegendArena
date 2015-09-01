@@ -6,7 +6,6 @@ import legendarena.api.message.Message
 import legendarena.api.utils.*
 import legendarena.chat.ChatSystem
 import legendarena.hub.HubWarper
-import legendarena.staffutils.VanishType
 import legendarena.staffutils.VanishUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

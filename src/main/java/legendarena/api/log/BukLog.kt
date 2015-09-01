@@ -7,6 +7,7 @@ package legendarena.api.log
 import legendarena.api.log.Level
 import legendarena.api.utils.StringUtils
 import legendarena.LegendArena
+import legendarena.chat.Notification
 import org.bukkit.Bukkit
 import org.bukkit.plugin.Plugin
 import java.util.logging.Logger
@@ -16,7 +17,7 @@ import java.util.logging.Logger
  *
  * Don't ask how the fuck I came up with it. Because even I don't know how.
  */
-class BukLog {
+public class BukLog {
 
     internal var p: Plugin? = null
     internal var l: Logger? = null
@@ -54,23 +55,25 @@ class BukLog {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
             log(Level.PIXELBROKEIT, "An error was encountered while " + reason + "! (see above for stacktrace)")
-        } else {
+            Notification.alertDevs("An error was encountered while " + reason + ": " + ex.getMessage())
+        } else
             log(Level.INTERNALERROR, "An error was encountered while " + reason + "! (\"" + ex.getMessage() + "\")")
-        }
+
     }
 
     /**
-     * Dump an error into the console, with no "An error was occured while {x}" addition.
+     * Dump an error into the console, with no "An error was occured while" before the reason message.
      *
-     * Example log: "Exception occured while trying to give diamonds to ThePixelDev! (NullPointerException {...})"
+     * Example log: "Could not give diamonds to Pixel! (NullPointerException {...})"
      */
     fun dumpRawError(ex: Throwable, reason: String) {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
             log(Level.PIXELBROKEIT, reason + " (see above for stacktrace)")
-        } else {
+            Notification.alertDevs(reason + ": " + ex.getMessage())
+        } else
             log(Level.INTERNALERROR, reason + " (\"" + ex.getMessage() + "\")")
-        }
+
     }
 
 }

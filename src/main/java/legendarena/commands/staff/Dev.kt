@@ -2,10 +2,10 @@ package legendarena.commands.staff
 
 import legendarena.api.emeralds.EmeraldsCore
 import legendarena.api.message.Message
+import legendarena.api.user.User
 import legendarena.api.utils.*
 import legendarena.hub.JumpPad
 import legendarena.scoreboard.ScoreboardSystem
-import legendarena.staffutils.VanishType
 import legendarena.staffutils.VanishUtils
 import org.apache.commons.io.FileUtils
 import org.bukkit.ChatColor
@@ -52,6 +52,9 @@ class Dev : CommandExecutor {
         } else if(args[0].equals("cooldown")) {
             var c = Cooldown(999.0)
             sender.sendMessage(c.getTimeRemaining())
+            return true
+        } else if(args[0].equals("reporttest")) {
+            User(sender as Player).report("Test report via /dev command")
             return true
         }
 

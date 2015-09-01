@@ -1,20 +1,30 @@
-# [Legend Arena](http://thenamedev.net/legendarena/) [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena)
+# Read Me First
+
+The plugins are not being updated anymore. Due to lack of time, I cannot carry on developing the plugin anymore.
+
+If you wish to pick this up, feel free to. However, I will be disassociating myself with Legend Arena, and the plugin will have one final release (1.3).
+
+I'm sorry. -Pixel
+
+# Old Readme
+
+## [Legend Arena](http://thenamedev.net/legendarena/) [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena)
 
 The Legend Arena plugins are Bukkit plugins made for Legend Arena.
 
-# Current Plugin List
+## Current Plugin List
 
 * Legend Arena (you're here!)
 * [Never Have I Ever](https://github.com/LegendArenaMC/NeverHaveIEver)
 
-## License
+### License
 
 The entire Legend Arena plugin source code is licensed under the TheNameDev Plugin License. Any and all usage of this plugin
 must comply with said license.
 
 A copy of said license can be found in the [LICENSE.md](https://github.com/LegendArenaMC/LegendArena/blob/dev/LICENSE.md) file.
 
-## Building
+### Building
 
 ```
 ./build.sh

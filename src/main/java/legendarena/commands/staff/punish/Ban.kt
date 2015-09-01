@@ -40,7 +40,7 @@ class Ban : CommandExecutor {
     public fun run(p: String, staff: StaffPlayer, reason: String) {
         var target = Bukkit.getPlayer(p)
         if(target != null)
-            target.kickPlayer(ChatUtils.getCustomMsg("Punish") + "You were banned by " + staff.getFormattedName() + ChatColor.BLUE + " for " + reason)
+            target.kickPlayer(ChatUtils.getCustomMsg("Punish") + "You were banned by " + staff.getFormattedName() + ChatColor.GREEN + " for " + reason)
 
         var broadcastMsg = FancyMessage(ChatUtils.getCustomMsg("Punish"))
                 .then("Player ")

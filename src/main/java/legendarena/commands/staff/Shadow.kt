@@ -45,8 +45,8 @@ class Shadow : CommandExecutor {
             }
 
         } else if(StringUtils.toLower(args[0]).equals("ignore")) {
-            var e = ChatSystem.toggleShadowMuteNotice(sender as Player)
-            if(e)
+            var ignored = ChatSystem.toggleShadowMuteNotice(sender as Player)
+            if(ignored)
                 sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "Now ignoring shadow mutes.")
             else
                 sender.sendMessage(ChatUtils.getCustomMsg("Chat System") + "No longer ignoring shadow mutes.")

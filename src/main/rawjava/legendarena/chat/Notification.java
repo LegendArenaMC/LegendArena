@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 public class Notification {
 
     public static void alert(String msg) {
-        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg).broadcast(Rank.MOD);
+        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.RED + msg).broadcast(Rank.MOD);
     }
 
     public static void alertDevs(String msg) {
@@ -21,7 +21,7 @@ public class Notification {
     }
 
     public static void alertSingle(Player p, String msg) {
-        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.DARK_PURPLE + msg).send(p);
+        new Message().append(ChatUtils.getCustomMsg("Notice") + ChatColor.RED + msg).send(p);
     }
 
 }

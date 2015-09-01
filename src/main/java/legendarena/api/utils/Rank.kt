@@ -4,6 +4,7 @@
 
 package legendarena.api.utils
 
+import legendarena.api.user.User
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
@@ -56,7 +57,11 @@ public enum class Rank {
     /**
      * Default user rank. This is only here as a catch-all, really. Not much else use.
      */
-    MEMBER("", 0);
+    MEMBER("", 0),
+    /**
+     * Removes ALL permissions. See the MEMBER rank for the actual default rank.
+     */
+    NOOB("", -1);
 
     private var permission = ""
     private var internalId = 0
@@ -69,12 +74,22 @@ public enum class Rank {
     }
 
     public fun isRanked(p: CommandSender): Boolean {
-        if(p is ConsoleCommandSender) return true
+        if(p !is Player) {
+            if(p is ConsoleCommandSender)
+                return true
+            return false
+        }
 
         when(this) {
+            Rank.NOOB -> {
+                var u = User(p)
+                if(u.isNoob())
+                    return true
+                return false
+            }
             Rank.MEMBER -> return true
-            Rank.DEV -> return SpecialStaffListUtils.isDeveloper(p as Player)
-            Rank.FOUNDER -> return SpecialStaffListUtils.isFounder(p as Player)
+            Rank.DEV -> return SpecialStaffListUtils.isDeveloper(p)
+            Rank.FOUNDER -> return SpecialStaffListUtils.isFounder(p)
 
             else -> return p.hasPermission(permission)
         }

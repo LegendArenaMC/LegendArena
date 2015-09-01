@@ -20,13 +20,13 @@ import java.util.*
  */
 public class LegendEconomy {
 
-    internal var sql: LegendSQL? = null
-    internal var db = "emeralds"
-    internal var p = Bukkit.getPluginManager().getPlugin("LegendArena")
-    internal var table = "LA_EMERALDS"
-    internal var log = BukLog(p)
+    private var sql: LegendSQL? = null
+    private var db = "emeralds"
+    private var p = Bukkit.getPluginManager().getPlugin("LegendArena")
+    private var table = "LA_EMERALDS"
+    private var log = BukLog(p)
 
-    internal var cache = HashMap<UUID, Int>()
+    private var cache = HashMap<UUID, Int>()
 
     private enum class Types {
         MYSQL("mysql"),
@@ -63,7 +63,7 @@ public class LegendEconomy {
         setup()
     }
 
-    internal fun setup() {
+    private fun setup() {
         log.debug("Setting up database...")
         sql!!.initialise()
         if(!sql!!.doesTableExist(table))
