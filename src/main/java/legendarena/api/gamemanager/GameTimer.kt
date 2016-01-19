@@ -1,7 +1,5 @@
 package legendarena.api.gamemanager
 
-import legendarena.api.gamemanager.GameTool
-
 interface GameTimer : Runnable, GameTool {
 
     /**

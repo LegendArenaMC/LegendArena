@@ -13,12 +13,11 @@ import org.bukkit.event.block.BlockPlaceEvent
 
 public class BlockPlaceListener : Listener {
 
-    EventHandler
-    public fun listenForPlace(ev: BlockPlaceEvent) {
+    @EventHandler public fun listenForPlace(ev: BlockPlaceEvent) {
         try {
-            if(!Rank.ADMIN.isRanked(ev.getPlayer())) return
-            if(ev.getItemInHand().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "JumpPad"))
-                ev.getBlock().getLocation().subtract(0.0, 1.0, 0.0).getBlock().setType(Material.REDSTONE_BLOCK)
+            if(Rank.ADMIN.isRanked(ev.player)) return
+            if(ev.itemInHand.itemMeta.getDisplayName().equals("" + ChatColor.GREEN + "JumpPad"))
+                ev.block.location.subtract(0.0, 1.0, 0.0).block.type = Material.REDSTONE_BLOCK
         } catch(ignore: Exception) {}
     }
 

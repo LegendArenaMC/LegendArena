@@ -3,6 +3,7 @@ package legendarena.commands.staff
 import legendarena.api.utils.ChatUtils
 import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
+import legendarena.api.utils.StringUtils
 import legendarena.hub.HubWarper
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -22,12 +23,12 @@ class Gadgets : CommandExecutor {
             RankUtils.fancyNoPermissions(Rank.MOD, sender)
             return true
         }
-        if(args.size() == 0) {
-            if(HubWarper.isExempt(sender.getUniqueId())) {
-                HubWarper.toggleExemption(sender.getUniqueId())
+        if(StringUtils.getSize(args) == 0) {
+            if(HubWarper.isExempt(sender.uniqueId)) {
+                HubWarper.toggleExemption(sender.uniqueId)
                 sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Removed from gadgets exempt list.")
             } else {
-                HubWarper.toggleExemption(sender.getUniqueId())
+                HubWarper.toggleExemption(sender.uniqueId)
                 sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Added to gadgets exempt list.")
             }
         } else {
@@ -35,13 +36,13 @@ class Gadgets : CommandExecutor {
                 sender.sendMessage(ChatUtils.getCustomMsg("" + ChatColor.RED + "Error") + "Player \"" + args[0] + "\" was not found.")
             } else {
                 val p = Bukkit.getPlayer(args[0])
-                val u = p.getUniqueId()
+                val u = p.uniqueId
                 if(HubWarper.isExempt(u)) {
                     HubWarper.toggleExemption(u)
-                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Removed player " + p.getName() + " from gadgets exemption list.")
+                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Removed player " + p.name + " from gadgets exemption list.")
                 } else {
                     HubWarper.toggleExemption(u)
-                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Added player " + p.getName() + " to gadgets exemption list.")
+                    sender.sendMessage(ChatUtils.getCustomMsg("Gadgets") + "Added player " + p.name + " to gadgets exemption list.")
                 }
             }
         }

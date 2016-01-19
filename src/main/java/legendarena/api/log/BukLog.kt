@@ -4,7 +4,6 @@
 
 package legendarena.api.log
 
-import legendarena.api.log.Level
 import legendarena.api.utils.StringUtils
 import legendarena.LegendArena
 import legendarena.chat.Notification
@@ -28,12 +27,12 @@ public class BukLog {
     }
 
     internal fun log(level: String, log: String) {
-        Bukkit.getLogger().info("BukLog [Level: " + StringUtils.toUpper(level) + " | From: " + p!!.getDescription().getName() + "] " + log)
+        Bukkit.getLogger().info("BukLog [Level: ${StringUtils.toUpper(level)} | From: ${p!!.description.name}] $log")
     }
 
     public fun log(l: Level, s: String): Unit = when(l) {
         Level.ITSALLBROKEN -> log("IT'S ALL BROKEN", s) //WE'RE ALL GONNA DIE
-        Level.PIXELBROKEIT -> log("PIXEL BROKE IT", s)
+        Level.ITBROKE -> log("ODIN BROKE IT", s)
         Level.SEVERE -> log("SEVERE", s)
         Level.WARNING -> log("WARNING", s)
         Level.INFO -> log("INFO", s)
@@ -54,10 +53,10 @@ public class BukLog {
     fun dumpError(ex: Throwable, reason: String) {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
-            log(Level.PIXELBROKEIT, "An error was encountered while " + reason + "! (see above for stacktrace)")
-            Notification.alertDevs("An error was encountered while " + reason + ": " + ex.getMessage())
+            log(Level.ITBROKE, "An error was encountered while $reason! (see above for stacktrace)")
+            Notification.alertDevs("An error was encountered while $reason: ${ex.message}")
         } else
-            log(Level.INTERNALERROR, "An error was encountered while " + reason + "! (\"" + ex.getMessage() + "\")")
+            log(Level.INTERNALERROR, "An error was encountered while $reason! (\"${ex.message}\")")
 
     }
 
@@ -69,10 +68,10 @@ public class BukLog {
     fun dumpRawError(ex: Throwable, reason: String) {
         if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
-            log(Level.PIXELBROKEIT, reason + " (see above for stacktrace)")
-            Notification.alertDevs(reason + ": " + ex.getMessage())
+            log(Level.ITBROKE, "$reason (see above for stacktrace)")
+            Notification.alertDevs("$reason: ${ex.message}")
         } else
-            log(Level.INTERNALERROR, reason + " (\"" + ex.getMessage() + "\")")
+            log(Level.INTERNALERROR, "$reason (\"${ex.message}\")")
 
     }
 

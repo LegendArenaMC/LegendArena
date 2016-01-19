@@ -21,19 +21,12 @@ public class HubListeners : Listener {
 
     private val cooldown = HashMap<UUID, Cooldown>()
 
-    /**
-     * WUBBBBBB
-     *
-     * ...sorry, I couldn't resist
-     */
-    EventHandler(ignoreCancelled = true)
-    public fun listenForDrop(ev: PlayerDropItemEvent) {
+    @EventHandler(ignoreCancelled = true) public fun listenForDrop(ev: PlayerDropItemEvent) {
         if(HubWarper.isExempt(ev.getPlayer().getUniqueId())) return
         ev.setCancelled(true)
     }
 
-    EventHandler
-    public fun listenForInteract(ev: PlayerInteractEvent) {
+    @EventHandler public fun listenForInteract(ev: PlayerInteractEvent) {
         try {
             if(ev.getItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "EnderBow"))
                 if(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))
@@ -44,8 +37,8 @@ public class HubListeners : Listener {
                 return
             if(ev.getItem().getItemMeta().getDisplayName().equals(HubWarper.getMainMenu(ev.getPlayer().getName()).getItemMeta().getDisplayName())) {
                 if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
-                    val c = cooldown.get(ev.getPlayer().getUniqueId())
-                    if(!c.done()) {
+                    val c = cooldown[ev.getPlayer().getUniqueId()]
+                    if(!c!!.done()) {
                         Message(MessageType.ACTIONBAR).append("" + ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.getPlayer())
                         return
                     }

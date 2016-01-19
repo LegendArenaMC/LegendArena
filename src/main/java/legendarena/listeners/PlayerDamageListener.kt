@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 
 public class PlayerDamageListener : Listener {
 
-    EventHandler
+    @EventHandler
     public fun listenForDamage(ev: EntityDamageEvent) {
         if(ev.getEntity() !is Player) return
         var p = ev.getEntity() as Player

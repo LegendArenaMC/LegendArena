@@ -21,14 +21,14 @@ class Shadow : CommandExecutor {
             return true
         }
 
-        if(args.size() == 0) {
+        if(StringUtils.getSize(args) == 0) {
             help(sender)
             return true
         }
 
         if(StringUtils.toLower(args[0]).equals("mute")) {
 
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 sender.sendMessage(ChatUtils.getFormattedMsg("/shadow mute <player>", "Shadow mute a player."))
                 return true
             }
@@ -39,7 +39,7 @@ class Shadow : CommandExecutor {
             }
 
             try {
-                ChatSystem.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.getName())
+                ChatSystem.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.name)
             } catch(ex: ShadowMuteNotAllowedException) {
                 sender.sendMessage("" + ChatColor.RED + "Shadow mutes are currently disallowed!")
             }

@@ -9,7 +9,6 @@ import legendarena.api.utils.ChatUtils
 import legendarena.hub.menu.Tag
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -19,7 +18,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 
 public class MainMenuListener : Listener {
 
-    EventHandler
+    @EventHandler
     public fun onInventoryClick(ev: InventoryClickEvent) {
         if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Main Menu")) return
         try {

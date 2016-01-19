@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerTeleportEvent
 
 public class PlayerMoveListener : Listener {
 
-    EventHandler public fun listenForMove(ev: PlayerMoveEvent) {
+    @EventHandler public fun listenForMove(ev: PlayerMoveEvent) {
         if(ev.getTo().getY() < -5) {
             ev.setCancelled(true)
             ev.getPlayer().teleport(ev.getPlayer().getWorld().getSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN)

@@ -1,6 +1,5 @@
 package legendarena.commands
 
-import legendarena.api.emeralds.EmeraldsCore
 import legendarena.api.message.Message
 import legendarena.api.message.MessageType
 import legendarena.api.utils.*
@@ -26,15 +25,15 @@ class Firework : CommandExecutor {
             return true
         }
 
-        if(cooldown.containsKey(sender.getUniqueId()) && !cooldown.get(sender.getUniqueId()).done()) {
-            sender.sendMessage(cooldown.get(sender.getUniqueId()).getTimeRemaining())
+        if(cooldown.containsKey(sender.uniqueId) && !cooldown[sender.uniqueId]!!.done()) {
+            sender.sendMessage(cooldown[sender.uniqueId]!!.getTimeRemaining())
             return true
         }
 
         PluginUtils.shootFireworks(sender)
         Message(MessageType.TITLE).append("" + ChatColor.GREEN + "Woo, fireworks!").send(sender)
         //3 second cooldown
-        cooldown.put(sender.getUniqueId(), Cooldown(3.0))
+        cooldown.put(sender.uniqueId, Cooldown(3.0))
         return true
     }
 

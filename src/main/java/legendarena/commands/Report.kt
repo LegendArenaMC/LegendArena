@@ -7,6 +7,7 @@ package legendarena.commands
 import legendarena.api.user.User
 import legendarena.api.utils.ChatUtils
 import legendarena.api.utils.Rank
+import legendarena.api.utils.StringUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -16,14 +17,14 @@ import org.bukkit.command.CommandSender
 public class Report : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>): Boolean {
-        if(args.size() == 0) {
+        if(StringUtils.getSize(args) == 0) {
             help(sender)
             return true
         }
 
         if(Rank.MOD.isRanked(sender)) {
             if(args[0].equals("check")) {
-                if(args.size() == 1) {
+                if(StringUtils.getSize(args) == 1) {
                     ChatUtils.fancyHelpSuggestMsg("/report check <player>", "Get the report list for a player", "report check ", true).send(sender)
                     return true
                 }
@@ -45,7 +46,7 @@ public class Report : CommandExecutor {
                 }
                 return true
             } else if(args[0].equals("clear")) {
-                if(args.size() == 1) {
+                if(StringUtils.getSize(args) == 1) {
                     ChatUtils.fancyHelpSuggestMsg("/report clear <player>", "Clear the reports for a player", "report clear ", true).send(sender)
                     return true
                 }
@@ -57,7 +58,7 @@ public class Report : CommandExecutor {
                 sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "Cleared reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).getName() + ChatColor.GREEN + ".")
                 return true
             } else if(args[0].equals("amount")) {
-                if(args.size() == 1) {
+                if(StringUtils.getSize(args) == 1) {
                     ChatUtils.fancyHelpSuggestMsg("/report amount <player>", "Show how many reports the specified player has", "report amount ", true).send(sender)
                     return true
                 }
@@ -71,7 +72,7 @@ public class Report : CommandExecutor {
             }
         }
 
-        if(args.size() == 1) {
+        if(StringUtils.getSize(args) == 1) {
             ChatUtils.fancyHelpSuggestMsg("/report <player> <reason>", "Report a player", "report ", true).send(sender)
             return true
         }

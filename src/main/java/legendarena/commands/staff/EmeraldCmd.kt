@@ -7,6 +7,7 @@ import legendarena.api.utils.ChatUtils
 import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
 import legendarena.LegendArena
+import legendarena.api.utils.StringUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -50,17 +51,17 @@ class EmeraldCmd : CommandExecutor {
             return true
         }
 
-        if(args.size() == 0)
+        if(StringUtils.getSize(args) == 0)
             help(sender)
         else {
             if(args[0].equals("amount")) {
-                sender.sendMessage(ChatUtils.getFormattedMsg("You Have", "" + emeralds!!.getEmeralds(sender.getName()) + " emeralds"))
+                sender.sendMessage(ChatUtils.getFormattedMsg("You Have", "" + emeralds!!.getEmeralds(sender.name) + " emeralds"))
             } else if(args[0].equals("add")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
-                if(args.size() <= 2)
+                if(StringUtils.getSize(args) <= 2)
                     sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds add <player> <amount>", "Adds a specified amount of emeralds to a player's account."))
                 else {
                     val p = Bukkit.getPlayer(args[1])
@@ -76,14 +77,14 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Adding " + add + " emerald(s)...")
-                    emeralds!!.addEmeralds(p.getName(), add)
+                    emeralds!!.addEmeralds(p.name, add)
                 }
             } else if(args[0].equals("remove") || args[0].equals("take")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
-                if(args.size() <= 2) {
+                if(StringUtils.getSize(args) <= 2) {
                     sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds take <player> <amount>", "Takes a specified amount of emeralds from a player's account."))
                 } else {
                     val p = Bukkit.getPlayer(args[1])
@@ -99,19 +100,19 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
 
-                    if(remove > emeralds!!.getEmeralds(p.getName())) {
+                    if(remove > emeralds!!.getEmeralds(p.name)) {
                         sender.sendMessage("" + ChatColor.RED + "That player does not have that many emeralds!")
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Removing " + remove + " emerald(s)...")
-                    emeralds!!.removeEmeralds(p.getName(), remove)
+                    emeralds!!.removeEmeralds(p.name, remove)
                 }
             } else if(args[0].equals("reset")) {
                 if(!Rank.ADMIN.isRanked(sender)) {
                     RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                     return true
                 }
-                if(args.size() < 2) {
+                if(StringUtils.getSize(args) < 2) {
                     sender.sendMessage(ChatUtils.getFormattedMsg("/emeralds reset <player>", "Takes all emeralds from a player's account."))
                 } else {
                     val p = Bukkit.getPlayer(args[1])
@@ -120,7 +121,7 @@ class EmeraldCmd : CommandExecutor {
                         return true
                     }
                     sender.sendMessage("" + ChatColor.GREEN + "Setting player's emerald count to zero...")
-                    emeralds!!.resetEmeralds(p.getName())
+                    emeralds!!.resetEmeralds(p.name)
                 }
             } else {
                 help(sender)

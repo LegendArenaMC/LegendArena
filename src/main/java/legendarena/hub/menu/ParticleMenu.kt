@@ -44,7 +44,7 @@ class ParticleMenu {
         pInv.setItem(16, MenuUtils.createItem(Material.WATER_BUCKET, "" + ChatColor.GREEN + "Colorful Effect Particles"))
 
         pInv.setItem(30, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
-        pInv.setItem(31, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Current Particles", "" + ChatColor.BLUE + if(ParticleCore.getParticles(p.getUniqueId()) == null) "NONE" else ParticleCore.getParticles(p.getUniqueId()).toString()))
+        pInv.setItem(31, MenuUtils.createItem(Material.EMERALD, "" + ChatColor.GREEN + "Current Particles", "" + ChatColor.BLUE + if(ParticleCore.getParticles(p.uniqueId) == null) "NONE" else ParticleCore.getParticles(p.uniqueId).toString()))
         pInv.setItem(32, MenuUtils.createItem(Material.BARRIER, "" + ChatColor.GREEN + "No Particles"))
         p.openInventory(pInv)
     }
@@ -53,7 +53,7 @@ class ParticleMenu {
 
         var log = BukLog(Bukkit.getPluginManager().getPlugin("LegendArena"))
 
-        EventHandler
+        @EventHandler
         public fun onInventoryClick(ev: InventoryClickEvent) {
 
             try {

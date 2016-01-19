@@ -1,14 +1,4 @@
-# Read Me First
-
-The plugins are not being updated anymore. Due to lack of time, I cannot carry on developing the plugin anymore.
-
-If you wish to pick this up, feel free to. However, I will be disassociating myself with Legend Arena, and the plugin will have one final release (1.3).
-
-I'm sorry. -Pixel
-
-# Old Readme
-
-## [Legend Arena](http://thenamedev.net/legendarena/) [![Circle CI](https://circleci.com/gh/LegendArenaMC/LegendArena.svg?style=svg)](https://circleci.com/gh/LegendArenaMC/LegendArena)
+## Legend Arena [![Build Status](https://drone.io/github.com/LegendArenaMC/LegendArena/status.png)](https://drone.io/github.com/LegendArenaMC/LegendArena/latest)
 
 The Legend Arena plugins are Bukkit plugins made for Legend Arena.
 
@@ -19,10 +9,7 @@ The Legend Arena plugins are Bukkit plugins made for Legend Arena.
 
 ### License
 
-The entire Legend Arena plugin source code is licensed under the TheNameDev Plugin License. Any and all usage of this plugin
-must comply with said license.
-
-A copy of said license can be found in the [LICENSE.md](https://github.com/LegendArenaMC/LegendArena/blob/dev/LICENSE.md) file.
+The entire Legend Arena plugin source code is licensed under the MIT License.
 
 ### Building
 
@@ -32,7 +19,7 @@ A copy of said license can be found in the [LICENSE.md](https://github.com/Legen
 
 Done.
 
-Or, get a pre-built jar from the CircleCI builds. (click on the build status image at the top of this README)
+Or, get a pre-built jar from the Drone.IO builds. (click on the build status image at the top of this README)
 
 And no, there will not be a Windows batch file. If you really need to build the plugin on Windows, just manually run the correct commands to build it.
 

@@ -62,12 +62,12 @@ public class ChatSystem {
 
         if(isShadowMuted(p)) {
             muteStatus.remove(p.getUniqueId());
-            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " has been un-shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
             return;
         }
 
         muteStatus.put(p.getUniqueId(), true);
-        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " has been shadow muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
     }
 
     public static void toggleMute(Player p, String muter) {
@@ -75,12 +75,12 @@ public class ChatSystem {
 
         if(isMuted(p)) {
             muteStatus.remove(p.getUniqueId());
-            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been un-muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+            Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " has been un-muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
             return;
         }
 
         muteStatus.put(p.getUniqueId(), false);
-        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.DARK_PURPLE + " has been muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
+        Notification.alert("Player " + ChatColor.YELLOW + p.getName() + ChatColor.RED + " has been muted by " + ChatColor.YELLOW + muter + ChatColor.DARK_PURPLE + ".");
     }
 
     /**

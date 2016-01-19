@@ -1,5 +1,7 @@
 package legendarena.api.utils;
 
+import java.util.ArrayList;
+
 /**
  * This only exists because Kotlin doesn't have a lot of String.[x] utils, such as toLowerCase(), etc.
  *
@@ -34,4 +36,13 @@ public class StringUtils {
     public static String replace(String target, String replace, String with) {
         return target.replace(replace, with);
     }
+
+    public static int getSize(ArrayList<?> check) {
+        return check.size();
+    }
+
+    public static int getSize(String[] check) {
+        return check.length;
+    }
+
 }

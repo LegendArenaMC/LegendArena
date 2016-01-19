@@ -7,6 +7,7 @@ package legendarena.api.user
 import legendarena.api.utils.ConfigUtils
 import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
+import legendarena.api.utils.StringUtils
 import legendarena.chat.ChatSystemUtils
 import legendarena.chat.Notification
 import org.bukkit.Bukkit
@@ -25,17 +26,17 @@ public class User {
 
     public constructor(p: Player) {
         this.p = p
-        var folder = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath(), "data")
+        var folder = File(Bukkit.getPluginManager().getPlugin("LegendArena").dataFolder.absolutePath, "data")
         folder.mkdirs()
-        var file = File(Bukkit.getPluginManager().getPlugin("LegendArena").getDataFolder().getAbsolutePath(), "data" + File.separator + p.getUniqueId().toString() + ".yml")
+        var file = File(Bukkit.getPluginManager().getPlugin("LegendArena").dataFolder.absolutePath, "data" + File.separator + p.uniqueId.toString() + ".yml")
         file.createNewFile()
         this.data = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"), file, true)
 
         //BEGIN DEFAULTS
 
-        data!!.addDefault("uuid", p.getUniqueId().toString())
+        data!!.addDefault("uuid", p.uniqueId.toString())
         var usernameList = ArrayList<String>()
-        usernameList.add(p.getName())
+        usernameList.add(p.name)
         data!!.addDefault("namehistory", usernameList)
         data!!.addDefault("reports.count", 0)
         var reports = getArrayList()
@@ -47,17 +48,17 @@ public class User {
         var warnings = getArrayList()
         data!!.addDefault("punish.warnings.list", warnings)
         data!!.addDefault("emeralds", 0)
-        data!!.addDefault("isNoob", false)
+        data!!.addDefault("isNerd", false)
 
         data!!.genIfDoesNotExist("uuid")
     }
 
-    public fun setIsNoob(set: Boolean) {
-        data!!.set("isNoob", set)
+    public fun setIsNerd(set: Boolean) {
+        data!!.set("isNerd", set)
     }
 
     public fun isNoob(): Boolean {
-        return data!!.get("isNoob") as Boolean
+        return data!!.get("isNerd") as Boolean
     }
 
     private fun getArrayList(): ArrayList<String> {
@@ -74,8 +75,8 @@ public class User {
 
         reports.add(reason)
         data!!.set("reports.list", reports)
-        data!!.set("reports.count", reports.size())
-        Notification.alert("" + ChatColor.YELLOW + p!!.getName() + ChatColor.RED + " has been reported for reason " + ChatColor.YELLOW + reason + ChatColor.RED + "!")
+        data!!.set("reports.count", StringUtils.getSize(reports))
+        Notification.alert("" + ChatColor.YELLOW + p!!.name + ChatColor.RED + " has been reported for reason " + ChatColor.YELLOW + reason + ChatColor.RED + "!")
 
         data!!.saveConfig()
     }
@@ -88,8 +89,8 @@ public class User {
 
         warnings.add(reason)
         data!!.set("punish.warnings.list", warnings)
-        data!!.set("reports.count", warnings.size())
-        Notification.alert("" + ChatColor.YELLOW + p!!.getName() + ChatColor.RED + " has been warned for reason " + ChatColor.YELLOW + reason)
+        data!!.set("reports.count", StringUtils.getSize(warnings))
+        Notification.alert("" + ChatColor.YELLOW + p!!.name + ChatColor.RED + " has been warned for reason " + ChatColor.YELLOW + reason)
 
         data!!.saveConfig()
     }
@@ -106,8 +107,8 @@ public class User {
 
     public fun hasBeenWarned(): Boolean {
         var r = getWarnings()
-        if(r.size() == 1)
-            if(r.get(0).equals("None"))
+        if(StringUtils.getSize(r) == 1)
+            if(r[0].equals("None"))
                 return false
 
         return true
@@ -115,8 +116,8 @@ public class User {
 
     public fun hasBeenReported(): Boolean {
         var r = getReports()
-        if(r.size() == 1)
-            if(r.get(0).equals("None"))
+        if(StringUtils.getSize(r) == 1)
+            if(r[0].equals("None"))
                 return false
 
         return true
@@ -159,6 +160,7 @@ public class User {
 
     public fun ban(reason: String, banner: String) {
         if(isBanned()) return
+
         data!!.saveConfig()
     }
 

@@ -6,11 +6,8 @@ package legendarena.commands.staff.punish
 
 import legendarena.api.fanciful.FancyMessage
 import legendarena.api.message.Message
-import legendarena.api.utils.ChatUtils
+import legendarena.api.utils.*
 
-import legendarena.api.utils.Rank
-import legendarena.api.utils.RankUtils
-import legendarena.api.utils.StaffPlayer
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -25,7 +22,7 @@ class Ban : CommandExecutor {
             RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
             return true
         }
-        if(args.size() == 0) {
+        if(StringUtils.getSize(args) == 0) {
             ChatUtils.fancyMsg("/ban <player>", "Ban a player from the network.")
             return true
         }

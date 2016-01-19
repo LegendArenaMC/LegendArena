@@ -38,7 +38,7 @@ class MinigameMenu {
 
     public inner class Listener : org.bukkit.event.Listener {
 
-        EventHandler
+        @EventHandler
         public fun onInventoryClick(ev: InventoryClickEvent) {
 
             try {

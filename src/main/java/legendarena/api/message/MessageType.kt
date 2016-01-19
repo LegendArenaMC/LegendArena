@@ -7,5 +7,4 @@ enum class MessageType {
     SUBTITLE,
     ACTIONBAR,
     FANCIFUL
-
 }

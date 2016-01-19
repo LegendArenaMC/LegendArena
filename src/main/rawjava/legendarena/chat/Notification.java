@@ -17,7 +17,11 @@ public class Notification {
     }
 
     public static void alertDevs(String msg) {
-        new Message().append(ChatUtils.getCustomMsg("Dev Notice") + ChatColor.RED + msg).broadcast(Rank.DEV);
+        new Message().append(ChatUtils.getCustomMsg("Dev Notice") + ChatColor.LIGHT_PURPLE + msg).broadcast(Rank.DEV);
+    }
+
+    public static void global(String msg) {
+        new Message().append(ChatUtils.getCustomMsg("Alert") + ChatColor.RED + msg).broadcast();
     }
 
     public static void alertSingle(Player p, String msg) {

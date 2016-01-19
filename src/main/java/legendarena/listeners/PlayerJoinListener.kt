@@ -2,6 +2,7 @@ package legendarena.listeners
 
 import legendarena.api.fanciful.FancyMessage
 import legendarena.api.message.Message
+import legendarena.api.user.User
 import legendarena.api.utils.MenuUtils
 import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
@@ -24,15 +25,13 @@ import org.bukkit.potion.PotionEffectType
 
 public class PlayerJoinListener : Listener {
 
-    EventHandler fun listenForJoin(ev: PlayerJoinEvent) {
+    @EventHandler fun listenForJoin(ev: PlayerJoinEvent) {
         ev.setJoinMessage("")
         if(!ev.getPlayer().hasPlayedBefore())
             FancyMessage("Welcome to ")
                         .color(ChatColor.GREEN)
                     .then("Legend Arena")
                         .color(ChatColor.YELLOW)
-                        .link("http://thenamedev.net/legendarena/")
-                        .tooltip("" + ChatColor.GREEN + "Click to open the Legend Arena site")
                     .then(", ")
                         .color(ChatColor.GREEN)
                     .then(ev.getPlayer().getName())
@@ -73,8 +72,10 @@ public class PlayerJoinListener : Listener {
         }
     }
 
-    EventHandler fun listenForQuit(ev: PlayerQuitEvent) {
+    @EventHandler fun listenForQuit(ev: PlayerQuitEvent) {
         ev.setQuitMessage("")
+        if(Rank.HELPER.isRanked(ev.getPlayer()))
+            Notification.alert("" + ChatColor.GRAY + "[" + ChatColor.RED + "-" + ChatColor.GRAY + "] " + User(ev.player).getRank().getNameColor() + ev.player.name)
     }
 
 }

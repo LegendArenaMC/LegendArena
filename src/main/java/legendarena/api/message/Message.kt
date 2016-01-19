@@ -1,9 +1,7 @@
 package legendarena.api.message
 
 import legendarena.api.fanciful.FancyMessage
-import legendarena.api.log.BukLog
 import legendarena.api.utils.Rank
-import legendarena.LegendArena
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Sound
@@ -56,6 +54,7 @@ class Message {
         if(type != MessageType.FANCIFUL) {
             if(builder != null)
                 builder = null
+            type = MessageType.FANCIFUL
         }
         this.fanciful = msg
         return this

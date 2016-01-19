@@ -6,6 +6,7 @@ import legendarena.api.message.MessageType
 import legendarena.api.utils.ChatUtils
 import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
+import legendarena.api.utils.StringUtils
 import legendarena.chat.Channel
 import legendarena.chat.ChatSystem
 import legendarena.chat.ChatSystemUtils
@@ -22,7 +23,7 @@ class Chat : CommandExecutor {
     }
 
     private fun run(sender: CommandSender, args: Array<String>) {
-        if(args.size() == 0) {
+        if(StringUtils.getSize(args) == 0) {
             help(sender)
             return
         }
@@ -35,7 +36,7 @@ class Chat : CommandExecutor {
                 RankUtils.fancyNoPermissions(Rank.MOD, sender)
                 return
             }
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ALERT" + ChatColor.BLUE + " chat.").send(sender as Player)
                 ChatSystem.add(sender as Player, Channel.ALERT)
             } else {
@@ -54,7 +55,7 @@ class Chat : CommandExecutor {
                 RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
                 return
             }
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ADMIN" + ChatColor.BLUE + " chat.").send(sender as Player)
                 ChatSystem.add(sender as Player, Channel.ADMIN)
             } else {
@@ -73,7 +74,7 @@ class Chat : CommandExecutor {
                 RankUtils.fancyNoPermissions(Rank.HELPER, sender)
                 return
             }
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "STAFF" + ChatColor.BLUE + " chat.").send(sender as Player)
                 ChatSystem.add(sender as Player, Channel.STAFF)
             } else {
@@ -92,7 +93,7 @@ class Chat : CommandExecutor {
                 RankUtils.fancyNoPermissions(Rank.DEV, sender)
                 return
             }
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "DEV" + ChatColor.BLUE + " chat.").send(sender as Player)
                 ChatSystem.add(sender as Player, Channel.DEV)
             } else {
@@ -114,7 +115,7 @@ class Chat : CommandExecutor {
                 return
             }
 
-            if(args.size() == 1) {
+            if(StringUtils.getSize(args) == 1) {
                 sender.sendMessage(ChatUtils.getFormattedHeader("Chat Settings"))
                 ChatUtils.fancyHelpMsg("/chat manage globalmute", "Toggle chat global mute", "chat manage globalmute", true).send(sender)
                 ChatUtils.fancyHelpMsg("/chat manage allowsmute", "Toggle allowing of shadow mutes", "chat manage allowsmute", true).send(sender)

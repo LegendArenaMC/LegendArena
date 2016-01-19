@@ -21,8 +21,10 @@ import java.util.*
 public class LegendEconomy {
 
     private var sql: LegendSQL? = null
+    //Temporarily hardcoded
     private var db = "emeralds"
     private var p = Bukkit.getPluginManager().getPlugin("LegendArena")
+    //Temporarily hardcoded
     private var table = "LA_EMERALDS"
     private var log = BukLog(p)
 
@@ -56,7 +58,7 @@ public class LegendEconomy {
         } else {
             //assume we're using sqlite, so setup the sqlite db file
             //by the way! sqlite is good for basic single servers (like survival servers and such) but for networks - PLEASE, PLEASE, PLEASEEE USE MYSQL!
-            var dbFile = File(p.getDataFolder().getAbsolutePath() + File.separator + "emeralds.db")
+            var dbFile = File(p.dataFolder.absolutePath + File.separator + "emeralds.db")
             sql = LegendSQL(dbFile)
         }
 
@@ -67,7 +69,7 @@ public class LegendEconomy {
         log.debug("Setting up database...")
         sql!!.initialise()
         if(!sql!!.doesTableExist(table))
-            sql!!.standardQuery("CREATE TABLE " + table + " ( NAME varchar(255), EMERALDS int );")
+            sql!!.standardQuery("CREATE TABLE $table ( NAME varchar(255), EMERALDS int );")
     }
 
     public fun getEmeralds(p: String): Int {
@@ -75,19 +77,19 @@ public class LegendEconomy {
             //if(cache.containsKey(Bukkit.getPlayer(p).getUniqueId())) return cache.get(Bukkit.getPlayer(p).getUniqueId())
         var rs: ResultSet?
         try {
-            rs = sql!!.sqlQuery("SELECT EMERALDS FROM `" + table + "` WHERE NAME=\"" + p + "\";")
+            rs = sql!!.sqlQuery("SELECT EMERALDS FROM `$table` WHERE NAME=\"$p\";")
         } catch(ex: NullPointerException) {
             setup() //attempt to setup the SQL database as the connection may be broken for some reason
             return 0
         } catch(ex: SQLException) {
-            log.log(Level.SEVERE, "ERROR! Attempting to get emeralds count for player " + p + " resulted in an SQLException!")
+            log.log(Level.SEVERE, "ERROR! Attempting to get emeralds count for player $p resulted in an SQLException!")
             return 0
         }
         var amount = 0
         if(rs!!.next())
             amount = rs.getInt("emeralds")
         if(Bukkit.getPlayer(p) != null)
-            cache.put(Bukkit.getPlayer(p).getUniqueId(), amount)
+            cache.put(Bukkit.getPlayer(p).uniqueId, amount)
         rs.close()
         return amount
     }
@@ -118,17 +120,17 @@ public class LegendEconomy {
         if(a <= -1)
             throw Exception("A player's emeralds count cannot be less than 0")
         if(getEmeralds(p) == 0) {
-            sql!!.standardQuery("INSERT INTO `" + table + "` (`NAME`, `EMERALDS`) VALUES (\"" + p + "\", " + a + "; COMMIT;")
+            sql!!.standardQuery("INSERT INTO `$table` (`NAME`, `EMERALDS`) VALUES (\"$p\", $a; COMMIT;")
             BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.DEBUG, "insert")
         } else {
-            sql!!.standardQuery("UPDATE OR ROLLBACK `" + table + "` SET EMERALDS = " + a + " WHERE NAME = " + p + "; COMMIT;")
+            sql!!.standardQuery("UPDATE OR ROLLBACK `$table` SET EMERALDS = $a WHERE NAME = $p; COMMIT;")
             BukLog(Bukkit.getPluginManager().getPlugin("LegendArena")).log(Level.DEBUG, "update")
         }
 
         sql!!.closeConnection()
 
         if(Bukkit.getPlayer(p) != null)
-            cache.put(Bukkit.getPlayer(p).getUniqueId(), a)
+            cache.put(Bukkit.getPlayer(p).uniqueId, a)
     }
 
 }

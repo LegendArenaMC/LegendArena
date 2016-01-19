@@ -50,16 +50,16 @@ class Tag {
 
         internal fun createItem(name: String, color: Short): ItemStack {
             val i = ItemStack(Material.STAINED_GLASS, 1, color)
-            val im = i.getItemMeta()
-            im.setDisplayName("" + ChatColor.GREEN + name)
+            val im = i.itemMeta
+            im.displayName = "" + ChatColor.GREEN + name
             i.setItemMeta(im)
             return i
         }
 
         internal fun createItem(name: String, color: Short, dummy: Boolean): ItemStack {
             val i = ItemStack(Material.STAINED_GLASS_PANE, 1, color)
-            val im = i.getItemMeta()
-            im.setDisplayName("" + ChatColor.GREEN + name)
+            val im = i.itemMeta
+            im.displayName = "" + ChatColor.GREEN + name
             i.setItemMeta(im)
             return i
         }
@@ -79,7 +79,7 @@ class Tag {
             Message().append("" + ChatColor.GREEN + "Tagged yourself as a " + r.getNameColor() + r).setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(p)
         }
 
-        EventHandler
+        @EventHandler
         public fun onInventoryClick(ev: InventoryClickEvent) {
             if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Tag Selector")) return
             try {

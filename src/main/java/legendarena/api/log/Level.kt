@@ -8,7 +8,7 @@ public enum class Level {
     INTERNALERROR,
     WARNING,
     ITSALLBROKEN,
-    PIXELBROKEIT, //shameless "i borked it" level of logging
+    ITBROKE, //shameless "i borked it" level of logging
     DEBUG
 
 }

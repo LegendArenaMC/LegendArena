@@ -1,6 +1,5 @@
 package legendarena.api.gamemanager
 
-import legendarena.api.gamemanager.GamePlayerState
 import org.bukkit.entity.Player
 
 class GamePlayer {
@@ -37,7 +36,7 @@ class GamePlayer {
     public fun setState(state: GamePlayerState) {
         this.state = state
         if(state == GamePlayerState.SPECTATOR) {
-            getPlayer().spigot().setCollidesWithEntities(false)
+            getPlayer().spigot().collidesWithEntities = false
         }
     }
 

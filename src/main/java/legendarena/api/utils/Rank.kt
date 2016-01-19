@@ -61,7 +61,7 @@ public enum class Rank {
     /**
      * Removes ALL permissions. See the MEMBER rank for the actual default rank.
      */
-    NOOB("", -1);
+    NERD("", -1);
 
     private var permission = ""
     private var internalId = 0
@@ -81,7 +81,7 @@ public enum class Rank {
         }
 
         when(this) {
-            Rank.NOOB -> {
+            Rank.NERD -> {
                 var u = User(p)
                 if(u.isNoob())
                     return true
@@ -96,7 +96,7 @@ public enum class Rank {
     }
 
     /**
-     * Yes, I realize it's Color, not Colour. Fuck it, too lazy to go through more code to fix it.
+     * Yes, I realize the function name is Color, not Colour. Fuck it, too lazy to go through more code to fix it.
      */
     public fun getNameColor(): ChatColor {
         when(this) {

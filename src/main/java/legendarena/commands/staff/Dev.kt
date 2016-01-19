@@ -7,7 +7,6 @@ import legendarena.api.utils.*
 import legendarena.hub.JumpPad
 import legendarena.scoreboard.ScoreboardSystem
 import legendarena.staffutils.VanishUtils
-import org.apache.commons.io.FileUtils
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -19,10 +18,10 @@ class Dev : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, s: String, args: Array<String>): Boolean {
         if(!Rank.DEV.isRanked(sender)) {
-            RankUtils.fancyNoPermissions(Rank.DEV, sender as Player)
+            RankUtils.fancyNoPermissions(Rank.DEV, sender)
             return true
         }
-        if(args.size() == 0) {
+        if(StringUtils.getSize(args) == 0) {
             var msg = Message()
 
             msg.append(ChatUtils.getFormattedHeader("Operating System") + "\n")
@@ -42,7 +41,7 @@ class Dev : CommandExecutor {
             return true
         } else if(args[0].equals("gc")) {
             sender.sendMessage("" + ChatColor.YELLOW + "Running garbage collector....")
-            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.getName() + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
+            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.name + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
             System.gc()
             sender.sendMessage("" + ChatColor.GREEN + "Successfully ran garbage collector.")
             return true

@@ -19,7 +19,7 @@ import java.util.*
 
 class LegendArena : KotlinUtils() {
 
-    @Deprecated
+    @Deprecated(message = "Use config key 'enable.debug' instead.")
     /**
      * Use the config key "enable.debug" instead.
      */
