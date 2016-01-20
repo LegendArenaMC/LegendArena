@@ -1,8 +1,6 @@
 package legendarena.chat
 
-import legendarena.api.fanciful.FancyMessage
 import legendarena.api.utils.ChatUtils
-import legendarena.api.utils.Rank
 import legendarena.api.utils.RankUtils
 import legendarena.api.utils.StringUtils
 import org.bukkit.ChatColor

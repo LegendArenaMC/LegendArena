@@ -87,7 +87,7 @@ public class Report : CommandExecutor {
             return true
         }
 
-        if(report!!.getDisplayRank().isStaff()) {
+        if(report!!.getDisplayRank().isStaff() && !Rank.MOD.isRanked(sender)) {
             sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "You must think you're funny, eh?")
             return true
         }

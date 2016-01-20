@@ -15,7 +15,7 @@ class Message {
     private var fanciful: FancyMessage? = null
 
     private var fadeIn = 5
-    private var stay = 10
+    private var stay = 20
     private var fadeOut = 5
 
     private var sound: Sound? = null

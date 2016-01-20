@@ -1,9 +1,6 @@
 package legendarena.chat
 
-import legendarena.api.utils.ChatUtils
 import legendarena.api.utils.Rank
-import org.bukkit.ChatColor
-import org.bukkit.entity.Player
 
 public enum class Channel {
 

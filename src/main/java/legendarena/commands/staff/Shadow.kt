@@ -39,7 +39,7 @@ class Shadow : CommandExecutor {
             }
 
             try {
-                ChatSystem.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.name)
+                ChatSystem.toggleShadowMute(Bukkit.getPlayer(args[1]), sender.getName())
             } catch(ex: ShadowMuteNotAllowedException) {
                 sender.sendMessage("" + ChatColor.RED + "Shadow mutes are currently disallowed!")
             }

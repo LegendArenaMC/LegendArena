@@ -7,6 +7,7 @@ package legendarena.api.log
 import legendarena.api.utils.StringUtils
 import legendarena.LegendArena
 import legendarena.chat.Notification
+import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
 import org.bukkit.plugin.Plugin
 import java.util.logging.Logger
@@ -51,7 +52,7 @@ public class BukLog {
      * Example log: "An error occured while giving emeralds to all players! (Player "ZRaptor22" is a nub)" (sorry Jaden!)
      */
     fun dumpError(ex: Throwable, reason: String) {
-        if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
+        if(ConfigUtils.config.get("enable.devserver") as Boolean) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
             log(Level.ITBROKE, "An error was encountered while $reason! (see above for stacktrace)")
             Notification.alertDevs("An error was encountered while $reason: ${ex.message}")
@@ -66,7 +67,7 @@ public class BukLog {
      * Example log: "Could not give diamonds to Pixel! (NullPointerException {...})"
      */
     fun dumpRawError(ex: Throwable, reason: String) {
-        if(LegendArena().devMode) { //are we in dev mode? if so, print the stacktrace instead of the plain message
+        if(ConfigUtils.config.get("enable.devserver") as Boolean) { //are we in dev mode? if so, print the stacktrace instead of the plain message
             ex.printStackTrace()
             log(Level.ITBROKE, "$reason (see above for stacktrace)")
             Notification.alertDevs("$reason: ${ex.message}")

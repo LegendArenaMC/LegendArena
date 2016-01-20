@@ -21,10 +21,8 @@ import java.util.*
 public class LegendEconomy {
 
     private var sql: LegendSQL? = null
-    //Temporarily hardcoded
     private var db = "emeralds"
     private var p = Bukkit.getPluginManager().getPlugin("LegendArena")
-    //Temporarily hardcoded
     private var table = "LA_EMERALDS"
     private var log = BukLog(p)
 

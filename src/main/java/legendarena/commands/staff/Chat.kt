@@ -29,19 +29,19 @@ class Chat : CommandExecutor {
         }
 
         if(args[0].equals("off")) {
-            Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "GLOBAL" + ChatColor.BLUE + " chat.").send(sender as Player)
-            ChatSystem.remove(sender as Player)
+            Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "GLOBAL" + ChatColor.GREEN + " chat.").send(sender as Player)
+            ChatSystem.remove(sender)
         } else if(args[0].equals("alert")) {
             if(!Rank.MOD.isRanked(sender as Player)) {
                 RankUtils.fancyNoPermissions(Rank.MOD, sender)
                 return
             }
             if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ALERT" + ChatColor.BLUE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, Channel.ALERT)
+                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ALERT" + ChatColor.GREEN + " chat.").send(sender)
+                ChatSystem.add(sender, Channel.ALERT)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
-                val p = sender as Player
+                val p = sender
                 val oldChannel = ChatSystem.getChannel(p)
                 ChatSystem.add(p, Channel.ALERT)
                 ChatSystem.msg(p, cast)
@@ -56,11 +56,11 @@ class Chat : CommandExecutor {
                 return
             }
             if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ADMIN" + ChatColor.BLUE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, Channel.ADMIN)
+                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ADMIN" + ChatColor.GREEN + " chat.").send(sender)
+                ChatSystem.add(sender, Channel.ADMIN)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
-                val p = sender as Player
+                val p = sender
                 val oldChannel = ChatSystem.getChannel(p)
                 ChatSystem.add(p, Channel.ADMIN)
                 ChatSystem.msg(p, cast)
@@ -75,8 +75,8 @@ class Chat : CommandExecutor {
                 return
             }
             if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "STAFF" + ChatColor.BLUE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, Channel.STAFF)
+                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "STAFF" + ChatColor.GREEN + " chat.").send(sender as Player)
+                ChatSystem.add(sender, Channel.STAFF)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
                 val p = sender as Player
@@ -94,11 +94,11 @@ class Chat : CommandExecutor {
                 return
             }
             if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "DEV" + ChatColor.BLUE + " chat.").send(sender as Player)
-                ChatSystem.add(sender as Player, Channel.DEV)
+                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "DEV" + ChatColor.GREEN + " chat.").send(sender)
+                ChatSystem.add(sender, Channel.DEV)
             } else {
                 val cast = ChatUtils.formatCast(args, 0)
-                val p = sender as Player
+                val p = sender
                 val oldChannel = ChatSystem.getChannel(p)
                 ChatSystem.add(p, Channel.DEV)
                 ChatSystem.msg(p, cast)
@@ -137,37 +137,36 @@ class Chat : CommandExecutor {
             help(sender)
     }
 
+    private fun send(sender: CommandSender, c: Channel, cmd: String) {
+        if(ChatSystem.getChannel(sender as Player) == c)
+            FancyMessage("* ")
+                    .color(ChatColor.YELLOW)
+                    .then(c.name.toString())
+                    .color(ChatColor.GREEN)
+                    .command(cmd)
+                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(c) + ChatColor.YELLOW + " channel")
+                    .send(sender)
+        else
+            FancyMessage("  " + c.name.toString())
+                    .color(ChatColor.GREEN)
+                    .command(cmd)
+                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(c) + ChatColor.YELLOW + " channel")
+                    .send(sender)
+    }
+
     internal fun help(sender: CommandSender) {
         sender.sendMessage(ChatUtils.getFormattedHeader("Available Channels"))
-        FancyMessage("GLOBAL")
-                    .color(ChatColor.GREEN)
-                    .command("/c off")
-                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(Channel.GLOBAL) + ChatColor.YELLOW + " channel")
-                .send(sender)
-        FancyMessage("STAFF")
-                    .color(getChannelColor(Channel.STAFF, sender))
-                    .command("/c staff")
-                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(Channel.STAFF) + ChatColor.YELLOW + " channel")
-                .send(sender)
-        FancyMessage("ALERT")
-                    .color(getChannelColor(Channel.ALERT, sender))
-                    .command("/c alert")
-                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(Channel.ALERT) + ChatColor.YELLOW + " channel")
-                .send(sender)
-        FancyMessage("ADMIN")
-                    .color(getChannelColor(Channel.ADMIN, sender))
-                    .command("/c admin")
-                .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(Channel.ADMIN) + ChatColor.YELLOW + " channel")
-                .send(sender)
-        FancyMessage("DEV")
-                    .color(getChannelColor(Channel.DEV, sender))
-                    .command("/c dev")
-                    .tooltip("" + ChatColor.YELLOW + "Click to join the " + ChatSystem.getChannelName(Channel.DEV) + ChatColor.YELLOW + " channel")
-                .send(sender)
+        send(sender, Channel.GLOBAL, "/c off")
+        send(sender, Channel.STAFF, "/c staff")
+        send(sender, Channel.ALERT, "/c alert")
+        send(sender, Channel.ADMIN, "/c admin")
+        send(sender, Channel.DEV, "/c dev")
 
         sender.sendMessage("\n")
 
-        FancyMessage("Manage Settings")
+        FancyMessage("${ChatUtils.specialCharacters[1]} ")
+                    .color(ChatColor.DARK_GRAY)
+                    .then("Manage Settings")
                     .color(getChannelColor(Channel.ADMIN, sender))
                     .suggest("/c manage")
                     .tooltip("" + ChatColor.YELLOW + "Click to change settings")

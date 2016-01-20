@@ -41,7 +41,7 @@ class Dev : CommandExecutor {
             return true
         } else if(args[0].equals("gc")) {
             sender.sendMessage("" + ChatColor.YELLOW + "Running garbage collector....")
-            Message().append("" + ChatColor.YELLOW + "Staff member " + ChatColor.BLUE + sender.name + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
+            Message().append("" + ChatColor.YELLOW + "Staff member " + User(sender as Player).getDisplayRank().getNameColor() + sender.name + ChatColor.YELLOW + " is running the garbage collector...").broadcast(Rank.ADMIN)
             System.gc()
             sender.sendMessage("" + ChatColor.GREEN + "Successfully ran garbage collector.")
             return true

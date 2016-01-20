@@ -17,7 +17,7 @@ public enum Months {
 
     private int month = -1;
 
-    private Months(int month) {
+    Months(int month) {
         this.month = month;
     }
 

@@ -132,7 +132,6 @@ public class MOTDUtils {
             "Something happened", //Something happened
             "JumpPads - now with 250% more bounce!",
             "Deck the halls with cheesy breadsticks!",
-            "omnomnompotatoes.gif", //OM POTATOES (..sorry)
             "I think that dragon likes potatoes.",
             "That rainbow didn't taste like Skittles at all!",
             "Your server is bad and you should feel bad!",
@@ -141,7 +140,7 @@ public class MOTDUtils {
             "How did I get here? [THE END]",
             "What time is it? It's Muffin Time!",
             "Actually, it's 12:30.",
-            ":compileJava [100 Errors]", //I hate Java.[tm]
+            ":compileJava [1000 Errors]", //Java 99, now with a million errors!
             "Every other page, splat.",
             "I got a thousand dollars, now I'll get Starbucks.",
             "f u liek dis video raet comment n subskrieb",
@@ -154,7 +153,6 @@ public class MOTDUtils {
             "The moon landing was a fake!",
             "9/11 was a fak- AHH MY SPLEEEENNN", //we get it, "9/11 Truthers". You think 9/11 was fake. NOW GO AWAY. PLEASE. YOU'RE BEATING A DEAD HORSE FOR WHAT IT'S WORTH. </rant>
             "Poor Taren.", //if you don't get the reference, Taren (am I even getting that right? fuck it) is a Linus Media Group employee, i.e. the company(?) who makes LinusTechTips
-            "Derpy sister is derpy", //OHGOD WHAT IS JADEN'S SISTER DOING NOW
             "GNU Terry Pratchett", //reference to the "X-Clacks-Overhead: GNU Terry Pratchett" header in responses from some servers ( see: http://clacksoverhead.discworld.us/ )
             "314 clicks has resolved the issue.", //program not responding? CLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICKCLICK<and so on>
             "WE'VE BEEN SMECKLEDORFED!", //see: http://redd.it/3g2e5j
@@ -170,10 +168,10 @@ public class MOTDUtils {
             "That's a monsterous feline from that jukebox.", //jaden yet again
             "Too many splitkillers...", //*yawn* jaden, again.. (and agario)
             "Everybody do the flop!", //blame both asdfmovie and jaden
-            "ThePixelDev was thrown in the void by JadenJFilms", //again, jaden
+            "OdinAir was thrown in the void by JadenJFilms", //again, jaden
             "Mario must live on Mushroom Island!", //blame jaden 2k15 v1224
-            "JadenJFilms was thrown in the void by ThePixelDev",
-            "ThePixelDev was killed by Ste-wait, what?", //steve pls
+            "JadenJFilms was thrown in the void by OdinAir",
+            "OdinAir was killed by Ste-wait, what?", //steve pls
             "Monstercat - Now with 1,000% more Future Bass!", //also HOLY MOTHER OF WHAT, SOMEONE PREDICTED THE FUTURE (...bass) http://redd.it/3gxl3x
     };
 
@@ -222,7 +220,6 @@ public class MOTDUtils {
             "Fedora!",
             "Is a Beefy Miracle.", //reference to Fedora's "Beefy Miracle" release
             "Minty fresh!", //reference to both Linux Mint (another Linux (fine, GNU/Linux) distrobution...), and the mint flavour (whynotboth.jpg)
-            "USE GENTOO, NOOB",
             "Windows krill!",
             //"You Mac squid!", //disclaimer by Pixel: we do not condone the practice of calling mac users "squids" in real life.
     };
@@ -240,7 +237,7 @@ public class MOTDUtils {
     public static String getRandomMOTD() {
         //yes, hard-coded, full-out overrides. because why not.[tm]
         if(new CalendarUtils().getDay() == 3 && new CalendarUtils().isMonth(Months.MAY))
-            return "Happy birthday, Pixel! <3";
+            return "Happy birthday, Odin! <3";
         else if(new CalendarUtils().getDay() == 16 && new CalendarUtils().isMonth(Months.NOVEMBER))
             return "Happy birthday, Jaden! <3";
 

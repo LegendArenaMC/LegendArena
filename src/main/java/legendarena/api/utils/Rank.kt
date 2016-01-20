@@ -83,7 +83,7 @@ public enum class Rank {
         when(this) {
             Rank.NERD -> {
                 var u = User(p)
-                if(u.isNoob())
+                if(u.isNerd())
                     return true
                 return false
             }
@@ -100,7 +100,7 @@ public enum class Rank {
      */
     public fun getNameColor(): ChatColor {
         when(this) {
-            Rank.FOUNDER -> return ChatColor.DARK_AQUA
+            Rank.FOUNDER -> return ChatColor.LIGHT_PURPLE
             Rank.DEV -> return ChatColor.DARK_PURPLE
             Rank.ADMIN -> return ChatColor.DARK_RED
             Rank.MOD -> return ChatColor.RED

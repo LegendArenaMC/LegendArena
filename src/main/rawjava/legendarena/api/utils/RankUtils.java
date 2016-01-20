@@ -2,6 +2,7 @@ package legendarena.api.utils;
 
 import legendarena.api.exceptions.AreYouDrunkException;
 import legendarena.api.fanciful.FancyMessage;
+import legendarena.api.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -72,17 +73,17 @@ public class RankUtils {
             case MEMBERPLUS:
                 return "Buy the Member Plus rank on the store! [coming soon[tm]]";
             case VIP:
-                return "Run a YouTube channel with 5k+ subs, or stream with 3k+ viewers.";
+                return "Run a YouTube channel with 5k+ subs, or stream with 1k+ viewers.";
             case HELPER:
                 return "Apply when we're looking for staff!";
             case MOD:
                 return "Rank up from Helper by being a helpful staff member!";
             case ADMIN:
-                return "Same as moderator, rank up from Mod by being a helpful staff member!";
+                return "Same as helper to mod, rank up from Mod by being a helpful staff member!";
             case DEV:
-                return "Help out with the LA plugins enough that we hire you onto the dev team!";
+                return "Help out with the LA plugins enough!";
             case FOUNDER:
-                return "Sell your soul to Legend Arena. (just kidding - only founders gets this rank (duh))";
+                return "Sell your soul to Legend Arena. (in reality: you can't)";
 
             default:
                 return "Error - rank " + r + " was not recognized by howToGetRank()! (or it's the Member rank, in which case the method that is calling this is drunk)";
@@ -95,10 +96,6 @@ public class RankUtils {
             if(r.isRanked(p))
                 list[list.length] = p;
         return list;
-    }
-
-    public static int getRankId(Player p) {
-        return getRank(p).getInternalId();
     }
 
     public static int getDisplayRankId(Player p) {

@@ -6,6 +6,7 @@ package legendarena.commands.staff.punish
 
 import legendarena.api.fanciful.FancyMessage
 import legendarena.api.message.Message
+import legendarena.api.user.User
 import legendarena.api.utils.*
 
 import org.bukkit.Bukkit
@@ -27,17 +28,17 @@ class Ban : CommandExecutor {
             return true
         }
 
-        var staff = StaffPlayer(sender as Player)
+        var staff = User(sender as Player)
         var reason = ChatUtils.formatCast(args, 0)
 
         run(args[0], staff, reason)
         return true
     }
 
-    public fun run(p: String, staff: StaffPlayer, reason: String) {
+    public fun run(p: String, staff: User, reason: String) {
         var target = Bukkit.getPlayer(p)
         if(target != null)
-            target.kickPlayer(ChatUtils.getCustomMsg("Punish") + "You were banned by " + staff.getFormattedName() + ChatColor.GREEN + " for " + reason)
+            target.kickPlayer(ChatUtils.getCustomMsg("Punish") + "You were banned by " + staff.getName() + ChatColor.GREEN + " for " + reason)
 
         var broadcastMsg = FancyMessage(ChatUtils.getCustomMsg("Punish"))
                 .then("Player ")

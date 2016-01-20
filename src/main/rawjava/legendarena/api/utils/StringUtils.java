@@ -1,6 +1,8 @@
 package legendarena.api.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * This only exists because Kotlin doesn't have a lot of String.[x] utils, such as toLowerCase(), etc.
@@ -43,6 +45,10 @@ public class StringUtils {
 
     public static int getSize(String[] check) {
         return check.length;
+    }
+
+    public static Set<?> getKeySet(HashMap<?, ?> from) {
+        return from.keySet();
     }
 
 }

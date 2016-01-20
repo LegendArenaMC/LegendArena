@@ -7,6 +7,7 @@ package legendarena.scoreboard;
 import legendarena.api.utils.Rank;
 import legendarena.api.utils.RankUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -21,7 +22,7 @@ public class ScoreboardSystem {
             memberplus, member;
 
     private static String[] colorCodes = {
-            "§3",
+            "§d",
             "§5",
             "§4",
             "§c",
@@ -29,6 +30,16 @@ public class ScoreboardSystem {
             "§6",
             "§b",
             "§7"
+    };
+
+    private static String[] suffixes = {
+            "§8 | §7Founder",
+            "§8 | §7Dev",
+            "§8 | §7Admin",
+            "§8 | §7Mod",
+            "§8 | §7Helper",
+            "§8 | §7VIP",
+            "§8 | §7Member+"
     };
 
     private static boolean init = false;
@@ -49,36 +60,43 @@ public class ScoreboardSystem {
             founder = sb.registerNewTeam("Founder");
 
         founder.setPrefix(colorCodes[0]);
+        founder.setSuffix(suffixes[0]);
 
         if(dev == null)
             dev = sb.registerNewTeam("Dev");
 
         dev.setPrefix(colorCodes[1]);
+        dev.setSuffix(suffixes[1]);
 
         if(admin == null)
             admin = sb.registerNewTeam("Admin");
 
         admin.setPrefix(colorCodes[2]);
+        admin.setSuffix(suffixes[2]);
 
         if(mod == null)
             mod = sb.registerNewTeam("Mod");
 
         mod.setPrefix(colorCodes[3]);
+        mod.setSuffix(suffixes[3]);
 
         if(helper == null)
             helper = sb.registerNewTeam("Helper");
 
         helper.setPrefix(colorCodes[4]);
+        helper.setSuffix(suffixes[4]);
 
         if(vip == null)
             vip = sb.registerNewTeam("VIP");
 
         vip.setPrefix(colorCodes[5]);
+        vip.setSuffix(suffixes[5]);
 
         if(memberplus == null)
             memberplus = sb.registerNewTeam("MemberPlus");
 
         memberplus.setPrefix(colorCodes[6]);
+        memberplus.setSuffix(suffixes[6]);
 
         if(member == null)
             member = sb.registerNewTeam("Member");

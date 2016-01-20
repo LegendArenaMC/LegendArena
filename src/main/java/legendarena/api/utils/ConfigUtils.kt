@@ -97,11 +97,6 @@ public class ConfigUtils {
         }
     }
 
-    public fun setConfigVersion(ver: Int) {
-        addDefault("configVersion", ver)
-        this.confVersion = ver
-    }
-
     public fun genIfDoesNotExist(key: String) {
         if(!contains(key))
             genDefaults()
@@ -126,8 +121,9 @@ public class ConfigUtils {
     public fun genDefaults() {
         if(!shutup)
             log!!.log(Level.DEBUG, "Generating config from defaults...")
-        for(i in defaults.keySet())
-            set(i, defaults.get(i))
+        @Suppress("UNCHECKED_CAST")
+        for(i in StringUtils.getKeySet(defaults) as Set<String>)
+            set(i, defaults[i]!!)
         if(!shutup)
             log!!.log(Level.DEBUG, "Config generated.")
         saveConfig()

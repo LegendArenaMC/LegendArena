@@ -53,11 +53,15 @@ public class User {
         data!!.genIfDoesNotExist("uuid")
     }
 
+    public fun save() {
+        data!!.saveConfig()
+    }
+
     public fun setIsNerd(set: Boolean) {
         data!!.set("isNerd", set)
     }
 
-    public fun isNoob(): Boolean {
+    public fun isNerd(): Boolean {
         return data!!.get("isNerd") as Boolean
     }
 
@@ -78,7 +82,7 @@ public class User {
         data!!.set("reports.count", StringUtils.getSize(reports))
         Notification.alert("" + ChatColor.YELLOW + p!!.name + ChatColor.RED + " has been reported for reason " + ChatColor.YELLOW + reason + ChatColor.RED + "!")
 
-        data!!.saveConfig()
+        save()
     }
 
     public fun warn(reason: String) {
@@ -92,7 +96,7 @@ public class User {
         data!!.set("reports.count", StringUtils.getSize(warnings))
         Notification.alert("" + ChatColor.YELLOW + p!!.name + ChatColor.RED + " has been warned for reason " + ChatColor.YELLOW + reason)
 
-        data!!.saveConfig()
+        save()
     }
 
     public fun clearReports() {
@@ -102,7 +106,7 @@ public class User {
         data!!.set("reports.list", reports)
         data!!.set("reports.count", 0)
 
-        data!!.saveConfig()
+        save()
     }
 
     public fun hasBeenWarned(): Boolean {
@@ -160,7 +164,7 @@ public class User {
 
     public fun ban(reason: String, banner: String) {
         if(isBanned()) return
-
+        data!!.set("", true)
         data!!.saveConfig()
     }
 

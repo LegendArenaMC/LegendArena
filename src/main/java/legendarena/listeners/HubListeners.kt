@@ -31,7 +31,7 @@ public class HubListeners : Listener {
             if(ev.getItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "EnderBow"))
                 if(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))
                     return
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode)
+            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()))
                 ev.setCancelled(true)
             if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK)
                 return
@@ -49,7 +49,7 @@ public class HubListeners : Listener {
                 cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))
             }
         } catch(ex: Exception) {
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()) && !LegendArena().devMode)
+            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()))
                 ev.setCancelled(true)
         }
 

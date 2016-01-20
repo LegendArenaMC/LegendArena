@@ -1,6 +1,7 @@
 package legendarena
 
 import legendarena.api.utils.*
+import legendarena.chat.Notification
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
@@ -18,12 +19,6 @@ import org.bukkit.Bukkit
 import java.util.*
 
 class LegendArena : KotlinUtils() {
-
-    @Deprecated(message = "Use config key 'enable.debug' instead.")
-    /**
-     * Use the config key "enable.debug" instead.
-     */
-    public final var devMode: Boolean = if(ConfigUtils.config.get("enable.devserver") == null) false else ConfigUtils.config.get("enable.devserver") as Boolean
 
     override fun onEnable() {
         var p = Bukkit.getPluginManager().getPlugin("LegendArena")
@@ -91,7 +86,7 @@ class LegendArena : KotlinUtils() {
 
         setup.announceStatus("Finishing up...")
 
-        VersionUtils.setVersion("LegendArena", "1.1-SNAPSHOT")
+        VersionUtils.setVersion("LegendArena", "1.2-SNAPSHOT")
         VersionUtils.setVersion("Kotlin", "0.12.613")
         ScoreboardSystem.init()
         fixRankShit()
@@ -102,7 +97,6 @@ class LegendArena : KotlinUtils() {
     internal fun setupConfig() {
         var config = ConfigUtils.config
         var configVer = 3
-        config.setConfigVersion(configVer)
         config.addDefault("debug", true)
         config.addDefault("enable.lobbyServer", true)
         config.addDefault("hub.hubworld", "world")
@@ -113,11 +107,11 @@ class LegendArena : KotlinUtils() {
         config.addDefault("emeralds.mysql.database", "emeralds")
         config.addDefault("emeralds.sqlite.file", "emeralds.db")
         config.addDefault("enable.devserver", false)
-        config.genIfDoesNotExist("configVersion")
+        config.genIfDoesNotExist("debug")
     }
 
     private fun fixRankShit() {
-        //fucking /reload breaking the scoreboard system DansGame
+        //fuck reload
         for(p in Bukkit.getOnlinePlayers())
             ScoreboardSystem.setRank(p, RankUtils.getRank(p))
     }

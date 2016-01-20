@@ -186,18 +186,6 @@ public class ChatSystem {
     }
 
     /**
-     * Sends a staff notice to all online staff.<br><br>
-     *
-     * <strong>Use <code>Notification.alert()</code> instead.</strong>
-     *
-     * @param msg The notice to send
-     */
-    @Deprecated
-    public static void notice(String msg) {
-        Notification.alert(msg);
-    }
-
-    /**
      * Sends a chat message as a player.<br><br>
      *
      * Pro-tip: To send a message in a certain channel temporarily, set the player's channel to the needed channel, send the message, and set the channel back to what it was.
@@ -244,7 +232,7 @@ public class ChatSystem {
         // (plus, this lets me just add channels to the channel class + implement them and they're ready)
 
         built += getChannelName(getChannel(p)) + " " + ChatColor.DARK_GRAY + "|" + ChatColor.YELLOW + " ";
-        built += RankUtils.getRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.specialCharacters[1] + " " + ChatColor.YELLOW;
+        built += RankUtils.getDisplayRank(p).getNameColor() + p.getName() + " " + ChatColor.DARK_GRAY + ChatUtils.specialCharacters[1] + " " + ChatColor.YELLOW;
         built += m;
 
         return built;

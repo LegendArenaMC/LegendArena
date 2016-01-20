@@ -34,7 +34,7 @@ class Tag {
 
         public fun show(p: Player) {
             val inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Tag Selector")
-            inv.setItem(2, createItem("FOUNDER", 11))
+            inv.setItem(2, createItem("FOUNDER", 6))
             inv.setItem(3, createItem("DEV", 10))
             inv.setItem(4, createItem("ADMIN", 14))
             inv.setItem(5, createItem("MOD", 14, true))
