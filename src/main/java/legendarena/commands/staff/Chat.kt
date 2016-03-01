@@ -124,13 +124,8 @@ class Chat : CommandExecutor {
 
             if(args[1].equals("allowsmute"))
                 ChatSystem.allowShadowMute(!ChatSystem.isShadowMuteAllowed())
-
-            else if(args[1].equals("globalmute")) {
-                if(ChatSystem.isChatMuted())
-                    ChatSystem.setGlobalMute(false)
-                else
-                    ChatSystem.setGlobalMute(true)
-            }
+            else if(args[1].equals("globalmute"))
+                ChatSystem.setGlobalMute(!ChatSystem.isChatMuted())
         }
 
         else

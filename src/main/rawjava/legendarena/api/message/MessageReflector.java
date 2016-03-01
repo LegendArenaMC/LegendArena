@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Reflects titles and subtitles, version independent. Heavily adapted before use.
  *
- * <br><br>Note by Pixel: Taken from NetworkUtilities, with minor tweaks. (ps: go check it out! the plugin is seriously awesome)
+ * <br><br>Note by Odin: Taken from NetworkUtilities, with minor tweaks. (ps: go check it out! the plugin is seriously awesome)
  *
  * @version 1.1.0
  * @author Maxim Van de Wynckel

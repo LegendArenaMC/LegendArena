@@ -1,6 +1,6 @@
 package legendarena.motd
 
-public enum class ListType {
+enum class ListType {
 
     SONG,
     RANDOM,

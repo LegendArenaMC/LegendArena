@@ -16,27 +16,23 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-public class MainMenuListener : Listener {
+class MainMenuListener : Listener {
 
-    @EventHandler
-    public fun onInventoryClick(ev: InventoryClickEvent) {
-        if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Main Menu")) return
+    @EventHandler fun onInventoryClick(ev: InventoryClickEvent) {
+        if(!ev.inventory.name.equals(ChatUtils.getCustomMsg("Menus") + "Main Menu")) return
         try {
-            if(ev.getCurrentItem().getItemMeta() == null) return
-            if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Warper")) {
-                ev.getWhoClicked().closeInventory()
-                MinigameMenu().show(ev.getWhoClicked() as Player)
-                Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Particle Selector")) {
-                ev.getWhoClicked().closeInventory()
-                ParticleMenu().show(ev.getWhoClicked() as Player)
-                Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
-            } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Tag Selector")) {
-                ev.getWhoClicked().closeInventory()
-                Tag().tagGUI(ev.getWhoClicked() as Player)
-                Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
+            if(ev.currentItem.itemMeta == null) return
+            if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Warper")) {
+                ev.whoClicked.closeInventory()
+                MinigameMenu().show(ev.whoClicked as Player)
+            } else if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Particle Selector")) {
+                ev.whoClicked.closeInventory()
+                ParticleMenu().show(ev.whoClicked as Player)
+            } else if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Tag Selector")) {
+                ev.whoClicked.closeInventory()
+                Tag().tagGUI(ev.whoClicked as Player)
             }
-            ev.setCancelled(true)
+            ev.isCancelled = true
         } catch(ignore: Exception) {
             // Ignore the error
         }

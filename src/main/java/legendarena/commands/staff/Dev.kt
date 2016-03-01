@@ -1,14 +1,11 @@
 package legendarena.commands.staff
 
-import legendarena.api.emeralds.EmeraldsCore
 import legendarena.api.message.Message
+import legendarena.api.message.MessageType
 import legendarena.api.user.User
 import legendarena.api.utils.*
 import legendarena.hub.JumpPad
-import legendarena.scoreboard.ScoreboardSystem
-import legendarena.staffutils.VanishUtils
 import org.bukkit.ChatColor
-import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -50,7 +47,7 @@ class Dev : CommandExecutor {
             return true
         } else if(args[0].equals("cooldown")) {
             var c = Cooldown(999.0)
-            sender.sendMessage(c.getTimeRemaining())
+            Message(MessageType.ACTIONBAR).append(c.getTimeRemaining()).send(sender)
             return true
         } else if(args[0].equals("reporttest")) {
             User(sender as Player).report("Test report via /dev command")
@@ -69,23 +66,23 @@ class Dev : CommandExecutor {
         return true
     }
 
-    public fun getMaxMemory(): Double {
+    fun getMaxMemory(): Double {
         return Runtime.getRuntime().maxMemory().toDouble()
     }
 
-    public fun getTotalMemory(): Double {
+    fun getTotalMemory(): Double {
         return Runtime.getRuntime().totalMemory().toDouble()
     }
 
-    public fun getFreeMemory(): Double {
+    fun getFreeMemory(): Double {
         return Runtime.getRuntime().freeMemory().toDouble()
     }
 
-    public fun getUsedMemory(): Double {
+    fun getUsedMemory(): Double {
         return (getTotalMemory() - getFreeMemory()).toDouble()
     }
 
-    public fun getUsedMemoryPercentage(): Double {
+    fun getUsedMemoryPercentage(): Double {
         val untruncated = ((getUsedMemory() / getMaxMemory()) * 100L)
         return Math.round(untruncated * 100).toDouble() / 100 //2.D.P Precision
     }

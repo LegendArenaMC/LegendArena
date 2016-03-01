@@ -28,11 +28,12 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
+@Suppress("UsePropertyAccessSyntax")
 class Tag {
 
     private class TagGUI {
 
-        public fun show(p: Player) {
+        fun show(p: Player) {
             val inv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Tag Selector")
             inv.setItem(2, createItem("FOUNDER", 6))
             inv.setItem(3, createItem("DEV", 10))
@@ -66,96 +67,94 @@ class Tag {
 
     }
 
-    public class TagListener : Listener {
+    class TagListener : Listener {
 
-        public fun setTag(p: Player, r: Rank?) {
+        fun setTag(p: Player, r: Rank?) {
             if(r == null) {
                 RankUtils.clearTag(p)
-                Message().append("" + ChatColor.GREEN + "Cleared tag.").setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(p)
+                Message().append("" + ChatColor.GREEN + "Cleared tag.").send(p)
                 return
             }
             RankUtils.setTag(p, r)
             ScoreboardSystem.setRank(p, r)
-            Message().append("" + ChatColor.GREEN + "Tagged yourself as a " + r.getNameColor() + r).setSound(Sound.ORB_PICKUP).setPitch(1.0f, 1.5f).send(p)
+            Message().append("" + ChatColor.GREEN + "Tagged yourself as a " + r.getNameColor() + r).setSound(Sound.BLOCK_NOTE_PLING).setPitch(1.0f, 1.5f).send(p)
         }
 
-        @EventHandler
-        public fun onInventoryClick(ev: InventoryClickEvent) {
-            if(!ev.getInventory().getName().equals(ChatUtils.getCustomMsg("Menus") + "Tag Selector")) return
+        @EventHandler fun onInventoryClick(ev: InventoryClickEvent) {
+            if(!ev.inventory.name.equals(ChatUtils.getCustomMsg("Menus") + "Tag Selector")) return
             try {
-                if(ev.getCurrentItem().getItemMeta() == null) return
-                var p = ev.getWhoClicked() as Player
-                var itemName = ev.getCurrentItem().getItemMeta().getDisplayName()
+                if(ev.currentItem.itemMeta == null) return
+                var p = ev.whoClicked as Player
+                var itemName = ev.currentItem.itemMeta.displayName
                 if(itemName.equals("" + ChatColor.GREEN + "FOUNDER")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.FOUNDER)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "DEV")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.DEV)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "ADMIN")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.ADMIN)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "MOD")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.MOD)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "HELPER")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.HELPER)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "VIP")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.VIP)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "MEMBER+")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.MEMBERPLUS)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "MEMBER")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, Rank.MEMBER)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "Clear Tag")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     try {
                         setTag(p, null)
                     } catch(ex: AreYouDrunkException) {
                         p.sendMessage("" + ChatColor.RED + "You cannot tag yourself as that!")
                     }
                 } else if(itemName.equals("" + ChatColor.GREEN + "Back")) {
-                    ev.getWhoClicked().closeInventory()
+                    ev.whoClicked.closeInventory()
                     MainMenu().show(p)
-                    Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(p)
                 }
 
-                ev.setCancelled(true)
+                ev.isCancelled = true
             } catch(ignore: Exception) {
                 // Ignore the error
             }
@@ -164,7 +163,7 @@ class Tag {
 
     }
 
-    public fun tagGUI(sender: CommandSender) {
+    fun tagGUI(sender: CommandSender) {
         TagGUI().show(sender as Player)
     }
 

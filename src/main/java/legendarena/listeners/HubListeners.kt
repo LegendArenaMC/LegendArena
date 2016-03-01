@@ -17,40 +17,40 @@ import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import java.util.*
 
-public class HubListeners : Listener {
+class HubListeners : Listener {
 
     private val cooldown = HashMap<UUID, Cooldown>()
 
-    @EventHandler(ignoreCancelled = true) public fun listenForDrop(ev: PlayerDropItemEvent) {
-        if(HubWarper.isExempt(ev.getPlayer().getUniqueId())) return
-        ev.setCancelled(true)
+    @EventHandler(ignoreCancelled = true) fun listenForDrop(ev: PlayerDropItemEvent) {
+        if(HubWarper.isExempt(ev.player.uniqueId)) return
+        ev.isCancelled = true
     }
 
-    @EventHandler public fun listenForInteract(ev: PlayerInteractEvent) {
+    @EventHandler fun listenForInteract(ev: PlayerInteractEvent) {
         try {
-            if(ev.getItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "EnderBow"))
-                if(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+            if(ev.item.itemMeta.displayName.equals("" + ChatColor.GREEN + "EnderBow"))
+                if(ev.action.equals(Action.RIGHT_CLICK_AIR) || ev.action.equals(Action.RIGHT_CLICK_BLOCK))
                     return
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()))
-                ev.setCancelled(true)
-            if(ev.getAction() !== Action.RIGHT_CLICK_AIR && ev.getAction() !== Action.RIGHT_CLICK_BLOCK)
+            if(!HubWarper.isExempt(ev.player.uniqueId))
+                ev.isCancelled = true
+            if(ev.action !== Action.RIGHT_CLICK_AIR && ev.action !== Action.RIGHT_CLICK_BLOCK)
                 return
-            if(ev.getItem().getItemMeta().getDisplayName().equals(HubWarper.getMainMenu(ev.getPlayer().getName()).getItemMeta().getDisplayName())) {
-                if(cooldown.containsKey(ev.getPlayer().getUniqueId())) {
-                    val c = cooldown[ev.getPlayer().getUniqueId()]
+            if(ev.item.itemMeta.displayName.equals(HubWarper.getMainMenu(ev.player.name).itemMeta.displayName)) {
+                if(cooldown.containsKey(ev.player.uniqueId)) {
+                    val c = cooldown[ev.player.uniqueId]
                     if(!c!!.done()) {
-                        Message(MessageType.ACTIONBAR).append("" + ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.getPlayer())
+                        Message(MessageType.ACTIONBAR).append("" + ChatColor.RED + "Ow, that hurts! :( ( " + c.getTimeRemaining() + ChatColor.RED + " )").send(ev.player)
                         return
                     }
                 }
-                MainMenu().show(ev.getPlayer())
-                if(!ev.isCancelled())
-                    ev.setCancelled(true)
-                cooldown.put(ev.getPlayer().getUniqueId(), Cooldown(1.0))
+                MainMenu().show(ev.player)
+                if(!ev.isCancelled)
+                    ev.isCancelled = true
+                cooldown.put(ev.player.uniqueId, Cooldown(1.0))
             }
         } catch(ex: Exception) {
-            if(!HubWarper.isExempt(ev.getPlayer().getUniqueId()))
-                ev.setCancelled(true)
+            if(!HubWarper.isExempt(ev.player.uniqueId))
+                ev.isCancelled = true
         }
 
 

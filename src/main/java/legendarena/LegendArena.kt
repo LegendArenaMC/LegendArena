@@ -86,17 +86,16 @@ class LegendArena : KotlinUtils() {
 
         setup.announceStatus("Finishing up...")
 
-        VersionUtils.setVersion("LegendArena", "1.2-SNAPSHOT")
-        VersionUtils.setVersion("Kotlin", "0.12.613")
+        VersionUtils.setVersion("LegendArena", "1.3-SNAPSHOT")
+        VersionUtils.setVersion("Kotlin", "1.0.0")
         ScoreboardSystem.init()
         fixRankShit()
 
-        setup.announceStatus("LegendArena v" + p.getDescription().getVersion() + " fully loaded.")
+        setup.announceStatus("LegendArena v${p.description.version} fully loaded.")
     }
 
     internal fun setupConfig() {
         var config = ConfigUtils.config
-        var configVer = 3
         config.addDefault("debug", true)
         config.addDefault("enable.lobbyServer", true)
         config.addDefault("hub.hubworld", "world")

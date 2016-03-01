@@ -20,10 +20,10 @@ import java.util.*
 
 class MinigameMenu {
 
-    public var invName: String = ChatUtils.getCustomMsg("Menus") + "Warper"
+    var invName: String = ChatUtils.getCustomMsg("Menus") + "Warper"
     private var inv: Inventory? = null
 
-    public constructor() {
+    constructor() {
         inv = Bukkit.createInventory(null, 36, invName)
 
         inv!!.setItem(12, MenuUtils.createItem(Material.DISPENSER, "" + ChatColor.GREEN + "Hub"))
@@ -32,33 +32,31 @@ class MinigameMenu {
         inv!!.setItem(31, MenuUtils.createItem(Material.ARROW, "" + ChatColor.GREEN + "Back"))
     }
 
-    public fun show(p: Player) {
+    fun show(p: Player) {
         p.openInventory(inv)
     }
 
-    public inner class Listener : org.bukkit.event.Listener {
+    inner class Listener : org.bukkit.event.Listener {
 
-        @EventHandler
-        public fun onInventoryClick(ev: InventoryClickEvent) {
+        @EventHandler fun onInventoryClick(ev: InventoryClickEvent) {
 
             try {
-                if(!ev.getInventory().getName().equals(invName)) return
-                if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Hub")) {
-                    ev.setCancelled(true)
-                    ev.getWhoClicked().closeInventory()
-                    val p = ev.getWhoClicked() as Player
-                    p.teleport(Bukkit.getWorld(ConfigUtils.config.get("hub.hubworld") as String).getSpawnLocation())
-                } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Never Have I Ever")) {
-                    ev.setCancelled(true)
-                    ev.getWhoClicked().closeInventory()
-                    ev.getWhoClicked().sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
-                } else if(ev.getCurrentItem().getItemMeta().getDisplayName().equals("" + ChatColor.GREEN + "Back")) {
-                    ev.setCancelled(true)
-                    ev.getWhoClicked().closeInventory()
-                    MainMenu().show(ev.getWhoClicked() as Player)
-                    Message().setSound(Sound.WOOD_CLICK).setPitch(1.0f, 1.1f).send(ev.getWhoClicked() as Player)
+                if(!ev.inventory.name.equals(invName)) return
+                if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Hub")) {
+                    ev.isCancelled = true
+                    ev.whoClicked.closeInventory()
+                    val p = ev.whoClicked as Player
+                    p.teleport(Bukkit.getWorld(ConfigUtils.config.get("hub.hubworld") as String).spawnLocation)
+                } else if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Never Have I Ever")) {
+                    ev.isCancelled = true
+                    ev.whoClicked.closeInventory()
+                    ev.whoClicked.sendMessage("" + ChatColor.GREEN + "Totally not a hint towards an actual minigame that works, nope, no hints here </sarcasm>")
+                } else if(ev.currentItem.itemMeta.displayName.equals("" + ChatColor.GREEN + "Back")) {
+                    ev.isCancelled = true
+                    ev.whoClicked.closeInventory()
+                    MainMenu().show(ev.whoClicked as Player)
                 }
-                ev.setCancelled(true)
+                ev.isCancelled = true
             } catch(ignore: Exception) {
                 // Ignore the error
             }

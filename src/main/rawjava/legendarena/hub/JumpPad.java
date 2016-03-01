@@ -22,7 +22,7 @@ public class JumpPad {
 
     public static void jump(Player p) {
         p.setVelocity(p.getLocation().getDirection().multiply(3.0D).setY(1));
-        new Message().setSound(Sound.BAT_TAKEOFF).setPitch(1.0f, 1.5f).send(p);
+        new Message().setSound(Sound.ENTITY_BAT_TAKEOFF).setPitch(1.0f, 1.5f).send(p);
     }
 
     public static class JumpPadListener implements Listener {

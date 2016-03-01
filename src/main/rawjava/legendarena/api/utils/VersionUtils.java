@@ -10,14 +10,6 @@ public class VersionUtils {
         return "1.3";
     }
 
-    @Deprecated
-    /**
-     * Use getAPIVersionId() instead.
-     */
-    public static int getAPIVersionInt() {
-        return 3;
-    }
-
     public static double getAPIVersionId() {
         return 3.0;
     }

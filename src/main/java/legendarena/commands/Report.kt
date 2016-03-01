@@ -13,6 +13,7 @@ import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import java.util.*
 
 public class Report : CommandExecutor {
 
@@ -40,8 +41,17 @@ public class Report : CommandExecutor {
                     return true
                 }
                 sender.sendMessage(ChatUtils.getFormattedHeader("Reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).getName() + ChatColor.GRAY + " (" + user.getReportAmount() + ")"))
+                var l = HashMap<String, Int>()
                 for(report in reportList) {
-                    sender.sendMessage("" + ChatColor.GRAY + "(#" + reportId + ") " + ChatColor.RED + report)
+                    if(l.containsKey(report))
+                        l.put(report, l[report]!! + 1)
+                    else
+                        l.put(report, 1)
+                }
+                for(rep in l.keys) {
+                    var i = "";
+                    if(l[rep]!! > 1) i = " " + ChatColor.GRAY + "(x${l[rep]})"
+                    sender.sendMessage("" + ChatColor.GRAY + "(#" + reportId + ") " + ChatColor.RED + rep + i)
                     reportId++
                 }
                 return true
