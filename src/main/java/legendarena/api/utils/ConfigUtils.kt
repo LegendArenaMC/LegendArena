@@ -4,7 +4,6 @@
 
 package legendarena.api.utils
 
-import legendarena.api.exceptions.AreYouDrunkException
 import legendarena.api.log.BukLog
 import legendarena.api.log.Level
 import org.bukkit.Bukkit
@@ -20,7 +19,7 @@ import java.util.HashMap
  *
  * Also: WHY THE FUCK DO YOU NOT WORK. WHAT THE FUCK IS WRONG WITH YOU, YOU IDIOTIC PIECE OF CRAP, CONFIGUTILS. FUCK YOU. /innerrage
  */
-public class ConfigUtils {
+class ConfigUtils {
 
     private var config: FileConfiguration? = null
     private var configFile: File? = null
@@ -30,10 +29,10 @@ public class ConfigUtils {
     private var confVersion = 1
     private var shutup = false
 
-    public constructor(p: Plugin) {
+    constructor(p: Plugin) {
         this.log = BukLog(p)
 
-        configFile = File(p.getDataFolder().getAbsolutePath(), "Config.yml")
+        configFile = File(p.dataFolder.absolutePath, "Config.yml")
 
         this.p = p
         try {
@@ -43,10 +42,10 @@ public class ConfigUtils {
         }
     }
 
-    public constructor(p: Plugin, fileName: String) {
+    constructor(p: Plugin, fileName: String) {
         this.log = BukLog(p)
 
-        configFile = File(p.getDataFolder().getAbsolutePath(), fileName + ".yml")
+        configFile = File(p.dataFolder.absolutePath, fileName + ".yml")
 
         this.p = p
         try {
@@ -56,7 +55,7 @@ public class ConfigUtils {
         }
     }
 
-    public constructor(p: Plugin, f: File) {
+    constructor(p: Plugin, f: File) {
         this.log = BukLog(p)
 
         configFile = f
@@ -69,7 +68,7 @@ public class ConfigUtils {
         }
     }
 
-    public constructor(p: Plugin, f: File, shutup: Boolean) {
+    constructor(p: Plugin, f: File, shutup: Boolean) {
         this.shutup = shutup
         this.log = BukLog(p)
 
@@ -83,7 +82,7 @@ public class ConfigUtils {
         }
     }
 
-    public fun saveConfig() {
+    fun saveConfig() {
         try {
             config!!.save(configFile)
         } catch(ex: IOException) {
@@ -93,32 +92,32 @@ public class ConfigUtils {
             BukLog(p!!).log(Level.INTERNALERROR, "[[[ BEGIN ERROR SPAM ]]]")
             Bukkit.getLogger().info(" ")
             ex.printStackTrace()
-            BukLog(p!!).log(Level.INTERNALERROR, "Failed to save config for plugin \"" + p!!.getDescription().getName() + "\"! (see above for error spam)")
+            BukLog(p!!).log(Level.INTERNALERROR, "Failed to save config for plugin \"" + p!!.description.name + "\"! (see above for error spam)")
         }
     }
 
-    public fun genIfDoesNotExist(key: String) {
+    fun genIfDoesNotExist(key: String) {
         if(!contains(key))
             genDefaults()
     }
 
-    public fun contains(key: String): Boolean {
+    fun contains(key: String): Boolean {
         return config!!.contains(key)
     }
 
-    public fun set(key: String, set: Any) {
+    fun set(key: String, set: Any) {
         config!!.set(key, set)
     }
 
-    public fun addDefault(key: String, set: Any) {
+    fun addDefault(key: String, set: Any) {
         defaults.put(key, set)
     }
 
-    public fun get(key: String): Any? {
+    fun get(key: String): Any? {
         return config!!.get(key)
     }
 
-    public fun genDefaults() {
+    fun genDefaults() {
         if(!shutup)
             log!!.log(Level.DEBUG, "Generating config from defaults...")
         @Suppress("UNCHECKED_CAST")
@@ -129,7 +128,7 @@ public class ConfigUtils {
         saveConfig()
     }
 
-    public fun resetConfig() {
+    fun resetConfig() {
         try {
             configFile!!.delete()
         } catch(ex: IOException) {
@@ -140,12 +139,12 @@ public class ConfigUtils {
 
         try {
             //thanks java[tm]
-            p!!.getDataFolder().mkdirs()
+            p!!.dataFolder.mkdirs()
             configFile!!.createNewFile()
         } catch(ex: IOException) {
             if(shutup)
                 throw Exception("Could not reset configuration!")
-            BukLog(p!!).dumpError(ex, "resetting configuration for plugin " + p!!.getDescription().getName())
+            BukLog(p!!).dumpError(ex, "resetting configuration for plugin " + p!!.description.name)
             throw Exception("Could not reset configuration!")
         }
 

@@ -2,7 +2,7 @@ package legendarena.chat
 
 import legendarena.api.utils.Rank
 
-public enum class Channel {
+enum class Channel {
 
     ADMIN(Rank.ADMIN),
     DEV(Rank.DEV),
@@ -20,7 +20,7 @@ public enum class Channel {
         rank = Rank.MEMBER
     }
 
-    public fun getRank(): Rank {
+    fun getRank(): Rank {
         return rank
     }
 

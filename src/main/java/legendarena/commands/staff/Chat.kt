@@ -22,92 +22,44 @@ class Chat : CommandExecutor {
         return if(c.getRank().isRanked(p)) ChatColor.GREEN else ChatColor.RED
     }
 
+    fun switchChat(sender: CommandSender, c: Channel, args: Array<String>) {
+        if(!c.getRank().isRanked(sender as Player)) {
+            RankUtils.fancyNoPermissions(c.getRank(), sender)
+            return
+        }
+        if(StringUtils.getSize(args) == 1) {
+            //Enter channel
+            Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.WHITE + c.toString() + ChatColor.GREEN + " chat.").send(sender)
+            if(c == Channel.GLOBAL)
+                ChatSystem.remove(sender)
+            else
+                ChatSystem.add(sender, c)
+        } else {
+            if(c == Channel.GLOBAL)
+                ChatSystem.remove(sender)
+            val cast = ChatUtils.formatCast(args, 0)
+            val p = sender
+            val oldChannel = ChatSystem.getChannel(p)
+            ChatSystem.add(p, c)
+            ChatSystem.msg(p, cast)
+            if(oldChannel == Channel.GLOBAL)
+                ChatSystem.remove(p)
+            else
+                ChatSystem.add(p, oldChannel)
+        }
+    }
+
     private fun run(sender: CommandSender, args: Array<String>) {
         if(StringUtils.getSize(args) == 0) {
             help(sender)
             return
         }
 
-        if(args[0].equals("off")) {
-            Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "GLOBAL" + ChatColor.GREEN + " chat.").send(sender as Player)
-            ChatSystem.remove(sender)
-        } else if(args[0].equals("alert")) {
-            if(!Rank.MOD.isRanked(sender as Player)) {
-                RankUtils.fancyNoPermissions(Rank.MOD, sender)
-                return
-            }
-            if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ALERT" + ChatColor.GREEN + " chat.").send(sender)
-                ChatSystem.add(sender, Channel.ALERT)
-            } else {
-                val cast = ChatUtils.formatCast(args, 0)
-                val p = sender
-                val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, Channel.ALERT)
-                ChatSystem.msg(p, cast)
-                if(oldChannel == Channel.GLOBAL)
-                    ChatSystem.remove(p)
-                else
-                    ChatSystem.add(p, oldChannel)
-            }
-        } else if(args[0].equals("admin")) {
-            if(!Rank.ADMIN.isRanked(sender as Player)) {
-                RankUtils.fancyNoPermissions(Rank.ADMIN, sender)
-                return
-            }
-            if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "ADMIN" + ChatColor.GREEN + " chat.").send(sender)
-                ChatSystem.add(sender, Channel.ADMIN)
-            } else {
-                val cast = ChatUtils.formatCast(args, 0)
-                val p = sender
-                val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, Channel.ADMIN)
-                ChatSystem.msg(p, cast)
-                if(oldChannel == Channel.GLOBAL)
-                    ChatSystem.remove(p)
-                else
-                    ChatSystem.add(p, oldChannel)
-            }
-        } else if(args[0].equals("staff")) {
-            if(!Rank.HELPER.isRanked(sender)) {
-                RankUtils.fancyNoPermissions(Rank.HELPER, sender)
-                return
-            }
-            if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "STAFF" + ChatColor.GREEN + " chat.").send(sender as Player)
-                ChatSystem.add(sender, Channel.STAFF)
-            } else {
-                val cast = ChatUtils.formatCast(args, 0)
-                val p = sender as Player
-                val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, Channel.STAFF)
-                ChatSystem.msg(p, cast)
-                if(oldChannel == Channel.GLOBAL)
-                    ChatSystem.remove(p)
-                else
-                    ChatSystem.add(p, oldChannel)
-            }
-        } else if(args[0].equals("dev")) {
-            if(!Rank.DEV.isRanked(sender as Player)) {
-                RankUtils.fancyNoPermissions(Rank.DEV, sender)
-                return
-            }
-            if(StringUtils.getSize(args) == 1) {
-                Message().append(ChatUtils.getCustomMsg("Chat") + "Entered " + ChatColor.RED + "DEV" + ChatColor.GREEN + " chat.").send(sender)
-                ChatSystem.add(sender, Channel.DEV)
-            } else {
-                val cast = ChatUtils.formatCast(args, 0)
-                val p = sender
-                val oldChannel = ChatSystem.getChannel(p)
-                ChatSystem.add(p, Channel.DEV)
-                ChatSystem.msg(p, cast)
-                if(oldChannel == Channel.GLOBAL)
-                    ChatSystem.remove(p)
-                else
-                    ChatSystem.add(p, oldChannel)
-            }
-        }
+        if(args[0].equals("off")) switchChat(sender, Channel.GLOBAL, args)
+        else if(args[0].equals("alert")) switchChat(sender, Channel.ALERT, args)
+        else if(args[0].equals("admin")) switchChat(sender, Channel.ADMIN, args)
+        else if(args[0].equals("staff")) switchChat(sender, Channel.STAFF, args)
+        else if(args[0].equals("dev")) switchChat(sender, Channel.DEV, args)
 
         else if(args[0].equals("manage")) {
             if(!Rank.ADMIN.isRanked(sender as Player)) {
@@ -128,8 +80,7 @@ class Chat : CommandExecutor {
                 ChatSystem.setGlobalMute(!ChatSystem.isChatMuted())
         }
 
-        else
-            help(sender)
+        else help(sender)
     }
 
     private fun send(sender: CommandSender, c: Channel, cmd: String) {

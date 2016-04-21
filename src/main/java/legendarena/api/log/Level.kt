@@ -1,6 +1,6 @@
 package legendarena.api.log
 
-public enum class Level {
+enum class Level {
 
     INFO,
     SEVERE,
@@ -8,7 +8,7 @@ public enum class Level {
     INTERNALERROR,
     WARNING,
     ITSALLBROKEN,
-    ITBROKE, //shameless "i borked it" level of logging
+    ITBROKE,
     DEBUG
 
 }

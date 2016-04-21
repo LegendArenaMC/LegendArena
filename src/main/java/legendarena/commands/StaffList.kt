@@ -31,10 +31,10 @@ class StaffList : CommandExecutor {
         }
         for(p in staffOnline) {
            msg.then("\n")
-                    .then(p.getName())
+                    .then(p.name)
                         .color(RankUtils.getDisplayRank(p).getNameColor())
-                        .suggest("/msg " + p.getName() + " ")
-                        .tooltip("Click to message " + p.getName())
+                        .suggest("/msg " + p.name + " ")
+                        .tooltip("Click to message " + p.name)
                     .then(" // ")
                         .color(ChatColor.DARK_GRAY)
                     .then(RankUtils.getDisplayRank(p).toString())

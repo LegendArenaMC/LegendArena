@@ -1,11 +1,9 @@
 package legendarena
 
 import legendarena.api.utils.*
-import legendarena.chat.Notification
 import legendarena.commands.*
 import legendarena.commands.staff.*
 import legendarena.commands.staff.punish.*
-import legendarena.hub.HubWarper
 import legendarena.hub.JumpPad
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
@@ -16,7 +14,6 @@ import legendarena.listeners.menu.*
 import legendarena.scoreboard.ScoreboardSystem
 import legendarena.utils.ConfigUtils
 import org.bukkit.Bukkit
-import java.util.*
 
 class LegendArena : KotlinUtils() {
 
@@ -65,7 +62,6 @@ class LegendArena : KotlinUtils() {
         setup.registerListener(HubListeners())
         setup.registerListener(PlayerJoinListener())
         setup.registerListener(JumpPad.JumpPadListener())
-        setup.registerListener(PlayerMoveListener())
         setup.registerListener(AntiHungerListener())
         setup.registerListener(BlockPlaceListener())
         setup.registerListener(PlayerDamageListener())

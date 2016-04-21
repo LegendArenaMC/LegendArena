@@ -26,13 +26,13 @@ class Message {
 
     private var reflector = MessageReflector()
 
-    public constructor() {}
+    constructor() {}
 
-    public constructor(type: MessageType) {
+    constructor(type: MessageType) {
         this.type = type
     }
 
-    public fun append(msg: String): Message {
+    fun append(msg: String): Message {
         if(type == MessageType.FANCIFUL)
             throw ClassCastException("You can't append a String onto a FancyMessage!")
         if(builder == null)
@@ -41,7 +41,7 @@ class Message {
         return this
     }
 
-    public fun append(color: ChatColor): Message {
+    fun append(color: ChatColor): Message {
         if(type == MessageType.FANCIFUL)
             throw ClassCastException("You can't append a ChatColor onto a FancyMessage!")
         if(builder == null)
@@ -50,7 +50,7 @@ class Message {
         return this
     }
 
-    public fun append(msg: FancyMessage): Message {
+    fun append(msg: FancyMessage): Message {
         if(type != MessageType.FANCIFUL) {
             if(builder != null)
                 builder = null
@@ -60,31 +60,31 @@ class Message {
         return this
     }
 
-    public fun setSound(s: Sound): Message {
+    fun setSound(s: Sound): Message {
         sound = s
         return this
     }
 
-    public fun setPitch(p1: Float, p2: Float): Message {
+    fun setPitch(p1: Float, p2: Float): Message {
         pitch1 = p1
         pitch2 = p2
         return this
     }
 
-    public fun send(vararg p: Player) {
+    fun send(vararg p: Player) {
         var msg = toString()
 
         for(p1 in p) {
             if(sound != null)
-                p1.playSound(p1.getLocation(), sound, pitch1, pitch2)
+                p1.playSound(p1.location, sound, pitch1, pitch2)
             if(msg != "")
                 _send(p1)
         }
     }
 
-    public fun send(p: CommandSender) {
+    fun send(p: CommandSender) {
         if(sound != null)
-            (p as Player).playSound(p.getLocation(), sound, pitch1, pitch2)
+            (p as Player).playSound(p.location, sound, pitch1, pitch2)
         _send(p as Player)
     }
 
@@ -100,12 +100,12 @@ class Message {
         }
     }
 
-    public fun broadcast() {
+    fun broadcast() {
         for(p in Bukkit.getOnlinePlayers())
             send(p)
     }
 
-    public fun broadcast(r: Rank) {
+    fun broadcast(r: Rank) {
         for(p in Bukkit.getOnlinePlayers()) {
             if(!r.isRanked(p)) continue
             send(p)
@@ -115,7 +115,7 @@ class Message {
     /**
      * Even I have no idea why this function exists.
      */
-    public fun broadcast(vararg r: Rank) {
+    fun broadcast(vararg r: Rank) {
         for(p in Bukkit.getOnlinePlayers())
             for(b in r) {
                 if(!b.isRanked(p)) continue
@@ -124,11 +124,11 @@ class Message {
             }
     }
 
-    public fun networkBroadcast() {
+    fun networkBroadcast() {
         throw UnsupportedOperationException("Soon[tm]")
     }
 
-    override public fun toString(): String {
+    override fun toString(): String {
         if(builder == null)
             return ""
         return builder.toString()

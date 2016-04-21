@@ -15,7 +15,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import java.util.*
 
-public class Report : CommandExecutor {
+class Report : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, p1: Command?, p2: String?, args: Array<out String>): Boolean {
         if(StringUtils.getSize(args) == 0) {
@@ -37,10 +37,10 @@ public class Report : CommandExecutor {
                 var reportList = user.getReports()
                 var reportId = 1
                 if(!user.hasBeenReported()) {
-                    sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "There are no reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).getName() + ChatColor.GREEN + "!")
+                    sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "There are no reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).name + ChatColor.GREEN + "!")
                     return true
                 }
-                sender.sendMessage(ChatUtils.getFormattedHeader("Reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).getName() + ChatColor.GRAY + " (" + user.getReportAmount() + ")"))
+                sender.sendMessage(ChatUtils.getFormattedHeader("Reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).name + ChatColor.GRAY + " (" + user.getReportAmount() + ")"))
                 var l = HashMap<String, Int>()
                 for(report in reportList) {
                     if(l.containsKey(report))
@@ -65,7 +65,7 @@ public class Report : CommandExecutor {
                     return true
                 }
                 User(Bukkit.getPlayer(args[1])).clearReports()
-                sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "Cleared reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).getName() + ChatColor.GREEN + ".")
+                sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "Cleared reports for player " + ChatColor.YELLOW + Bukkit.getPlayer(args[1]).name + ChatColor.GREEN + ".")
                 return true
             } else if(args[0].equals("amount")) {
                 if(StringUtils.getSize(args) == 1) {
@@ -77,7 +77,7 @@ public class Report : CommandExecutor {
                     return true
                 }
                 var user = User(Bukkit.getPlayer(args[1]))
-                sender.sendMessage(ChatUtils.getFormattedMsg("Report amount for " + ChatColor.YELLOW + user.getPlayer().getName(), "" + user.getReportAmount()))
+                sender.sendMessage(ChatUtils.getFormattedMsg("Report amount for " + ChatColor.YELLOW + user.getPlayer().name, "" + user.getReportAmount()))
                 return true
             }
         }
@@ -97,13 +97,13 @@ public class Report : CommandExecutor {
             return true
         }
 
-        if(report!!.getDisplayRank().isStaff() && !Rank.MOD.isRanked(sender)) {
+        if(report.getDisplayRank().isStaff() && !Rank.MOD.isRanked(sender)) {
             sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "You must think you're funny, eh?")
             return true
         }
 
         report.report(reportMsg)
-        sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "You reported player " + ChatColor.YELLOW + report.getPlayer().getName() + ChatColor.GREEN + " for reason " + ChatColor.YELLOW + reportMsg + ChatColor.GREEN + ".")
+        sender.sendMessage(ChatUtils.getCustomMsg("Reports") + "You reported player " + ChatColor.YELLOW + report.getPlayer().name + ChatColor.GREEN + " for reason " + ChatColor.YELLOW + reportMsg + ChatColor.GREEN + ".")
 
         return true
     }

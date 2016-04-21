@@ -17,29 +17,31 @@ import java.util.logging.Logger
  *
  * Don't ask how the fuck I came up with it. Because even I don't know how.
  */
-public class BukLog {
+class BukLog {
 
     internal var p: Plugin? = null
     internal var l: Logger? = null
 
-    public constructor(p: Plugin) {
+    constructor(p: Plugin) {
         this.p = p
         l = Bukkit.getLogger()
     }
 
     internal fun log(level: String, log: String) {
-        Bukkit.getLogger().info("BukLog [Level: ${StringUtils.toUpper(level)} | From: ${p!!.description.name}] $log")
+        Bukkit.getLogger().info("Billy [Level: ${StringUtils.toUpper(level)} | From: ${p!!.description.name}] $log")
     }
 
-    public fun log(l: Level, s: String): Unit = when(l) {
-        Level.ITSALLBROKEN -> log("IT'S ALL BROKEN", s) //WE'RE ALL GONNA DIE
-        Level.ITBROKE -> log("ODIN BROKE IT", s)
-        Level.SEVERE -> log("SEVERE", s)
-        Level.WARNING -> log("WARNING", s)
-        Level.INFO -> log("INFO", s)
-        Level.DEBUG -> log("DEBUG", s)
-        Level.ERROR -> log("ERROR", s)
-        Level.INTERNALERROR -> log("INTERNAL ERROR", s)
+    fun log(l: Level, s: String): Unit {
+        when(l) {
+            Level.ITSALLBROKEN -> log("IT'S ALL BROKEN", s) //WE'RE ALL GONNA DIE
+            Level.ITBROKE -> log("ODIN BROKE IT", s)
+            Level.SEVERE -> log("SEVERE", s)
+            Level.WARNING -> log("WARNING", s)
+            Level.INFO -> log("INFO", s)
+            Level.DEBUG -> log("DEBUG", s)
+            Level.ERROR -> log("ERROR", s)
+            Level.INTERNALERROR -> log("INTERNAL ERROR", s)
+        }
     }
 
     fun debug(m: String) {
@@ -49,7 +51,7 @@ public class BukLog {
     /**
      * Dump an error into the console with a reason string.
      *
-     * Example log: "An error occured while giving emeralds to all players! (Player "ZRaptor22" is a nub)" (sorry Jaden!)
+     * Example log: "An error occured while giving emeralds to all players! (Player "ZRaptor22" is a nerd)" (sorry Jaden!)
      */
     fun dumpError(ex: Throwable, reason: String) {
         if(ConfigUtils.config.get("enable.devserver") as Boolean) { //are we in dev mode? if so, print the stacktrace instead of the plain message
@@ -58,7 +60,6 @@ public class BukLog {
             Notification.alertDevs("An error was encountered while $reason: ${ex.message}")
         } else
             log(Level.INTERNALERROR, "An error was encountered while $reason! (\"${ex.message}\")")
-
     }
 
     /**

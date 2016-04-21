@@ -4,25 +4,21 @@
 
 package legendarena.api.gamemanager
 
-import legendarena.api.gamemanager.GameListener
-import legendarena.api.gamemanager.GameTimer
-import legendarena.api.gamemanager.GameTool
-import legendarena.api.gamemanager.GameState
 import legendarena.api.utils.SetupUtils
 import org.bukkit.plugin.Plugin
 
-public class Game {
+class Game {
 
     var p: Plugin? = null
     var setup: SetupUtils? = null
 
-    public constructor(p: Plugin) {
+    constructor(p: Plugin) {
         //TODO: Plugin field init stuffs
         this.p = p
         this.setup = SetupUtils(p)
     }
 
-    public fun register(reg: GameTool) {
+    fun register(reg: GameTool) {
         if(reg is GameListener) {
             //register as a listener
             setup!!.registerListener(reg)
@@ -32,7 +28,7 @@ public class Game {
         }
     }
 
-    public fun setState(state: GameState) {
+    fun setState(state: GameState) {
         //TODO: State stuff
         //TODO: Announce network status
     }

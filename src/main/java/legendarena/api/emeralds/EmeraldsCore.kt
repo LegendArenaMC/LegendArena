@@ -16,21 +16,22 @@ import org.bukkit.entity.Player
 /**
  * This is broken to hell and back and should be avoided at all costs.
  */
+@Deprecated(message = "This is broken to hell and back - avoid at all costs.")
 class EmeraldsCore {
 
     private var econ = LegendEconomy()
 
-    public constructor() {}
+    constructor() {}
 
-    public fun getEcon(): LegendEconomy {
+    fun getEcon(): LegendEconomy {
         return econ
     }
 
-    public fun getEmeralds(p: String): Int {
+    fun getEmeralds(p: String): Int {
         return econ.getEmeralds(p)
     }
 
-    public fun removeEmeralds(p: String, amount: Int) {
+    fun removeEmeralds(p: String, amount: Int) {
         if(amount < 1)
             throw NullPointerException()
         else if(amount >= Integer.MAX_VALUE)
@@ -38,7 +39,7 @@ class EmeraldsCore {
         getEcon().takeEmeralds(p, amount)
     }
 
-    public fun addEmeralds(p: String, amount: Int) {
+    fun addEmeralds(p: String, amount: Int) {
         if(amount < 1)
             throw NullPointerException("You may want to actually give the player an emerald with the addEmeralds() function.")
         else if(amount >= Integer.MAX_VALUE)
@@ -46,7 +47,7 @@ class EmeraldsCore {
         econ.addEmeralds(p, amount)
     }
 
-    public fun resetEmeralds(p: String) {
+    fun resetEmeralds(p: String) {
         removeEmeralds(p, getEmeralds(p))
     }
 

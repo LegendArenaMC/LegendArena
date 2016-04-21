@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT'
+    compile group: 'org.spigotmc', name: 'spigot-api', version: '1.9.2-R0.1-SNAPSHOT'
     compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

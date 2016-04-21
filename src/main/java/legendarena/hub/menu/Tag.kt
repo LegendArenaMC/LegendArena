@@ -5,30 +5,20 @@
 package legendarena.hub.menu
 
 import legendarena.api.exceptions.AreYouDrunkException
-import legendarena.api.fanciful.FancyMessage
 import legendarena.api.message.Message
 import legendarena.api.utils.*
-import legendarena.hub.HubWarper
-import legendarena.hub.menu.MainMenu
-import legendarena.hub.menu.MinigameMenu
-import legendarena.hub.menu.ParticleMenu
 import legendarena.scoreboard.ScoreboardSystem
-import legendarena.staffutils.VanishUtils
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.Sound
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
 
-@Suppress("UsePropertyAccessSyntax")
 class Tag {
 
     private class TagGUI {
@@ -53,6 +43,7 @@ class Tag {
             val i = ItemStack(Material.STAINED_GLASS, 1, color)
             val im = i.itemMeta
             im.displayName = "" + ChatColor.GREEN + name
+            @Suppress("UsePropertyAccessSyntax")
             i.setItemMeta(im)
             return i
         }
@@ -61,6 +52,7 @@ class Tag {
             val i = ItemStack(Material.STAINED_GLASS_PANE, 1, color)
             val im = i.itemMeta
             im.displayName = "" + ChatColor.GREEN + name
+            @Suppress("UsePropertyAccessSyntax") //Shut up, I know.
             i.setItemMeta(im)
             return i
         }
@@ -81,6 +73,7 @@ class Tag {
         }
 
         @EventHandler fun onInventoryClick(ev: InventoryClickEvent) {
+            // TODO: This is an awful mess
             if(!ev.inventory.name.equals(ChatUtils.getCustomMsg("Menus") + "Tag Selector")) return
             try {
                 if(ev.currentItem.itemMeta == null) return

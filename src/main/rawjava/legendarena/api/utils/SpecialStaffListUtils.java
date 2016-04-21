@@ -16,6 +16,7 @@ public class SpecialStaffListUtils {
      */
 
     private static final ArrayList<String> devUUIDList = new ArrayList<String>() {{
+            add("2dec56e8-5548-4d89-8967-ee0da35f9874"); //Jaden
             add("70336328-0de7-430e-8cba-2779e2a05ab5"); //Odin
     }};
 

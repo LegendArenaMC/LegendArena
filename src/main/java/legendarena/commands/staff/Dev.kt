@@ -29,7 +29,7 @@ class Dev : CommandExecutor {
             msg.append(ChatUtils.getFormattedMsg("Date [US Format]", CalendarUtils().getDayString(false, CalendarUtils.DateLocale.US) + " " + CalendarUtils().getDateString(CalendarUtils.DateLocale.US)) + "\n")
             msg.append(ChatUtils.getFormattedHeader("System") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Using", "" + getUsedMemoryPercentage() + "% memory") + "\n")
-            msg.append(ChatUtils.getFormattedMsg("Available proccessors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
+            msg.append(ChatUtils.getFormattedMsg("Available processors", Runtime.getRuntime().availableProcessors().toString()) + "\n")
             msg.append(ChatUtils.getFormattedHeader("API/Library Versions") + "\n")
             msg.append(ChatUtils.getFormattedMsg("Kotlin version", VersionUtils.getVersion("Kotlin")) + "\n")
             msg.append(ChatUtils.getFormattedMsg("API version", VersionUtils.getAPIVersion() + ", codenamed \"" + VersionUtils.getAPIVersionCodename() + "\"") + " (backend ID: " + VersionUtils.getAPIVersionId() + ")\n")

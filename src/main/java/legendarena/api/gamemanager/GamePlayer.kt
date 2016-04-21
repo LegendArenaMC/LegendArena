@@ -7,7 +7,7 @@ class GamePlayer {
     private var p: Player? = null
     private var state: GamePlayerState? = null
 
-    public constructor(p: Player, state: GamePlayerState) {
+    constructor(p: Player, state: GamePlayerState) {
         this.p = p
         this.state = state
     }
@@ -16,7 +16,7 @@ class GamePlayer {
      * Get the player instance
      * @return The player instance
      */
-    public fun getPlayer(): Player {
+    fun getPlayer(): Player {
         return p!!
     }
 
@@ -25,7 +25,7 @@ class GamePlayer {
      * @return The player's state
      * @see GamePlayerState
      */
-    public fun getState(): GamePlayerState {
+    fun getState(): GamePlayerState {
         return state!!
     }
 
@@ -33,7 +33,7 @@ class GamePlayer {
      * Set the state of the player
      * @param state The state to set to
      */
-    public fun setState(state: GamePlayerState) {
+    fun setState(state: GamePlayerState) {
         this.state = state
         if(state == GamePlayerState.SPECTATOR) {
             getPlayer().spigot().collidesWithEntities = false

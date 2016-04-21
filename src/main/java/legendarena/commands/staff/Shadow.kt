@@ -60,7 +60,6 @@ class Shadow : CommandExecutor {
     internal fun help(sender: CommandSender) {
         sender.sendMessage(ChatUtils.getFormattedHeader("Shadow Utils"))
         sender.sendMessage(ChatUtils.getFormattedMsg("/shadow mute <player>", "Shadow mute a player."))
-        //sender.sendMessage(ChatUtils.getFormattedMsg("/shadow list", "List currently shadow muted players."))
         sender.sendMessage(ChatUtils.getFormattedMsg("/shadow ignore", "Ignore shadow muted players messages. [WIP]"))
     }
 

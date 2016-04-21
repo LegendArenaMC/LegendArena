@@ -15,7 +15,7 @@ enum class GamePlayerState private constructor(private val canInteract: Boolean)
      * Can the player interact in the game (e.g open chests, etc)
      * @return `true` if the player can interact, `false` otherwise
      */
-    public fun canInteractWithGame(): Boolean {
+    fun canInteractWithGame(): Boolean {
         return canInteract
     }
 

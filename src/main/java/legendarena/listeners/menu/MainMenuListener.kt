@@ -4,13 +4,11 @@
 
 package legendarena.listeners.menu
 
-import legendarena.api.message.Message
 import legendarena.api.utils.ChatUtils
 import legendarena.hub.menu.Tag
 import legendarena.hub.menu.MinigameMenu
 import legendarena.hub.menu.ParticleMenu
 import org.bukkit.ChatColor
-import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

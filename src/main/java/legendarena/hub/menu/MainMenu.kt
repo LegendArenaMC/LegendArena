@@ -14,9 +14,9 @@ import org.bukkit.inventory.Inventory
 
 class MainMenu {
 
-    public constructor() {}
+    constructor() {}
 
-    public fun show(p: Player) {
+    fun show(p: Player) {
         var pInv = Bukkit.createInventory(null, 36, ChatUtils.getCustomMsg("Menus") + "Main Menu")
         pInv.setItem(11, MenuUtils.createItem(Material.COMPASS, "" + ChatColor.GREEN + "Warper"))
         pInv.setItem(13, MenuUtils.createItem(Material.NETHER_STAR, "" + ChatColor.GREEN + "Particle Selector"))

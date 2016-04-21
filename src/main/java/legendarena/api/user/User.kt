@@ -19,12 +19,12 @@ import java.util.*
 /**
  * Is this a horrible temporary workaround for storing info about a player? Absolutely. Does it work? Yes.
  */
-public class User {
+class User {
 
     private var data: ConfigUtils? = null
     private var p: Player? = null
 
-    public constructor(p: Player) {
+    constructor(p: Player) {
         this.p = p
         var folder = File(Bukkit.getPluginManager().getPlugin("LegendArena").dataFolder.absolutePath, "data")
         folder.mkdirs()
@@ -53,15 +53,15 @@ public class User {
         data!!.genIfDoesNotExist("uuid")
     }
 
-    public fun save() {
+    fun save() {
         data!!.saveConfig()
     }
 
-    public fun setIsNerd(set: Boolean) {
+    fun setIsNerd(set: Boolean) {
         data!!.set("isNerd", set)
     }
 
-    public fun isNerd(): Boolean {
+    fun isNerd(): Boolean {
         return data!!.get("isNerd") as Boolean
     }
 
@@ -71,7 +71,7 @@ public class User {
         return list
     }
 
-    public fun report(reason: String) {
+    fun report(reason: String) {
         var reports = getReports()
 
         if(!hasBeenReported())
@@ -85,7 +85,7 @@ public class User {
         save()
     }
 
-    public fun warn(reason: String) {
+    fun warn(reason: String) {
         var warnings = getReports()
 
         if(!hasBeenWarned())
@@ -99,7 +99,7 @@ public class User {
         save()
     }
 
-    public fun clearReports() {
+    fun clearReports() {
         var reports = ArrayList<String>()
 
         reports.add("None")
@@ -109,7 +109,7 @@ public class User {
         save()
     }
 
-    public fun hasBeenWarned(): Boolean {
+    fun hasBeenWarned(): Boolean {
         var r = getWarnings()
         if(StringUtils.getSize(r) == 1)
             if(r[0].equals("None"))
@@ -118,7 +118,7 @@ public class User {
         return true
     }
 
-    public fun hasBeenReported(): Boolean {
+    fun hasBeenReported(): Boolean {
         var r = getReports()
         if(StringUtils.getSize(r) == 1)
             if(r[0].equals("None"))
@@ -127,42 +127,42 @@ public class User {
         return true
     }
 
-    public fun getReports(): ArrayList<String> {
+    fun getReports(): ArrayList<String> {
         return data!!.get("reports.list") as ArrayList<String>
     }
 
-    public fun getWarnings(): ArrayList<String> {
+    fun getWarnings(): ArrayList<String> {
         return data!!.get("punish.warnings.list") as ArrayList<String>
     }
 
-    public fun getReportAmount(): Int {
+    fun getReportAmount(): Int {
         if(!hasBeenReported())
             return 0
         else
             return data!!.get("reports.count") as Int
     }
 
-    public fun getName(): String {
+    fun getName(): String {
         return ChatSystemUtils().getFormattedName(p!!)
     }
 
-    public fun getPlayer(): Player {
+    fun getPlayer(): Player {
         return p!!
     }
 
-    public fun getDisplayRank(): Rank {
+    fun getDisplayRank(): Rank {
         return RankUtils.getDisplayRank(p!!)
     }
 
-    public fun getRank(): Rank {
+    fun getRank(): Rank {
         return RankUtils.getRank(p!!)
     }
 
-    public fun isBanned(): Boolean {
+    fun isBanned(): Boolean {
         return java.lang.Boolean.valueOf(data!!.get("punish.banned") as String)
     }
 
-    public fun ban(reason: String, banner: String) {
+    fun ban(reason: String, banner: String) {
         if(isBanned()) return
         data!!.set("", true)
         data!!.saveConfig()

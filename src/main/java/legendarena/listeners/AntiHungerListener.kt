@@ -9,12 +9,12 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.FoodLevelChangeEvent
 
-public class AntiHungerListener : Listener {
+class AntiHungerListener : Listener {
 
-    @EventHandler public fun listenForHunger(ev: FoodLevelChangeEvent) {
-        if(HubWarper.isExempt(ev.getEntity().getUniqueId()))
+    @EventHandler fun listenForHunger(ev: FoodLevelChangeEvent) {
+        if(HubWarper.isExempt(ev.entity.uniqueId))
             return
-        ev.setCancelled(true)
+        ev.isCancelled = true
     }
 
 }

@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.entity.Player
 
-public enum class Rank {
+enum class Rank {
 
     /**
      * Founder rank. (really just a renamed Owner rank in a sense)
@@ -73,7 +73,7 @@ public enum class Rank {
         this.internalId = internalId
     }
 
-    public fun isRanked(p: CommandSender): Boolean {
+    fun isRanked(p: CommandSender): Boolean {
         if(p !is Player) {
             if(p is ConsoleCommandSender)
                 return true
@@ -98,7 +98,7 @@ public enum class Rank {
     /**
      * Yes, I realize the function name is Color, not Colour. Fuck it, too lazy to go through more code to fix it.
      */
-    public fun getNameColor(): ChatColor {
+    fun getNameColor(): ChatColor {
         when(this) {
             Rank.FOUNDER -> return ChatColor.LIGHT_PURPLE
             Rank.DEV -> return ChatColor.DARK_PURPLE
@@ -112,11 +112,11 @@ public enum class Rank {
         }
     }
 
-    public fun getInternalId(): Int {
+    fun getInternalId(): Int {
         return internalId
     }
 
-    public fun isStaff(): Boolean {
+    fun isStaff(): Boolean {
         when(this) {
             FOUNDER -> return true
             DEV -> return true

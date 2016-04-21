@@ -15,10 +15,8 @@ import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
 
-/**
- * SQL is fun. /s
- */
-public class LegendEconomy {
+@Deprecated(message = "Avoid using this.")
+class LegendEconomy {
 
     private var sql: LegendSQL? = null
     private var db = "emeralds"
@@ -34,16 +32,16 @@ public class LegendEconomy {
 
         internal var type = ""
 
-        public constructor(type: String) {
+        constructor(type: String) {
             this.type = type
         }
 
-        public fun getTypeString(): String {
+        fun getTypeString(): String {
             return type
         }
     }
 
-    public constructor() {
+    constructor() {
         var config = ConfigUtils(Bukkit.getPluginManager().getPlugin("LegendArena"))
         table = StringUtils.toUpper(config.get("emeralds.table") as String) //insert table flip joke here
         if(StringUtils.toLower(config.get("emeralds.storage") as String) == Types.MYSQL.getTypeString()) {
@@ -70,7 +68,7 @@ public class LegendEconomy {
             sql!!.standardQuery("CREATE TABLE $table ( NAME varchar(255), EMERALDS int );")
     }
 
-    public fun getEmeralds(p: String): Int {
+    fun getEmeralds(p: String): Int {
         //if(Bukkit.getPlayer(p) != null)
             //if(cache.containsKey(Bukkit.getPlayer(p).getUniqueId())) return cache.get(Bukkit.getPlayer(p).getUniqueId())
         var rs: ResultSet?
@@ -92,7 +90,7 @@ public class LegendEconomy {
         return amount
     }
 
-    public fun addEmeralds(p: String, a: Int) {
+    fun addEmeralds(p: String, a: Int) {
         var currentEmeralds: Int
         try {
             currentEmeralds = getEmeralds(p)
@@ -102,7 +100,7 @@ public class LegendEconomy {
         setEmeralds(p, currentEmeralds + a)
     }
 
-    public fun takeEmeralds(p: String, a: Int) {
+    fun takeEmeralds(p: String, a: Int) {
         var currentEmeralds: Int
         try {
             currentEmeralds = getEmeralds(p)
@@ -114,7 +112,7 @@ public class LegendEconomy {
         setEmeralds(p, currentEmeralds - a)
     }
 
-    public fun setEmeralds(p: String, a: Int) {
+    fun setEmeralds(p: String, a: Int) {
         if(a <= -1)
             throw Exception("A player's emeralds count cannot be less than 0")
         if(getEmeralds(p) == 0) {

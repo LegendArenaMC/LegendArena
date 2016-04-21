@@ -10,6 +10,6 @@ interface GameTimer : Runnable, GameTool {
     /**
      * The delay, in ticks (to get the ticks for seconds, seconds * 20)
      */
-    public fun delay(): Long
+    fun delay(): Long
 
 }

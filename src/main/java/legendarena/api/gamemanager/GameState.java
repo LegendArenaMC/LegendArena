@@ -6,7 +6,7 @@ package legendarena.api.gamemanager;
 
 public enum GameState {
 
-    BOOTING,
+    SERVERSTART,
     LOBBY,
     STARTING,
     INGAME,

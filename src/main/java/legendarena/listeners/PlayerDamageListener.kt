@@ -10,14 +10,13 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 
-public class PlayerDamageListener : Listener {
+class PlayerDamageListener : Listener {
 
-    @EventHandler
-    public fun listenForDamage(ev: EntityDamageEvent) {
-        if(ev.getEntity() !is Player) return
-        var p = ev.getEntity() as Player
-        if(HubWarper.isExempt(p.getUniqueId())) return
-        ev.setCancelled(true)
+    @EventHandler fun listenForDamage(ev: EntityDamageEvent) {
+        if(ev.entity !is Player) return
+        var p = ev.entity as Player
+        if(HubWarper.isExempt(p.uniqueId)) return
+        ev.isCancelled = true
     }
 
 }

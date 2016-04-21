@@ -1,25 +1,41 @@
 #!/usr/bin/env bash
+if which tput >/dev/null 2>&1; then
+  ncolors=$(tput colors)
+fi
+if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
+  RED="$(tput setaf 1)"
+  GREEN="$(tput setaf 2)"
+  YELLOW="$(tput setaf 3)"
+  BLUE="$(tput setaf 4)"
+  MAGENTA="$(tput setaf 5)"
+  CYAN="$(tput setaf 6)"
+  GRAY="$(tput setaf 7)"
+  BOLD="$(tput bold)"
+  NORMAL="$(tput sgr0)"
+else
+  RED=""
+  GREEN=""
+  YELLOW=""
+  BLUE=""
+  MAGENTA=""
+  CYAN=""
+  GRAY=""
+  BOLD=""
+  NORMAL=""
+fi
+
+BUILDDIR=`pwd`
+
+echo "${BOLD}${BLUE}+ ${GREEN}Building ${CYAN}`basename $BUILDDIR`${GREEN} on branch ${CYAN}`git rev-parse --abbrev-ref HEAD`${GREEN}..."
+
+# Gradle builder
 
 echo "Building `basename \`pwd\`` on branch `git rev-parse --abbrev-ref HEAD`..."
 
-set -e
-
-#prefer system-wide installations of gradle than the gradle wrapper
-#(mainly to save the annoyance of downloading the gradle runtime if we don't need to)
-if [ -f scripts/.requireshadow ]; then
-    if hash gradle 2>/dev/null; then
-        gradle build shadowJar
-    else
-        ./gradlew build shadowJar --no-daemon
-    fi
-    rm build/libs/`basename \`pwd\``.jar
-    mv build/libs/`basename \`pwd\``-all.jar build/libs/`basename \`pwd\``.jar
+if [ -f "$BUILDDIR/.buildconfig" ]; then
+  gradle `cat $BUILDDIR/.buildconfig`
 else
-    if hash gradle 2>/dev/null; then
-        gradle build
-    else
-        ./gradlew build --no-daemon
-    fi
+  gradle build
 fi
 
 echo "Done!"
